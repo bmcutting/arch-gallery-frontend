@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: "Plus Jakarta Sans Regular";
+    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans Medium";
+    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans Semibold";
+    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans Bold";
+    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans ExtraBold";
+    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-ExtraBold.ttf");
+}
+
+@theme {
+    --color-primary: #B9BEC4;
+    --color-secondary: #8A9096;
+    --color-card: var(--color-gray-300);
+    --color-layout: var(--color-gray-300);
+
+    --font-body: "Plus Jakarta Sans Regular";
+    --font-title-regular: "Plus Jakarta Sans Regular";
+    --font-title-medium: "Plus Jakarta Sans Medium";
+    --font-title-bold: "Plus Jakarta Sans Bold";
+    --font-title-semibold: "Plus Jakarta Sans SemiBold";
+    --font-medium: "Plus Jakarta Sans Medium";
+    --font-regular: "Plus Jakarta Sans Regular";
+    --font-semibold: "Plus Jakarta Sans SemiBold" !important;
+    --font-bold: "Plus Jakarta Sans Bold";
+
+    --shadow-input: 0px 0px 5.5px rgb(76 217 100 / 0.3);
+
+    --radius-card: var(--radius-lg);
+    --radius-input: var(--radius-md);
+
+    --spacing-border-layout: 1.5px;
+    --spacing-border-button: 1.5px;
+
+    --breakpoint-xs: 450px;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+.react-tiny-popover-container {
+    z-index: 999;
+}
+
+body {
+    font-family: var(--font-body);
+}
+
+input,
+textarea,
+td,
+span,
+div {
+    font-family: var(--font-body);
+}
+
+strong {
+    font-family: var(--font-semibold);
+    font-weight: normal;
+}
+
+button {
+    cursor: pointer;
+}
