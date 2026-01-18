@@ -1,5 +1,9 @@
-import Button from "../../modules/app/modules/ui/components/Button/Button";
+import AppLayout from "./components/AppLayout";
 
 export default function Home() {
-  return <Button size="lg" className="m-2 rounded-b-full rounded-t-full">-</Button>;
+  return (
+    <AppLayout>
+      <div></div>
+    </AppLayout>
+  );
 }
