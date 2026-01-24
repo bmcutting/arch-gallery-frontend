@@ -33,9 +33,7 @@
     --color-muted: #F5F5F4;
     --color-border: #44403C;
     --color-background: #0F0F0F;
-    /* gray-950 */
     --color-foreground: #E7E5E4;
-    /* stone-200 */
 
     --font-body: "Plus Jakarta Sans Regular";
     --font-title-regular: "Plus Jakarta Sans Regular";
@@ -69,35 +67,6 @@ h6 {
     font-family: 'Crimson Text', serif;
 }
 
-h1 {
-    font-size: 3rem;
-    line-height: 1.1;
-    font-weight: 700;
-}
-
-h2 {
-    font-size: 2.25rem;
-    line-height: 1.2;
-    font-weight: 600;
-}
-
-h3 {
-    font-size: 1.875rem;
-    line-height: 1.25;
-    font-weight: 600;
-}
-
-h4 {
-    font-size: 1.5rem;
-    line-height: 1.3;
-    font-weight: 600;
-}
-
-h5 {
-    font-size: 1.25rem;
-    line-height: 1.4;
-    font-weight: 600;
-}
 
 .caption {
     font-family: 'IBM Plex Sans', sans-serif;
@@ -111,31 +80,7 @@ h5 {
     font-feature-settings: 'tnum' on, 'lnum' on;
 }
 
-@media (max-width: 768px) {
-    body {
-        font-size: 15px;
-    }
 
-    h1 {
-        font-size: 2.25rem;
-    }
-
-    h2 {
-        font-size: 1.875rem;
-    }
-
-    h3 {
-        font-size: 1.5rem;
-    }
-
-    h4 {
-        font-size: 1.25rem;
-    }
-
-    h5 {
-        font-size: 1.125rem;
-    }
-}
 
 
 .no-scroll {
