@@ -2,7 +2,10 @@ import { useState } from "react";
 import { AuthValidator } from "../../../../modules/user/domain/validator/auth/auth-validator";
 import useToast from "../../../../modules/app/hooks/useToast";
 import { useNavigate } from "react-router-dom";
-import { LOCAL_STORAGE_KEY, LocalStorage } from "../../../../modules/app/entities/local-storage";
+import {
+  LOCAL_STORAGE_KEY,
+  LocalStorage,
+} from "../../../../modules/app/entities/local-storage";
 import { loginUser } from "../../../../modules/user/services/login-user";
 import type { HttpResponseError } from "../../../../modules/app/modules/http/domain/error";
 import { HttpStatusCode } from "axios";
@@ -25,8 +28,7 @@ export default function useLogin() {
 
         loginUser({ email: email, password: password })
           .then((data) => {
-            LocalStorage.set(LOCAL_STORAGE_KEY.ACCESS_TOKEN, data.accessToken);
-
+            LocalStorage.set(LOCAL_STORAGE_KEY.ACCESS_TOKEN, data.access_token);
             router("/home", { replace: true });
           })
           .catch((e: HttpResponseError) => {
@@ -40,7 +42,7 @@ export default function useLogin() {
             }
           })
           .finally(() => {
-            setLoading(true);
+            setLoading(false);
           });
       },
       error: errors,

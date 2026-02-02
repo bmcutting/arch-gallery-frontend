@@ -1,5 +1,5 @@
 export interface UserLoginResponse {
-  accessToken: string;
+  access_token: string;
   id: string;
   email: string;
   userName: string;

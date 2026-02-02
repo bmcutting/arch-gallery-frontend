@@ -3,9 +3,13 @@ import useToast from "../../../../modules/app/hooks/useToast";
 import { useState } from "react";
 import { createUser } from "../../../../modules/user/services/create-user";
 import { SignUpValidator } from "../../../../modules/user/domain/validator/signup/signup-validator";
-import { LOCAL_STORAGE_KEY, LocalStorage } from "../../../../modules/app/entities/local-storage";
+import {
+  LOCAL_STORAGE_KEY,
+  LocalStorage,
+} from "../../../../modules/app/entities/local-storage";
 import type { HttpResponseError } from "../../../../modules/app/modules/http/domain/error";
 import { HttpStatusCode } from "axios";
+import { loginUser } from "../../../../modules/user/services/login-user";
 
 export default function useSignUp() {
   const { errors, error } = useToast();
@@ -39,8 +43,14 @@ export default function useSignUp() {
           lastName: lastName,
           userName: userName,
         })
-          .then((data) => {
-            LocalStorage.set(LOCAL_STORAGE_KEY.ACCESS_TOKEN, data.accessToken);
+          .then(() => {
+            return loginUser({ email, password });
+          })
+          .then((loginData) => {
+            LocalStorage.set(
+              LOCAL_STORAGE_KEY.ACCESS_TOKEN,
+              loginData.access_token,
+            );
 
             router("/home", { replace: true });
           })
@@ -55,7 +65,7 @@ export default function useSignUp() {
             }
           })
           .finally(() => {
-            setLoading(true);
+            setLoading(false);
           });
       },
       error: errors,

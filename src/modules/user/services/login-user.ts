@@ -4,6 +4,6 @@ import type { LoginUserDTO } from "../dto/write/login-user";
 
 export function loginUser(props: LoginUserDTO): Promise<UserLoginResponse> {
     return instance
-    .post<UserLoginResponse>("auth/sign-in", props)
+    .post<UserLoginResponse>("auth/login", props)
     .then((data) => data.data);
 }
