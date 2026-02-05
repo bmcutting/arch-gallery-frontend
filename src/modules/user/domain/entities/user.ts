@@ -3,9 +3,12 @@ export interface User {
   email: string;
   firstName: string;
   lastName: string;
-  phoneNumber: string;
-  bio: string;
-  profileImageUrl: string;
-  website: string;
-  location: string;
+  userName: string;
+  phoneNumber?: string;
+  bio?: string;
+  profileImageUrl?: string;
+  website?: string;
+  location?: string;
+  experienceYears?: number;
+  specialization?: string;
 }
