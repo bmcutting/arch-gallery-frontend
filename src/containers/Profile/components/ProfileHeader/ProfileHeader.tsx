@@ -19,7 +19,7 @@ export default function ProfileHeader({ user }: Props) {
         <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-12">
           <div className="relative w-45 h-45 md:w-60 md:h-60 lg:w-70 lg:h-70 mx-auto lg:mx-0">
             <img
-              src={"erika.jpg"}
+              src={user?.profileImageUrl ? user.profileImageUrl : "user.png"}
               alt={`${user?.firstName ?? ""} ${user?.lastName ?? ""}`}
               className="w-full h-full rounded-full object-cover border-4 border-primary/90"
             />
