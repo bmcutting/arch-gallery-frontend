@@ -1,10 +1,12 @@
 import { FaBriefcase, FaMapMarkerAlt } from "react-icons/fa";
 import { IoGlobeOutline } from "react-icons/io5";
-import useProfile from "../../hooks/useProfile";
+import type { User } from "../../../../modules/user/domain/entities/user";
 
-export default function ProfileHeader() {
-  const user = useProfile();
+interface Props {
+  user: User | null;
+}
 
+export default function ProfileHeader({ user }: Props) {
   return (
     <div className="mt-14 bg-card border-b border-border">
       <div className="max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-8 lg:py-12">
@@ -67,13 +69,13 @@ export default function ProfileHeader() {
                 type="button"
                 className="px-2 py-1 text-xs font-medium text-gray-700 border border-gray-300 rounded hover:bg-gray-100 transition"
               >
-                Enviar Mensaje
+                Enviar Correo
               </button>
               <button
                 type="button"
                 className="px-2 py-1 text-xs font-medium text-gray-700 border border-gray-300 rounded hover:bg-gray-100 transition"
               >
-                Conectar
+                Editar Perfil
               </button>
             </div>
           </div>
