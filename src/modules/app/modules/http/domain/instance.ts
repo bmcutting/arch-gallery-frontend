@@ -21,7 +21,7 @@ instance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 const handleError = (error: unknown): HttpResponseError => {
@@ -59,8 +59,13 @@ instance.interceptors.response.use(
   (response) => response,
   (error) => {
     const e = handleError(error);
+
+    if (e.status === HttpStatusCode.Unauthorized) {
+      LocalStorage.remove(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+      window.location.href = "/login";
+    }
     return Promise.reject(e);
-  }
+  },
 );
 
 export { instance };
