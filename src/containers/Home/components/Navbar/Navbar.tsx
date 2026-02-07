@@ -6,10 +6,15 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 h-14 w-full lg:px-10 px-4 py-2 bg-white bg-opacity-90 shadow backdrop-blur-lg backdrop-blur-saturate-150 z-[9999]">
       <div className="flex flex-wrap items-center justify-between w-full text-slate-800">
         <a
-          className="mr-4 block cursor-pointer py-1.5 text-md text-slate-800 font-semibold"
+          className="flex items-center gap-2 mr-4 cursor-pointer py-1.5 text-md text-slate-800 font-semibold"
           href="#"
         >
-          ArchGallery
+          <img
+            src="arch-gallery-icon.jpg"
+            alt="ArchGallery logo"
+            className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 object-contain"
+          />
+          <span>ArchGallery</span>
         </a>
         <div className="hidden lg:block">
           <ul className="flex flex-col gap-2 mt-2 mb-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
