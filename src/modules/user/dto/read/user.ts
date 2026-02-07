@@ -9,4 +9,10 @@ export interface UserResponse {
   website: string;
   experienceYears: number;
   specialization: string;
+  profileImageUrl: string;
+  phoneNumber: string;
+  instagramUrl: string;
+  twitterUrl: string;
+  linkedinUrl: string;
+  languages: string[];
 }

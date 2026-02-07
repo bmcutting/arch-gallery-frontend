@@ -14,6 +14,12 @@ export class UserMapper {
       website: r.website,
       experienceYears: r.experienceYears,
       specialization: r.specialization,
+      profileImageUrl: r.profileImageUrl,
+      phoneNumber: r.phoneNumber,
+      instagramUrl: r.instagramUrl,
+      twitterUrl: r.twitterUrl,
+      linkedinUrl: r.linkedinUrl,
+      languages: r.languages,
     };
   }
 }

@@ -11,4 +11,8 @@ export interface User {
   location?: string;
   experienceYears?: number;
   specialization?: string;
+  instagramUrl?: string;
+  twitterUrl?: string;
+  linkedinUrl?: string;
+  languages?: string[];
 }
