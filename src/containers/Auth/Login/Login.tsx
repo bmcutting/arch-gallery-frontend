@@ -1,3 +1,4 @@
+import { APP_ROUTES } from "../../../modules/app/domain/constants/app-routes";
 import Button from "../../../modules/app/modules/ui/components/Button/Button";
 import FormInput from "../../../modules/app/modules/ui/components/Form/FormInput";
 import Input from "../../../modules/app/modules/ui/components/Input/Input";
@@ -25,8 +26,8 @@ export default function Login() {
             loading={false}
             onChange={setEmail}
             placeholder="user@gmail.com"
-            size="base"
             value={email}
+            className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>
 
@@ -37,7 +38,7 @@ export default function Login() {
             value={password}
             type="password"
             placeholder="********"
-            size="base"
+            className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>
 
@@ -56,7 +57,7 @@ export default function Login() {
         <AuthPrompt
           message="¿No tienes cuenta?"
           linkText="Regístrate"
-          to="/signup"
+          to={APP_ROUTES.SIGNUP}
         />
       </form>
     </AuthContainer>

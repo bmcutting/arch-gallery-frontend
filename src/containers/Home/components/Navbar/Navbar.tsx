@@ -10,7 +10,7 @@ export default function Navbar() {
           href="#"
         >
           <img
-            src="arch-gallery-icon.jpg"
+            src="/arch-gallery-icon.jpg"
             alt="ArchGallery logo"
             className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 object-contain"
           />

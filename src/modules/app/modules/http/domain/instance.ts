@@ -5,6 +5,7 @@ import {
   LocalStorage,
 } from "../../../entities/local-storage";
 import type { HttpResponseError } from "./error";
+import { APP_ROUTES } from "../../../domain/constants/app-routes";
 
 const instance = axios.create({
   baseURL: API_ROUTE,
@@ -62,7 +63,7 @@ instance.interceptors.response.use(
 
     if (e.status === HttpStatusCode.Unauthorized) {
       LocalStorage.remove(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-      window.location.href = "/login";
+      window.location.href = APP_ROUTES.LOGIN;
     }
     return Promise.reject(e);
   },

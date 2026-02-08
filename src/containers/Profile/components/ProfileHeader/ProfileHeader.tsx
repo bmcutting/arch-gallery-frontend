@@ -7,12 +7,15 @@ import {
 } from "react-icons/fa";
 import { IoGlobeOutline } from "react-icons/io5";
 import type { User } from "../../../../modules/user/domain/entities/user";
+import { useNavigate } from "react-router-dom";
+import { APP_ROUTES } from "../../../../modules/app/domain/constants/app-routes";
 
 interface Props {
   user: User | null;
 }
 
 export default function ProfileHeader({ user }: Props) {
+  const navigate = useNavigate();
   return (
     <div className="mt-14 bg-card border-b border-border">
       <div className="max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-8 lg:py-12">
@@ -119,6 +122,7 @@ export default function ProfileHeader({ user }: Props) {
               </button>
               <button
                 type="button"
+                onClick={() => navigate(APP_ROUTES.PROFILEMANAGEMENT)}
                 className="px-5 py-2 text-base font-semibold text-white bg-primary rounded-lg shadow hover:bg-primary/90 transition-colors"
               >
                 Editar Perfil

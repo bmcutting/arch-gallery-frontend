@@ -1,3 +1,4 @@
+import { APP_ROUTES } from "../../../modules/app/domain/constants/app-routes";
 import Button from "../../../modules/app/modules/ui/components/Button/Button";
 import FormInput from "../../../modules/app/modules/ui/components/Form/FormInput";
 import Input from "../../../modules/app/modules/ui/components/Input/Input";
@@ -37,8 +38,8 @@ export default function SignUp() {
             loading={false}
             onChange={setEmail}
             placeholder="user@gmail.com"
-            size="base"
             value={email}
+            className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>
         <FormInput label="Nombre" size="base" required>
@@ -46,8 +47,8 @@ export default function SignUp() {
             loading={false}
             onChange={setFirstName}
             placeholder="Carlos"
-            size="base"
             value={firstName}
+            className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>
         <FormInput label="Apellido" size="base" required>
@@ -55,8 +56,8 @@ export default function SignUp() {
             loading={false}
             onChange={setLastName}
             placeholder="Peguer"
-            size="base"
             value={lastName}
+            className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>
         <FormInput label="Nombre de usuario" size="base" required>
@@ -64,8 +65,8 @@ export default function SignUp() {
             loading={false}
             onChange={setUserName}
             placeholder="carlospeguer"
-            size="base"
             value={userName}
+            className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>
         <FormInput label="Contraseña" size="base" required>
@@ -75,7 +76,7 @@ export default function SignUp() {
             value={password}
             type="password"
             placeholder="********"
-            size="base"
+            className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>
         <Button
@@ -92,7 +93,7 @@ export default function SignUp() {
         <AuthPrompt
           message="¿Ya tienes cuenta?"
           linkText="Inicia Sesión"
-          to="/login"
+          to={APP_ROUTES.LOGIN}
         />
       </form>
     </AuthContainer>
