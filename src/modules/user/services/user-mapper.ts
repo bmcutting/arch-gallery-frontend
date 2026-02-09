@@ -3,7 +3,6 @@ import type { UserResponse } from "../dto/read/user";
 
 export class UserMapper {
   static execute(r: UserResponse): User {
-    console.log(r);
     return {
       id: r.id,
       email: r.email,

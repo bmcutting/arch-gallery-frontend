@@ -9,6 +9,7 @@ export default function ProfileManagement() {
     formData,
     bio,
     maxChars,
+    status,
     handleBioChange,
     handleSave,
     handleChange,
@@ -30,17 +31,6 @@ export default function ProfileManagement() {
                 <p className="text-sm md:text-base text-black">
                   Administra tu información profesional y tus preferencias
                 </p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <button className="border hover:bg-purple-100 hover:text-black p-2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                  Vista previa
-                </button>
-                <button
-                  className="border hover:bg-purple-100 hover:text-black p-2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-                  onClick={handleSave}
-                >
-                  Guardar cambios
-                </button>
               </div>
             </div>
           </div>
@@ -139,6 +129,22 @@ export default function ProfileManagement() {
                     htmlFor="firstName"
                     className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
                   >
+                    Años de experiencia
+                  </label>
+                  <Input
+                    placeholder="Años de Experiencia"
+                    value={(formData.experienceYears ?? 0).toString()}
+                    onChange={(value: string) =>
+                      handleChange("experienceYears", value)
+                    }
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="firstName"
+                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
+                  >
                     Sitio web
                   </label>
                   <Input
@@ -190,7 +196,7 @@ export default function ProfileManagement() {
               <div>
                 <textarea
                   placeholder="Escribe tu biografía profesional..."
-                  value={bio}
+                  value={formData.bio}
                   onChange={(e) => handleBioChange(e.target.value)}
                   className="w-full h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg 
                      rounded-md border border-gray-300 focus:ring-2 focus:ring-primary 
@@ -298,6 +304,33 @@ export default function ProfileManagement() {
                     <span className="text-lg">+</span> Añadir idioma
                   </button>
                 </div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 px-6 py-3 md:px-8 md:py-4">
+                <button
+                  type="button"
+                  className="px-5 py-2 text-base font-semibold rounded-lg shadow transition-colors border bg-primary text-white hover:bg-primary/90 "
+                >
+                  Vista previa
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleSave}
+                  className={`px-5 py-2 text-base font-semibold rounded-lg shadow transition-colors 
+                    ${
+                      status === "success"
+                        ? "bg-green-300 text-white"
+                        : status === "error"
+                          ? "border-2 border-red-300 text-red-300 bg-white"
+                          : "bg-primary text-white hover:bg-primary/90"
+                    }`}
+                >
+                  {status === "success"
+                    ? "Guardado"
+                    : status === "error"
+                      ? "Error al guardar"
+                      : "Guardar"}
+                </button>
               </div>
             </div>
           </div>

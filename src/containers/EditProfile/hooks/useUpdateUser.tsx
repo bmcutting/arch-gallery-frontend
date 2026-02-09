@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import type { User } from "../../../modules/user/domain/entities/user";
 import useProfile from "../../Profile/hooks/useProfile";
+import { updateUser } from "../../../modules/user/services/update-user";
+import { UserMapperDto } from "../../../modules/user/services/user-mapper-dto";
 
 export default function useUpdateUser() {
   const user = useProfile();
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
   const [formData, setFormData] = useState<User>({
     id: user?.id ?? "",
@@ -36,7 +39,20 @@ export default function useUpdateUser() {
   };
 
   const handleSave = () => {
-    console.log("Datos a guardar:", formData);
+    updateUser(UserMapperDto.execute(formData))
+      .then((data) => {
+        if (data.success === true) {
+          setStatus("success");
+          setTimeout(() => setStatus("idle"), 5000);
+        } else {
+          setStatus("error");
+          setTimeout(() => setStatus("idle"), 5000);
+        }
+      })
+      .catch(() => {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 5000);
+      });
   };
 
   const [bio, setBio] = useState(formData.bio ?? user?.bio ?? "");
@@ -73,6 +89,7 @@ export default function useUpdateUser() {
     formData,
     bio,
     maxChars,
+    status,
     handleBioChange,
     handleSave,
     handleChange,
