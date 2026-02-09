@@ -1,45 +1,21 @@
-import { useEffect, useState } from "react";
 import Input from "../../modules/app/modules/ui/components/Input/Input";
 import AppLayout from "../Home/components/AppLayout";
-import useProfile from "../Profile/hooks/useProfile";
 import ProfilePhotoUpload from "./components/ProfilePhotoUploadForm";
-import type { User } from "../../modules/user/domain/entities/user";
+import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import useUpdateUser from "./hooks/useUpdateUser";
 
 export default function ProfileManagement() {
-  const user = useProfile();
-
-  const [formData, setFormData] = useState<User>({
-    id: user?.id ?? "",
-    email: user?.email ?? "",
-    firstName: user?.firstName ?? "",
-    lastName: user?.lastName ?? "",
-    userName: user?.userName ?? "",
-    phoneNumber: user?.phoneNumber ?? "",
-    bio: user?.bio ?? "",
-    profileImageUrl: user?.profileImageUrl ?? "",
-    website: user?.website ?? "",
-    location: user?.location ?? "",
-    experienceYears: user?.experienceYears ?? 0,
-    specialization: user?.specialization ?? "",
-    instagramUrl: user?.instagramUrl ?? "",
-    twitterUrl: user?.twitterUrl ?? "",
-    linkedinUrl: user?.linkedinUrl ?? "",
-    languages: user?.languages ?? [],
-  });
-
-  useEffect(() => {
-    if (user) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setFormData({ ...user, languages: user.languages ?? [] });
-    }
-  }, [user]);
-
-  const handleChange = (field: keyof User, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-  const handleSave = () => {
-    console.log("Datos a guardar:", formData);
-  };
+  const {
+    formData,
+    bio,
+    maxChars,
+    handleBioChange,
+    handleSave,
+    handleChange,
+    addLanguage,
+    removeLanguage,
+    updateLanguage,
+  } = useUpdateUser();
 
   return (
     <AppLayout>
@@ -73,133 +49,254 @@ export default function ProfileManagement() {
             <div className="p-6 md:p-8 border-b border-border">
               <ProfilePhotoUpload />
             </div>
-            <div className="p-6 md:p-8">
+
+            <div className="px-6 py-3 md:px-8 md:py-4">
               <h2 className="text-lg md:text-xl font-semibold mb-6">
                 Información Personal
               </h2>
 
               <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <Input
-                  placeholder="Nombre"
-                  value={formData.firstName ?? user?.firstName ?? ""}
-                  onChange={(value: string) => handleChange("firstName", value)}
-                  className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
-                />
-
-                <Input
-                  placeholder="Apellido"
-                  value={formData.lastName ?? user?.lastName ?? ""}
-                  onChange={(value: string) => handleChange("lastName", value)}
-                  className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
-                />
-
-                <Input
-                  placeholder="Nombre de usuario"
-                  value={formData.userName ?? user?.userName ?? ""}
-                  onChange={(value: string) => handleChange("userName", value)}
-                  className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
-                />
-
-                <Input
-                  placeholder="Correo Electrónico"
-                  value={formData.email ?? user?.email ?? ""}
-                  onChange={(value: string) => handleChange("email", value)}
-                  className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
-                />
-
-                <Input
-                  placeholder="Teléfono"
-                  value={formData.phoneNumber ?? user?.phoneNumber ?? ""}
-                  onChange={(value: string) =>
-                    handleChange("phoneNumber", value)
-                  }
-                  className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
-                />
-
-                <Input
-                  placeholder="Biografía"
-                  value={formData.bio ?? user?.bio ?? ""}
-                  onChange={(value: string) => handleChange("bio", value)}
-                  className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
-                />
-
-                <Input
-                  placeholder="Website"
-                  value={formData.website ?? user?.website ?? ""}
-                  onChange={(value: string) => handleChange("website", value)}
-                  className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
-                />
-
-                <Input
-                  placeholder="Ubicación"
-                  value={formData.location ?? user?.location ?? ""}
-                  onChange={(value: string) => handleChange("location", value)}
-                  className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
-                />
-
-                <Input
-                  placeholder="Especialización"
-                  value={formData.specialization ?? user?.specialization ?? ""}
-                  onChange={(value: string) =>
-                    handleChange("specialization", value)
-                  }
-                  className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
-                />
+                <div>
+                  <label
+                    htmlFor="firstName"
+                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
+                  >
+                    Nombre
+                  </label>
+                  <Input
+                    placeholder="Nombre"
+                    value={formData.firstName ?? ""}
+                    onChange={(value: string) =>
+                      handleChange("firstName", value)
+                    }
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="firstName"
+                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
+                  >
+                    Apellido
+                  </label>
+                  <Input
+                    placeholder="Apellido"
+                    value={formData.lastName ?? ""}
+                    onChange={(value: string) =>
+                      handleChange("lastName", value)
+                    }
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="firstName"
+                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
+                  >
+                    Nombre de usuario
+                  </label>
+                  <Input
+                    placeholder="Nombre de usuario"
+                    value={formData.userName ?? ""}
+                    onChange={(value: string) =>
+                      handleChange("userName", value)
+                    }
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="firstName"
+                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
+                  >
+                    Correo Electrónico
+                  </label>
+                  <Input
+                    placeholder="Correo Electrónico"
+                    value={formData.email ?? ""}
+                    onChange={(value: string) => handleChange("email", value)}
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="firstName"
+                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
+                  >
+                    Teléfono
+                  </label>
+                  <Input
+                    placeholder="Teléfono"
+                    value={formData.phoneNumber ?? ""}
+                    onChange={(value: string) =>
+                      handleChange("phoneNumber", value)
+                    }
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="firstName"
+                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
+                  >
+                    Sitio web
+                  </label>
+                  <Input
+                    placeholder="Website"
+                    value={formData.website ?? ""}
+                    onChange={(value: string) => handleChange("website", value)}
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="firstName"
+                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
+                  >
+                    Ubicación
+                  </label>
+                  <Input
+                    placeholder="Ubicación"
+                    value={formData.location ?? ""}
+                    onChange={(value: string) =>
+                      handleChange("location", value)
+                    }
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="firstName"
+                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
+                  >
+                    Especialización
+                  </label>
+                  <Input
+                    placeholder="Especialización"
+                    value={formData.specialization ?? ""}
+                    onChange={(value: string) =>
+                      handleChange("specialization", value)
+                    }
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                  />
+                </div>
               </div>
             </div>
 
-            <div className="p-6 md:p-8">
+            <div className="px-6 py-3 md:px-8 md:py-4">
+              <h2 className="text-lg md:text-xl font-semibold mb-6">
+                Biografía Profesional
+              </h2>
+              <div>
+                <textarea
+                  placeholder="Escribe tu biografía profesional..."
+                  value={bio}
+                  onChange={(e) => handleBioChange(e.target.value)}
+                  className="w-full h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg 
+                     rounded-md border border-gray-300 focus:ring-2 focus:ring-primary 
+                     resize-none leading-relaxed"
+                  maxLength={maxChars}
+                />
+                <p
+                  className={`text-xs mt-2 ${
+                    bio.length >= maxChars
+                      ? "text-red-500 font-extrabold"
+                      : "text-gray-500"
+                  }`}
+                >
+                  {bio.length}/{maxChars} caracteres
+                </p>
+              </div>
+            </div>
+
+            <div className="px-6 py-3 md:px-8 md:py-4">
               <h2 className="text-lg md:text-xl font-semibold mb-6">
                 Redes Sociales
               </h2>
 
               <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <Input
-                  placeholder="Instagram"
-                  value={formData.instagramUrl ?? ""}
-                  onChange={(value: string) =>
-                    handleChange("instagramUrl", value)
-                  }
-                  className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
-                />
+                <div className="flex gap-2 items-center text-xl md:text-2xl lg:text-3xl">
+                  <FaInstagram className="text-pink-500" />
+                  <input
+                    placeholder="Instagram"
+                    value={formData.instagramUrl ?? ""}
+                    onChange={(e) =>
+                      handleChange("instagramUrl", e.target.value)
+                    }
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md 
+                 border border-gray-300 focus:ring-2 focus:ring-primary"
+                  />
+                </div>
 
-                <Input
-                  placeholder="Twitter"
-                  value={formData.twitterUrl ?? ""}
-                  onChange={(value: string) =>
-                    handleChange("twitterUrl", value)
-                  }
-                  className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
-                />
+                <div className="flex gap-2 items-center text-xl md:text-2xl lg:text-3xl">
+                  <FaTwitter className="text-sky-500" />
+                  <input
+                    placeholder="Twitter"
+                    value={formData.twitterUrl ?? ""}
+                    onChange={(e) => handleChange("twitterUrl", e.target.value)}
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md 
+                 border border-gray-300 focus:ring-2 focus:ring-primary"
+                  />
+                </div>
 
-                <Input
-                  placeholder="LinkedIn"
-                  value={formData.linkedinUrl ?? ""}
-                  onChange={(value: string) =>
-                    handleChange("linkedinUrl", value)
-                  }
-                  className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
-                />
+                <div className="flex gap-2 items-center text-xl md:text-2xl lg:text-3xl">
+                  <FaLinkedin className="text-blue-700" />
+                  <input
+                    placeholder="LinkedIn"
+                    value={formData.linkedinUrl ?? ""}
+                    onChange={(e) =>
+                      handleChange("linkedinUrl", e.target.value)
+                    }
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md 
+                 border border-gray-300 focus:ring-2 focus:ring-primary"
+                  />
+                </div>
               </div>
-              <div className="mt-8">
-                <h2 className="text-lg md:text-xl font-semibold mb-4">
-                  Idiomas
-                </h2>
-                <div className="space-y-4">
+
+              <div className="px-6 py-3 md:px-8 md:py-4">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg md:text-xl font-semibold">Idiomas</h2>
+                </div>
+
+                <div className="space-y-3">
                   {formData.languages?.map((lang, index) => (
-                    <Input
-                      key={index}
-                      value={lang}
-                      onChange={(value) => {
-                        const newLanguages = [...(formData.languages ?? [])];
-                        newLanguages[index] = value;
-                        setFormData((prev) => ({
-                          ...prev,
-                          languages: newLanguages,
-                        }));
-                      }}
-                    />
+                    <div key={index} className="flex items-center gap-3">
+                      <Input
+                        value={lang}
+                        onChange={(value) => updateLanguage(index, value)}
+                        placeholder="Ej: Español, Inglés, Francés..."
+                        className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeLanguage(index)}
+                        className="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-md transition-colors"
+                        disabled={formData.languages?.length === 1}
+                        title="Eliminar idioma"
+                      >
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    </div>
                   ))}
+                  <button
+                    type="button"
+                    onClick={addLanguage}
+                    className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors text-sm"
+                  >
+                    <span className="text-lg">+</span> Añadir idioma
+                  </button>
                 </div>
               </div>
             </div>

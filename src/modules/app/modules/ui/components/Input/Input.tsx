@@ -31,7 +31,7 @@ export default function Input({
       {loading ? (
         <FormLoader />
       ) : (
-        <div className={`relative flex items-center ${full ? "w-full" : ""}`}>
+        <div className={`relative flex items-center  ${full ? "w-full" : ""}`}>
           <input
             className={className}
             type={type ?? "text"}
