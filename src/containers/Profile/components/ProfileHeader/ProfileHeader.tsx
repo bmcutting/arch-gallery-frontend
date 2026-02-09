@@ -4,6 +4,7 @@ import {
   FaLinkedin,
   FaMapMarkerAlt,
   FaTwitter,
+  FaPhone,
 } from "react-icons/fa";
 import { IoGlobeOutline } from "react-icons/io5";
 import type { User } from "../../../../modules/user/domain/entities/user";
@@ -53,6 +54,12 @@ export default function ProfileHeader({ user }: Props) {
                       ? "1 año de experiencia"
                       : `${user.experienceYears} años de experiencia`}
                   </span>
+                </div>
+              )}
+              {user?.phoneNumber && (
+                <div className="flex items-center gap-2 text-base md:text-lg lg:text-2xl text-black">
+                  <FaPhone className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" />
+                  <span>{user.phoneNumber}</span>{" "}
                 </div>
               )}
             </div>
