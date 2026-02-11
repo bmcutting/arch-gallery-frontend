@@ -3,6 +3,7 @@ import AppLayout from "../Home/components/AppLayout";
 import ProfilePhotoUpload from "./components/ProfilePhotoUploadForm";
 import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import useUpdateUser from "./hooks/useUpdateUser";
+import FormInput from "../../modules/app/modules/ui/components/Form/FormInput";
 
 export default function ProfileManagement() {
   const {
@@ -45,147 +46,93 @@ export default function ProfileManagement() {
                 Información Personal
               </h2>
 
-              <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
-                  >
-                    Nombre
-                  </label>
+              <div className="grid gap-x-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                <FormInput label="Nombre" size="lg">
                   <Input
                     placeholder="Nombre"
                     value={formData.firstName ?? ""}
                     onChange={(value: string) =>
                       handleChange("firstName", value)
                     }
-                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
                   />
-                </div>
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
-                  >
-                    Apellido
-                  </label>
+                </FormInput>
+                <FormInput label="Apellido" size="lg">
                   <Input
                     placeholder="Apellido"
                     value={formData.lastName ?? ""}
                     onChange={(value: string) =>
                       handleChange("lastName", value)
                     }
-                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
                   />
-                </div>
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
-                  >
-                    Nombre de usuario
-                  </label>
+                </FormInput>
+                <FormInput label="Nombre de usuario" size="lg">
                   <Input
                     placeholder="Nombre de usuario"
                     value={formData.userName ?? ""}
                     onChange={(value: string) =>
                       handleChange("userName", value)
                     }
-                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
                   />
-                </div>
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
-                  >
-                    Correo Electrónico
-                  </label>
+                </FormInput>
+                <FormInput label="Correo electrónico" size="lg">
                   <Input
                     placeholder="Correo Electrónico"
                     value={formData.email ?? ""}
                     onChange={(value: string) => handleChange("email", value)}
-                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
                   />
-                </div>
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
-                  >
-                    Teléfono
-                  </label>
+                </FormInput>
+                <FormInput label="Teléfono" size="lg">
                   <Input
                     placeholder="Teléfono"
                     value={formData.phoneNumber ?? ""}
                     onChange={(value: string) =>
                       handleChange("phoneNumber", value)
                     }
-                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
                   />
-                </div>
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
-                  >
-                    Años de experiencia
-                  </label>
+                </FormInput>
+                <FormInput label="Años de experiencia" size="lg">
                   <Input
                     placeholder="Años de Experiencia"
                     value={(formData.experienceYears ?? 0).toString()}
                     onChange={(value: string) =>
                       handleChange("experienceYears", value)
                     }
-                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
                   />
-                </div>
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
-                  >
-                    Sitio web
-                  </label>
+                </FormInput>
+                <FormInput label="Sitio web" size="lg">
                   <Input
                     placeholder="Website"
                     value={formData.website ?? ""}
                     onChange={(value: string) => handleChange("website", value)}
-                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
                   />
-                </div>
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
-                  >
-                    Ubicación
-                  </label>
+                </FormInput>
+                <FormInput label="Ubicación" size="lg">
                   <Input
                     placeholder="Ubicación"
                     value={formData.location ?? ""}
                     onChange={(value: string) =>
                       handleChange("location", value)
                     }
-                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
                   />
-                </div>
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="text-sm md:text-base lg:text-lg font-medium text-gray-700"
-                  >
-                    Especialización
-                  </label>
+                </FormInput>
+                <FormInput label="Especialización" size="lg">
                   <Input
                     placeholder="Especialización"
                     value={formData.specialization ?? ""}
                     onChange={(value: string) =>
                       handleChange("specialization", value)
                     }
-                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
                   />
-                </div>
+                </FormInput>
               </div>
             </div>
 
@@ -277,7 +224,6 @@ export default function ProfileManagement() {
                         type="button"
                         onClick={() => removeLanguage(index)}
                         className="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-md transition-colors"
-                        disabled={formData.languages?.length === 1}
                         title="Eliminar idioma"
                       >
                         <svg
@@ -299,7 +245,7 @@ export default function ProfileManagement() {
                   <button
                     type="button"
                     onClick={addLanguage}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors text-sm"
+                    className="flex items-center justify-center font-semibold gap-2 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors text-sm w-full text-center"
                   >
                     <span className="text-lg">+</span> Añadir idioma
                   </button>
@@ -308,15 +254,8 @@ export default function ProfileManagement() {
               <div className="flex flex-col sm:flex-row gap-3 px-6 py-3 md:px-8 md:py-4">
                 <button
                   type="button"
-                  className="px-5 py-2 text-base font-semibold rounded-lg shadow transition-colors border bg-primary text-white hover:bg-primary/90 "
-                >
-                  Vista previa
-                </button>
-
-                <button
-                  type="button"
                   onClick={handleSave}
-                  className={`px-5 py-2 text-base font-semibold rounded-lg shadow transition-colors 
+                  className={`px-5 py-2 text-base font-semibold rounded-lg shadow transition-colors w-full
                     ${
                       status === "success"
                         ? "bg-green-300 text-white"

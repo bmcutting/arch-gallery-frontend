@@ -27,6 +27,11 @@ export default function useUpdateUser() {
     languages: user?.languages ?? [],
   });
 
+  const cleanFormData = (data: User): User => ({
+    ...data,
+    languages: (data.languages ?? []).filter((lang) => lang.trim() !== ""),
+  });
+
   useEffect(() => {
     if (user) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -39,7 +44,9 @@ export default function useUpdateUser() {
   };
 
   const handleSave = () => {
-    updateUser(UserMapperDto.execute(formData))
+    const cleaned = cleanFormData(formData);
+
+    updateUser(UserMapperDto.execute(cleaned))
       .then((data) => {
         if (data.success === true) {
           setStatus("success");
