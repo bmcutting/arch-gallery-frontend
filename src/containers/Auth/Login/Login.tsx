@@ -8,9 +8,17 @@ import Header from "../components/Header";
 import useLogin from "./hooks/useLogin";
 
 export default function Login() {
-  const { handleSubmit, loading, email, password, setEmail, setPassword } =
-    useLogin();
-
+  const {
+    handleSubmit,
+    handleTouched,
+    loading,
+    email,
+    password,
+    touched,
+    setEmail,
+    setPassword,
+  } = useLogin();
+  console.log(touched);
   return (
     <AuthContainer>
       <Header />
@@ -26,6 +34,11 @@ export default function Login() {
             loading={false}
             onChange={setEmail}
             placeholder="user@gmail.com"
+            name="email"
+            onClear={() => setEmail("")}
+            touched={touched.email}
+            onBlur={handleTouched}
+            errorMsg="Debe añadir un correo electrónico"
             value={email}
             className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
@@ -35,9 +48,14 @@ export default function Login() {
           <Input
             loading={false}
             onChange={setPassword}
+            name="password"
             value={password}
             type="password"
             placeholder="********"
+            onClear={() => setPassword("")}
+            touched={touched.password}
+            onBlur={handleTouched}
+            errorMsg="Debe añadir la contraseña"
             className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>

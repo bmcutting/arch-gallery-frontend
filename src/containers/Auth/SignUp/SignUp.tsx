@@ -10,12 +10,14 @@ import useSignUp from "./hooks/useSignUp";
 export default function SignUp() {
   const {
     handleSubmit,
+    handleTouched,
     loading,
     email,
     password,
     firstName,
     userName,
     lastName,
+    touched,
     setEmail,
     setPassword,
     setFirstName,
@@ -38,7 +40,12 @@ export default function SignUp() {
             loading={false}
             onChange={setEmail}
             placeholder="user@gmail.com"
+            name="email"
             value={email}
+            onClear={() => setEmail("")}
+            touched={touched.email}
+            onBlur={handleTouched}
+            errorMsg="Debe añadir un correo electrónico"
             className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>
@@ -47,7 +54,12 @@ export default function SignUp() {
             loading={false}
             onChange={setFirstName}
             placeholder="Carlos"
+            name="firstName"
             value={firstName}
+            onClear={() => setFirstName("")}
+            touched={touched.firstName}
+            onBlur={handleTouched}
+            errorMsg="Debe añadir el nombre"
             className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>
@@ -56,7 +68,12 @@ export default function SignUp() {
             loading={false}
             onChange={setLastName}
             placeholder="Peguer"
+            name="lastName"
             value={lastName}
+            onClear={() => setLastName("")}
+            touched={touched.lastName}
+            onBlur={handleTouched}
+            errorMsg="Debe añadir el apellido"
             className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>
@@ -65,7 +82,12 @@ export default function SignUp() {
             loading={false}
             onChange={setUserName}
             placeholder="carlospeguer"
+            name="userName"
             value={userName}
+            onClear={() => setUserName("")}
+            touched={touched.userName}
+            onBlur={handleTouched}
+            errorMsg="Debe añadir el nombre de usuario"
             className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>
@@ -73,9 +95,14 @@ export default function SignUp() {
           <Input
             loading={false}
             onChange={setPassword}
+            name="password"
             value={password}
             type="password"
             placeholder="********"
+            onClear={() => setPassword("")}
+            touched={touched.password}
+            onBlur={handleTouched}
+            errorMsg="Debe añadir la contraseña"
             className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>

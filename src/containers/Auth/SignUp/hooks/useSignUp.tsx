@@ -22,6 +22,13 @@ export default function useSignUp() {
   const [firstName, setFirstName] = useState("");
   const [userName, setUserName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [touched, setTouched] = useState({
+    email: false,
+    password: false,
+    firstName: false,
+    userName: false,
+    lastName: false,
+  });
 
   function handleSubmit() {
     const validator = new SignUpValidator({
@@ -72,14 +79,20 @@ export default function useSignUp() {
     });
   }
 
+  const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
+    setTouched({ ...touched, [e.target.name]: true });
+  };
+
   return {
     handleSubmit,
+    handleTouched,
     loading,
     email,
     password,
     firstName,
     userName,
     lastName,
+    touched,
     setEmail,
     setPassword,
     setFirstName,

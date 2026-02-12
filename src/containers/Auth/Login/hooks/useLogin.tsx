@@ -15,7 +15,7 @@ export default function useLogin() {
   const router = useNavigate();
 
   const [loading, setLoading] = useState(false);
-
+  const [touched, setTouched] = useState({ email: false, password: false });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -48,5 +48,19 @@ export default function useLogin() {
       error: errors,
     });
   }
-  return { handleSubmit, loading, email, password, setPassword, setEmail };
+
+  const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
+    setTouched({ ...touched, [e.target.name]: true });
+  };
+
+  return {
+    handleSubmit,
+    handleTouched,
+    loading,
+    email,
+    password,
+    touched,
+    setPassword,
+    setEmail,
+  };
 }
