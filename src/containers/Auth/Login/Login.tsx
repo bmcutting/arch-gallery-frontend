@@ -15,6 +15,7 @@ export default function Login() {
     email,
     password,
     touched,
+    hasErrors,
     setEmail,
     setPassword,
   } = useLogin();
@@ -67,6 +68,7 @@ export default function Login() {
           uppercase
           type="submit"
           loading={loading}
+          disabled={hasErrors}
           full
         >
           Iniciar Sesión

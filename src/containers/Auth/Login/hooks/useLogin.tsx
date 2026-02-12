@@ -53,6 +53,8 @@ export default function useLogin() {
     setTouched({ ...touched, [e.target.name]: true });
   };
 
+  const hasErrors = !email || !password;
+
   return {
     handleSubmit,
     handleTouched,
@@ -60,6 +62,7 @@ export default function useLogin() {
     email,
     password,
     touched,
+    hasErrors,
     setPassword,
     setEmail,
   };

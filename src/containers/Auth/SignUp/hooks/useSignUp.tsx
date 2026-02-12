@@ -83,6 +83,8 @@ export default function useSignUp() {
     setTouched({ ...touched, [e.target.name]: true });
   };
 
+  const hasErrors = !email || !firstName || !lastName || !userName || !password;
+
   return {
     handleSubmit,
     handleTouched,
@@ -93,6 +95,7 @@ export default function useSignUp() {
     userName,
     lastName,
     touched,
+    hasErrors,
     setEmail,
     setPassword,
     setFirstName,

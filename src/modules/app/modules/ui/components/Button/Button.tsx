@@ -35,7 +35,7 @@ export default forwardRef<HTMLButtonElement, Props>(
       loading,
       disabled,
     }: Props,
-    ref
+    ref,
   ) => {
     const CLASS = clsx(
       "flex items-center justify-center",
@@ -94,14 +94,14 @@ export default forwardRef<HTMLButtonElement, Props>(
         "stroke-white": color === "primary",
       },
 
-      { "cursor-pointer": !disabled && !loading },
-
       {
         "disabled:bg-gray-50": color === "light",
         "disabled:bg-secondary": color === "primary",
       },
 
-      className
+      disabled || loading ? "opacity-40 cursor-not-allowed" : "cursor-pointer",
+
+      className,
     );
 
     return (
@@ -116,5 +116,5 @@ export default forwardRef<HTMLButtonElement, Props>(
         <p className="font-medium">{children}</p>
       </button>
     );
-  }
+  },
 );

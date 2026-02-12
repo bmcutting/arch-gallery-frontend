@@ -18,6 +18,7 @@ export default function SignUp() {
     userName,
     lastName,
     touched,
+    hasErrors,
     setEmail,
     setPassword,
     setFirstName,
@@ -113,6 +114,7 @@ export default function SignUp() {
           uppercase
           type="submit"
           loading={loading}
+          disabled={hasErrors}
           full
         >
           Registrarse
