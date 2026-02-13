@@ -15,21 +15,14 @@ export default function Login() {
     email,
     password,
     touched,
-    hasErrors,
     setEmail,
     setPassword,
   } = useLogin();
-  console.log(touched);
+  
   return (
     <AuthContainer>
       <Header />
-      <form
-        className="w-full"
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit();
-        }}
-      >
+      <form className="w-full" onSubmit={handleSubmit}>
         <FormInput label="Correo" size="base" required>
           <Input
             loading={false}
@@ -68,7 +61,6 @@ export default function Login() {
           uppercase
           type="submit"
           loading={loading}
-          disabled={hasErrors}
           full
         >
           Iniciar Sesión

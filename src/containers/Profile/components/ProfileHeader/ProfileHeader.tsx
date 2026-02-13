@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../../../modules/app/domain/constants/app-routes";
 
 interface Props {
-  user: User | null;
+  user: User;
 }
 
 export default function ProfileHeader({ user }: Props) {
@@ -46,16 +46,17 @@ export default function ProfileHeader({ user }: Props) {
                   <span>{user.location}</span>
                 </div>
               )}
-              {user?.experienceYears && (
-                <div className="flex items-center gap-2 text-base md:text-lg lg:text-2xl text-black">
-                  <FaBriefcase className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" />
-                  <span>
-                    {user.experienceYears === 1
-                      ? "1 año de experiencia"
-                      : `${user.experienceYears} años de experiencia`}
-                  </span>
-                </div>
-              )}
+              {user?.experienceYears !== undefined &&
+                user.experienceYears > 0 && (
+                  <div className="flex items-center gap-2 text-base md:text-lg lg:text-2xl text-black">
+                    <FaBriefcase className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" />{" "}
+                    <span>
+                      {user.experienceYears === 1
+                        ? "1 año de experiencia"
+                        : `${user.experienceYears} años de experiencia`}
+                    </span>
+                  </div>
+                )}
               {user?.phoneNumber && (
                 <div className="flex items-center gap-2 text-base md:text-lg lg:text-2xl text-black">
                   <FaPhone className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" />

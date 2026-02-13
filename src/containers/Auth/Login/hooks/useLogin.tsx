@@ -19,7 +19,14 @@ export default function useLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit() {
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    const newTouched = { ...touched };
+    if (!email) newTouched.email = true;
+    if (!password) newTouched.password = true;
+    setTouched(newTouched);
+
     const validator = new AuthValidator({ email: email, password: password });
 
     validator.execute({
@@ -53,8 +60,6 @@ export default function useLogin() {
     setTouched({ ...touched, [e.target.name]: true });
   };
 
-  const hasErrors = !email || !password;
-
   return {
     handleSubmit,
     handleTouched,
@@ -62,7 +67,6 @@ export default function useLogin() {
     email,
     password,
     touched,
-    hasErrors,
     setPassword,
     setEmail,
   };

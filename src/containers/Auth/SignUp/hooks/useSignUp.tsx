@@ -16,21 +16,54 @@ export default function useSignUp() {
   const router = useNavigate();
 
   const [loading, setLoading] = useState(false);
+  const [step, setStep] = useState(1);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [userName, setUserName] = useState("");
   const [lastName, setLastName] = useState("");
+
   const [touched, setTouched] = useState({
     email: false,
     password: false,
+    confirmPassword: false,
     firstName: false,
     userName: false,
     lastName: false,
   });
 
-  function handleSubmit() {
+  function handleStepOneSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    const newTouched = { ...touched };
+    if (!email) newTouched.email = true;
+    if (!firstName) newTouched.firstName = true;
+    if (!lastName) newTouched.lastName = true;
+    if (!userName) newTouched.userName = true;
+    setTouched(newTouched);
+
+    if (!email || !firstName || !lastName || !userName) {
+      error({ message: "Completa todos los campos" });
+      return;
+    }
+    setStep(2);
+  }
+
+  function handleFinalSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    const newTouched = { ...touched };
+    if (!password) newTouched.password = true;
+    if (!confirmPassword) newTouched.confirmPassword = true;
+    setTouched(newTouched);
+
+    if (password !== confirmPassword) {
+      error({ message: "Las contraseñas no coinciden" });
+      return;
+    }
+
     const validator = new SignUpValidator({
       email: email,
       password: password,
@@ -83,21 +116,24 @@ export default function useSignUp() {
     setTouched({ ...touched, [e.target.name]: true });
   };
 
-  const hasErrors = !email || !firstName || !lastName || !userName || !password;
 
   return {
-    handleSubmit,
+    step,
+    setStep,
+    handleStepOneSubmit,
+    handleFinalSubmit,
     handleTouched,
     loading,
     email,
     password,
+    confirmPassword,
     firstName,
     userName,
     lastName,
     touched,
-    hasErrors,
     setEmail,
     setPassword,
+    setConfirmPassword,
     setFirstName,
     setLastName,
     setUserName,
