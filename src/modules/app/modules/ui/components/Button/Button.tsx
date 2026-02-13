@@ -17,6 +17,7 @@ interface Props {
   rounded?: boolean;
   disabled?: boolean;
   loading?: boolean;
+  status?: "idle" | "success" | "error";
 }
 
 export default forwardRef<HTMLButtonElement, Props>(
@@ -34,6 +35,7 @@ export default forwardRef<HTMLButtonElement, Props>(
       rounded,
       loading,
       disabled,
+      status,
     }: Props,
     ref,
   ) => {
@@ -43,6 +45,13 @@ export default forwardRef<HTMLButtonElement, Props>(
       "whitespace-nowrap",
 
       uppercase && "uppercase",
+
+      {
+        "bg-green-300 text-white": status === "success",
+        "border-2 border-red-300 text-red-300 bg-white": status === "error",
+        "bg-primary text-white hover:bg-primary/90":
+          status === "idle" || !status,
+      },
 
       {
         "bg-primary": color === "primary" && !loading,

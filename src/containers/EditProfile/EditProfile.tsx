@@ -4,6 +4,7 @@ import ProfilePhotoUpload from "./components/ProfilePhotoUploadForm";
 import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import useUpdateUser from "./hooks/useUpdateUser";
 import FormInput from "../../modules/app/modules/ui/components/Form/FormInput";
+import Button from "../../modules/app/modules/ui/components/Button/Button";
 
 export default function ProfileManagement() {
   const {
@@ -11,12 +12,16 @@ export default function ProfileManagement() {
     bio,
     maxChars,
     status,
+    touched,
+    hasErrors,
+    handleTouched,
     handleBioChange,
     handleSave,
     handleChange,
     addLanguage,
     removeLanguage,
     updateLanguage,
+    setFormData,
   } = useUpdateUser();
 
   return (
@@ -54,6 +59,16 @@ export default function ProfileManagement() {
                     onChange={(value: string) =>
                       handleChange("firstName", value)
                     }
+                    name="firstName"
+                    touched={touched.firstName}
+                    onBlur={handleTouched}
+                    errorMsg="Debe añadir el nombre"
+                    onClear={() =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        firstName: "",
+                      }))
+                    }
                     className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
                   />
                 </FormInput>
@@ -63,6 +78,16 @@ export default function ProfileManagement() {
                     value={formData.lastName ?? ""}
                     onChange={(value: string) =>
                       handleChange("lastName", value)
+                    }
+                    name="lastName"
+                    touched={touched.lastName}
+                    onBlur={handleTouched}
+                    errorMsg="Debe añadir el apellido"
+                    onClear={() =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        lastName: "",
+                      }))
                     }
                     className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
                   />
@@ -74,6 +99,16 @@ export default function ProfileManagement() {
                     onChange={(value: string) =>
                       handleChange("userName", value)
                     }
+                    name="userName"
+                    touched={touched.userName}
+                    onBlur={handleTouched}
+                    errorMsg="Debe añadir el nombre de usuario"
+                    onClear={() =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        userName: "",
+                      }))
+                    }
                     className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
                   />
                 </FormInput>
@@ -82,6 +117,16 @@ export default function ProfileManagement() {
                     placeholder="Correo Electrónico"
                     value={formData.email ?? ""}
                     onChange={(value: string) => handleChange("email", value)}
+                    name="email"
+                    touched={touched.email}
+                    onBlur={handleTouched}
+                    errorMsg="Debe añadir el correo electrónico"
+                    onClear={() =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        email: "",
+                      }))
+                    }
                     className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
                   />
                 </FormInput>
@@ -242,34 +287,34 @@ export default function ProfileManagement() {
                       </button>
                     </div>
                   ))}
-                  <button
+                  <Button
                     type="button"
                     onClick={addLanguage}
-                    className="flex items-center justify-center font-semibold gap-2 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors text-sm w-full text-center"
+                    size="base"
+                    full
+                    color="primary"
                   >
                     <span className="text-lg">+</span> Añadir idioma
-                  </button>
+                  </Button>
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 px-6 py-3 md:px-8 md:py-4">
-                <button
+                <Button
                   type="button"
                   onClick={handleSave}
-                  className={`px-5 py-2 text-base font-semibold rounded-lg shadow transition-colors w-full
-                    ${
-                      status === "success"
-                        ? "bg-green-300 text-white"
-                        : status === "error"
-                          ? "border-2 border-red-300 text-red-300 bg-white"
-                          : "bg-primary text-white hover:bg-primary/90"
-                    }`}
+                  disabled={hasErrors}
+                  size="lg"
+                  full
+                  status={status}
                 >
-                  {status === "success"
-                    ? "Guardado"
-                    : status === "error"
-                      ? "Error al guardar"
-                      : "Guardar"}
-                </button>
+                  <p className="font-medium">
+                    {status === "success"
+                      ? "Guardado"
+                      : status === "error"
+                        ? "Error al guardar"
+                        : "Guardar"}
+                  </p>
+                </Button>
               </div>
             </div>
           </div>

@@ -27,6 +27,13 @@ export default function useUpdateUser() {
     languages: user?.languages ?? [],
   });
 
+  const [touched, setTouched] = useState({
+    email: false,
+    firstName: false,
+    userName: false,
+    lastName: false,
+  });
+
   const cleanFormData = (data: User): User => ({
     ...data,
     languages: (data.languages ?? []).filter((lang) => lang.trim() !== ""),
@@ -92,16 +99,30 @@ export default function useUpdateUser() {
     }));
   };
 
+  const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
+    setTouched({ ...touched, [e.target.name]: true });
+  };
+
+  const hasErrors =
+    !formData.email ||
+    !formData.firstName ||
+    !formData.lastName ||
+    !formData.userName;
+
   return {
     formData,
     bio,
     maxChars,
     status,
+    touched,
+    hasErrors,
     handleBioChange,
     handleSave,
     handleChange,
+    handleTouched,
     addLanguage,
     removeLanguage,
     updateLanguage,
+    setFormData,
   };
 }
