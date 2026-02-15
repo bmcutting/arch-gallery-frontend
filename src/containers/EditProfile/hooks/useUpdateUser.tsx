@@ -50,7 +50,25 @@ export default function useUpdateUser() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSave = () => {
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newTouched = { ...touched };
+    if (!formData.email) newTouched.email = true;
+    if (!formData.firstName) newTouched.firstName = true;
+    if (!formData.lastName) newTouched.lastName = true;
+    if (!formData.userName) newTouched.userName = true;
+    setTouched(newTouched);
+
+    if (
+      !formData.email ||
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.userName
+    ) {
+      return;
+    }
+
     const cleaned = cleanFormData(formData);
 
     updateUser(UserMapperDto.execute(cleaned))
@@ -103,11 +121,6 @@ export default function useUpdateUser() {
     setTouched({ ...touched, [e.target.name]: true });
   };
 
-  const hasErrors =
-    !formData.email ||
-    !formData.firstName ||
-    !formData.lastName ||
-    !formData.userName;
 
   return {
     formData,
@@ -115,7 +128,6 @@ export default function useUpdateUser() {
     maxChars,
     status,
     touched,
-    hasErrors,
     handleBioChange,
     handleSave,
     handleChange,
