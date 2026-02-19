@@ -8,6 +8,7 @@ export class ProjectMapper {
       id: r.id,
       title: r.title,
       description: r.description,
+      year: r.year,
       categories: CategoryMapper.toDomainList(r.categories),
     };
   }

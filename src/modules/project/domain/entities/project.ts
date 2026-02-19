@@ -6,6 +6,7 @@ export interface Project {
   id: string;
   title: string;
   description: string;
+  year: number;
   imagesUrl?: string[];
   likes?: Like[];
   comments?: Comment[];

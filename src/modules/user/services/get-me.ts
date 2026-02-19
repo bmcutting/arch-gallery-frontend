@@ -5,7 +5,6 @@ import { UserMapper } from "./user-mapper";
 
 export async function getMe(): Promise<User> {
   return instance.get<UserResponse>("users/me").then((data) => {
-    const result = UserMapper.execute(data.data);
-    return result;
+    return UserMapper.execute(data.data);
   });
 }

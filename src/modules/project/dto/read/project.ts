@@ -5,6 +5,7 @@ export interface ProjectResponse {
   id: string;
   title: string;
   description: string;
+  year: number;
   createdAt: string;
   imagesUrl: string[];
   categories: Category[];

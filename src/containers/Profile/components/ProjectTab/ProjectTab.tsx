@@ -57,7 +57,7 @@ export default function ProjectTab() {
                 className="w-full h-full object-cover transition-all group-hover:scale-105"
               />
               <div className="absolute top-3 right-3 px-3 py-1.5 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium text-blue-500">
-                {"project.year"}
+                {project.year}
               </div>
             </div>
             <div className="p-4 md:p-6">
@@ -79,7 +79,7 @@ export default function ProjectTab() {
                   </div>
                 </div>
                 <div className="text-xs md:text-sm font-medium text-secondary">
-                  {"project.category"}
+                  {project.categories?.map((c) => c.name).join(", ")}
                 </div>
               </div>
             </div>
