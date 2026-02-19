@@ -2,8 +2,10 @@ import { FaEye, FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Select from "../../../../modules/app/modules/ui/components/Select/Select";
 import { useState } from "react";
+import useProject from "../../hooks/useProject";
 
 export default function ProjectTab() {
+  const projects = useProject();
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [selectedSort, setSelectedSort] = useState("recent");
 
@@ -21,7 +23,7 @@ export default function ProjectTab() {
     { value: "popular", label: "Más Populares" },
   ];
 
-  const projects = [
+  const project = [
     {
       id: 1,
       title: "Metagross",
@@ -76,7 +78,7 @@ export default function ProjectTab() {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
-        {projects.map((project) => (
+        {projects.projects?.map((project) => (
           <Link
             key={project.id}
             to={`/project-gallery?id=${project.id}`}
@@ -84,12 +86,12 @@ export default function ProjectTab() {
           >
             <div className="relative aspect-4/3 overflow-hidden bg-muted">
               <img
-                src={project.image}
+                src="/pp.jfif"
                 alt={project.title}
                 className="w-full h-full object-cover transition-all group-hover:scale-105"
               />
               <div className="absolute top-3 right-3 px-3 py-1.5 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium text-blue-500">
-                {project.year}
+                {"project.year"}
               </div>
             </div>
             <div className="p-4 md:p-6">
@@ -103,15 +105,15 @@ export default function ProjectTab() {
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-1.5 text-sm text-secondary">
                     <FaHeart />
-                    <span>{project.likes}</span>
+                    <span>{"project.likes"}</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-sm text-secondary">
                     <FaEye />
-                    <span>{project.views} vistas</span>
+                    <span>{"project.views"} vistas</span>
                   </div>
                 </div>
                 <div className="text-xs md:text-sm font-medium text-secondary">
-                  {project.category}
+                  {"project.category"}
                 </div>
               </div>
             </div>
