@@ -1,3 +1,4 @@
+import { CategoryMapper } from "../../category/services/category-mapper";
 import type { Project } from "../domain/entities/project";
 import type { ProjectResponse } from "../dto/read/project";
 
@@ -7,11 +8,11 @@ export class ProjectMapper {
       id: r.id,
       title: r.title,
       description: r.description,
+      categories: CategoryMapper.toDomainList(r.categories),
     };
   }
 
   static toDomainList(r: ProjectResponse[]): Project[] {
-    console.log(r);
     return r.map((project) => this.toDomain(project));
   }
 }
