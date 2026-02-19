@@ -23,40 +23,6 @@ export default function ProjectTab() {
     { value: "popular", label: "Más Populares" },
   ];
 
-  const project = [
-    {
-      id: 1,
-      title: "Metagross",
-      description:
-        "Metagross es un pokemon de tipo acero y psíquico utilizado en batallas. Evoluciona de Metang y Beldum",
-      year: 2025,
-      image: "pp.jfif",
-      likes: 100,
-      views: 100,
-      category: "Urbanismo",
-    },
-    {
-      id: 2,
-      title: "Proyecto Residencial",
-      description: "Un conjunto de viviendas modernas y sostenibles.",
-      year: 2024,
-      image: "house.jpg",
-      likes: 250,
-      views: 500,
-      category: "Residencial",
-    },
-    {
-      id: 3,
-      title: "Centro Comercial",
-      description: "Espacio comercial con diseño innovador.",
-      year: 2023,
-      image: "mall.jpg",
-      likes: 400,
-      views: 1200,
-      category: "Comercial",
-    },
-  ];
-
   return (
     <div className="space-y-6 md:space-y-8">
       <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
