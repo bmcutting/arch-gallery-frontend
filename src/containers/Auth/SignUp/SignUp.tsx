@@ -29,6 +29,7 @@ export default function SignUp() {
     setFirstName,
     setLastName,
     setUserName,
+    setStep
   } = useSignUp();
 
   return (
@@ -142,17 +143,27 @@ export default function SignUp() {
 
           <ErrorMessage message={error} />
 
-          <Button
-            className="mt-8"
-            color="primary"
-            size="lg"
-            uppercase
-            type="submit"
-            loading={loading}
-            full
-          >
-            Registrarse
-          </Button>
+          <div className="mt-8 flex gap-4 justify-center">
+            <Button
+              color="primary"
+              size="lg"
+              type="button"
+              onClick={() => setStep(1)}
+            >
+              Volver
+            </Button>
+
+            <Button
+              color="primary"
+              size="lg"
+              uppercase
+              type="submit"
+              loading={loading}
+              full
+            >
+              Registrarse
+            </Button>
+          </div>
         </form>
       )}
 

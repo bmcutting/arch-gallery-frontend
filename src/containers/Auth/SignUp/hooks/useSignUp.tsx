@@ -44,7 +44,6 @@ export default function useSignUp() {
     setTouched(newTouched);
 
     if (!email || !firstName || !lastName || !userName) {
-      setError("Completa todos los campos");
       return;
     }
     setStep(2);
@@ -118,7 +117,6 @@ export default function useSignUp() {
 
   return {
     step,
-    setStep,
     handleStepOneSubmit,
     handleFinalSubmit,
     handleTouched,
@@ -137,5 +135,6 @@ export default function useSignUp() {
     setFirstName,
     setLastName,
     setUserName,
+    setStep,
   };
 }
