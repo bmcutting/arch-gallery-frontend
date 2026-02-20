@@ -1,5 +1,6 @@
 import { APP_ROUTES } from "../../../modules/app/domain/constants/app-routes";
 import Button from "../../../modules/app/modules/ui/components/Button/Button";
+import ErrorMessage from "../../../modules/app/modules/ui/components/ErrorMessage/ErrorMessage";
 import FormInput from "../../../modules/app/modules/ui/components/Form/FormInput";
 import Input from "../../../modules/app/modules/ui/components/Input/Input";
 import AuthPrompt from "../../../modules/user/components/AuthPrompt/AuthPrompt";
@@ -21,6 +22,7 @@ export default function SignUp() {
     userName,
     lastName,
     touched,
+    error,
     setEmail,
     setPassword,
     setConfirmPassword,
@@ -90,6 +92,9 @@ export default function SignUp() {
               className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
             />
           </FormInput>
+
+          <ErrorMessage message={error} />
+
           <Button
             className="mt-8"
             color="primary"
@@ -134,6 +139,8 @@ export default function SignUp() {
               className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
             />
           </FormInput>
+
+          <ErrorMessage message={error} />
 
           <Button
             className="mt-8"

@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import useToast from "../../../../modules/app/hooks/useToast";
 import { useState } from "react";
 import { createUser } from "../../../../modules/user/services/create-user";
 import { SignUpValidator } from "../../../../modules/user/domain/validator/signup/signup-validator";
@@ -12,7 +11,6 @@ import { HttpStatusCode } from "axios";
 import { loginUser } from "../../../../modules/user/services/login-user";
 
 export default function useSignUp() {
-  const { errors, error } = useToast();
   const router = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -21,6 +19,7 @@ export default function useSignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
   const [firstName, setFirstName] = useState("");
   const [userName, setUserName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -45,7 +44,7 @@ export default function useSignUp() {
     setTouched(newTouched);
 
     if (!email || !firstName || !lastName || !userName) {
-      error({ message: "Completa todos los campos" });
+      setError("Completa todos los campos");
       return;
     }
     setStep(2);
@@ -60,7 +59,7 @@ export default function useSignUp() {
     setTouched(newTouched);
 
     if (password !== confirmPassword) {
-      error({ message: "Las contraseñas no coinciden" });
+      setError("Las contraseñas no coinciden");
       return;
     }
 
@@ -96,26 +95,26 @@ export default function useSignUp() {
           })
           .catch((e: HttpResponseError) => {
             if (e.status === HttpStatusCode.Conflict) {
-              error({
-                id: "not-found-error",
-                message: "Ya existe un usuario con este correo",
-              });
+              setError("Ya existe un usuario con este correo");
             } else {
-              error({ message: `Hubo un error al crear el usuario` });
+              setError("Hubo un error al crear el usuario");
             }
           })
           .finally(() => {
             setLoading(false);
           });
       },
-      error: errors,
+      error(errors) {
+        if (errors.length > 0) {
+          setError(errors[0].message);
+        }
+      },
     });
   }
 
   const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
     setTouched({ ...touched, [e.target.name]: true });
   };
-
 
   return {
     step,
@@ -131,6 +130,7 @@ export default function useSignUp() {
     userName,
     lastName,
     touched,
+    error,
     setEmail,
     setPassword,
     setConfirmPassword,

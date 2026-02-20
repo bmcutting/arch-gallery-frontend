@@ -1,6 +1,5 @@
 import * as LucideIcons from "lucide-react";
 import { HelpCircle } from "lucide-react";
-import type { Size } from "../../domain/size";
 
 type IconName = keyof typeof LucideIcons;
 

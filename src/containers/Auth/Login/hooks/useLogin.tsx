@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { AuthValidator } from "../../../../modules/user/domain/validator/auth/auth-validator";
-import useToast from "../../../../modules/app/hooks/useToast";
 import { useNavigate } from "react-router-dom";
 import {
   LOCAL_STORAGE_KEY,
@@ -11,11 +10,11 @@ import type { HttpResponseError } from "../../../../modules/app/modules/http/dom
 import { HttpStatusCode } from "axios";
 
 export default function useLogin() {
-  const { errors, error } = useToast();
   const router = useNavigate();
 
   const [loading, setLoading] = useState(false);
   const [touched, setTouched] = useState({ email: false, password: false });
+  const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -40,19 +39,20 @@ export default function useLogin() {
           })
           .catch((e: HttpResponseError) => {
             if (e.status === HttpStatusCode.NotFound) {
-              error({
-                id: "not-found-error",
-                message: "No existe este usuario",
-              });
+              setError("No existe este usuario");
             } else {
-              error({ message: `Hubo un error al autenticar el usuario` });
+              setError(`Hubo un error al autenticar el usuario`);
             }
           })
           .finally(() => {
             setLoading(false);
           });
       },
-      error: errors,
+      error(errors) {
+        if (errors.length > 0) {
+          setError(errors[0].message);
+        }
+      },
     });
   }
 
@@ -67,6 +67,7 @@ export default function useLogin() {
     email,
     password,
     touched,
+    error,
     setPassword,
     setEmail,
   };
