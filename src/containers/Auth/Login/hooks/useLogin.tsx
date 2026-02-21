@@ -8,9 +8,10 @@ import {
 import { loginUser } from "../../../../modules/user/services/login-user";
 import type { HttpResponseError } from "../../../../modules/app/modules/http/domain/error";
 import { HttpStatusCode } from "axios";
+import { APP_ROUTES } from "../../../../modules/app/domain/constants/app-routes";
 
 export default function useLogin() {
-  const router = useNavigate();
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
   const [touched, setTouched] = useState({ email: false, password: false });
@@ -35,8 +36,14 @@ export default function useLogin() {
         loginUser({ email: email, password: password })
           .then((data) => {
             LocalStorage.set(LOCAL_STORAGE_KEY.ACCESS_TOKEN, data.access_token);
-            router("/home", { replace: true });
+            LocalStorage.set(
+              LOCAL_STORAGE_KEY.REFRESH_TOKEN,
+              data.refresh_token,
+            );
+
+            navigate(APP_ROUTES.HOME);
           })
+
           .catch((e: HttpResponseError) => {
             if (e.status === HttpStatusCode.NotFound) {
               setError("No existe este usuario");

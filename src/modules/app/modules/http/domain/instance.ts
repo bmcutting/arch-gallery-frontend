@@ -58,12 +58,34 @@ const handleError = (error: unknown): HttpResponseError => {
 
 instance.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
     const e = handleError(error);
 
     if (e.status === HttpStatusCode.Unauthorized) {
-      LocalStorage.remove(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-      window.location.href = APP_ROUTES.LOGIN;
+      const originalRequest = error.config;
+      const refreshToken = LocalStorage.get(LOCAL_STORAGE_KEY.REFRESH_TOKEN);
+
+      if (refreshToken) {
+        try {
+          const { data } = await axios.post(`${API_ROUTE}/auth/refresh`, {
+            refresh_token: refreshToken,
+          });
+
+          LocalStorage.set(LOCAL_STORAGE_KEY.ACCESS_TOKEN, data.access_token);
+          LocalStorage.set(LOCAL_STORAGE_KEY.REFRESH_TOKEN, data.refresh_token);
+
+          originalRequest.headers.authorization = `Bearer ${data.access_token}`;
+          return instance(originalRequest);
+        } catch (refreshError) {
+          LocalStorage.remove(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+          LocalStorage.remove(LOCAL_STORAGE_KEY.REFRESH_TOKEN);
+          window.location.href = APP_ROUTES.LOGIN;
+          return Promise.reject(refreshError);
+        }
+      } else {
+        LocalStorage.remove(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+        window.location.href = APP_ROUTES.LOGIN;
+      }
     }
     return Promise.reject(e);
   },
