@@ -5,53 +5,62 @@ export default function Home() {
   const projects = useFeed();
   return (
     <AppLayout>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-14">
-        {projects.projects?.map((project) => (
-          <div
-            key={project.id}
-            className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
-          >
-            {/* Imagen de preview */}
-            {project.previewImage && (
-              <img
-                src="/sa.jpeg"
-                alt={project.title}
-                className="w-full h-48 object-cover"
-              />
-            )}
-
-            {/* Contenido */}
-            <div className="p-4 flex flex-col gap-2">
-              <h2 className="text-lg font-semibold text-gray-800">
-                {project.title}
-              </h2>
-
-              <div className="flex items-center gap-3 mt-2">
-                {project.author.profileImage && (
+      <section className="mt-14 px-6">
+        <h1 className="text-3xl font-bold text-gray-900 mb-12 text-center tracking-wide">
+          Galería de Arquitectura
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {projects.projects?.map((project) => (
+            <article
+              key={project.id}
+              className="group relative bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-[1.02] transition-transform duration-300"
+            >
+              {/* Imagen estilo cuadro */}
+              {project.previewImage && (
+                <div className="aspect-w-4 aspect-h-3">
+                  {" "}
                   <img
-                    src={project.author.profileImage}
-                    alt={project.author.name}
-                    className="w-8 h-8 rounded-full object-cover"
+                    src={"/sa.jpeg"}
+                    alt={`Obra: ${project.title}`}
+                    className="w-full h-full object-cover border-8 border-gray-100 group-hover:border-gray-300 transition-colors"
                   />
-                )}
-                <span className="text-sm text-gray-600">
-                  {project.author.name}
-                </span>
-              </div>
-
-              <div className="flex justify-between text-sm text-gray-500 mt-3">
-                <span>👍 {project.likesCount ?? 0}</span>
-                <span>💬 {project.commentsCount ?? 0}</span>
-                {project.createdAt && (
-                  <span>
-                    {new Date(project.createdAt[0]).toLocaleDateString()}
+                </div>
+              )}
+              {/* Pie de obra */}
+              <div className="p-6 flex flex-col gap-4 bg-gray-50">
+                <h2 className="text-xl font-semibold text-gray-800 text-center">
+                  {project.title}
+                </h2>
+                {/* Autor como firma */}
+                <div className="flex items-center justify-center gap-3">
+                  {project.author.profileImage && (
+                    <img
+                      src={project.author.profileImage}
+                      alt={`Firma de ${project.author.name}`}
+                      className="w-10 h-10 rounded-full object-cover border border-gray-300"
+                    />
+                  )}
+                  <span className="text-sm text-gray-600 italic">
+                    {project.author.name}
                   </span>
-                )}
+                </div>
+                {/* Metadatos discretos */}
+                <div className="flex justify-center gap-6 text-xs text-gray-500 mt-2">
+                  <span>👍 {project.likesCount ?? 0}</span>
+                  <span>💬 {project.commentsCount ?? 0}</span>
+                  {project.createdAt && (
+                    <time
+                      dateTime={new Date(project.createdAt[0]).toISOString()}
+                    >
+                      {new Date(project.createdAt[0]).toLocaleDateString()}
+                    </time>
+                  )}
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
-      </div>
+            </article>
+          ))}
+        </div>
+      </section>
     </AppLayout>
   );
 }
