@@ -1,9 +1,8 @@
-import { FaEye, FaHeart } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import Select from "../../../../modules/app/modules/ui/components/Select/Select";
 import { useState } from "react";
 import useProject from "../../hooks/useProject";
 import CreateProjectModal from "../../../../modules/project/components/CreateProjectModal";
+import ProjectCard from "../../../../modules/project/components/ProjectCard";
 
 interface Props {
   userId: string;
@@ -50,45 +49,7 @@ export default function ProjectTab({ userId }: Props) {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
         {projects?.map((project) => (
-          <Link
-            key={project.id}
-            to={`/project-gallery?id=${project.id}`}
-            className="group bg-card border border-border rounded-lg overflow-hidden transition-all hover:shadow-amber-50 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-          >
-            <div className="relative aspect-4/3 overflow-hidden bg-muted">
-              <img
-                src="/pp.jfif"
-                alt={project.title}
-                className="w-full h-full object-cover transition-all group-hover:scale-105"
-              />
-              <div className="absolute top-3 right-3 px-3 py-1.5 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium text-blue-500">
-                {project.year}
-              </div>
-            </div>
-            <div className="p-4 md:p-6">
-              <h3 className="text-lg md:text-xl font-semibold text-secondary mb-2 line-clamp-1 group-hover:text-secondary transition-all">
-                {project.title}
-              </h3>
-              <p className="text-sm md:text-base text-secondary mb-4 line-clamp-2">
-                {project.description}
-              </p>
-              <div className="flex items-center justify-between pt-4 border-t border-border">
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-1.5 text-sm text-secondary">
-                    <FaHeart />
-                    <span>{"project.likes"}</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 text-sm text-secondary">
-                    <FaEye />
-                    <span>{"project.views"} vistas</span>
-                  </div>
-                </div>
-                <div className="text-xs md:text-sm font-medium text-secondary">
-                  {project.categories?.map((c) => c.name).join(", ")}
-                </div>
-              </div>
-            </div>
-          </Link>
+          <ProjectCard key={project.id} project={project} />
         ))}
         <div
           onClick={() => setShowCreateModal(true)}

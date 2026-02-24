@@ -15,8 +15,5 @@ export default function useProfile() {
       });
   }, [user?.id]);
 
-  if (!user) {
-    throw new Error("User not loaded");
-  }
   return user;
 }
