@@ -3,9 +3,14 @@ import { Link } from "react-router-dom";
 import Select from "../../../../modules/app/modules/ui/components/Select/Select";
 import { useState } from "react";
 import useProject from "../../hooks/useProject";
+import CreateProjectModal from "../../../../modules/project/components/CreateProjectModal";
 
-export default function ProjectTab() {
-  const projects = useProject();
+interface Props {
+  userId: string;
+}
+
+export default function ProjectTab({ userId }: Props) {
+  const { projects, showCreateModal, setShowCreateModal } = useProject();
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [selectedSort, setSelectedSort] = useState("recent");
 
@@ -44,7 +49,7 @@ export default function ProjectTab() {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
-        {projects.projects?.map((project) => (
+        {projects?.map((project) => (
           <Link
             key={project.id}
             to={`/project-gallery?id=${project.id}`}
@@ -85,7 +90,22 @@ export default function ProjectTab() {
             </div>
           </Link>
         ))}
+        <div
+          onClick={() => setShowCreateModal(true)}
+          className="flex flex-col items-center justify-center border-2 border-dashed border-accent rounded-lg cursor-pointer hover:bg-accent/10 transition-all"
+        >
+          <span className="text-lg md:text-xl font-semibold text-primary">
+            + Añadir Proyecto
+          </span>
+        </div>
       </div>
+
+      {showCreateModal && (
+        <CreateProjectModal
+          onClose={() => setShowCreateModal(false)}
+          userId={userId}
+        />
+      )}
     </div>
   );
 }

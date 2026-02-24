@@ -5,16 +5,14 @@ import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import useUpdateUser from "./hooks/useUpdateUser";
 import FormInput from "../../modules/app/modules/ui/components/Form/FormInput";
 import Button from "../../modules/app/modules/ui/components/Button/Button";
+import Textarea from "../../modules/app/modules/ui/components/TextArea/TextArea";
 
 export default function ProfileManagement() {
   const {
     formData,
-    bio,
-    maxChars,
     status,
     touched,
     handleTouched,
-    handleBioChange,
     handleSave,
     handleChange,
     addLanguage,
@@ -183,29 +181,17 @@ export default function ProfileManagement() {
               </div>
 
               <div className="px-6 py-3 md:px-8 md:py-4">
-                <h2 className="text-lg md:text-xl font-semibold mb-6">
-                  Biografía Profesional
-                </h2>
-                <div>
-                  <textarea
+                <FormInput label="Biografía profesional" size="lg">
+                  <Textarea
                     placeholder="Escribe tu biografía profesional..."
                     value={formData.bio}
-                    onChange={(e) => handleBioChange(e.target.value)}
-                    className="w-full h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg 
-                     rounded-md border border-gray-300 focus:ring-2 focus:ring-primary 
-                     resize-none leading-relaxed"
-                    maxLength={maxChars}
+                    onChange={(value: string) => handleChange("bio", value)}
+                    maxChars={500}
+                    className="h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg 
+               rounded-md border border-gray-300 focus:ring-2 focus:ring-primary 
+               resize-none leading-relaxed"
                   />
-                  <p
-                    className={`text-xs mt-2 ${
-                      bio.length >= maxChars
-                        ? "text-red-500 font-extrabold"
-                        : "text-gray-500"
-                    }`}
-                  >
-                    {bio.length}/{maxChars} caracteres
-                  </p>
-                </div>
+                </FormInput>
               </div>
 
               <div className="px-6 py-3 md:px-8 md:py-4">
@@ -304,19 +290,14 @@ export default function ProfileManagement() {
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 px-6 py-3 md:px-8 md:py-4">
-                  <Button
-                    type="submit"
-                    size="lg"
-                    full
-                    status={status}
-                  >
-                    <p className="font-medium">
+                  <Button type="submit" size="lg" full status={status}>
+                    <span className="font-medium">
                       {status === "success"
                         ? "Guardado"
                         : status === "error"
                           ? "Error al guardar"
                           : "Guardar"}
-                    </p>
+                    </span>
                   </Button>
                 </div>
               </div>

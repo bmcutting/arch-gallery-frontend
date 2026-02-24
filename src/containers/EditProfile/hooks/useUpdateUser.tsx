@@ -87,13 +87,6 @@ export default function useUpdateUser() {
       });
   };
 
-  const [bio, setBio] = useState(formData.bio ?? user?.bio ?? "");
-  const maxChars = 500;
-  const handleBioChange = (value: string) => {
-    setBio(value);
-    handleChange("bio", value);
-  };
-
   const addLanguage = () => {
     setFormData((prev) => ({
       ...prev,
@@ -121,14 +114,10 @@ export default function useUpdateUser() {
     setTouched({ ...touched, [e.target.name]: true });
   };
 
-
   return {
     formData,
-    bio,
-    maxChars,
     status,
     touched,
-    handleBioChange,
     handleSave,
     handleChange,
     handleTouched,

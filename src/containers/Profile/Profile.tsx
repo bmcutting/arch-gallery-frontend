@@ -45,7 +45,7 @@ export default function Profile() {
               aria-labelledby={`${activeTab}-tab`}
               className="mt-6 animate-fadeIn"
             >
-              {activeTab === "projects" && <ProjectTab />}
+              {activeTab === "projects" && <ProjectTab userId={user?.id} />}
               {activeTab === "about" && <AbouTab user={user} />}
             </div>
           </div>

@@ -4,8 +4,7 @@ import type { User } from "../../../modules/user/domain/entities/user";
 import { APP_ROUTES } from "../../../modules/app/domain/constants/app-routes";
 
 export default function useProfile() {
-  const [user, setUser] = useState<User>();
-
+  const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
     getMe()
       .then((data) => {
@@ -16,5 +15,8 @@ export default function useProfile() {
       });
   }, [user?.id]);
 
+  if (!user) {
+    throw new Error("User not loaded");
+  }
   return user;
 }

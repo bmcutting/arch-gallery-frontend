@@ -3,7 +3,8 @@ import type { Project } from "../../../modules/project/domain/entities/project";
 import { getProjectByLoggedUser } from "../../../modules/project/services/get-project";
 
 export default function useProject() {
-  const [projects, setProjects] = useState<Project[] | null>(null);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   useEffect(() => {
     getProjectByLoggedUser()
@@ -11,9 +12,9 @@ export default function useProject() {
         setProjects(data);
       })
       .catch(() => {
-        setProjects(null);
+        console.log("h");
       });
   }, []);
 
-  return { projects };
+  return { projects, showCreateModal, setShowCreateModal };
 }
