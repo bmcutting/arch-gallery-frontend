@@ -21,13 +21,15 @@ export class ProjectMapper {
 
   static toProjectFeed(r: ProjectFeedResponse): ProjectFeed {
     return {
-      id: r.id,
-      title: r.title,
-      previewImage: r.previewImage[1],
+      id: r?.id ?? "",
+      title: r?.title ?? "",
+      previewImage: Array.isArray(r?.previewImage)
+        ? (r.previewImage[1] ?? "")
+        : (r?.previewImage ?? ""),
       author: {
-        id: r.author.id,
-        name: r.author.name,
-        profileImage: r.author.profileImage,
+        id: r?.author?.id ?? "",
+        name: r?.author?.name ?? "",
+        profileImage: r?.author?.profileImage ?? null,
       },
     };
   }
@@ -37,6 +39,7 @@ export class ProjectMapper {
     projects = r.map((project) => {
       return this.toProjectFeed(project);
     });
+    console.log(projects);
     return projects;
   }
 }
