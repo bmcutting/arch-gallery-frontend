@@ -6,6 +6,7 @@ import SignUp from "./containers/Auth/SignUp/SignUp";
 import Home from "./containers/Home/Home";
 import Profile from "./containers/Profile/Profile";
 import ProfileManagement from "./containers/EditProfile/EditProfile";
+import Search from "./containers/Search/Search";
 
 export default function App() {
   return (
@@ -17,6 +18,8 @@ export default function App() {
         <Route path={APP_ROUTES.SIGNUP} element={<SignUp />} />
         <Route path={APP_ROUTES.HOME} element={<Home />} />
         <Route path={APP_ROUTES.PROFILE} element={<Profile />} />
+        <Route path={APP_ROUTES.SEARCH} element={<Search/>}/>
+        <Route path={APP_ROUTES.ARCHITECTS} element={<Search/>}/>
         <Route
           path={APP_ROUTES.PROFILEMANAGEMENT}
           element={<ProfileManagement />}

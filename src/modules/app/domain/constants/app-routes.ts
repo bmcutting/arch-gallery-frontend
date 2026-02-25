@@ -4,4 +4,6 @@ export const APP_ROUTES = {
   HOME: "/home",
   PROFILE: "/profile",
   PROFILEMANAGEMENT: "/profile/profilemanagement",
+  ARCHITECTS: "architects",
+  SEARCH: "search"
 };
