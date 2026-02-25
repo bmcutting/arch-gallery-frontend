@@ -21,8 +21,9 @@ export class ProjectMapper {
 
   static toProjectFeed(r: ProjectFeedResponse): ProjectFeed {
     return {
-      id: r?.id ?? "",
-      title: r?.title ?? "",
+      id: r.id,
+      title: r.title,
+      year: r.year,
       likesCount: r?.likesCount ?? 0,
       commentsCount: r?.commentsCount ?? 0,
       previewImage: Array.isArray(r?.previewImage)
