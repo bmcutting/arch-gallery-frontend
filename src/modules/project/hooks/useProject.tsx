@@ -17,7 +17,6 @@ export default function useProject({ onClose, userId }: Props) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log(year)
     createProject({ title, year, description, userId });
 
     if (onClose) onClose();

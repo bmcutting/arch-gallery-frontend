@@ -12,7 +12,6 @@ export default function useProject() {
         setProjects(data);
       })
       .catch(() => {
-        console.log("h");
       });
   }, []);
 

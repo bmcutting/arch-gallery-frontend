@@ -23,6 +23,8 @@ export class ProjectMapper {
     return {
       id: r?.id ?? "",
       title: r?.title ?? "",
+      likesCount: r?.likesCount ?? 0,
+      commentsCount: r?.commentsCount ?? 0,
       previewImage: Array.isArray(r?.previewImage)
         ? (r.previewImage[1] ?? "")
         : (r?.previewImage ?? ""),
@@ -39,7 +41,6 @@ export class ProjectMapper {
     projects = r.map((project) => {
       return this.toProjectFeed(project);
     });
-    console.log(projects);
     return projects;
   }
 }

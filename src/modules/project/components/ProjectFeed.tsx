@@ -2,7 +2,6 @@ import {
   FaImage,
   FaHeart,
   FaComment,
-  FaRegCalendarAlt,
   FaUser,
 } from "react-icons/fa";
 
@@ -23,14 +22,7 @@ interface ProjectFeedProps {
 }
 
 export default function ProjectFeed({ project }: ProjectFeedProps) {
-  const formattedDate = project.createdAt
-    ? new Date(project.createdAt[0]).toLocaleDateString("es-ES", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      })
-    : null;
-
+    console.log(project)
   return (
     <article
       key={project.id}
