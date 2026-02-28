@@ -3,7 +3,7 @@ import useFeed from "./hooks/useFeed";
 import ProjectFeed from "../../modules/project/components/ProjectFeed";
 
 export default function Home() {
-  const projects = useFeed();
+  const { projects, loading, loaderRef } = useFeed();
   return (
     <AppLayout>
       <section className="mt-14 px-6">
@@ -11,10 +11,12 @@ export default function Home() {
           Galería de Arquitectura
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {projects.projects?.map((project) => (
+          {projects?.map((project) => (
             <ProjectFeed key={project.id} project={project} />
           ))}
         </div>
+        <div ref={loaderRef} />
+        {loading && <p>Cargando...</p>}
       </section>
     </AppLayout>
   );
