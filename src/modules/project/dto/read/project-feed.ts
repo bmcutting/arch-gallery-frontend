@@ -1,3 +1,5 @@
+import type { Category } from "../../../category/domain/entities/category";
+
 export interface ProjectFeedResponse {
   id: string;
   title: string;
@@ -5,7 +7,8 @@ export interface ProjectFeedResponse {
   previewImage: string;
   likesCount?: number;
   commentsCount?: number;
-  createdAt?: Date[];
+  createdAt?: Date;
+  categories: Category[];
   author: {
     id: string;
     name: string;

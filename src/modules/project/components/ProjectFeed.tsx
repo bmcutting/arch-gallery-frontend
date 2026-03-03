@@ -1,4 +1,5 @@
 import { FaImage, FaHeart, FaComment, FaUser } from "react-icons/fa";
+import Button from "../../app/modules/ui/components/Button/Button";
 
 interface ProjectFeedProps {
   project: {
@@ -23,7 +24,6 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
       key={project.id}
       className="group relative bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-2xl hover:border-gray-300 hover:shadow-primary transition-all duration-300 overflow-hidden"
     >
-      {/* Imagen / placeholder con relación 4:3 */}
       <div className="relative bg-gray-100">
         {project.previewImage ? (
           <div className="aspect-4/3 w-full overflow-hidden">
@@ -44,17 +44,16 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
         )}
       </div>
 
-      {/* Pie de obra: información del proyecto */}
       <div className="p-5">
-        {/* Título del proyecto */}
         <div className="flex flex-row justify-between">
           <h2 className="text-xl font-semibold text-gray-800 leading-tight mb-2 line-clamp-2">
             {project.title}
           </h2>
-          <span className="text-xl border-b-2 border-primary">{project.year}</span>
+          <span className="text-xl border-b-2 border-primary">
+            {project.year}
+          </span>
         </div>
 
-        {/* Autor con ícono por defecto */}
         <div className="flex items-center gap-2 text-gray-600 mb-4">
           <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden shrink-0">
             {project.author.profileImage ? (
@@ -70,22 +69,29 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
           <span className="text-sm font-medium">{project.author.name}</span>
         </div>
 
-        {/* Metadatos en dos líneas (más detalles) */}
         <div className="border-t border-gray-100 pt-3">
-          <div className="flex items-center justify-between text-xs text-gray-500">
-            <div className="flex items-center gap-3">
-              <span className="flex items-center gap-1">
-                <FaHeart className="text-gray-400" />
-                {project.likesCount ?? 0}
-              </span>
-              <span className="flex items-center gap-1">
-                <FaComment className="text-gray-400" />
-                {project.commentsCount ?? 0}
-              </span>
+          <div className="flex items-center justify-center text-xs">
+            <div className="flex w-full items-center gap-3">
+              <Button size="base" className="flex" full>
+                <div className="flex items-center gap-3">
+                  <FaHeart className="text-gray-400" />
+                  {project.likesCount ?? 0}
+                </div>
+              </Button>
+              <Button
+                size="base"
+                full
+                onClick={() => {
+                  console.log(`${project.author.name}`);
+                }}
+              >
+                <div className="flex items-center gap-3">
+                  <FaComment className="text-gray-400" />
+                  {project.commentsCount ?? 0}
+                </div>
+              </Button>
             </div>
           </div>
-
-          {/* Detalle adicional: separador visual (opcional) */}
         </div>
       </div>
     </article>

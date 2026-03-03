@@ -29,6 +29,7 @@ export class ProjectMapper {
       previewImage: Array.isArray(r?.previewImage)
         ? (r.previewImage[1] ?? "")
         : (r?.previewImage ?? ""),
+      categories: CategoryMapper.toDomainList(r.categories),
       author: {
         id: r?.author?.id ?? "",
         name: r?.author?.name ?? "",
