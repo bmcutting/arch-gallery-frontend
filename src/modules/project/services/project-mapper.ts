@@ -1,4 +1,5 @@
 import { CategoryMapper } from "../../category/services/category-mapper";
+import { CommentMapper } from "../../comment/services/comment-mapper";
 import { LikeMapper } from "../../like/services/like-mapper";
 import type { Project } from "../domain/entities/project";
 import type { ProjectFeed } from "../domain/entities/project-feed";
@@ -13,6 +14,7 @@ export class ProjectMapper {
       description: r.description,
       year: r.year,
       likes: LikeMapper.toDomainList(r.likes),
+      comments: CommentMapper.toDomainList(r.comments),
       categories: CategoryMapper.toDomainList(r.categories),
     };
   }
