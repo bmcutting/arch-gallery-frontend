@@ -7,27 +7,20 @@ interface Props {
 
 export default function useProjectCard({ projectId }: Props) {
   const [showModal, setShowModal] = useState(false);
-  const [confirmDelete, setConfirmDelete] = useState(false);
-  
+
   const handleDelete = () => {
-    if (confirmDelete) {
-      deleteProject({ projectId });
-      setConfirmDelete(false);
-      setShowModal(false);
-    } else {
-      setShowModal(true);
-    }
+    deleteProject({ projectId });
+    setShowModal(false);
   };
 
   const handleClose = () => {
     setShowModal(false);
-    setConfirmDelete(false);
   };
+
   return {
     showModal,
     setShowModal,
     handleDelete,
     handleClose,
-    setConfirmDelete,
   };
 }

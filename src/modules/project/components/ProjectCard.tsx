@@ -10,10 +10,9 @@ interface Props {
 
 export default function ProjectCard({ project }: Props) {
   const { showModal, setShowModal, handleDelete, handleClose } = useProjectCard(
-    {
-      projectId: project.id,
-    },
+    { projectId: project.id },
   );
+
   return (
     <>
       <div className="group bg-card border border-border rounded-lg overflow-hidden transition-all hover:shadow-amber-50 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
@@ -61,8 +60,8 @@ export default function ProjectCard({ project }: Props) {
         <Modal
           message={`¿Seguro que quieres eliminar el proyecto "${project.title}"?`}
           onConfirm={() => {
-            handleDelete(); // lógica de eliminación
-            handleClose(); // cerrar modal
+            handleDelete();
+            handleClose();
           }}
           onCancel={handleClose}
           confirmLabel="Eliminar"
