@@ -1,4 +1,5 @@
 import { CategoryMapper } from "../../category/services/category-mapper";
+import { LikeMapper } from "../../like/services/like-mapper";
 import type { Project } from "../domain/entities/project";
 import type { ProjectFeed } from "../domain/entities/project-feed";
 import type { ProjectResponse } from "../dto/read/project";
@@ -11,6 +12,7 @@ export class ProjectMapper {
       title: r.title,
       description: r.description,
       year: r.year,
+      likes: LikeMapper.toDomainList(r.likes),
       categories: CategoryMapper.toDomainList(r.categories),
     };
   }

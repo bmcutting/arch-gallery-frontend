@@ -1,4 +1,5 @@
-import type { Category } from "../../../category/domain/entities/category";
+import type { CategoryResponse } from "../../../category/dto/read/category";
+import type { LikeResponse } from "../../../like/dto/read/like";
 import type { UserResponse } from "../../../user/dto/read/user";
 
 export interface ProjectResponse {
@@ -8,8 +9,8 @@ export interface ProjectResponse {
   year: number;
   createdAt: string;
   imagesUrl: string[];
-  categories: Category[];
+  categories: CategoryResponse[];
   user: UserResponse;
-  likesCount: number;
+  likes: LikeResponse[];
   commentsCount: number;
 }

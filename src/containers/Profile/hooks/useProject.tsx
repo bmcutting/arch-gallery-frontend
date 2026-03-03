@@ -11,8 +11,7 @@ export default function useProject() {
       .then((data) => {
         setProjects(data);
       })
-      .catch(() => {
-      });
+      .catch(() => {});
   }, []);
 
   return { projects, showCreateModal, setShowCreateModal };
