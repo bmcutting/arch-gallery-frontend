@@ -122,7 +122,7 @@ export default forwardRef<HTMLButtonElement, Props>(
         onClick={onClick}
       >
         {icon && <i className="">{icon({ size: 16 })}</i>}
-        <p className="font-medium">{children}</p>
+        {children}
       </button>
     );
   },
