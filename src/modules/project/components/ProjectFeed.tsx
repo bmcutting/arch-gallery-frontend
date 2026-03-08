@@ -1,22 +1,10 @@
 import { FaImage, FaHeart, FaComment, FaUser } from "react-icons/fa";
 import Button from "../../app/modules/ui/components/Button/Button";
 import uselike from "../../like/hooks/useLike";
+import type { ProjectFeed } from "../domain/entities/project-feed";
 
 interface ProjectFeedProps {
-  project: {
-    id: string;
-    title: string;
-    year: number;
-    previewImage?: string;
-    likesCount?: number;
-    commentsCount?: number;
-    createdAt?: Date[];
-    author: {
-      id: string;
-      name: string;
-      profileImage?: string | null;
-    };
-  };
+  project: ProjectFeed;
 }
 
 export default function ProjectFeed({ project }: ProjectFeedProps) {
@@ -78,19 +66,23 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
               <Button size="base" className="flex" full onClick={handleLike}>
                 <div className="flex items-center gap-3">
                   <FaHeart className="text-gray-400 hover:text-red-500 hover:scale-200 transition-all" />
-                  {project.likesCount ?? 0}
+                  {project.likes?.length ?? 0}
                 </div>
               </Button>
               <Button
                 size="base"
                 full
                 onClick={() => {
-                  console.log(`${project.author.name}`);
+                  if (project.comments?.length !== 0) {
+                    project.comments?.forEach((element) => {
+                      console.log(element.message);
+                    });
+                  }
                 }}
               >
                 <div className="flex items-center gap-3">
                   <FaComment className="text-gray-400 hover:text-blue-500 hover:scale-200 transition-all" />
-                  {project.commentsCount ?? 0}
+                  {project.comments?.length ?? 0}
                 </div>
               </Button>
             </div>

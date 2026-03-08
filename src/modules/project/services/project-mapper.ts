@@ -28,8 +28,8 @@ export class ProjectMapper {
       id: r.id,
       title: r.title,
       year: r.year,
-      likesCount: r?.likesCount ?? 0,
-      commentsCount: r?.commentsCount ?? 0,
+      likes: LikeMapper.toDomainList(r.likes),
+      comments: CommentMapper.toDomainList(r.comments),
       previewImage: Array.isArray(r?.previewImage)
         ? (r.previewImage[1] ?? "")
         : (r?.previewImage ?? ""),
