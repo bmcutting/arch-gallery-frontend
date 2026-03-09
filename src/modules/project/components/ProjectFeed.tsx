@@ -1,18 +1,18 @@
 import { FaImage, FaHeart, FaComment, FaUser } from "react-icons/fa";
 import Button from "../../app/modules/ui/components/Button/Button";
-import uselike from "../../like/hooks/useLike";
+import useLike from "../../like/hooks/useLike";
 import type { ProjectFeed } from "../domain/entities/project-feed";
 import CommentCard from "../../comment/components/CommentCard";
-import { useState } from "react";
 
 interface ProjectFeedProps {
   project: ProjectFeed;
 }
 
 export default function ProjectFeed({ project }: ProjectFeedProps) {
-  const { handleLike } = uselike({ projectId: project.id });
-  const [showComments, setShowComments] = useState(false);
-
+  const { handleLike, showComments, setShowComments, likesCount } = useLike({
+    projectId: project.id,
+    initialLikes: project.likes?.length ?? 0,
+  });
   return (
     <article
       key={project.id}
@@ -69,7 +69,7 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
               <Button size="base" className="flex" full onClick={handleLike}>
                 <div className="flex items-center gap-3">
                   <FaHeart className="text-gray-400 hover:text-red-500 hover:scale-200 transition-all" />
-                  {project.likes?.length ?? 0}
+                  {likesCount}
                 </div>
               </Button>
               <Button
