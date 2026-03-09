@@ -2,6 +2,7 @@ import { FaImage, FaHeart, FaComment, FaUser } from "react-icons/fa";
 import Button from "../../app/modules/ui/components/Button/Button";
 import uselike from "../../like/hooks/useLike";
 import type { ProjectFeed } from "../domain/entities/project-feed";
+import CommentCard from "../../comment/components/CommentCard";
 
 interface ProjectFeedProps {
   project: ProjectFeed;
@@ -89,6 +90,9 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
           </div>
         </div>
       </div>
+      {project.comments?.map((comment) => (
+        <CommentCard key={comment.id} comment={comment}></CommentCard>
+      ))}
     </article>
   );
 }
