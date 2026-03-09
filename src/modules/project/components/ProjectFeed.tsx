@@ -3,6 +3,7 @@ import Button from "../../app/modules/ui/components/Button/Button";
 import uselike from "../../like/hooks/useLike";
 import type { ProjectFeed } from "../domain/entities/project-feed";
 import CommentCard from "../../comment/components/CommentCard";
+import { useState } from "react";
 
 interface ProjectFeedProps {
   project: ProjectFeed;
@@ -10,6 +11,7 @@ interface ProjectFeedProps {
 
 export default function ProjectFeed({ project }: ProjectFeedProps) {
   const { handleLike } = uselike({ projectId: project.id });
+  const [showComments, setShowComments] = useState(false);
 
   return (
     <article
@@ -73,13 +75,7 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
               <Button
                 size="base"
                 full
-                onClick={() => {
-                  if (project.comments?.length !== 0) {
-                    project.comments?.forEach((element) => {
-                      console.log(element.message);
-                    });
-                  }
-                }}
+                onClick={() => setShowComments((prev) => !prev)}
               >
                 <div className="flex items-center gap-3">
                   <FaComment className="text-gray-400 hover:text-blue-500 hover:scale-200 transition-all" />
@@ -90,9 +86,32 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
           </div>
         </div>
       </div>
-      {project.comments?.map((comment) => (
-        <CommentCard key={comment.id} comment={comment}></CommentCard>
-      ))}
+      <div
+        className={`absolute inset-0 bg-white/95 backdrop-blur-sm transition-transform duration-500 ${
+          showComments ? "translate-y-0" : "translate-y-full"
+        }`}
+      >
+        <div className="p-4 h-full flex flex-col">
+          <div className="flex justify-between items-center mb-3">
+            <h3 className="text-lg font-semibold">Comentarios</h3>
+            <button
+              className="text-gray-500 hover:text-gray-700"
+              onClick={() => setShowComments(false)}
+            >
+              ✕
+            </button>
+          </div>
+          <div className="flex-1 overflow-y-auto space-y-2">
+            {project.comments?.length ? (
+              project.comments.map((comment) => (
+                <CommentCard key={comment.id} comment={comment} />
+              ))
+            ) : (
+              <span className="text-sm text-gray-500">No hay comentarios</span>
+            )}
+          </div>
+        </div>
+      </div>
     </article>
   );
 }
