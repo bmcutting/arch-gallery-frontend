@@ -11,6 +11,7 @@ export interface ProjectFeedResponse {
   comments: CommentResponse[];
   createdAt?: Date;
   categories: Category[];
+   likedByUser: boolean;
   author: {
     id: string;
     name: string;

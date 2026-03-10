@@ -9,10 +9,12 @@ interface ProjectFeedProps {
 }
 
 export default function ProjectFeed({ project }: ProjectFeedProps) {
-  const { handleLike, showComments, setShowComments, likesCount } = useLike({
-    projectId: project.id,
-    initialLikes: project.likes?.length ?? 0,
-  });
+  const { handleLike, showComments, setShowComments, likesCount, likedByUser } =
+    useLike({
+      projectId: project.id,
+      initialLikes: project.likes?.length ?? 0,
+      initiallyLiked: project.likedByUser,
+    });
   return (
     <article
       key={project.id}
@@ -68,7 +70,13 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
             <div className="flex w-full items-center gap-3">
               <Button size="base" className="flex" full onClick={handleLike}>
                 <div className="flex items-center gap-3">
-                  <FaHeart className="text-gray-400 hover:text-red-500 hover:scale-200 transition-all" />
+                  <FaHeart
+                    className={`transition-all ${
+                      likedByUser
+                        ? "text-red-500 scale-125"
+                        : "text-gray-400 hover:text-red-500 hover:scale-200"
+                    }`}
+                  />{" "}
                   {likesCount}
                 </div>
               </Button>

@@ -34,6 +34,7 @@ export class ProjectMapper {
         ? (r.previewImage[1] ?? "")
         : (r?.previewImage ?? ""),
       categories: CategoryMapper.toDomainList(r.categories),
+      likedByUser: r.likedByUser,
       author: {
         id: r?.author?.id ?? "",
         name: r?.author?.name ?? "",
