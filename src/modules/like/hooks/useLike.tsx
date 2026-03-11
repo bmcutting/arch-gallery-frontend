@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { addLike } from "../services/add-like";
 import { removeLike } from "../services/remove-like";
+import { addComment } from "../../comment/services/add-comment";
 
 interface Props {
   projectId: string;
@@ -15,7 +16,9 @@ export default function useLike({
 }: Props) {
   const [likesCount, setLikesCount] = useState(initialLikes);
   const [showComments, setShowComments] = useState(false);
+  const [showTextarea, setShowTextarea] = useState(false);
   const [likedByUser, setLikedByUser] = useState(initiallyLiked);
+  const [comment, setComment] = useState("");
 
   async function handleLike() {
     try {
@@ -33,5 +36,28 @@ export default function useLike({
     }
   }
 
-  return { handleLike, showComments, setShowComments, likesCount, likedByUser };
+  async function handleComment() {
+    try {
+      const updatedComment = await addComment({
+        projectId: projectId,
+        message: comment,
+      });
+      console.log(updatedComment);
+    } catch {
+      console.log("Error al alternar like");
+    }
+  }
+
+  return {
+    handleLike,
+    comment,
+    setComment,
+    showTextarea,
+    setShowTextarea,
+    showComments,
+    handleComment,
+    setShowComments,
+    likesCount,
+    likedByUser,
+  };
 }

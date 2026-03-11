@@ -25,6 +25,23 @@
     src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-ExtraBold.ttf");
 }
 
+/* Ocultar scrollbar en navegadores basados en WebKit (Chrome, Safari, Edge) */
+textarea::-webkit-scrollbar {
+    display: none;
+}
+
+/* Ocultar scrollbar en Firefox */
+textarea {
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+/* Ocultar scrollbar en IE y Edge antiguos */
+textarea {
+    -ms-overflow-style: none;
+}
+
+
 @theme {
     --color-primary: #B9BEC4;
     --color-secondary: #8A9096;

@@ -3,18 +3,31 @@ import Button from "../../app/modules/ui/components/Button/Button";
 import useLike from "../../like/hooks/useLike";
 import type { ProjectFeed } from "../domain/entities/project-feed";
 import CommentCard from "../../comment/components/CommentCard";
+import Textarea from "../../app/modules/ui/components/TextArea/TextArea";
+import { BiSend } from "react-icons/bi";
 
 interface ProjectFeedProps {
   project: ProjectFeed;
 }
 
 export default function ProjectFeed({ project }: ProjectFeedProps) {
-  const { handleLike, showComments, setShowComments, likesCount, likedByUser } =
-    useLike({
-      projectId: project.id,
-      initialLikes: project.likes?.length ?? 0,
-      initiallyLiked: project.likedByUser,
-    });
+  const {
+    handleLike,
+    showComments,
+    comment,
+    setComment,
+    showTextarea,
+    setShowTextarea,
+    setShowComments,
+    handleComment,
+    likesCount,
+    likedByUser,
+  } = useLike({
+    projectId: project.id,
+    initialLikes: project.likes?.length ?? 0,
+    initiallyLiked: project.likedByUser,
+  });
+
   return (
     <article
       key={project.id}
@@ -76,7 +89,7 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
                         ? "text-red-500 scale-125"
                         : "text-gray-400 hover:text-red-500 hover:scale-200"
                     }`}
-                  />{" "}
+                  />
                   {likesCount}
                 </div>
               </Button>
@@ -117,6 +130,25 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
             ) : (
               <span className="text-sm text-gray-500">No hay comentarios</span>
             )}
+          </div>
+          <div className="relative mt-3">
+            <Textarea
+              value={comment}
+              placeholder="Comenta..."
+              onChange={setComment}
+              onFocus={() => setShowTextarea(true)}
+              onBlur={() => setShowTextarea(false)}
+              className={`px-3 py-2 pr-10 text-sm md:text-base lg:text-lg 
+                  rounded-md border border-gray-300 focus:ring-2 focus:ring-primary 
+                  resize-none leading-relaxed overflow-y-auto transition-all duration-400
+                  ${showTextarea ? "h-40 md:h-56 lg:h-64" : "h-10 md:h-10 lg:h-12"}`}
+            />
+            <button
+              onClick={handleComment}
+              className="absolute bottom-4 right-3 text-gray-400 hover:text-primary transition-colors"
+            >
+              <BiSend size={20} />
+            </button>
           </div>
         </div>
       </div>

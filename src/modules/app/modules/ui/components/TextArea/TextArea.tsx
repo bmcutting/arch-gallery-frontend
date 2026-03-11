@@ -14,6 +14,7 @@ interface Props {
   errorMsg?: string;
   onClear?: () => void;
   onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
+  onFocus?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
   className?: string;
   maxChars?: number;
 }
@@ -31,19 +32,19 @@ export default function Textarea({
   required,
   onClear,
   onBlur,
+  onFocus,
   className,
   maxChars,
 }: Props) {
   const isInvalid = touched && !value;
   const length = value?.length ?? 0;
-  
+
   return (
     <>
       {loading ? (
         <FormLoader />
       ) : (
         <div className={`${full ? "w-full" : ""}`}>
-          {/* Textarea + botón Clear */}
           <div
             className={`relative ${isInvalid ? "border-red-500 border-2 rounded-lg" : "border-gray-300"}`}
           >
@@ -56,6 +57,7 @@ export default function Textarea({
               value={value ?? ""}
               onChange={(e) => onChange(e.target.value)}
               onBlur={onBlur}
+              onFocus={onFocus}
               rows={4}
             />
             {onClear && value && (
@@ -65,7 +67,6 @@ export default function Textarea({
             )}
           </div>
 
-          {/* Mensaje de error */}
           {isInvalid && <p className="mt-1 text-sm text-red-500">{errorMsg}</p>}
 
           {maxChars && (
