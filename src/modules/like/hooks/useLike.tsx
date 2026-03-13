@@ -44,7 +44,7 @@ export default function useLike({
       });
       console.log(updatedComment);
     } catch {
-      console.log("Error al alternar like");
+      console.log("Error al alternar comentario");
     }
   }
 

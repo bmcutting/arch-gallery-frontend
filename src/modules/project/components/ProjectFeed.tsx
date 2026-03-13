@@ -78,6 +78,17 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
           <span className="text-sm font-medium">{project.author.name}</span>
         </div>
 
+        <div className="flex flex-wrap gap-2 mb-3">
+          {project.categories?.slice(0, 5).map((cat) => (
+            <span
+              key={cat.id}
+              className="px-2 py-1 text-sm rounded-full bg-gray-100 text-gray-600"
+            >
+              {cat.name}
+            </span>
+          ))}
+        </div>
+
         <div className="border-t border-gray-100 pt-3">
           <div className="flex items-center justify-center text-xs">
             <div className="flex w-full items-center gap-3">
