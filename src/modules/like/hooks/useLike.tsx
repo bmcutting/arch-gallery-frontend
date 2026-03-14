@@ -18,6 +18,7 @@ export default function useLike({
   const [showComments, setShowComments] = useState(false);
   const [showTextarea, setShowTextarea] = useState(false);
   const [likedByUser, setLikedByUser] = useState(initiallyLiked);
+  const [showDetail, setShowDetail] = useState(false);
   const [comment, setComment] = useState("");
 
   async function handleLike() {
@@ -55,6 +56,8 @@ export default function useLike({
     showTextarea,
     setShowTextarea,
     showComments,
+    showDetail,
+    setShowDetail,
     handleComment,
     setShowComments,
     likesCount,

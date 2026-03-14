@@ -5,6 +5,8 @@ import type { ProjectFeed } from "../domain/entities/project-feed";
 import CommentCard from "../../comment/components/CommentCard";
 import Textarea from "../../app/modules/ui/components/TextArea/TextArea";
 import { BiSend } from "react-icons/bi";
+import ProjectDetailModal from "./ProjectDetailModal";
+import type { Project } from "../domain/entities/project";
 
 interface ProjectFeedProps {
   project: ProjectFeed;
@@ -19,6 +21,8 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
     showTextarea,
     setShowTextarea,
     setShowComments,
+    showDetail,
+    setShowDetail,
     handleComment,
     likesCount,
     likedByUser,
@@ -27,6 +31,23 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
     initialLikes: project.likes?.length ?? 0,
     initiallyLiked: project.likedByUser,
   });
+
+  const mockProject: Project = {
+    id: "1",
+    title: "Sistema de Gestión Industrial",
+    description:
+      "Proyecto de integración de sistemas industriales con backend en .NET y frontend en React.",
+    year: 2026,
+    imagesUrl: ["/sa.jpg", "/sa.jpg", "/sa.jpg"],
+    categories: [
+      { id: "c1", name: "Automatización" },
+      { id: "c2", name: "Frontend" },
+      { id: "c3", name: "Backend" },
+    ],
+    likes: [],
+    comments: [],
+    createdAt: [new Date()],
+  };
 
   return (
     <article
@@ -117,6 +138,12 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
             </div>
           </div>
         </div>
+
+        <div className="mt-3">
+          <Button size="base" full onClick={() => setShowDetail(true)}>
+            Ver más
+          </Button>
+        </div>
       </div>
       <div
         className={`absolute inset-0 bg-white/95 backdrop-blur-sm transition-transform duration-500 ${
@@ -163,6 +190,12 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
           </div>
         </div>
       </div>
+      {showDetail && (
+        <ProjectDetailModal
+          project={mockProject}
+          onClose={() => setShowDetail(false)}
+        />
+      )}
     </article>
   );
 }
