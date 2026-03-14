@@ -9,6 +9,11 @@ export class CommentMapper {
       userId: r.userId,
       message: r.message,
       createdAt: r.createdAt,
+      user: {
+        id: r.user.id,
+        userName: r.user.userName,
+        profileImageUrl: r.user.profileImageUrl,
+      },
     };
   }
 
