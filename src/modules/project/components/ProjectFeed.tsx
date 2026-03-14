@@ -27,6 +27,7 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
     handleComment,
     likesCount,
     likedByUser,
+    commentsContainerRef,
   } = useLike({
     project,
   });
@@ -145,9 +146,13 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
         </div>
       </div>
       <div
-        className={`absolute inset-0 bg-white/95 backdrop-blur-sm transition-transform duration-500 ${
-          showComments ? "translate-y-0" : "translate-y-full"
-        }`}
+        className={`absolute inset-0 bg-white/95 backdrop-blur-sm
+              transition-all duration-500 ease-in-out
+              ${
+                showComments
+                  ? "translate-y-0 opacity-100 pointer-events-auto"
+                  : "translate-y-full opacity-0 pointer-events-none"
+              }`}
       >
         <div className="p-4 h-full flex flex-col">
           <div className="flex justify-between items-center mb-3">
@@ -159,15 +164,25 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
               ✕
             </button>
           </div>
-          <div className="flex-1 overflow-y-auto space-y-2">
-            {comments?.length ? (
+          <div
+            className="flex-1 overflow-y-auto space-y-2"
+            ref={commentsContainerRef}
+          >
+            {comments.length ? (
               comments.map((comment) => (
-                <CommentCard key={comment.id} comment={comment} />
+                <div
+                  key={comment.id}
+                  className="transition-all duration-500 ease-out transform 
+                   animate-fadeInUp"
+                >
+                  <CommentCard comment={comment} />
+                </div>
               ))
             ) : (
               <span className="text-sm text-gray-500">No hay comentarios</span>
             )}
           </div>
+
           <div className="relative mt-3">
             <Textarea
               value={comment}
