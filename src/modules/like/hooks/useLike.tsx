@@ -2,33 +2,30 @@ import { useState } from "react";
 import { addLike } from "../services/add-like";
 import { removeLike } from "../services/remove-like";
 import { addComment } from "../../comment/services/add-comment";
+import type { ProjectFeed } from "../../project/domain/entities/project-feed";
+import { fetchComments } from "../services/fetch-comment";
 
 interface Props {
-  projectId: string;
-  initialLikes?: number;
-  initiallyLiked?: boolean;
+  project: ProjectFeed;
 }
 
-export default function useLike({
-  projectId,
-  initialLikes = 0,
-  initiallyLiked = false,
-}: Props) {
-  const [likesCount, setLikesCount] = useState(initialLikes);
+export default function useLike({ project }: Props) {
+  const [likesCount, setLikesCount] = useState(project.likes?.length ?? 0);
   const [showComments, setShowComments] = useState(false);
   const [showTextarea, setShowTextarea] = useState(false);
-  const [likedByUser, setLikedByUser] = useState(initiallyLiked);
+  const [comments, setComments] = useState(project.comments ?? []);
+  const [likedByUser, setLikedByUser] = useState(project.likedByUser);
   const [showDetail, setShowDetail] = useState(false);
   const [comment, setComment] = useState("");
 
   async function handleLike() {
     try {
       if (likedByUser) {
-        const updatedLikes = await removeLike({ projectId });
+        const updatedLikes = await removeLike({ projectId: project.id });
         setLikesCount(updatedLikes);
         setLikedByUser(false);
       } else {
-        const updatedLikes = await addLike({ projectId });
+        const updatedLikes = await addLike({ projectId: project.id });
         setLikesCount(updatedLikes);
         setLikedByUser(true);
       }
@@ -39,11 +36,15 @@ export default function useLike({
 
   async function handleComment() {
     try {
-      const updatedComment = await addComment({
-        projectId: projectId,
+      const totalComments = await addComment({
+        projectId: project.id,
         message: comment,
       });
-      console.log(updatedComment);
+
+      const updatedComments = await fetchComments(project.id);
+      setComments(updatedComments);
+
+      setComment("");
     } catch {
       console.log("Error al alternar comentario");
     }
@@ -57,6 +58,8 @@ export default function useLike({
     setShowTextarea,
     showComments,
     showDetail,
+    comments,
+    setComments,
     setShowDetail,
     handleComment,
     setShowComments,

@@ -21,15 +21,14 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
     showTextarea,
     setShowTextarea,
     setShowComments,
+    comments,
     showDetail,
     setShowDetail,
     handleComment,
     likesCount,
     likedByUser,
   } = useLike({
-    projectId: project.id,
-    initialLikes: project.likes?.length ?? 0,
-    initiallyLiked: project.likedByUser,
+    project,
   });
 
   const mockProject: Project = {
@@ -132,7 +131,7 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
               >
                 <div className="flex items-center gap-3">
                   <FaComment className="text-gray-400 hover:text-blue-500 hover:scale-200 transition-all" />
-                  {project.comments?.length ?? 0}
+                  {comments?.length ?? 0}
                 </div>
               </Button>
             </div>
@@ -161,8 +160,8 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
             </button>
           </div>
           <div className="flex-1 overflow-y-auto space-y-2">
-            {project.comments?.length ? (
-              project.comments.map((comment) => (
+            {comments?.length ? (
+              comments.map((comment) => (
                 <CommentCard key={comment.id} comment={comment} />
               ))
             ) : (
