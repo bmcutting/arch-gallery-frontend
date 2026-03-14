@@ -7,14 +7,17 @@ import Textarea from "../../app/modules/ui/components/TextArea/TextArea";
 import { BiSend } from "react-icons/bi";
 import ProjectDetailModal from "./ProjectDetailModal";
 import type { Project } from "../domain/entities/project";
+import useComment from "../../comment/hooks/useComment";
+import useProjectDetail from "../hooks/useProjectDetail";
 
 interface ProjectFeedProps {
   project: ProjectFeed;
 }
 
 export default function ProjectFeed({ project }: ProjectFeedProps) {
+  const { handleLike, likesCount, likedByUser } = useLike({ project });
+  const { showDetail, setShowDetail } = useProjectDetail();
   const {
-    handleLike,
     showComments,
     comment,
     setComment,
@@ -22,15 +25,9 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
     setShowTextarea,
     setShowComments,
     comments,
-    showDetail,
-    setShowDetail,
     handleComment,
-    likesCount,
-    likedByUser,
     commentsContainerRef,
-  } = useLike({
-    project,
-  });
+  } = useComment({ project });
 
   const mockProject: Project = {
     id: "1",
