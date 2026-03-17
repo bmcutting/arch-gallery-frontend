@@ -1,27 +1,39 @@
 import { FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Project } from "../domain/entities/project";
+import { getProjectById } from "../services/get-project-by-id";
 
 interface ProjectDetailModalProps {
-  project: Project;
+  projectId: string;
   onClose: () => void;
 }
 
 export default function ProjectDetailModal({
-  project,
+  projectId,
   onClose,
 }: ProjectDetailModalProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [project, setProject] = useState<Project>();
+
+   useEffect(() => {
+    getProjectById({ projectId })
+      .then((data) => {
+        setProject(data);
+      })
+      .catch(() => {
+        console.log("asdad");
+      });
+  }, [projectId]);
 
   const handlePrev = () => {
     setCurrentIndex((prev) =>
-      prev === 0 ? (project.imagesUrl?.length ?? 1) - 1 : prev - 1,
+      prev === 0 ? (project?.imagesUrl?.length ?? 1) - 1 : prev - 1,
     );
   };
 
   const handleNext = () => {
     setCurrentIndex((prev) =>
-      prev === (project.imagesUrl?.length ?? 1) - 1 ? 0 : prev + 1,
+      prev === (project?.imagesUrl?.length ?? 1) - 1 ? 0 : prev + 1,
     );
   };
 
@@ -29,7 +41,7 @@ export default function ProjectDetailModal({
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-lg max-w-4xl w-full p-6 overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">{project.title}</h2>
+          <h2 className="text-2xl font-bold">{project?.title}</h2>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700"
@@ -38,10 +50,10 @@ export default function ProjectDetailModal({
           </button>
         </div>
 
-        <p className="text-gray-700 mb-4">{project.description}</p>
+        <p className="text-gray-700 mb-4">{project?.description}</p>
 
         {/* Carrusel */}
-        {project.imagesUrl && project.imagesUrl.length > 0 && (
+        {project?.imagesUrl && project.imagesUrl.length > 0 && (
           <div className="relative flex items-center justify-center mb-6">
             <button
               onClick={handlePrev}
@@ -65,7 +77,7 @@ export default function ProjectDetailModal({
 
         {/* Indicadores */}
         <div className="flex justify-center gap-2 mb-4">
-          {project.imagesUrl?.map((_, idx) => (
+          {project?.imagesUrl?.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
@@ -78,7 +90,7 @@ export default function ProjectDetailModal({
 
         {/* Categorías */}
         <div className="flex flex-wrap gap-2">
-          {project.categories?.map((cat) => (
+          {project?.categories?.map((cat) => (
             <span
               key={cat.id}
               className="px-3 py-1 text-sm rounded-full bg-primary/10 text-primary font-medium"

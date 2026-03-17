@@ -3,7 +3,6 @@ import Button from "../../app/modules/ui/components/Button/Button";
 import useLike from "../../like/hooks/useLike";
 import type { ProjectFeed } from "../domain/entities/project-feed";
 import ProjectDetailModal from "./ProjectDetailModal";
-import type { Project } from "../domain/entities/project";
 import useProjectDetail from "../hooks/useProjectDetail";
 import CommentSection from "../../comment/components/CommentSection";
 import useComment from "../../comment/hooks/useComment";
@@ -16,23 +15,6 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
   const { handleLike, likesCount, likedByUser } = useLike({ project });
   const commentState = useComment({ project });
   const { showDetail, setShowDetail } = useProjectDetail();
-
-  const mockProject: Project = {
-    id: "1",
-    title: "Sistema de Gestión Industrial",
-    description:
-      "Proyecto de integración de sistemas industriales con backend en .NET y frontend en React.",
-    year: 2026,
-    imagesUrl: ["/sa.jpg", "/sa.jpg", "/sa.jpg"],
-    categories: [
-      { id: "c1", name: "Automatización" },
-      { id: "c2", name: "Frontend" },
-      { id: "c3", name: "Backend" },
-    ],
-    likes: [],
-    comments: [],
-    createdAt: [new Date()],
-  };
 
   return (
     <article
@@ -135,7 +117,7 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
 
       {showDetail && (
         <ProjectDetailModal
-          project={mockProject}
+          projectId={project.id}
           onClose={() => setShowDetail(false)}
         />
       )}
