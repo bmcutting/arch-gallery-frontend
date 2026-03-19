@@ -15,6 +15,7 @@ interface Props {
   errorMsg?: string;
   onClear?: () => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   className?: string;
 }
 
@@ -32,6 +33,7 @@ export default function Input({
   required,
   onClear,
   onBlur,
+  onKeyDown,
   className,
 }: Props) {
   const isInvalid = touched && !value;
@@ -55,6 +57,7 @@ export default function Input({
               value={value ?? ""}
               onChange={(e) => onChange(e.target.value)}
               onBlur={onBlur}
+              onKeyDown={onKeyDown}
             />
             {onClear && value && (
               <div className="absolute right-2.5 z-10">

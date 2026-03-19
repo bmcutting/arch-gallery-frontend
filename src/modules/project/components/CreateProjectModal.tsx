@@ -16,9 +16,13 @@ export default function CreateProjectModal({ onClose, userId }: Props) {
     title,
     description,
     year,
+    categories,
     setTitle,
     setDescription,
     setYear,
+    addCategory,
+    removeCategory,
+    updateCategory,
   } = useProject({ onClose, userId });
 
   return (
@@ -55,6 +59,38 @@ export default function CreateProjectModal({ onClose, userId }: Props) {
 
           <FormInput label="Año" required>
             <Input value={String(year)} onChange={(v) => setYear(Number(v))} />
+          </FormInput>
+
+          <FormInput label="Categorías (máx. 5)">
+            <div className="space-y-3">
+              {categories.map((cat, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <Input
+                    value={cat}
+                    onChange={(value) => updateCategory(index, value)}
+                    placeholder="Ej: Urbanismo, Vivienda, Obra nueva..."
+                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeCategory(index)}
+                    className="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-md transition-colors"
+                    title="Eliminar categoría"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+              <Button
+                type="button"
+                onClick={addCategory}
+                size="base"
+                full
+                color="primary"
+              >
+                <span className="text-lg">+</span> Añadir categoría
+              </Button>
+            </div>
           </FormInput>
 
           {/* Actions */}
