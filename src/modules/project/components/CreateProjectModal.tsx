@@ -26,7 +26,7 @@ export default function CreateProjectModal({ onClose, userId }: Props) {
   } = useProject({ onClose, userId });
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50 transition-opacity mt-14">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50 transition-opacity mt-14 overflow-y-auto">
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg p-6 animate-fadeIn">
         {/* Header */}
         <div className="flex items-center gap-2 mb-6">
