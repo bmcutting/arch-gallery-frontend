@@ -1,5 +1,6 @@
 import { FiHome, FiSearch, FiUser, FiUsers } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { APP_ROUTES } from "../../../../modules/app/domain/constants/app-routes";
 
 export default function Navbar() {
   return (
@@ -20,7 +21,7 @@ export default function Navbar() {
           <ul className="flex flex-col gap-2 mt-2 mb-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
             <li className="flex items-center p-1 text-md gap-x-2 text-slate-900 font-semibold">
               <a
-                href="/dashboard"
+                href={APP_ROUTES.HOME}
                 className="flex items-center gap-2 hover:text-primary"
               >
                 <FiHome size={18} /> Home
@@ -28,7 +29,7 @@ export default function Navbar() {
             </li>
             <li className="flex items-center p-1 text-md gap-x-2 text-slate-900 font-semibold">
               <a
-                href="/search"
+                href={APP_ROUTES.SEARCH}
                 className="flex items-center gap-2 hover:text-primary"
               >
                 <FiSearch size={18} /> Búsqueda
@@ -36,7 +37,7 @@ export default function Navbar() {
             </li>
             <li className="flex items-center p-1 text-md gap-x-2 text-slate-900 font-semibold">
               <a
-                href="/architects"
+                href={APP_ROUTES.ARCHITECTS}
                 className="flex items-center gap-2 hover:text-primary"
               >
                 <FiUsers size={18} /> Arquitectos
@@ -44,7 +45,7 @@ export default function Navbar() {
             </li>
             <li className="flex items-center p-1 text-md gap-x-2 text-slate-900 font-semibold">
               <a
-                href="/profile"
+                href={APP_ROUTES.PROFILE}
                 className="flex items-center gap-2 hover:text-primary"
               >
                 <FiUser size={18} /> Mi Perfil
@@ -53,16 +54,16 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="flex gap-6 lg:hidden">
-          <Link to="/home" className="hover:text-blue-600">
+          <Link to={APP_ROUTES.HOME} className="hover:text-blue-600">
             <FiHome size={22} />
           </Link>
-          <Link to="/search" className="hover:text-blue-600">
+          <Link to={APP_ROUTES.SEARCH} className="hover:text-blue-600">
             <FiSearch size={22} />
           </Link>
-          <Link to="/architects" className="hover:text-blue-600">
+          <Link to={APP_ROUTES.ARCHITECTS} className="hover:text-blue-600">
             <FiUsers size={22} />
           </Link>
-          <Link to="/profile" className="hover:text-blue-600">
+          <Link to={APP_ROUTES.PROFILE} className="hover:text-blue-600">
             <FiUser size={22} />
           </Link>
         </div>
