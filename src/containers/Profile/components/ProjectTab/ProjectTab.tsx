@@ -1,5 +1,4 @@
 import Select from "../../../../modules/app/modules/ui/components/Select/Select";
-import { useState } from "react";
 import useProject from "../../hooks/useProject";
 import CreateProjectModal from "../../../../modules/project/components/CreateProjectModal";
 import ProjectCard from "../../../../modules/project/components/ProjectCard";
@@ -9,23 +8,17 @@ interface Props {
 }
 
 export default function ProjectTab({ userId }: Props) {
-  const { projects, showCreateModal, setShowCreateModal } = useProject();
-  const [selectedFilter, setSelectedFilter] = useState("all");
-  const [selectedSort, setSelectedSort] = useState("recent");
-
-  const filterOptions = [
-    { value: "all", label: "Todos los Proyectos" },
-    { value: "residential", label: "Residencial" },
-    { value: "commercial", label: "Comercial" },
-    { value: "institutional", label: "Institucional" },
-    { value: "landscape", label: "Paisajismo" },
-  ];
-
-  const sortOptions = [
-    { value: "recent", label: "Más Recientes" },
-    { value: "oldest", label: "Más Antiguos" },
-    { value: "popular", label: "Más Populares" },
-  ];
+  const {
+    projects,
+    showCreateModal,
+    setShowCreateModal,
+    selectedFilter,
+    selectedSort,
+    filterOptions,
+    sortOptions,
+    handleSort,
+    handleFilter,
+  } = useProject();
 
   return (
     <div className="space-y-6 md:space-y-8">
@@ -35,7 +28,7 @@ export default function ProjectTab({ userId }: Props) {
             label="Filtrar por Tipo"
             options={filterOptions}
             value={selectedFilter}
-            onChange={setSelectedFilter}
+            onChange={handleFilter}
           />
         </div>
         <div className="flex-1">
@@ -43,7 +36,7 @@ export default function ProjectTab({ userId }: Props) {
             label="Ordenar por"
             options={sortOptions}
             value={selectedSort}
-            onChange={setSelectedSort}
+            onChange={handleSort}
           />
         </div>
       </div>

@@ -6,7 +6,7 @@ export interface UseSelectProps {
   multiple?: boolean;
   options?: Option[];
   disabled?: boolean;
-  onChange: React.Dispatch<React.SetStateAction<string>>;
+  onChange: (value: string) => void;
 }
 
 interface Option {

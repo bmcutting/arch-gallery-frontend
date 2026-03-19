@@ -14,7 +14,7 @@ interface Props {
   disabled?: boolean;
   description?: string;
   name?: string;
-  onChange: React.Dispatch<React.SetStateAction<string>>;
+  onChange: (value: string) => void;
 }
 
 interface Options {

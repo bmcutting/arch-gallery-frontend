@@ -11,5 +11,5 @@ export interface Project {
   likes?: Like[];
   comments?: Comment[];
   categories?: Category[];
-  createdAt?: Date[];
+  createdAt: Date;
 }
