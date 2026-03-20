@@ -2,9 +2,7 @@ import { CategoryMapper } from "../../category/services/category-mapper";
 import { CommentMapper } from "../../comment/services/comment-mapper";
 import { LikeMapper } from "../../like/services/like-mapper";
 import type { Project } from "../domain/entities/project";
-import type { ProjectFeed } from "../domain/entities/project-feed";
 import type { ProjectResponse } from "../dto/read/project";
-import type { ProjectFeedResponse } from "../dto/read/project-feed";
 
 export class ProjectMapper {
   static toDomain(r: ProjectResponse): Project {
@@ -13,41 +11,16 @@ export class ProjectMapper {
       title: r.title,
       description: r.description,
       year: r.year,
+      user: r.user,
+      imagesUrl: r.imagesUrl ?? [],
       likes: LikeMapper.toDomainList(r.likes),
       comments: CommentMapper.toDomainList(r.comments),
       categories: CategoryMapper.toDomainList(r.categories),
+      createdAt: new Date(r.createdAt),
     };
   }
 
   static toDomainList(r: ProjectResponse[]): Project[] {
     return r.map((project) => this.toDomain(project));
-  }
-
-  static toProjectFeed(r: ProjectFeedResponse): ProjectFeed {
-    return {
-      id: r.id,
-      title: r.title,
-      year: r.year,
-      likes: LikeMapper.toDomainList(r.likes),
-      comments: CommentMapper.toDomainList(r.comments),
-      previewImage: Array.isArray(r?.previewImage)
-        ? (r.previewImage[1] ?? "")
-        : (r?.previewImage ?? ""),
-      categories: CategoryMapper.toDomainList(r.categories),
-      likedByUser: r.likedByUser,
-      author: {
-        id: r?.author?.id ?? "",
-        name: r?.author?.name ?? "",
-        profileImage: r?.author?.profileImage ?? null,
-      },
-    };
-  }
-
-  static toFeedList(r: ProjectFeedResponse[]): ProjectFeed[] {
-    let projects: ProjectFeed[] = [];
-    projects = r.map((project) => {
-      return this.toProjectFeed(project);
-    });
-    return projects;
   }
 }

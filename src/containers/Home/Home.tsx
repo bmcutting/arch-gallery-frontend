@@ -11,8 +11,12 @@ export default function Home() {
           Galería de Arquitectura
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {projects?.map((project) => (
-            <ProjectFeed key={project.id} project={project} />
+          {projects?.map((item) => (
+            <ProjectFeed
+              key={item.project.id}
+              project={item.project}
+              likedByUser={item.likedByUser}
+            />
           ))}
         </div>
         <div ref={loaderRef} />

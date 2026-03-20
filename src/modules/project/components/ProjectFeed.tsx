@@ -1,18 +1,22 @@
 import { FaImage, FaHeart, FaComment, FaUser } from "react-icons/fa";
 import Button from "../../app/modules/ui/components/Button/Button";
 import useLike from "../../like/hooks/useLike";
-import type { ProjectFeed } from "../domain/entities/project-feed";
 import ProjectDetailModal from "./ProjectDetailModal";
 import useProjectDetail from "../hooks/useProjectDetail";
 import CommentSection from "../../comment/components/CommentSection";
 import useComment from "../../comment/hooks/useComment";
+import type { Project } from "../domain/entities/project";
 
 interface ProjectFeedProps {
-  project: ProjectFeed;
+  project: Project;
+  likedByUser: boolean;
 }
 
-export default function ProjectFeed({ project }: ProjectFeedProps) {
-  const { handleLike, likesCount, likedByUser } = useLike({ project });
+export default function ProjectFeed({
+  project,
+  likedByUser,
+}: ProjectFeedProps) {
+  const { handleLike, likesCount, liked } = useLike({ project, likedByUser });
   const commentState = useComment({ project });
   const { showDetail, setShowDetail } = useProjectDetail();
 
@@ -22,7 +26,7 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
       className="group relative bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-2xl hover:border-gray-300 hover:shadow-primary transition-all duration-300 overflow-hidden"
     >
       <div className="relative bg-gray-100">
-        {project.previewImage ? (
+        {project.imagesUrl ? (
           <div className="aspect-4/3 w-full overflow-hidden">
             <img
               src="/sa.jpg"
@@ -53,9 +57,9 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
 
         <div className="flex items-center gap-2 text-gray-600 mb-4">
           <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden shrink-0">
-            {project.author.profileImage ? (
+            {project.user.profileImageUrl ? (
               <img
-                src={project.author.profileImage}
+                src={project.user.profileImageUrl}
                 alt=""
                 className="w-full h-full object-cover"
               />
@@ -63,7 +67,7 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
               <FaUser className="text-gray-500 text-sm" />
             )}
           </div>
-          <span className="text-sm font-medium">{project.author.name}</span>
+          <span className="text-sm font-medium">{project.user.userName}</span>
         </div>
 
         <div className="flex flex-wrap gap-2 mb-3">
@@ -84,7 +88,7 @@ export default function ProjectFeed({ project }: ProjectFeedProps) {
                 <div className="flex items-center gap-3">
                   <FaHeart
                     className={`transition-all ${
-                      likedByUser
+                      liked
                         ? "text-red-500 scale-125"
                         : "text-gray-400 hover:text-red-500 hover:scale-200"
                     }`}

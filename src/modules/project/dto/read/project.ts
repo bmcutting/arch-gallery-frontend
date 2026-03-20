@@ -8,7 +8,7 @@ export interface ProjectResponse {
   title: string;
   description: string;
   year: number;
-  createdAt: string;
+  createdAt: Date;
   imagesUrl: string[];
   categories: CategoryResponse[];
   user: UserResponse;

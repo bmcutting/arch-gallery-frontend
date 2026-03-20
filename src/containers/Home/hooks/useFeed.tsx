@@ -1,13 +1,19 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { ProjectFeed } from "../../../modules/project/domain/entities/project-feed";
 import { getProjectFeed } from "../../../modules/project/services/get-feed";
+import type { Project } from "../../../modules/project/domain/entities/project";
+
+interface ProjectFeedItem {
+  project: Project;
+  likedByUser: boolean;
+}
 
 export default function useFeed() {
-  const [projects, setProjects] = useState<ProjectFeed[]>([]);
+  const [projects, setProjects] = useState<ProjectFeedItem[]>([]);
   const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const loaderRef = useRef<HTMLDivElement | null>(null);
+
   const loadMore = useCallback(async () => {
     if (loading || !hasMore) return;
     setLoading(true);
@@ -15,16 +21,18 @@ export default function useFeed() {
       const data = await getProjectFeed(nextCursor);
 
       setProjects((prev) => {
-        const ids = new Set(prev.map((p) => p.id));
-        const filtered = data.items.filter((p) => !ids.has(p.id));
+        const ids = new Set(prev.map((p) => p.project.id));
+        const filtered = data.items.filter((item) => !ids.has(item.project.id));
         return [...prev, ...filtered];
       });
+
       setNextCursor(data.nextCursor);
       setHasMore(!!data.nextCursor);
     } finally {
       setLoading(false);
     }
   }, [loading, hasMore, nextCursor]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {

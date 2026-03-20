@@ -1,26 +1,27 @@
 import { useState } from "react";
 import { addLike } from "../services/add-like";
 import { removeLike } from "../services/remove-like";
-import type { ProjectFeed } from "../../project/domain/entities/project-feed";
+import type { Project } from "../../project/domain/entities/project";
 
 interface Props {
-  project: ProjectFeed;
+  project: Project;
+  likedByUser: boolean;
 }
 
-export default function useLike({ project }: Props) {
+export default function useLike({ project, likedByUser: initialLiked }: Props) {
   const [likesCount, setLikesCount] = useState(project.likes?.length ?? 0);
-  const [likedByUser, setLikedByUser] = useState(project.likedByUser);
+  const [liked, setLiked] = useState(initialLiked);
 
   async function handleLike() {
     try {
-      if (likedByUser) {
+      if (liked) {
         const updatedLikes = await removeLike({ projectId: project.id });
         setLikesCount(updatedLikes);
-        setLikedByUser(false);
+        setLiked(false);
       } else {
         const updatedLikes = await addLike({ projectId: project.id });
         setLikesCount(updatedLikes);
-        setLikedByUser(true);
+        setLiked(true);
       }
     } catch {
       console.log("Error al alternar like");
@@ -29,7 +30,7 @@ export default function useLike({ project }: Props) {
 
   return {
     likesCount,
-    likedByUser,
+    liked,
     handleLike,
   };
 }
