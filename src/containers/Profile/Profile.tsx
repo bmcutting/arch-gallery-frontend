@@ -19,6 +19,16 @@ export default function Profile() {
     { id: "experience", label: "Experiencia", icon: "Briefcase" },
   ];
 
+  if (!user) {
+    return (
+      <AppLayout>
+        <div className="min-h-screen flex items-center justify-center">
+          <p>Cargando perfil...</p>
+        </div>
+      </AppLayout>
+    );
+  }
+
   return (
     <AppLayout>
       <div className="min-h-screen">
