@@ -96,9 +96,11 @@ export default function Select({
         </select>
 
         {isOpen && (
-          <div className="absolute z-50 w-full mt-1 bg-white text-black border border-border rounded-md shadow-sm shadow-primary">
+          <div className="absolute z-50 w-full mt-1 bg-white text-black border border-border rounded-md shadow-sm shadow-primary max-h-48 overflow-y-auto">
             {options.length === 0 ? (
-              <p className="text-sm text-primary">No hay más opciones</p>
+              <p className="text-sm text-primary px-3 py-2">
+                No hay más opciones
+              </p>
             ) : (
               options.map((option) => (
                 <div
