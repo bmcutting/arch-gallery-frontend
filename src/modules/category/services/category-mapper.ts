@@ -9,7 +9,10 @@ export class CategoryMapper {
     };
   }
 
-  static toDomainList(r: CategoryResponse[]): Category[] {
-    return r.map((category) => this.toDomain(category));
+  static toDomainList(r?: CategoryResponse[] | null): Category[] {
+    if (!r || r.length === 0) {
+      return [];
+    }
+    return r.map((c) => this.toDomain(c));
   }
 }

@@ -17,7 +17,10 @@ export class CommentMapper {
     };
   }
 
-  static toDomainList(r: CommentResponse[]): Comment[] {
-    return r.map((comment) => this.toDomain(comment));
+  static toDomainList(r?: CommentResponse[] | null): Comment[] {
+    if (!r || r.length === 0) {
+      return [];
+    }
+    return r.map((c) => this.toDomain(c));
   }
 }

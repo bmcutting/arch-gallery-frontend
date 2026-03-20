@@ -10,7 +10,10 @@ export class LikeMapper {
     };
   }
 
-  static toDomainList(r: LikeResponse[]): Like[] {
+  static toDomainList(r?: LikeResponse[] | null): Like[] {
+    if (!r || r.length === 0) {
+      return [];
+    }
     return r.map((like) => this.toDomain(like));
   }
 }
