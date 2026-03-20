@@ -3,9 +3,18 @@ import type { Project } from "../domain/entities/project";
 import type { ProjectResponse } from "../dto/read/project";
 import { ProjectMapper } from "./project-mapper";
 
-export async function getProjectByLoggedUser(): Promise<Project[]> {
-  return instance.get<ProjectResponse[]>("projects/me").then((res) => {
-    const projects = ProjectMapper.toDomainList(res.data);
-    return projects;
-  });
+export interface ProjectFeedItem {
+  project: ProjectResponse;
+  likedByUser: boolean;
+}
+
+export async function getProjectByLoggedUser(): Promise<
+  { project: Project; likedByUser: boolean }[]
+> {
+  return instance.get<ProjectFeedItem[]>("projects/me").then((res) =>
+    res.data.map((item) => ({
+      project: ProjectMapper.toDomain(item.project),
+      likedByUser: item.likedByUser,
+    })),
+  );
 }

@@ -1,7 +1,7 @@
 import Select from "../../../../modules/app/modules/ui/components/Select/Select";
 import useProject from "../../hooks/useProject";
 import CreateProjectModal from "../../../../modules/project/components/CreateProjectModal";
-import ProjectCard from "../../../../modules/project/components/ProjectCard";
+import ProjectFeed from "../../../../modules/project/components/ProjectFeed";
 
 interface Props {
   userId: string;
@@ -41,8 +41,12 @@ export default function ProjectTab({ userId }: Props) {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
-        {projects?.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+        {projects?.map((item) => (
+          <ProjectFeed
+            key={item.project.id}
+            project={item.project}
+            likedByUser={item.likedByUser}
+          />
         ))}
         <div
           onClick={() => setShowCreateModal(true)}
