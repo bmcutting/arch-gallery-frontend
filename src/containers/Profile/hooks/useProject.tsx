@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Project } from "../../../modules/project/domain/entities/project";
 import { getProjectByLoggedUser } from "../../../modules/project/services/get-project";
+import { deleteProject } from "../../../modules/project/services/delete-project";
 
 interface ProjectFeedItem {
   project: Project;
@@ -12,6 +13,8 @@ export default function useProject() {
   const [filteredProjects, setFilteredProjects] = useState<ProjectFeedItem[]>(
     [],
   );
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [projectToDelete, setProjectToDelete] = useState<Project | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [selectedSort, setSelectedSort] = useState("recent");
@@ -69,6 +72,29 @@ export default function useProject() {
     setFilteredProjects(sortList(filtered, selectedSort));
   }
 
+  function requestDelete(project: Project) {
+    setProjectToDelete(project);
+    setShowDeleteModal(true);
+  }
+
+  async function confirmDelete() {
+    if (!projectToDelete) return;
+    const ok = await deleteProject({ projectId: projectToDelete.id });
+    if (ok) {
+      setProjects((prev) => prev.filter((p) => p.project.id !== projectToDelete.id));
+      setFilteredProjects((prev) =>
+        prev.filter((p) => p.project.id !== projectToDelete.id),
+      );
+    }
+    setShowDeleteModal(false);
+    setProjectToDelete(null);
+  }
+
+  function cancelDelete() {
+    setShowDeleteModal(false);
+    setProjectToDelete(null);
+  }
+
   useEffect(() => {
     getProjectByLoggedUser()
       .then((data) => {
@@ -92,5 +118,12 @@ export default function useProject() {
     sortOptions,
     handleSort,
     handleFilter,
+    setProjects,
+    setFilteredProjects,
+    showDeleteModal,
+    projectToDelete,
+    requestDelete,
+    confirmDelete,
+    cancelDelete,
   };
 }
