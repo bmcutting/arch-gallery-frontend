@@ -1,10 +1,11 @@
 import Select from "../../../../modules/app/modules/ui/components/Select/Select";
-import useProject from "../../hooks/useProject";
+import useTabProject from "../../hooks/useTabProject";
 import CreateProjectModal from "../../../../modules/project/components/CreateProjectModal";
 import ProjectFeed from "../../../../modules/project/components/ProjectFeed";
 import ProjectContextMenu from "../ProjectContextMenu/ProjectContextMenu";
 import useContextMenu from "../../hooks/useContextMenu";
 import Modal from "../../../../modules/app/modules/ui/components/Modal/Modal";
+import EditProjectModal from "../../../../modules/project/components/EditProjectModal";
 
 interface Props {
   userId: string;
@@ -15,6 +16,8 @@ export default function ProjectTab({ userId }: Props) {
     projects,
     showCreateModal,
     setShowCreateModal,
+    showEditModal,
+    setShowEditModal,
     selectedFilter,
     selectedSort,
     filterOptions,
@@ -26,7 +29,9 @@ export default function ProjectTab({ userId }: Props) {
     requestDelete,
     confirmDelete,
     cancelDelete,
-  } = useProject();
+    projectToEdit,
+    requestEdit,
+  } = useTabProject();
 
   const { openMenuId, toggleMenu } = useContextMenu();
 
@@ -60,7 +65,7 @@ export default function ProjectTab({ userId }: Props) {
             <ProjectContextMenu
               isOpen={openMenuId === item.project.id}
               onToggle={() => toggleMenu(item.project.id)}
-              onEdit={() => console.log("Editar", item.project)}
+              onEdit={() => requestEdit(item.project)}
               onDelete={() => requestDelete(item.project)}
             />
           </div>
@@ -81,6 +86,14 @@ export default function ProjectTab({ userId }: Props) {
           userId={userId}
         />
       )}
+
+      {showEditModal && projectToEdit && (
+        <EditProjectModal
+          onClose={() => setShowEditModal(false)}
+          project={projectToEdit}
+        />
+      )}
+
       {showDeleteModal && projectToDelete && (
         <Modal
           message={`¿Seguro que quieres eliminar el proyecto "${projectToDelete.title}"?`}

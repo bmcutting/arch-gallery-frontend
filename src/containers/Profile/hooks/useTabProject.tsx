@@ -8,13 +8,15 @@ interface ProjectFeedItem {
   likedByUser: boolean;
 }
 
-export default function useProject() {
+export default function useTabProject() {
   const [projects, setProjects] = useState<ProjectFeedItem[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<ProjectFeedItem[]>(
     [],
   );
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState<Project | null>(null);
+  const [projectToEdit, setProjectToEdit] = useState<Project | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [selectedSort, setSelectedSort] = useState("recent");
@@ -77,11 +79,18 @@ export default function useProject() {
     setShowDeleteModal(true);
   }
 
+  function requestEdit(project: Project) {
+    setProjectToEdit(project);
+    setShowEditModal(true);
+  }
+
   async function confirmDelete() {
     if (!projectToDelete) return;
     const ok = await deleteProject({ projectId: projectToDelete.id });
     if (ok) {
-      setProjects((prev) => prev.filter((p) => p.project.id !== projectToDelete.id));
+      setProjects((prev) =>
+        prev.filter((p) => p.project.id !== projectToDelete.id),
+      );
       setFilteredProjects((prev) =>
         prev.filter((p) => p.project.id !== projectToDelete.id),
       );
@@ -110,6 +119,8 @@ export default function useProject() {
     projects: filteredProjects,
     showCreateModal,
     setShowCreateModal,
+    showEditModal,
+    setShowEditModal,
     selectedFilter,
     setSelectedFilter,
     selectedSort,
@@ -125,5 +136,7 @@ export default function useProject() {
     requestDelete,
     confirmDelete,
     cancelDelete,
+    projectToEdit,
+    requestEdit,
   };
 }

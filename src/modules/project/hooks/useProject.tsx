@@ -1,22 +1,50 @@
 import { useState } from "react";
 import { createProject } from "../services/create-project";
+import type { Project } from "../domain/entities/project";
+import { updateProject } from "../services/update-project";
 
 interface Props {
   onClose?: () => void;
+  project?: Project;
   userId: string;
 }
 
-export default function useProject({ onClose, userId }: Props) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [year, setYear] = useState<number>(new Date().getFullYear());
-  const [imagesUrl, setImagesUrl] = useState<string[]>([]);
+export default function useProject({ onClose, userId, project }: Props) {
+  const [title, setTitle] = useState(project?.title ? project.title : "");
+  const [description, setDescription] = useState(
+    project?.description ? project.description : "",
+  );
+  const [year, setYear] = useState<number>(
+    project?.year ? project.year : new Date().getFullYear(),
+  );
+  const [imagesUrl, setImagesUrl] = useState<string[]>(
+    project?.imagesUrl ? project.imagesUrl : [],
+  );
   const [categories, setCategories] = useState<string[]>([]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     createProject({ title, year, description, userId, categories });
+
+    if (onClose) onClose();
+  };
+
+  const handleEdit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!project?.id) {
+      console.error("No project id provided for update");
+      return;
+    }
+
+    updateProject({
+      projectId: project?.id,
+      title,
+      year,
+      description,
+      categories,
+    });
 
     if (onClose) onClose();
   };
@@ -41,6 +69,7 @@ export default function useProject({ onClose, userId }: Props) {
 
   return {
     handleSubmit,
+    handleEdit,
     title,
     description,
     year,

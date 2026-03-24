@@ -1,18 +1,19 @@
-import { FaFolderPlus } from "react-icons/fa";
+import { FaFolderOpen } from "react-icons/fa6";
+import type { Project } from "../domain/entities/project";
 import FormInput from "../../app/modules/ui/components/Form/FormInput";
 import Input from "../../app/modules/ui/components/Input/Input";
+import useProject from "../hooks/useProject";
 import Textarea from "../../app/modules/ui/components/TextArea/TextArea";
 import Button from "../../app/modules/ui/components/Button/Button";
-import useProject from "../hooks/useProject";
 
 interface Props {
+  project: Project;
   onClose: () => void;
-  userId: string;
 }
 
-export default function CreateProjectModal({ onClose, userId }: Props) {
+export default function EditProjectModal({ project, onClose }: Props) {
   const {
-    handleSubmit,
+    handleEdit,
     title,
     description,
     year,
@@ -23,17 +24,17 @@ export default function CreateProjectModal({ onClose, userId }: Props) {
     addCategory,
     removeCategory,
     updateCategory,
-  } = useProject({ onClose, userId });
+  } = useProject({ onClose, userId: "", project });
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50 transition-opacity mt-14 overflow-y-auto">
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg p-6 animate-fadeIn">
         <div className="flex items-center gap-2 mb-6">
-          <FaFolderPlus className="text-accent text-2xl" />
-          <h2 className="text-2xl font-bold text-secondary">Nuevo Proyecto</h2>
+          <FaFolderOpen className="text-accent text-2xl" />
+          <h2 className="text-2xl font-bold text-secondary">Editar Proyecto</h2>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleEdit} className="space-y-5">
           <FormInput label="Título" required>
             <Input
               value={title}
@@ -50,8 +51,8 @@ export default function CreateProjectModal({ onClose, userId }: Props) {
               onChange={setDescription}
               maxChars={500}
               className="h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg 
-                          rounded-md border border-gray-300 focus:ring-2 focus:ring-primary 
-                          resize-none leading-relaxed"
+                                    rounded-md border border-gray-300 focus:ring-2 focus:ring-primary 
+                                    resize-none leading-relaxed"
             />
           </FormInput>
 
@@ -104,7 +105,7 @@ export default function CreateProjectModal({ onClose, userId }: Props) {
               size="lg"
               type="submit"
               className="px-4 py-2 border rounded-lg hover:bg-muted transition"
-              onClick={() => handleSubmit}
+              onClick={() => handleEdit}
             >
               Guardar
             </Button>
