@@ -20,7 +20,6 @@ export default function Arquitects() {
     LOCATIONS,
     SORT_OPTIONS,
     SPECIALIZATIONS,
-    user,
   } = useArchitects();
 
   return (
@@ -70,7 +69,6 @@ export default function Arquitects() {
                 className="w-44"
               />
             </div>
-            <ArchitectCard architect={user}></ArchitectCard>
           </div>
         </div>
         {architects.length === 0 ? (
