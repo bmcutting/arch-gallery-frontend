@@ -1,46 +1,27 @@
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaUserAlt } from "react-icons/fa";
 import AppLayout from "../Home/components/AppLayout";
 import Input from "../../modules/app/modules/ui/components/Input/Input";
-import { useState } from "react";
 import Select from "../../modules/app/modules/ui/components/Select/Select";
 import ArchitectCard from "../../modules/user/components/AuthPrompt/ArquitectCard";
-import useProfile from "../Profile/hooks/useProfile";
+import Button from "../../modules/app/modules/ui/components/Button/Button";
+import useArchitects from "./hooks/useArchitects";
 
 export default function Arquitects() {
-  const [query, setQuery] = useState("");
-  const [specialization, setSpecialization] = useState("all");
-  const [location, setLocation] = useState("all");
-  const [sortBy, setSortBy] = useState("name");
-
-  const user = useProfile();
-
-  const SPECIALIZATIONS = [
-    { value: "all", label: "Todas las especialidades" },
-    { value: "sostenible", label: "Diseño Sostenible" },
-    { value: "comercial", label: "Arquitectura Comercial" },
-    { value: "minimalista", label: "Arquitectura Minimalista" },
-    { value: "urbana", label: "Rehabilitación Urbana" },
-    { value: "institucional", label: "Arquitectura Institucional" },
-    { value: "industrial", label: "Arquitectura Industrial" },
-    { value: "residencial", label: "Arquitectura Residencial" },
-  ];
-
-  const LOCATIONS = [
-    { value: "all", label: "Todas las ubicaciones" },
-    { value: "Madrid", label: "Madrid" },
-    { value: "Barcelona", label: "Barcelona" },
-    { value: "Valencia", label: "Valencia" },
-    { value: "Sevilla", label: "Sevilla" },
-    { value: "Bilbao", label: "Bilbao" },
-    { value: "Málaga", label: "Málaga" },
-    { value: "Zaragoza", label: "Zaragoza" },
-  ];
-
-  const SORT_OPTIONS = [
-    { value: "name", label: "Nombre A-Z" },
-    { value: "experience", label: "Más experiencia" },
-    { value: "projects", label: "Más proyectos" },
-  ];
+  const {
+    query,
+    setQuery,
+    specialization,
+    setSpecialization,
+    location,
+    setLocation,
+    architects,
+    sortBy,
+    setSortBy,
+    LOCATIONS,
+    SORT_OPTIONS,
+    SPECIALIZATIONS,
+    user,
+  } = useArchitects();
 
   return (
     <AppLayout>
@@ -92,6 +73,27 @@ export default function Arquitects() {
             <ArchitectCard architect={user}></ArchitectCard>
           </div>
         </div>
+        {architects.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-20 text-center">
+            <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4">
+              <FaUserAlt />
+            </div>
+            <h3 className="text-xl font-heading font-semibold text-foreground mb-2">
+              Sin resultados
+            </h3>
+            <p className="text-muted-foreground max-w-sm">
+              No encontramos arquitectos con los filtros seleccionados.
+            </p>
+            <Button size="lg">Limpiar filtros</Button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {architects?.map((architect) => (
+              <ArchitectCard key={architect?.id} architect={architect} />
+            ))}
+          </div>
+        )}
+        <div></div>
       </div>
     </AppLayout>
   );
