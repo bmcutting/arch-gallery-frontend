@@ -3,12 +3,16 @@ import AppLayout from "../Home/components/AppLayout";
 import Input from "../../modules/app/modules/ui/components/Input/Input";
 import { useState } from "react";
 import Select from "../../modules/app/modules/ui/components/Select/Select";
+import ArchitectCard from "../../modules/user/components/AuthPrompt/ArquitectCard";
+import useProfile from "../Profile/hooks/useProfile";
 
 export default function Arquitects() {
   const [query, setQuery] = useState("");
   const [specialization, setSpecialization] = useState("all");
   const [location, setLocation] = useState("all");
   const [sortBy, setSortBy] = useState("name");
+
+  const user = useProfile();
 
   const SPECIALIZATIONS = [
     { value: "all", label: "Todas las especialidades" },
@@ -85,6 +89,7 @@ export default function Arquitects() {
                 className="w-44"
               />
             </div>
+            <ArchitectCard architect={user}></ArchitectCard>
           </div>
         </div>
       </div>
