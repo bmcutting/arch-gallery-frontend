@@ -1,14 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { User } from "../../../modules/user/domain/entities/user";
-import useProfile from "../../Profile/hooks/useProfile";
+import { getAllUsers } from "../../../modules/user/services/get-all-users";
 
 export default function useArchitects() {
   const [query, setQuery] = useState("");
   const [specialization, setSpecialization] = useState("all");
   const [location, setLocation] = useState("all");
   const [sortBy, setSortBy] = useState("name");
-  const user = useProfile();
-  const [architects, setArchitects] = useState<User[]>(user ? [user] : []);
+  const [architects, setArchitects] = useState<User[]>([]);
 
   const SPECIALIZATIONS = [
     { value: "all", label: "Todas las especialidades" },
@@ -38,6 +37,17 @@ export default function useArchitects() {
     { value: "projects", label: "Más proyectos" },
   ];
 
+  useEffect(() => {
+    getAllUsers({})
+      .then((result) => {
+        // result es un PaginationResult<User>
+        setArchitects(result.items); // suponiendo que PaginationResult tiene la propiedad items
+      })
+      .catch((error) => {
+        console.error("Error al obtener usuarios", error);
+      });
+  }, []);
+
   return {
     query,
     setQuery,
@@ -52,6 +62,5 @@ export default function useArchitects() {
     LOCATIONS,
     SORT_OPTIONS,
     SPECIALIZATIONS,
-    user,
   };
 }
