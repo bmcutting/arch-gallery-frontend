@@ -5,7 +5,8 @@ export interface UpdateUserDto {
   firstName?: string;
   lastName?: string;
   phoneNumber?: string;
-  bio?: string;
+  shortBio?: string;
+  longBio?: string;
   profileImageUrl?: string;
   website?: string;
   location?: string;

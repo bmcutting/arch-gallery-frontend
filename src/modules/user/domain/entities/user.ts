@@ -1,3 +1,6 @@
+import type { Experience } from "./experience";
+import type { Skill } from "./skill";
+
 export interface User {
   id: string;
   email: string;
@@ -5,7 +8,8 @@ export interface User {
   lastName: string;
   userName: string;
   phoneNumber?: string;
-  bio?: string;
+  longBio?: string;
+  shortBio?: string;
   profileImageUrl?: string;
   website?: string;
   location?: string;
@@ -15,4 +19,6 @@ export interface User {
   twitterUrl?: string;
   linkedinUrl?: string;
   languages?: string[];
+  skills?: Skill[];
+  experiences?: Experience[];
 }

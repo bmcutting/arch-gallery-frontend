@@ -1,10 +1,14 @@
+import type { ExperienceResponse } from "./experience";
+import type { SkillResponse } from "./skill";
+
 export interface UserResponse {
   id: string;
   email: string;
   firstName: string;
   lastName: string;
   userName: string;
-  bio: string;
+  longBio: string;
+  shortBio: string;
   location: string;
   website: string;
   experienceYears: number;
@@ -15,4 +19,6 @@ export interface UserResponse {
   twitterUrl: string;
   linkedinUrl: string;
   languages: string[];
+  skills: SkillResponse[];
+  experiences: ExperienceResponse[];
 }

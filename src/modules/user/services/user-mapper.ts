@@ -1,5 +1,7 @@
 import type { User } from "../domain/entities/user";
 import type { UserResponse } from "../dto/read/user";
+import { ExperienceMapper } from "./experience-mapper";
+import { SkillMapper } from "./skill-mapper";
 
 export class UserMapper {
   static execute(r: UserResponse): User {
@@ -9,7 +11,8 @@ export class UserMapper {
       lastName: r.lastName,
       firstName: r.firstName,
       userName: r.userName,
-      bio: r.bio,
+      shortBio: r.shortBio,
+      longBio: r.longBio,
       location: r.location,
       website: r.website,
       experienceYears: r.experienceYears,
@@ -20,6 +23,8 @@ export class UserMapper {
       twitterUrl: r.twitterUrl,
       linkedinUrl: r.linkedinUrl,
       languages: r.languages,
+      skills: SkillMapper.toDomainList(r.skills),
+      experiences: ExperienceMapper.toDomainList(r.experiences),
     };
   }
 }
