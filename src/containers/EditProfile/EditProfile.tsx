@@ -184,8 +184,8 @@ export default function ProfileManagement() {
                 <FormInput label="Biografía profesional" size="lg">
                   <Textarea
                     placeholder="Escribe tu biografía profesional..."
-                    value={formData.bio}
-                    onChange={(value: string) => handleChange("bio", value)}
+                    value={formData.longBio}
+                    onChange={(value: string) => handleChange("longBio", value)}
                     maxChars={500}
                     className="h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg 
                rounded-md border border-gray-300 focus:ring-2 focus:ring-primary 
