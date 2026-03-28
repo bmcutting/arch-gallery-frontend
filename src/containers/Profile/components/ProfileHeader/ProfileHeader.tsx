@@ -33,9 +33,14 @@ export default function ProfileHeader({ user }: Props) {
             <h1 className="text-2xl md:text-4xl lg:text-6xl font-title-bold text-black mb-2">
               {user?.firstName} {user?.lastName}
             </h1>
-            {user?.specialization && (
+            {user.specialization && (
               <p className="text-base md:text-lg lg:text-2xl text-black mb-4">
                 Especialización: {user.specialization}
+              </p>
+            )}
+            {user.shortBio && (
+              <p className="text-base md:text-lg lg:text-2xl text-black mb-4">
+                {user.shortBio}
               </p>
             )}
 
