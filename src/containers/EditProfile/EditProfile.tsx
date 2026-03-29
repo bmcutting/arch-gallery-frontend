@@ -179,7 +179,21 @@ export default function ProfileManagement() {
                   </FormInput>
                 </div>
               </div>
-
+              <div className="px-6 py-3 md:px-8 md:py-4">
+                <FormInput label="Descripción" size="lg">
+                  <Textarea
+                    placeholder="Escribe una pequeña descripción de tí..."
+                    value={formData.shortBio}
+                    onChange={(value: string) =>
+                      handleChange("shortBio", value)
+                    }
+                    maxChars={200}
+                    className="h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg 
+               rounded-md border border-gray-300 focus:ring-2 focus:ring-primary 
+               resize-none leading-relaxed"
+                  />
+                </FormInput>
+              </div>
               <div className="px-6 py-3 md:px-8 md:py-4">
                 <FormInput label="Biografía profesional" size="lg">
                   <Textarea

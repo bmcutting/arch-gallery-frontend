@@ -19,7 +19,7 @@ export default function ProfileHeader({ user }: Props) {
   const navigate = useNavigate();
   return (
     <div className="mt-14 bg-card border-b border-border">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-8 lg:py-12">
+      <div className="max-w-360 mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-8 lg:py-12">
         <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-12">
           <div className="relative w-45 h-45 md:w-60 md:h-60 lg:w-70 lg:h-70 mx-auto lg:mx-0">
             <img
