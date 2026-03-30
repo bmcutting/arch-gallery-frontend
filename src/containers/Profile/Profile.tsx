@@ -4,6 +4,7 @@ import ProfileHeader from "./components/ProfileHeader/ProfileHeader";
 import ProjectTab from "./components/ProjectTab/ProjectTab";
 import AbouTab from "./components/AboutTab/AboutTab";
 import useProfile from "./hooks/useProfile";
+import ExperienceTab from "./components/ExperienceTab/ExperienceTab";
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState("projects");
@@ -62,6 +63,7 @@ export default function Profile() {
             >
               {activeTab === "projects" && <ProjectTab userId={user?.id} />}
               {activeTab === "about" && <AbouTab user={user} />}
+              {activeTab === "experience" && <ExperienceTab user={user} />}
             </div>
           </div>
         </div>
