@@ -5,7 +5,7 @@ export class SkillMapper {
   static toDomain(r: SkillResponse): Skill {
     return {
       id: r.id,
-      name: r.nane,
+      name: r.name,
       level: r.level,
     };
   }
