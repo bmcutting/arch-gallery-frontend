@@ -11,6 +11,7 @@ export interface User {
   longBio?: string;
   shortBio?: string;
   profileImageUrl?: string;
+  coverImageUrl?: string;
   website?: string;
   location?: string;
   experienceYears?: number;

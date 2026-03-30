@@ -13,6 +13,7 @@ export class UserMapperDto {
       shortBio: user.shortBio,
       longBio: user.longBio,
       profileImageUrl: user.profileImageUrl,
+      coverImageUrl: user.coverImageUrl,
       website: user.website,
       location: user.location,
       experienceYears: user.experienceYears,

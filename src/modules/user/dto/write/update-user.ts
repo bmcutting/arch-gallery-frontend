@@ -8,6 +8,7 @@ export interface UpdateUserDto {
   shortBio?: string;
   longBio?: string;
   profileImageUrl?: string;
+  coverImageUrl?: string;
   website?: string;
   location?: string;
   experienceYears?: number;

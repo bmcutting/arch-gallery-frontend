@@ -14,6 +14,7 @@ export interface UserResponse {
   experienceYears: number;
   specialization: string;
   profileImageUrl: string;
+  coverImageUrl: string;
   phoneNumber: string;
   instagramUrl: string;
   twitterUrl: string;

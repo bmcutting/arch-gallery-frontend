@@ -18,6 +18,7 @@ export class UserMapper {
       experienceYears: r.experienceYears,
       specialization: r.specialization,
       profileImageUrl: r.profileImageUrl,
+      coverImageUrl: r.coverImageUrl,
       phoneNumber: r.phoneNumber,
       instagramUrl: r.instagramUrl,
       twitterUrl: r.twitterUrl,
