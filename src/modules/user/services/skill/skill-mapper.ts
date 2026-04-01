@@ -1,5 +1,5 @@
-import type { Skill } from "../domain/entities/skill";
-import type { SkillResponse } from "../dto/read/skill";
+import type { Skill } from "../../domain/entities/skill";
+import type { SkillResponse } from "../../dto/read/skill";
 
 export class SkillMapper {
   static toDomain(r: SkillResponse): Skill {

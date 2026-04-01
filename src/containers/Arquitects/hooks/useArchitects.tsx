@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { User } from "../../../modules/user/domain/entities/user";
-import { getAllUsers } from "../../../modules/user/services/get-all-users";
+import { getAllUsers } from "../../../modules/user/services/user/get-all-users";
 
 export default function useArchitects() {
   const [query, setQuery] = useState("");

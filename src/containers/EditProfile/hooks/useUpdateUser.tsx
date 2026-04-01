@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import type { User } from "../../../modules/user/domain/entities/user";
 import useProfile from "../../Profile/hooks/useProfile";
-import { updateUser } from "../../../modules/user/services/update-user";
-import { UserMapperDto } from "../../../modules/user/services/user-mapper-dto";
+import { updateUser } from "../../../modules/user/services/user/update-user";
+import { UserMapperDto } from "../../../modules/user/services/user/user-mapper-dto";
 
 export default function useUpdateUser() {
   const user = useProfile();

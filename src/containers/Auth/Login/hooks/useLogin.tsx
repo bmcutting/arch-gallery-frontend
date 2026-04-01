@@ -5,7 +5,7 @@ import {
   LOCAL_STORAGE_KEY,
   LocalStorage,
 } from "../../../../modules/app/entities/local-storage";
-import { loginUser } from "../../../../modules/user/services/login-user";
+import { loginUser } from "../../../../modules/user/services/user/login-user";
 import type { HttpResponseError } from "../../../../modules/app/modules/http/domain/error";
 import { HttpStatusCode } from "axios";
 import { APP_ROUTES } from "../../../../modules/app/domain/constants/app-routes";

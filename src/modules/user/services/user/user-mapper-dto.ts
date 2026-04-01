@@ -1,5 +1,5 @@
-import type { User } from "../domain/entities/user";
-import type { UpdateUserDto } from "../dto/write/update-user";
+import type { User } from "../../domain/entities/user";
+import type { UpdateUserDto } from "../../dto/write/update-user";
 
 export class UserMapperDto {
   static execute(user: User): UpdateUserDto {
