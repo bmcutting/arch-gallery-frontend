@@ -17,9 +17,9 @@ export default function LanguageSection({
 }: Props) {
   return (
     <div className="space-y-3">
-      <div className="md:grid md:grid-cols-2 gap-4">
+      <div className="md:grid md:grid-cols-2">
         {formData.languages?.map((lang, index) => (
-          <div key={index} className="flex items-center gap-3">
+          <div key={index} className="flex items-center gap-3 mt-2">
             <Input
               value={lang}
               onChange={(value) => updateLanguage(index, value)}

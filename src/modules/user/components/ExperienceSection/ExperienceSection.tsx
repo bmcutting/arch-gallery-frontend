@@ -18,7 +18,7 @@ export default function ExperienceSection({ experiences }: Props) {
         {experiences.map((exp) => (
           <div
             key={exp.id}
-            className="border border-border rounded-lg p-4 hover:shadow-sm transition-shadow"
+            className="border border-border rounded-lg p-4 hover:shadow-sm transition-shadow mt-2"
           >
             <div className="flex justify-between items-start">
               <div className="flex-1">
