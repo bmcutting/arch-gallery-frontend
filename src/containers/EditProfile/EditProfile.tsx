@@ -8,6 +8,7 @@ import BioSection from "../../modules/user/components/BioSection/BioSection";
 import SocialSection from "../../modules/user/components/SocialSection/SocialSection";
 import LanguageSection from "../../modules/user/components/LanguagesSection/LanguagesSection";
 import CoverImageUpload from "./components/CoverImageUpload/CoverImageUpload";
+import ExperienceSection from "../../modules/user/components/ExperienceSection/ExperienceSection";
 
 export default function ProfileManagement() {
   const {
@@ -80,6 +81,11 @@ export default function ProfileManagement() {
                     removeLanguage={removeLanguage}
                     addLanguage={addLanguage}
                   />
+                </CollapsibleSection>
+              </div>
+              <div className="px-6 py-3 md:px-8 md:py-4">
+                <CollapsibleSection title="Experiencia laboral y estudiantil">
+                  <ExperienceSection experiences={formData.experiences ?? []} />
                 </CollapsibleSection>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 px-6 py-3 md:px-8 md:py-4">
