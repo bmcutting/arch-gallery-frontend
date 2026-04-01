@@ -1,7 +1,5 @@
-import Input from "../../modules/app/modules/ui/components/Input/Input";
 import AppLayout from "../Home/components/AppLayout";
-import ProfilePhotoUpload from "./components/ProfilePhotoUploadForm";
-import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import ProfilePhotoUpload from "./components/ProfilePhotoUpload/ProfilePhotoUpload";
 import useUpdateUser from "./hooks/useUpdateUser";
 import Button from "../../modules/app/modules/ui/components/Button/Button";
 import PersonalInfoSection from "../../modules/user/components/PersonalInfoSection/PersonalInfoSection";
@@ -9,6 +7,7 @@ import CollapsibleSection from "../../modules/app/modules/shared/components/Coll
 import BioSection from "../../modules/user/components/BioSection/BioSection";
 import SocialSection from "../../modules/user/components/SocialSection/SocialSection";
 import LanguageSection from "../../modules/user/components/LanguagesSection/LanguagesSection";
+import CoverImageUpload from "./components/CoverImageUpload/CoverImageUpload";
 
 export default function ProfileManagement() {
   const {
@@ -44,6 +43,7 @@ export default function ProfileManagement() {
             <div className="rounded-lg shadow-warm-lg overflow-hidden">
               <div className="p-6 md:p-8 border-b border-border">
                 <ProfilePhotoUpload />
+                <CoverImageUpload />
               </div>
 
               <div className="px-6 py-3 md:px-8 md:py-4">

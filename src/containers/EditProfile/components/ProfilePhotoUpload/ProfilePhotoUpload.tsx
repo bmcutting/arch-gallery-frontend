@@ -1,5 +1,5 @@
 import { FaInfo, FaUpload } from "react-icons/fa";
-import Input from "../../../modules/app/modules/ui/components/Input/Input";
+import Input from "../../../../modules/app/modules/ui/components/Input/Input";
 
 interface Props {
   profileImageUrl?: string;
@@ -7,7 +7,7 @@ interface Props {
 
 export default function ProfilePhotoUpload({ profileImageUrl }: Props) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 mb-6">
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
         <div className="shrink-0">
           <div className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden bg-muted border-2 border-border">
