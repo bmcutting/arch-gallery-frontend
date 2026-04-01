@@ -9,6 +9,7 @@ import SocialSection from "../../modules/user/components/SocialSection/SocialSec
 import LanguageSection from "../../modules/user/components/LanguagesSection/LanguagesSection";
 import CoverImageUpload from "./components/CoverImageUpload/CoverImageUpload";
 import ExperienceSection from "../../modules/user/components/ExperienceSection/ExperienceSection";
+import SkillSection from "../../modules/user/components/SkillSection/SkillSection";
 
 export default function ProfileManagement() {
   const {
@@ -86,6 +87,11 @@ export default function ProfileManagement() {
               <div className="px-6 py-3 md:px-8 md:py-4">
                 <CollapsibleSection title="Experiencia laboral y estudiantil">
                   <ExperienceSection experiences={formData.experiences ?? []} />
+                </CollapsibleSection>
+              </div>
+              <div className="px-6 py-3 md:px-8 md:py-4">
+                <CollapsibleSection title="Habilidades">
+                  <SkillSection skills={formData.skills ?? []} />
                 </CollapsibleSection>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 px-6 py-3 md:px-8 md:py-4">
