@@ -22,6 +22,9 @@ export default function ProfileManagement() {
     addLanguage,
     removeLanguage,
     updateLanguage,
+    addExperience,
+    removeExperience,
+    updateExperience,
     setFormData,
   } = useUpdateUser();
 
@@ -86,12 +89,20 @@ export default function ProfileManagement() {
               </div>
               <div className="px-6 py-3 md:px-8 md:py-4">
                 <CollapsibleSection title="Experiencia laboral y estudiantil">
-                  <ExperienceSection experiences={formData.experiences ?? []} />
+                  <ExperienceSection
+                    experiences={formData.experiences ?? []}
+                    addExperience={addExperience}
+                    removeExperience={removeExperience}
+                    updateExperience={updateExperience}
+                  />
                 </CollapsibleSection>
               </div>
               <div className="px-6 py-3 md:px-8 md:py-4">
                 <CollapsibleSection title="Habilidades">
-                  <SkillSection skills={formData.skills ?? []} />
+                  <SkillSection
+                    skills={formData.skills ?? []}
+                    handleChange={handleChange}
+                  />
                 </CollapsibleSection>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 px-6 py-3 md:px-8 md:py-4">

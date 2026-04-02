@@ -3,6 +3,8 @@ import type { User } from "../../../modules/user/domain/entities/user";
 import useProfile from "../../Profile/hooks/useProfile";
 import { updateUser } from "../../../modules/user/services/user/update-user";
 import { UserMapperDto } from "../../../modules/user/services/user/user-mapper-dto";
+import type { Experience } from "../../../modules/user/domain/entities/experience";
+import type { Skill } from "../../../modules/user/domain/entities/skill";
 
 export default function useUpdateUser() {
   const user = useProfile();
@@ -26,6 +28,8 @@ export default function useUpdateUser() {
     twitterUrl: user?.twitterUrl ?? "",
     linkedinUrl: user?.linkedinUrl ?? "",
     languages: user?.languages ?? [],
+    skills: user?.skills ?? [],
+    experiences: user?.experiences ?? [],
   });
 
   const [touched, setTouched] = useState({
@@ -38,6 +42,8 @@ export default function useUpdateUser() {
   const cleanFormData = (data: User): User => ({
     ...data,
     languages: (data.languages ?? []).filter((lang) => lang.trim() !== ""),
+    skills: (data.skills ?? []).filter((skill) => skill.name.trim() !== ""),
+    experiences: data.experiences ?? [],
   });
 
   useEffect(() => {
@@ -111,6 +117,57 @@ export default function useUpdateUser() {
     }));
   };
 
+  const addExperience = (expData: Omit<Experience, "id">) => {
+    console.log(expData)
+    const newExp: Experience = {
+      id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(),
+      ...expData,
+    };
+    setFormData((prev) => ({
+      ...prev,
+      experiences: [...(prev.experiences || []), newExp],
+    }));
+  };
+  const updateExperience = (id: string, expData: Omit<Experience, "id">) => {
+    setFormData((prev) => ({
+      ...prev,
+      experiences: prev.experiences?.map((exp) =>
+        exp.id === id ? { ...expData, id } : exp,
+      ),
+    }));
+  };
+  const removeExperience = (id: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      experiences: prev.experiences?.filter((exp) => exp.id !== id) || [],
+    }));
+  };
+
+  const addSkill = (skillData: Omit<Skill, "id">) => {
+    const newSkill: Skill = {
+      id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(),
+      ...skillData,
+    };
+    setFormData((prev) => ({
+      ...prev,
+      skills: [...(prev.skills || []), newSkill],
+    }));
+  };
+  const updateSkill = (id: string, skillData: Omit<Skill, "id">) => {
+    setFormData((prev) => ({
+      ...prev,
+      skills: prev.skills?.map((skill) =>
+        skill.id === id ? { ...skillData, id } : skill,
+      ),
+    }));
+  };
+  const removeSkill = (id: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      skills: prev.skills?.filter((skill) => skill.id !== id) || [],
+    }));
+  };
+
   const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
     setTouched({ ...touched, [e.target.name]: true });
   };
@@ -125,6 +182,12 @@ export default function useUpdateUser() {
     addLanguage,
     removeLanguage,
     updateLanguage,
+    addExperience,
+    removeExperience,
+    updateExperience,
+    addSkill,
+    updateSkill,
+    removeSkill,
     setFormData,
   };
 }
