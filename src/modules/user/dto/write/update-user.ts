@@ -1,3 +1,6 @@
+import type { Experience } from "../../domain/entities/experience";
+import type { Skill } from "../../domain/entities/skill";
+
 export interface UpdateUserDto {
   userId: string;
   email?: string;
@@ -17,4 +20,6 @@ export interface UpdateUserDto {
   twitterUrl?: string;
   linkedinUrl?: string;
   languages?: string[];
+  skills?: Skill[];
+  experiences?: Experience[];
 }

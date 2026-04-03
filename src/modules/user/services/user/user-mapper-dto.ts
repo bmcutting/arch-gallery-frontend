@@ -22,6 +22,8 @@ export class UserMapperDto {
       twitterUrl: user.twitterUrl,
       linkedinUrl: user.linkedinUrl,
       languages: user.languages ?? [],
+      skills: user.skills ?? [],
+      experiences: user.experiences ?? [],
     };
   }
 }

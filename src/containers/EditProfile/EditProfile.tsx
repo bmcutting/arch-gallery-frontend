@@ -25,6 +25,9 @@ export default function ProfileManagement() {
     addExperience,
     removeExperience,
     updateExperience,
+    addSkill,
+    removeSkill,
+    updateSkill,
     setFormData,
   } = useUpdateUser();
 
@@ -101,7 +104,9 @@ export default function ProfileManagement() {
                 <CollapsibleSection title="Habilidades">
                   <SkillSection
                     skills={formData.skills ?? []}
-                    handleChange={handleChange}
+                    addSkill={addSkill}
+                    removeSkill={removeSkill}
+                    updateSkill={updateSkill}
                   />
                 </CollapsibleSection>
               </div>

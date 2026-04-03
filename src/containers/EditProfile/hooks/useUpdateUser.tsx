@@ -118,7 +118,7 @@ export default function useUpdateUser() {
   };
 
   const addExperience = (expData: Omit<Experience, "id">) => {
-    console.log(expData)
+    console.log(expData);
     const newExp: Experience = {
       id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(),
       ...expData,
@@ -162,10 +162,12 @@ export default function useUpdateUser() {
     }));
   };
   const removeSkill = (id: string) => {
+    console.log(id);
     setFormData((prev) => ({
       ...prev,
       skills: prev.skills?.filter((skill) => skill.id !== id) || [],
     }));
+    console.log(formData);
   };
 
   const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
