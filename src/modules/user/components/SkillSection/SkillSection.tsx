@@ -47,16 +47,16 @@ export default function SkillSection({
           No hay habilidades añadidas.
         </p>
       )}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {skills.map((skill) => (
           <div
             key={skill.id}
             className="flex justify-between items-center border border-border rounded-lg p-3"
           >
             <div>
-              <span className="font-medium">{skill.name}</span>
+              <span className="font-medium text-sm md:text-lg lg:text-xl">{skill.name}</span>
               {skill.level && (
-                <span className="ml-2 text-sm text-muted-foreground">
+                <span className="ml-2 text-xs md:text-sm text-muted-foreground">
                   ({skill.level})
                 </span>
               )}

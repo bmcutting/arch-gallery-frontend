@@ -19,12 +19,7 @@ export default function SkillFormModal({
   skill,
   onSave,
 }: Props) {
-  const { form, setForm, handleSubmit, LEVEL_OPTIONS } = useSkillForm({
-    isOpen,
-    onClose,
-    skill,
-    onSave,
-  });
+  const { form, setForm, LEVEL_OPTIONS } = useSkillForm({ isOpen, skill });
 
   if (!isOpen) return null;
 
@@ -39,8 +34,8 @@ export default function SkillFormModal({
             <FaTimes />
           </button>
         </div>
-        <form onSubmit={handleSubmit} className="p-4 space-y-4">
-          <FormInput label="Nombre de la habilidad">
+        <div className="p-4 space-y-4">
+          <FormInput label="Nombre de la habilidad" required>
             <Input
               placeholder="Ej: AutoCAD, Revit, Photoshop"
               value={form.name}
@@ -76,7 +71,7 @@ export default function SkillFormModal({
               Guardar
             </Button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

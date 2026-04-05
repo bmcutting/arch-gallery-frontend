@@ -3,17 +3,10 @@ import type { Skill } from "../domain/entities/skill";
 
 interface Props {
   isOpen: boolean;
-  onClose: () => void;
-  skill?: Skill | null; // null para nueva
-  onSave: (skillData: Omit<Skill, "id">) => void;
+  skill?: Skill | null;
 }
 
-export default function useSkillForm({
-  isOpen,
-  onClose,
-  skill,
-  onSave,
-}: Props) {
+export default function useSkillForm({ isOpen, skill }: Props) {
   const LEVEL_OPTIONS = [
     { value: "Beginner", label: "Básico" },
     { value: "Intermediate", label: "Intermedio" },
@@ -38,12 +31,5 @@ export default function useSkillForm({
     }
   }, [skill, isOpen]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim()) return;
-    onSave(form);
-    onClose();
-  };
-
-  return { form, setForm, handleSubmit, LEVEL_OPTIONS };
+  return { form, setForm, LEVEL_OPTIONS };
 }

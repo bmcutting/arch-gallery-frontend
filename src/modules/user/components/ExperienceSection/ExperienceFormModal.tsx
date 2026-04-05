@@ -20,7 +20,6 @@ export default function ExperienceFormModal({
   experience,
   onSave,
 }: Props) {
-  
   const { form, setForm, handleSubmit } = useExperienceForm({
     isOpen,
     onClose,
@@ -31,8 +30,8 @@ export default function ExperienceFormModal({
   if (!isOpen) return null;
 
   return (
-    <div className="flex items-center justify-center bg-black/5">
-      <div className="bg-card rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+    <div className="flex items-center justify-center">
+      <div className="bg-card rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-border">
         <div className="flex justify-between items-center p-4 border-b border-border">
           <h2 className="text-xl font-semibold">
             {experience ? "Editar experiencia" : "Añadir experiencia"}
@@ -43,19 +42,20 @@ export default function ExperienceFormModal({
         </div>
         <div onSubmit={handleSubmit} className="p-4 space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Tipo</label>
-            <select
-              value={form.type}
-              onChange={(e) =>
-                setForm({ ...form, type: e.target.value as ExperienceType })
-              }
-              className="w-full px-3 py-2 rounded-md border border-border"
-            >
-              <option value="Work">Experiencia profesional</option>
-              <option value="Education">Educación</option>
-            </select>
+            <FormInput label="Tipo" required>
+              <select
+                value={form.type}
+                onChange={(e) =>
+                  setForm({ ...form, type: e.target.value as ExperienceType })
+                }
+                className="w-full px-3 py-2 rounded-md border border-border"
+              >
+                <option value="Work">Experiencia profesional</option>
+                <option value="Education">Educación</option>
+              </select>
+            </FormInput>
           </div>
-          <FormInput label="Tìtulo">
+          <FormInput label="Tìtulo" required>
             <Input
               placeholder="Ej: Arquitecto Senior, Máster en Arquitectura"
               value={form.title}
@@ -63,7 +63,7 @@ export default function ExperienceFormModal({
               required
             />
           </FormInput>
-          <FormInput label="Institución/Empresa">
+          <FormInput label="Institución/Empresa" required>
             <Input
               placeholder="Nombre de la empresa o institución"
               value={form.institutionOrCompany}
@@ -77,6 +77,7 @@ export default function ExperienceFormModal({
             <FormInput
               label="Año de inicio"
               className="block text-sm font-medium mb-1"
+              required
             >
               <Input
                 placeholder="Nombre de la empresa o institución"
@@ -124,6 +125,7 @@ export default function ExperienceFormModal({
               placeholder="Describe tus responsabilidades o logros"
               value={form.description}
               onChange={(val) => setForm({ ...form, description: val })}
+              className="border border-border rounded-md p-2"
             />
           </FormInput>
           <div className="flex justify-end gap-3 pt-2">
