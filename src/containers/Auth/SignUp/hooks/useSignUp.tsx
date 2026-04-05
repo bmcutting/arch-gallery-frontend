@@ -94,7 +94,9 @@ export default function useSignUp() {
           })
           .catch((e: HttpResponseError) => {
             if (e.status === HttpStatusCode.Conflict) {
-              setError("Ya existe un usuario con este correo");
+              setError(
+                "Ya existe este usuario",
+              );
             } else {
               setError("Hubo un error al crear el usuario");
             }

@@ -23,6 +23,7 @@ export default function ExperienceSection({
   );
 
   const handleSave = (exp: Omit<Experience, "id">) => {
+    console.log(exp);
     if (editingExperience) {
       updateExperience(editingExperience.id, exp);
     } else {
@@ -44,8 +45,8 @@ export default function ExperienceSection({
 
   const formatRange = (exp: Experience) => {
     const start = exp.startYear;
-    const end = exp.isCurrent ? "Actualidad" : exp.endYear;
-    return `${start} – ${end}`;
+    const end = exp.isCurrent ? "Actualidad" : exp.endYear || "";
+    return end ? `${start} – ${end}` : `${start}`;
   };
 
   return (

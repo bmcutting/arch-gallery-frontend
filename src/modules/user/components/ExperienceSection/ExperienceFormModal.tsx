@@ -129,7 +129,7 @@ export default function ExperienceFormModal({
             <Button type="button" size="sm" onClick={onClose}>
               Cancelar
             </Button>
-            <Button type="button" size="sm">
+            <Button type="button" size="sm" onClick={() => onSave(form)}>
               Guardar
             </Button>
           </div>
