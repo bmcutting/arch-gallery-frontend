@@ -1,40 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Skill } from "../domain/entities/skill";
 
 interface Props {
-  addSkill: (skill: Omit<Skill, "id">) => void;
-  updateSkill: (id: string, skill: Omit<Skill, "id">) => void;
+  isOpen: boolean;
+  onClose: () => void;
+  skill?: Skill | null; // null para nueva
+  onSave: (skillData: Omit<Skill, "id">) => void;
 }
 
-export default function useSkillForm({ addSkill, updateSkill }: Props) {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [editingSkill, setEditingSkill] = useState<Skill | null>(null);
-
+export default function useSkillForm({
+  isOpen,
+  onClose,
+  skill,
+  onSave,
+}: Props) {
   const LEVEL_OPTIONS = [
-    { value: "beginner", label: "Básico" },
-    { value: "intermediate", label: "Intermedio" },
-    { value: "advanced", label: "Avanzado" },
-    { value: "expert", label: "Experto" },
+    { value: "Beginner", label: "Básico" },
+    { value: "Intermediate", label: "Intermedio" },
+    { value: "Advanced", label: "Avanzado" },
+    { value: "Expert", label: "Experto" },
   ];
 
-  const handleSave = (skillData: Omit<Skill, "id">) => {
-    if (editingSkill) {
-      updateSkill(editingSkill.id, skillData);
+  const [form, setForm] = useState<Omit<Skill, "id">>({
+    name: "",
+    level: undefined,
+  });
+
+  useEffect(() => {
+    if (skill) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setForm({
+        name: skill.name,
+        level: skill.level,
+      });
     } else {
-      addSkill(skillData);
+      setForm({ name: "", level: undefined });
     }
-    setEditingSkill(null);
-    setModalOpen(false);
+  }, [skill, isOpen]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name.trim()) return;
+    onSave(form);
+    onClose();
   };
 
-  const openEdit = (skill: Skill) => {
-    setEditingSkill(skill);
-    setModalOpen(true);
-  };
-
-  const openAdd = () => {
-    setEditingSkill(null);
-    setModalOpen(true);
-  };
-  return { modalOpen, handleSave, openEdit, openAdd, LEVEL_OPTIONS };
+  return { form, setForm, handleSubmit, LEVEL_OPTIONS };
 }
