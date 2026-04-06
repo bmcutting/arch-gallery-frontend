@@ -59,7 +59,8 @@ textarea {
 
 @theme {
     --color-primary: #B9BEC4;
-    --color-secondary: #C99700;
+    --color-secondary: #A3A9AF;
+    --color-accent: #C99700;
     --color-card: #FFFFFF;
     --color-layout: var(--color-gray-300);
     --color-muted: #F5F5F4;
