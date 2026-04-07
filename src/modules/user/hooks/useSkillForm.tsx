@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Skill } from "../domain/entities/skill";
+import { Level } from "../domain/enums/level";
 
 interface Props {
   isOpen: boolean;
@@ -8,10 +9,10 @@ interface Props {
 
 export default function useSkillForm({ isOpen, skill }: Props) {
   const LEVEL_OPTIONS = [
-    { value: "Beginner", label: "Básico" },
-    { value: "Intermediate", label: "Intermedio" },
-    { value: "Advanced", label: "Avanzado" },
-    { value: "Expert", label: "Experto" },
+    { value: Level.BEGINNER, label: "Principiante" },
+    { value: Level.INTERMEDIATE, label: "Intermedio" },
+    { value: Level.ADVANCED, label: "Avanzado" },
+    { value: Level.EXPERT, label: "Experto" },
   ];
 
   const [form, setForm] = useState<Omit<Skill, "id">>({

@@ -50,8 +50,8 @@ export default function ExperienceFormModal({
                 }
                 className="w-full px-3 py-2 rounded-md border border-border"
               >
-                <option value="Work">Experiencia profesional</option>
-                <option value="Education">Educación</option>
+                <option value="work">Experiencia profesional</option>
+                <option value="education">Educación</option>
               </select>
             </FormInput>
           </div>
