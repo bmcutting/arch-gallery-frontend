@@ -1,4 +1,5 @@
 import type { PaginationDTO } from "../../../app/modules/shared/dto/write/pagination";
+import type { UserSortFields } from "../../domain/enums/user-sort-fields";
 
 export type UserPaginationParams = PaginationDTO & {
   search?: string;
@@ -13,5 +14,5 @@ export type UserPaginationParams = PaginationDTO & {
   deletedAtMax?: Date;
   email?: string;
   isActive?: boolean;
-  sort?: string;
+  sort?: Array<{ field: UserSortFields; order: "ASC" | "DESC" }>;
 };

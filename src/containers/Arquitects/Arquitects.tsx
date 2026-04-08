@@ -8,25 +8,33 @@ import useArchitects from "./hooks/useArchitects";
 
 export default function Arquitects() {
   const {
-    query,
-    setQuery,
-    specialization,
-    setSpecialization,
-    location,
-    setLocation,
+    searchTerm,
+    setSearchTerm,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
     architects,
-    sortBy,
-    setSortBy,
-    LOCATIONS,
+    loading,
+    error,
+    totalPages,
+    page,
+    setPage,
+    sortValue,
+    setSortValue,
     SORT_OPTIONS,
-    SPECIALIZATIONS,
+    suggestions,
+    showSuggestions,
+    setShowSuggestions,
+    onSelectSuggestion,
+    clearFilters,
   } = useArchitects();
 
   return (
     <AppLayout>
       <div className="px-4 md:px-8 py-8 max-w-360 mx-auto mt-14">
-        <h1>Directorio de Arquitectos</h1>
-        <p className="text-muted-foreground">
+        <h1 className="text-3xl font-bold">Directorio de Arquitectos</h1>
+        <p className="text-black">
           Conecta con los mejores profesionales de la arquitectura
         </p>
 
@@ -36,42 +44,67 @@ export default function Arquitects() {
               <FaSearch className="absolute left-3 top-3 text-primary" />
               <Input
                 type="text"
-                value={query}
-                onChange={setQuery}
-                placeholder="Buscar por nombre, especialidad..."
+                value={searchTerm}
+                onChange={setSearchTerm}
+                onBlur={() => setShowSuggestions(true)}
+                placeholder="Buscar por nombre, email o username..."
                 full
                 className="w-full pl-10 pr-4 py-2.5 border border-primary rounded-lg text-black placeholder:text-primary"
               />
+              {showSuggestions && suggestions.length > 0 && (
+                <ul className="absolute z-10 w-full bg-white border border-gray-200 rounded-lg mt-1 shadow-lg max-h-60 overflow-auto">
+                  {suggestions.map((user) => (
+                    <li
+                      key={user.id}
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onMouseDown={() => onSelectSuggestion(user)}
+                    >
+                      <div className="font-medium">{user.userName}</div>
+                      <div className="text-sm text-gray-500">
+                        {user.firstName} {user.lastName}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Select
-                label="Especialidad"
-                options={SPECIALIZATIONS}
-                value={specialization}
-                onChange={setSpecialization}
+              <Input
+                type="text"
+                value={firstName}
+                onChange={setFirstName}
+                placeholder="Filtrar por nombre"
                 className="w-56"
               />
 
-              <Select
-                label="Ubicación"
-                options={LOCATIONS}
-                value={location}
-                onChange={setLocation}
-                className="w-44"
+              <Input
+                type="text"
+                value={lastName}
+                onChange={setLastName}
+                placeholder="Filtrar por apellido"
+                className="w-56"
               />
 
               <Select
                 label="Ordenar por"
                 options={SORT_OPTIONS}
-                value={sortBy}
-                onChange={setSortBy}
+                value={sortValue}
+                onChange={setSortValue}
                 className="w-44"
               />
             </div>
           </div>
         </div>
-        {architects.length === 0 ? (
+
+        {loading && (
+          <div className="text-center py-10">Cargando arquitectos...</div>
+        )}
+        {error && (
+          <div className="text-center py-10 text-red-500">Error: {error}</div>
+        )}
+
+        {!loading && !error && architects.length === 0 && (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4">
               <FaUserAlt />
@@ -79,19 +112,47 @@ export default function Arquitects() {
             <h3 className="text-xl font-heading font-semibold text-foreground mb-2">
               Sin resultados
             </h3>
-            <p className="text-muted-foreground max-w-sm">
+            <p className="text-muted-foreground max-w-sm mb-4">
               No encontramos arquitectos con los filtros seleccionados.
             </p>
-            <Button size="lg">Limpiar filtros</Button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {architects?.map((architect) => (
-              <ArchitectCard key={architect?.id} architect={architect} />
-            ))}
+            <Button size="lg" onClick={clearFilters}>
+              Limpiar filtros
+            </Button>
           </div>
         )}
-        <div></div>
+
+        {!loading && !error && architects.length > 0 && (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+              {architects.map((architect) => (
+                <ArchitectCard key={architect.id} architect={architect} />
+              ))}
+            </div>
+
+            {/* Paginación simple */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center gap-4 mt-8">
+                <Button
+                  size="lg"
+                  disabled={page === 1}
+                  onClick={() => setPage(page - 1)}
+                >
+                  Anterior
+                </Button>
+                <span className="text-sm">
+                  Página {page} de {totalPages}
+                </span>
+                <Button
+                  size="lg"
+                  disabled={page === totalPages}
+                  onClick={() => setPage(page + 1)}
+                >
+                  Siguiente
+                </Button>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </AppLayout>
   );
