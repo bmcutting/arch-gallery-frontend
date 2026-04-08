@@ -106,7 +106,7 @@ export default function Select({
                 <div
                   key={option?.value}
                   className={clsx(
-                    "flex cursor-pointer items-center px-3 py-2 text-sm hover:bg-accent",
+                    "flex cursor-pointer items-center px-3 py-2 text-sm hover:bg-primary/90",
                     isSelected(option.value) && "bg-primary text-white",
                     disabled && "pointer-events-none opacity-50",
                   )}

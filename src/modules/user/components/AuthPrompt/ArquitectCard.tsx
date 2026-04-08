@@ -48,7 +48,7 @@ export default function ArchitectCard({ architect }: Props) {
         </h3>
 
         {hasSpecialization && (
-          <p className="text-xs text-accent mb-2 font-medium">
+          <p className="text-xs mb-2 font-medium">
             {architect!.specialization}
           </p>
         )}
