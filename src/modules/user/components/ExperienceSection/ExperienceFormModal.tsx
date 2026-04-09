@@ -40,7 +40,7 @@ export default function ExperienceFormModal({
             <FaTimes />
           </button>
         </div>
-        <div onSubmit={handleSubmit} className="p-4 space-y-4">
+        <div onSubmit={handleSubmit} className="p-4 space-y-4 w-full">
           <div>
             <FormInput label="Tipo" required>
               <select
@@ -55,12 +55,14 @@ export default function ExperienceFormModal({
               </select>
             </FormInput>
           </div>
-          <FormInput label="Tìtulo" required>
+          <FormInput label="Título" required>
             <Input
               placeholder="Ej: Arquitecto Senior, Máster en Arquitectura"
               value={form.title}
               onChange={(val) => setForm({ ...form, title: val })}
               required
+              full
+              className="w-full px-3 py-2 border border-border rounded-md"
             />
           </FormInput>
           <FormInput label="Institución/Empresa" required>
@@ -71,6 +73,8 @@ export default function ExperienceFormModal({
                 setForm({ ...form, institutionOrCompany: val })
               }
               required
+              full
+              className="w-full px-3 py-2 border border-border rounded-md"
             />
           </FormInput>
           <div className="grid grid-cols-2 gap-4">
@@ -80,7 +84,6 @@ export default function ExperienceFormModal({
               required
             >
               <Input
-                placeholder="Nombre de la empresa o institución"
                 value={form.startYear.toString()}
                 onChange={(val) =>
                   setForm({ ...form, startYear: parseInt(val) })
