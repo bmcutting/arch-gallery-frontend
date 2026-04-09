@@ -25,6 +25,17 @@ export default function useExperienceForm({
     isCurrent: false,
   });
 
+  const [touched, setTouched] = useState({
+    type: false,
+    title: false,
+    institutionOrCompany: false,
+    startYear: false,
+  });
+
+  const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
+    setTouched({ ...touched, [e.target.name]: true });
+  };
+
   useEffect(() => {
     if (experience) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -37,6 +48,12 @@ export default function useExperienceForm({
         endYear: experience.endYear,
         isCurrent: experience.isCurrent || false,
       });
+      setTouched({
+        type: false,
+        title: false,
+        institutionOrCompany: false,
+        startYear: false,
+      });
     } else {
       setForm({
         type: ExperienceType.WORK,
@@ -47,15 +64,32 @@ export default function useExperienceForm({
         endYear: undefined,
         isCurrent: false,
       });
+      setTouched({
+        type: false,
+        title: false,
+        institutionOrCompany: false,
+        startYear: false,
+      });
     }
   }, [experience, isOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.title.trim() || !form.institutionOrCompany.trim()) return;
+
+    const newTouched = { ...touched };
+    if (!form.type) newTouched.type = true;
+    if (!form.title) newTouched.title = true;
+    if (!form.institutionOrCompany) newTouched.institutionOrCompany = true;
+    if (!form.startYear) newTouched.startYear = true;
+    setTouched(newTouched);
+
+    if (!form.title.trim() || !form.institutionOrCompany.trim()) {
+      return;
+    }
+
     onSave(form);
     onClose();
   };
 
-  return { form, setForm, handleSubmit };
+  return { form, setForm, handleSubmit, handleTouched, touched };
 }

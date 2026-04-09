@@ -19,7 +19,9 @@ export default function SkillFormModal({
   skill,
   onSave,
 }: Props) {
-  const { form, setForm, LEVEL_OPTIONS } = useSkillForm({ isOpen, skill });
+  const { form, setForm, LEVEL_OPTIONS, touched, handleTouched } = useSkillForm(
+    { isOpen, skill },
+  );
 
   if (!isOpen) return null;
 
@@ -37,10 +39,15 @@ export default function SkillFormModal({
         <div className="p-4 space-y-4">
           <FormInput label="Nombre de la habilidad" required>
             <Input
+              name="name"
               placeholder="Ej: AutoCAD, Revit, Photoshop"
               value={form.name}
+              touched={touched.name}
+              onBlur={handleTouched}
               onChange={(val) => setForm({ ...form, name: val })}
               required
+              errorMsg="Debe añadir el nombre de la habilidad"
+              className="w-full px-3 py-2 border border-border rounded-md"
               full
             />
           </FormInput>
@@ -67,7 +74,12 @@ export default function SkillFormModal({
             <Button type="button" size="sm" onClick={onClose}>
               Cancelar
             </Button>
-            <Button type="button" size="sm" onClick={() => onSave(form)}>
+            <Button
+              type="button"
+              size="sm"
+              onClick={() => onSave(form)}
+              disabled={!form.name}
+            >
               Guardar
             </Button>
           </div>

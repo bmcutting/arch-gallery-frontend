@@ -20,12 +20,13 @@ export default function ExperienceFormModal({
   experience,
   onSave,
 }: Props) {
-  const { form, setForm, handleSubmit } = useExperienceForm({
-    isOpen,
-    onClose,
-    experience,
-    onSave,
-  });
+  const { form, setForm, handleSubmit, handleTouched, touched } =
+    useExperienceForm({
+      isOpen,
+      onClose,
+      experience,
+      onSave,
+    });
 
   if (!isOpen) return null;
 
@@ -57,16 +58,21 @@ export default function ExperienceFormModal({
           </div>
           <FormInput label="Título" required>
             <Input
+              name="title"
               placeholder="Ej: Arquitecto Senior, Máster en Arquitectura"
               value={form.title}
               onChange={(val) => setForm({ ...form, title: val })}
               required
               full
+              touched={touched.title}
+              onBlur={handleTouched}
+              errorMsg="Debe añadir un título"
               className="w-full px-3 py-2 border border-border rounded-md"
             />
           </FormInput>
           <FormInput label="Institución/Empresa" required>
             <Input
+              name="institutionOrCompany"
               placeholder="Nombre de la empresa o institución"
               value={form.institutionOrCompany}
               onChange={(val) =>
@@ -74,6 +80,9 @@ export default function ExperienceFormModal({
               }
               required
               full
+              touched={touched.institutionOrCompany}
+              onBlur={handleTouched}
+              errorMsg="Debe añadir una institución o empresa"
               className="w-full px-3 py-2 border border-border rounded-md"
             />
           </FormInput>
@@ -84,10 +93,14 @@ export default function ExperienceFormModal({
               required
             >
               <Input
+                name="startYear"
                 value={form.startYear.toString()}
                 onChange={(val) =>
                   setForm({ ...form, startYear: parseInt(val) })
                 }
+                touched={touched.startYear}
+                onBlur={handleTouched}
+                errorMsg="Debe añadir el año de inicip"
                 required
               />
             </FormInput>
@@ -135,7 +148,17 @@ export default function ExperienceFormModal({
             <Button type="button" size="sm" onClick={onClose}>
               Cancelar
             </Button>
-            <Button type="button" size="sm" onClick={() => onSave(form)}>
+            <Button
+              type="button"
+              size="sm"
+              onClick={() => onSave(form)}
+              disabled={
+                !form.type ||
+                !form.title ||
+                !form.institutionOrCompany ||
+                !form.startYear
+              }
+            >
               Guardar
             </Button>
           </div>

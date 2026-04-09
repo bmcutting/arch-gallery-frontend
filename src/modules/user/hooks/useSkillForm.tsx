@@ -20,6 +20,14 @@ export default function useSkillForm({ isOpen, skill }: Props) {
     level: undefined,
   });
 
+  const [touched, setTouched] = useState({
+    name: false,
+  });
+
+  const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
+    setTouched({ ...touched, [e.target.name]: true });
+  };
+
   useEffect(() => {
     if (skill) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -27,10 +35,12 @@ export default function useSkillForm({ isOpen, skill }: Props) {
         name: skill.name,
         level: skill.level,
       });
+      setTouched({ name: false });
     } else {
       setForm({ name: "", level: undefined });
+      setTouched({ name: false });
     }
   }, [skill, isOpen]);
 
-  return { form, setForm, LEVEL_OPTIONS };
+  return { form, setForm, LEVEL_OPTIONS, touched, handleTouched };
 }
