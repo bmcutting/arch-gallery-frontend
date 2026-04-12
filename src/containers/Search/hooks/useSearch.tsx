@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { UserSortFields } from "../../../modules/user/domain/enums/user-sort-fields";
-import type { User } from "../../../modules/user/domain/entities/user";
-import type { UserPaginationParams } from "../../../modules/user/dto/write/user-pagination-params";
+import { ProjectSortFields } from "../../../modules/project/domain/enums/project-sort-fileds";
+import type { Project } from "../../../modules/project/domain/entities/project";
+import type { ProjectPaginationParams } from "../../../modules/project/dto/write/project-pagination-params";
 import type { PaginationResult } from "../../../modules/app/modules/shared/domain/core/pagination-result";
-import { getAllUsers } from "../../../modules/user/services/user/get-all-users";
+import { getAllProjects } from "../../../modules/project/services/get-all-projects";
 
-export default function useArchitects() {
+export default function useSearch() {
   function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
     func: F,
     wait: number,
@@ -17,38 +17,36 @@ export default function useArchitects() {
     };
   }
   const [searchTerm, setSearchTerm] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-
+  const [title, setTitle] = useState("");
+  const [year, setYear] = useState();
   const [page, setPage] = useState(1);
   const [pageSize] = useState(12);
-  const [sortField, setSortField] = useState<UserSortFields>(
-    UserSortFields.FIRST_NAME,
+  const [sortField, setSortField] = useState<ProjectSortFields>(
+    ProjectSortFields.TITLE,
   );
   const [sortOrder, setSortOrder] = useState<"ASC" | "DESC">("ASC");
 
-  const [architects, setArchitects] = useState<User[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [totalItems, setTotalItems] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [suggestions, setSuggestions] = useState<User[]>([]);
+  const [suggestions, setSuggestions] = useState<Project[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   const abortControllerRef = useRef<AbortController | null>(null);
 
   const SORT_OPTIONS = [
-    { value: `${UserSortFields.FIRST_NAME}-ASC`, label: "Nombre A-Z" },
-    { value: `${UserSortFields.FIRST_NAME}-DESC`, label: "Nombre Z-A" },
-    { value: `${UserSortFields.LAST_NAME}-ASC`, label: "Apellido A-Z" },
-    { value: `${UserSortFields.LAST_NAME}-DESC`, label: "Apellido Z-A" },
-    { value: `${UserSortFields.EMAIL}-ASC`, label: "Email A-Z" },
+    { value: `${ProjectSortFields.TITLE}-ASC`, label: "Título A-Z" },
+    { value: `${ProjectSortFields.TITLE}-DESC`, label: "Título Z-A" },
+    { value: `${ProjectSortFields.YEAR}-ASC`, label: "Year New-Old" },
+    { value: `${ProjectSortFields.YEAR}-DESC`, label: "Year Old-New" },
     { value: "createdAt-DESC", label: "Más recientes" },
   ];
 
-  const buildParams = useCallback((): UserPaginationParams => {
-    const params: UserPaginationParams = {
+  const buildParams = useCallback((): ProjectPaginationParams => {
+    const params: ProjectPaginationParams = {
       page,
       pageSize,
       sort: [{ field: sortField, order: sortOrder }],
@@ -58,18 +56,14 @@ export default function useArchitects() {
       params.search = searchTerm.trim();
     }
 
-    if (firstName.trim()) {
-      params.firstName = firstName.trim();
-    }
-    
-    if (lastName.trim()) {
-      params.lastName = lastName.trim();
+    if (title.trim()) {
+      params.title = title.trim();
     }
 
     return params;
-  }, [page, pageSize, sortField, sortOrder, searchTerm, firstName, lastName]);
+  }, [page, pageSize, sortField, sortOrder, searchTerm, title]);
 
-  const fetchArchitects = useCallback(async () => {
+  const fetchProjects = useCallback(async () => {
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
     }
@@ -81,12 +75,12 @@ export default function useArchitects() {
 
     try {
       const params = buildParams();
-      const result: PaginationResult<User> = await getAllUsers({
+      const result: PaginationResult<Project> = await getAllProjects({
         params,
         controller,
       });
 
-      setArchitects(result.items);
+      setProjects(result.items);
       setTotalItems(result.totalItems);
       setTotalPages(result.totalPages);
     } catch (err: unknown) {
@@ -103,8 +97,8 @@ export default function useArchitects() {
   }, [buildParams]);
 
   useEffect(() => {
-    fetchArchitects();
-  }, [fetchArchitects]);
+    fetchProjects();
+  }, [fetchProjects]);
 
   const fetchSuggestions = useCallback(async (query: string) => {
     if (!query.trim()) {
@@ -114,7 +108,7 @@ export default function useArchitects() {
 
     try {
       // Usamos el mismo endpoint pero con pageSize pequeño y solo el campo search
-      const result = await getAllUsers({
+      const result = await getAllProjects({
         params: {
           page: 1,
           pageSize: 5,
@@ -141,14 +135,17 @@ export default function useArchitects() {
     setShowSuggestions(true);
   };
 
-  const handleSelectSuggestion = (user: User) => {
-    setSearchTerm(user.userName); // o lo que quieras mostrar
+  const handleSelectSuggestion = (project: Project) => {
+    setSearchTerm(project.title); // o lo que quieras mostrar
     setShowSuggestions(false);
     // Opcional: podrías navegar al perfil o aplicarlo como filtro exacto
   };
 
   const handleSortChange = (value: string) => {
-    const [field, order] = value.split("-") as [UserSortFields, "ASC" | "DESC"];
+    const [field, order] = value.split("-") as [
+      ProjectSortFields,
+      "ASC" | "DESC",
+    ];
     setSortField(field);
     setSortOrder(order);
     setPage(1);
@@ -157,19 +154,18 @@ export default function useArchitects() {
   // Limpiar todos los filtros
   const clearFilters = () => {
     setSearchTerm("");
-    setFirstName("");
-    setLastName("");
+    setTitle("");
     setPage(1);
   };
 
   return {
     searchTerm,
     setSearchTerm: handleSearchChange,
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-    architects,
+    title,
+    setTitle,
+    year,
+    setYear,
+    projects,
     loading,
     error,
     totalItems,
