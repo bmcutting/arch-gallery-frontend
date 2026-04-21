@@ -43,7 +43,7 @@ export default function ArchitectCard({ architect }: Props) {
           </div>
         </div>
 
-        <h3 className="font-heading font-semibold text-black line-clamp-1 mb-0.5">
+        <h3 className="font-heading font-semibold text-foreground line-clamp-1 mb-0.5">
           {displayName}
         </h3>
 

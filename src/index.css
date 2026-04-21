@@ -66,7 +66,8 @@ textarea {
     --color-muted: #F5F5F4;
     --color-border: #EEE5EE;
     --color-background: #0F0F0F;
-    --color-foreground: #E7E5E4;
+    --color-foreground: #1F1F1F;
+    --color-muted-foreground: #6B7280;
     --color-error: #DC2626;
 
     --font-body: "Plus Jakarta Sans Regular";

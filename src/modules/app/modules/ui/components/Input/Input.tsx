@@ -15,6 +15,7 @@ interface Props {
   errorMsg?: string;
   onClear?: () => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   className?: string;
 }
@@ -33,6 +34,7 @@ export default function Input({
   required,
   onClear,
   onBlur,
+  onFocus,
   onKeyDown,
   className,
 }: Props) {
@@ -57,6 +59,7 @@ export default function Input({
               value={value ?? ""}
               onChange={(e) => onChange(e.target.value)}
               onBlur={onBlur}
+              onFocus={onFocus}
               onKeyDown={onKeyDown}
             />
             {onClear && value && (
