@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import { addComment } from "../../comment/services/add-comment";
-import type { ProjectFeed } from "../../project/domain/entities/project-feed";
+import type { Project } from "../../project/domain/entities/project";
 import { fetchComments } from "../../like/services/fetch-comment";
 
 interface Props {
-  project: ProjectFeed;
+  project: Project;
 }
 
 export default function useComment({ project }: Props) {

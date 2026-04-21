@@ -57,7 +57,7 @@ export default function ProjectFeed({
 
         <div className="flex items-center gap-2 text-gray-600 mb-4">
           <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden shrink-0">
-            {project.user.profileImageUrl ? (
+            {project.user?.profileImageUrl ? (
               <img
                 src={project.user.profileImageUrl}
                 alt=""
@@ -67,7 +67,9 @@ export default function ProjectFeed({
               <FaUser className="text-gray-500 text-sm" />
             )}
           </div>
-          <span className="text-sm font-medium">{project.user.userName}</span>
+          <span className="text-sm font-medium">
+            {project.user?.userName ?? "Unknown"}
+          </span>
         </div>
 
         <div className="flex flex-wrap gap-2 mb-3">

@@ -1,11 +1,11 @@
 import { BiSend } from "react-icons/bi";
 import Textarea from "../../app/modules/ui/components/TextArea/TextArea";
-import type { ProjectFeed } from "../../project/domain/entities/project-feed";
+import type { Project } from "../../project/domain/entities/project";
 import useComment from "../hooks/useComment";
 import CommentCard from "./CommentCard";
 
 interface Props extends ReturnType<typeof useComment> {
-  project: ProjectFeed;
+  project: Project;
 }
 
 export default function CommentSection({

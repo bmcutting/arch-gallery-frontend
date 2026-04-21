@@ -4,8 +4,8 @@ import AppLayout from "../Home/components/AppLayout";
 import Input from "../../modules/app/modules/ui/components/Input/Input";
 import Select from "../../modules/app/modules/ui/components/Select/Select";
 import Button from "../../modules/app/modules/ui/components/Button/Button";
-import ProjectCard from "../../modules/project/components/ProjectCard";
 import useSearch from "./hooks/useSearch";
+import ProjectFeed from "../../modules/project/components/ProjectFeed";
 
 export default function Search() {
   const {
@@ -128,8 +128,12 @@ export default function Search() {
         {!loading && !error && projects.length > 0 && (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-              {projects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
+              {projects.map((item) => (
+                <ProjectFeed
+                  key={item.project.id}
+                  project={item.project}
+                  likedByUser={item.likedByUser}
+                />
               ))}
             </div>
 

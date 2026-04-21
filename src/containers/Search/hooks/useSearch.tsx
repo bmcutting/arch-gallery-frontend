@@ -3,7 +3,7 @@ import { ProjectSortFields } from "../../../modules/project/domain/enums/project
 import type { Project } from "../../../modules/project/domain/entities/project";
 import type { ProjectPaginationParams } from "../../../modules/project/dto/write/project-pagination-params";
 import type { PaginationResult } from "../../../modules/app/modules/shared/domain/core/pagination-result";
-import { getAllProjects } from "../../../modules/project/services/get-all-projects";
+import { getAllProjects, type ProjectFeedItem } from "../../../modules/project/services/get-all-projects";
 
 export default function useSearch() {
   function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
@@ -26,7 +26,7 @@ export default function useSearch() {
   );
   const [sortOrder, setSortOrder] = useState<"ASC" | "DESC">("ASC");
 
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<ProjectFeedItem[]>([]);
   const [totalItems, setTotalItems] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -82,7 +82,7 @@ export default function useSearch() {
 
     try {
       const params = buildParams();
-      const result: PaginationResult<Project> = await getAllProjects({
+      const result: PaginationResult<ProjectFeedItem> = await getAllProjects({
         params,
         controller,
       });
@@ -122,7 +122,7 @@ export default function useSearch() {
           search: query.trim(),
         },
       });
-      setSuggestions(result.items);
+      setSuggestions(result.items.map((item) => item.project));
     } catch (err) {
       console.error("Error fetching suggestions", err);
       setSuggestions([]);

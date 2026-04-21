@@ -1,15 +1,10 @@
 import { instance } from "../../app/modules/http/domain/instance";
 import type { Project } from "../domain/entities/project";
-import type { ProjectResponse } from "../dto/read/project";
+import type { ProjectFeedItemResponse } from "./get-all-projects";
 import { ProjectMapper } from "./project-mapper";
 
-export interface ProjectFeedItem {
-  project: ProjectResponse;
-  likedByUser: boolean;
-}
-
 export interface ProjectFeedResponse {
-  items: ProjectFeedItem[];
+  items: ProjectFeedItemResponse[];
   nextCursor: string | null;
 }
 
