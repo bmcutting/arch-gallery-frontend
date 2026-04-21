@@ -13,7 +13,7 @@ export default function Label({ children, size, uppercase, bg }: Props) {
     <label
       htmlFor=""
       className={clsx(
-        "text-gray-600 font-medium",
+        "text-muted-foreground font-medium",
         {
           "text-sm": size === "sm",
           "text-base": size === "base",

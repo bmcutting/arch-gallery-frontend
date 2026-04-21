@@ -47,7 +47,7 @@ export default function FormInput({
       >
         {enabled === undefined && (
           <Label bg={false} size={size} uppercase={false}>
-            {label} {required && <span className="text-red-500">*</span>}
+            {label} {required && <span className="text-error">*</span>}
           </Label>
         )}
 

@@ -33,7 +33,7 @@ export default function CommentSection({
         <div className="flex justify-between items-center mb-3">
           <h3 className="text-lg font-semibold">Comentarios</h3>
           <button
-            className="text-gray-500 hover:text-gray-700"
+            className="text-muted-foreground hover:text-foreground"
             onClick={() => setShowComments(false)}
           >
             ✕
@@ -54,7 +54,7 @@ export default function CommentSection({
               </div>
             ))
           ) : (
-            <span className="text-sm text-gray-500">No hay comentarios</span>
+            <span className="text-sm text-muted-foreground">No hay comentarios</span>
           )}
         </div>
 
@@ -66,13 +66,13 @@ export default function CommentSection({
             onFocus={() => setShowTextarea(true)}
             onBlur={() => setShowTextarea(false)}
             className={`px-3 py-2 pr-10 text-sm md:text-base lg:text-lg 
-                  rounded-md border border-gray-300 focus:ring-2 focus:ring-primary 
+                  rounded-md border border-border focus:ring-2 focus:ring-primary
                   resize-none leading-relaxed overflow-y-auto transition-all duration-400
                   ${showTextarea ? "h-40 md:h-56 lg:h-64" : "h-10 md:h-10 lg:h-12"}`}
           />
           <button
             onClick={handleComment}
-            className="absolute bottom-4 right-3 text-gray-400 hover:text-primary transition-colors"
+            className="absolute bottom-4 right-3 text-muted-foreground hover:text-primary transition-colors"
           >
             <BiSend size={20} />
           </button>

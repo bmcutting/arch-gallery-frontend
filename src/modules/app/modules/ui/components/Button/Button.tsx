@@ -48,7 +48,7 @@ export default forwardRef<HTMLButtonElement, Props>(
 
       {
         "bg-green-300 text-white": status === "success",
-        "border-2 border-red-300 text-red-300 bg-white": status === "error",
+        "border-2 border-error text-error bg-card": status === "error",
         "bg-primary text-white hover:bg-primary/90":
           status === "idle" || !status,
       },
@@ -56,7 +56,7 @@ export default forwardRef<HTMLButtonElement, Props>(
       {
         "bg-primary": color === "primary" && !loading,
         "bg-white": color === "light" && !loading,
-        "bg-red-400": color === "danger" && !loading,
+        "bg-error": color === "danger" && !loading,
       },
 
       { "bg-secondary": color === "primary" && loading },
@@ -83,8 +83,8 @@ export default forwardRef<HTMLButtonElement, Props>(
       },
 
       {
-        "hover:bg-gray-50": color === "light" && !disabled,
-        "hover:bg-red-500": color === "danger" && !disabled,
+        "hover:bg-muted": color === "light" && !disabled,
+        "hover:bg-error/90": color === "danger" && !disabled,
         "hover:bg-secondary": color === "primary" && !disabled,
       },
 
@@ -104,7 +104,7 @@ export default forwardRef<HTMLButtonElement, Props>(
       },
 
       {
-        "disabled:bg-gray-50": color === "light",
+        "disabled:bg-muted": color === "light",
         "disabled:bg-secondary": color === "primary",
       },
 

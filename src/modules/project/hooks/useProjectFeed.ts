@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { getProjectFeed } from "../../../modules/project/services/get-feed";
-import type { Project } from "../../../modules/project/domain/entities/project";
+import { getProjectFeed } from "../services/get-feed";
+import type { Project } from "../domain/entities/project";
 
 interface ProjectFeedItem {
   project: Project;
   likedByUser: boolean;
 }
 
-export default function useFeed() {
+export default function useProjectFeed() {
   const [projects, setProjects] = useState<ProjectFeedItem[]>([]);
   const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);

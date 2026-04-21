@@ -123,7 +123,7 @@ export default function ProfileHeader({ user }: Props) {
                 {user.languages.map((lang) => (
                   <span
                     key={lang}
-                    className=" px-2 py-1 text-xs md:text-sm font-medium bg-gray-200 text-gray-700 rounded-full "
+                    className=" px-2 py-1 text-xs md:text-sm font-medium bg-muted text-foreground rounded-full "
                   >
                     {lang}
                   </span>

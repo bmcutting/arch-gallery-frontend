@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, SearchIcon, SlidersHorizontal } from "lucide-react";
 import { FaExclamationTriangle, FaUserAlt } from "react-icons/fa";
-import AppLayout from "../Home/components/AppLayout";
+import AppLayout from "../../layouts/AppLayout";
 import Input from "../../modules/app/modules/ui/components/Input/Input";
 import Segmented from "../../modules/app/modules/ui/components/Segmented/Segmented";
 import ArchitectCard from "../../modules/user/components/AuthPrompt/ArquitectCard";
 import ArchitectCardSkeleton from "../../modules/user/components/AuthPrompt/ArchitectCardSkeleton";
 import Button from "../../modules/app/modules/ui/components/Button/Button";
-import useArchitects from "./hooks/useArchitects";
+import useArchitects from "../../modules/user/hooks/useArchitects";
 
-export default function Arquitects() {
+export default function Architects() {
   const {
     searchTerm,
     setSearchTerm,

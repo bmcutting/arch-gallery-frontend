@@ -17,7 +17,7 @@ export default function BioSection({ formData, handleChange }: Props) {
           onChange={(value: string) => handleChange("shortBio", value)}
           maxChars={200}
           className="h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg 
-                 rounded-md border border-gray-300 focus:ring-2 focus:ring-primary 
+                 rounded-md border border-border focus:ring-2 focus:ring-primary
                  resize-none leading-relaxed"
         />
       </FormInput>
@@ -29,7 +29,7 @@ export default function BioSection({ formData, handleChange }: Props) {
           onChange={(value: string) => handleChange("longBio", value)}
           maxChars={500}
           className="h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg 
-                 rounded-md border border-gray-300 focus:ring-2 focus:ring-primary 
+                 rounded-md border border-border focus:ring-2 focus:ring-primary
                  resize-none leading-relaxed"
         />
       </FormInput>

@@ -46,7 +46,7 @@ export default function Textarea({
       ) : (
         <div className={`${full ? "w-full" : ""}`}>
           <div
-            className={`relative ${isInvalid ? "border-red-500 border-2 rounded-lg" : "border-gray-300"}`}
+            className={`relative ${isInvalid ? "border-error border-2 rounded-lg" : "border-border"}`}
           >
             <textarea
               className={`w-full resize-none ${className}`}
@@ -67,14 +67,14 @@ export default function Textarea({
             )}
           </div>
 
-          {isInvalid && <p className="mt-1 text-sm text-red-500">{errorMsg}</p>}
+          {isInvalid && <p className="mt-1 text-sm text-error">{errorMsg}</p>}
 
           {maxChars && (
             <p
               className={`text-xs mt-2 ${
                 length >= maxChars
-                  ? "text-red-500 font-extrabold"
-                  : "text-gray-500"
+                  ? "text-error font-extrabold"
+                  : "text-muted-foreground"
               }`}
             >
               {length}/{maxChars} caracteres

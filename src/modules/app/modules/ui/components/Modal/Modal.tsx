@@ -21,7 +21,7 @@ export default function Modal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
       <div className="bg-white rounded-xl shadow-2xl p-8 max-w-lg w-full text-center">
-        <p className="text-2xl font-bold text-gray-800 mb-6">{message}</p>
+        <p className="text-2xl font-bold text-foreground mb-6">{message}</p>
         {children && <div className="mb-8">{children}</div>}
 
         <div className="flex justify-center gap-4">

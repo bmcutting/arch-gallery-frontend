@@ -49,8 +49,8 @@ export default function CreateProjectModal({ onClose, userId }: Props) {
               value={description}
               onChange={setDescription}
               maxChars={500}
-              className="h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg 
-                          rounded-md border border-gray-300 focus:ring-2 focus:ring-primary 
+              className="h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg
+                          rounded-md border border-border focus:ring-2 focus:ring-primary
                           resize-none leading-relaxed"
             />
           </FormInput>
@@ -72,7 +72,7 @@ export default function CreateProjectModal({ onClose, userId }: Props) {
                   <button
                     type="button"
                     onClick={() => removeCategory(index)}
-                    className="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-md transition-colors"
+                    className="p-2 text-error hover:text-error/80 hover:bg-error/10 rounded-md transition-colors"
                     title="Eliminar categoría"
                   >
                     ✕

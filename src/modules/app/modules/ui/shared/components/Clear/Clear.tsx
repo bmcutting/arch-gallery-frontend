@@ -7,8 +7,8 @@ interface Props {
 export default function Clear({ onClick }: Props) {
   return (
     <i
-      className="stroke-gray-600 cursor-pointer rounded-full 
-      bg-white w-[20px] h-[20px] flex justify-center items-center hover:bg-gray-100"
+      className="stroke-muted-foreground cursor-pointer rounded-full
+      bg-card w-5 h-5 flex justify-center items-center hover:bg-muted"
       onClick={(e) => {
         e.stopPropagation();
         if (onClick) onClick();

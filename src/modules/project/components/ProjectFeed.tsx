@@ -97,8 +97,8 @@ export default function ProjectFeed({
                   <FaHeart
                     className={`transition-all ${
                       liked
-                        ? "text-red-500 scale-125"
-                        : "text-muted-foreground hover:text-red-500 hover:scale-200"
+                        ? "text-error scale-125"
+                        : "text-muted-foreground hover:text-error hover:scale-200"
                     }`}
                   />
                   {likesCount}
@@ -110,7 +110,7 @@ export default function ProjectFeed({
                 onClick={() => commentState.setShowComments((prev) => !prev)}
               >
                 <div className="flex items-center gap-3">
-                  <FaComment className="text-muted-foreground hover:text-blue-500 hover:scale-200 transition-all" />
+                  <FaComment className="text-muted-foreground hover:text-accent hover:scale-200 transition-all" />
                   {commentState.comments?.length ?? 0}
                 </div>
               </Button>

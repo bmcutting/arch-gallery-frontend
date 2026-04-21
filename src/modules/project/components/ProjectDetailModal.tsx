@@ -44,13 +44,13 @@ export default function ProjectDetailModal({
           <h2 className="text-2xl font-bold">{project?.title}</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-muted-foreground hover:text-foreground"
           >
             <FaTimes />
           </button>
         </div>
 
-        <p className="text-gray-700 mb-4">{project?.description}</p>
+        <p className="text-foreground mb-4">{project?.description}</p>
 
         {/* Carrusel */}
         {project?.imagesUrl && project.imagesUrl.length > 0 && (
@@ -82,7 +82,7 @@ export default function ProjectDetailModal({
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               className={`w-3 h-3 rounded-full ${
-                idx === currentIndex ? "bg-primary" : "bg-gray-300"
+                idx === currentIndex ? "bg-primary" : "bg-muted"
               }`}
             />
           ))}

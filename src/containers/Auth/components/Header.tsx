@@ -9,7 +9,7 @@ export default function Header() {
       <h1 className="font-title-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-2">
         ArchGallery
       </h1>
-      <p className="text-gray-600 font-medium text-sm sm:text-base md:text-lg lg:text-xl text-center">
+      <p className="text-muted-foreground font-medium text-sm sm:text-base md:text-lg lg:text-xl text-center">
         Inserte sus datos para continuar
       </p>
     </header>

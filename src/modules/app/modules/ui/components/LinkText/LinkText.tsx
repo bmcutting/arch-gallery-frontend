@@ -21,7 +21,7 @@ export default function LinkText({
         "text-sm text-center select-none transition-colors duration-300",
         highlight
           ? "text-primary font-semibold hover:underline hover:text-secondary"
-          : "text-gray-500",
+          : "text-muted-foreground",
         className
       ),
     [highlight, className]

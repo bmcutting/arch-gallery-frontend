@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getMe } from "../../../modules/user/services/user/get-me";
-import type { User } from "../../../modules/user/domain/entities/user";
-import { APP_ROUTES } from "../../../modules/app/domain/constants/app-routes";
+import { getMe } from "../services/user/get-me";
+import type { User } from "../domain/entities/user";
+import { APP_ROUTES } from "../../app/domain/constants/app-routes";
 
 export default function useProfile() {
   const [user, setUser] = useState<User>();

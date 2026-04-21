@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { UserSortFields } from "../../../modules/user/domain/enums/user-sort-fields";
-import type { User } from "../../../modules/user/domain/entities/user";
-import type { UserPaginationParams } from "../../../modules/user/dto/write/user-pagination-params";
-import type { PaginationResult } from "../../../modules/app/modules/shared/domain/core/pagination-result";
-import { getAllUsers } from "../../../modules/user/services/user/get-all-users";
+import { UserSortFields } from "../domain/enums/user-sort-fields";
+import type { User } from "../domain/entities/user";
+import type { UserPaginationParams } from "../dto/write/user-pagination-params";
+import type { PaginationResult } from "../../app/modules/shared/domain/core/pagination-result";
+import { getAllUsers } from "../services/user/get-all-users";
 
 export default function useArchitects() {
   function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
@@ -61,7 +61,7 @@ export default function useArchitects() {
     if (firstName.trim()) {
       params.firstName = firstName.trim();
     }
-    
+
     if (lastName.trim()) {
       params.lastName = lastName.trim();
     }
@@ -113,7 +113,6 @@ export default function useArchitects() {
     }
 
     try {
-      // Usamos el mismo endpoint pero con pageSize pequeño y solo el campo search
       const result = await getAllUsers({
         params: {
           page: 1,
@@ -142,9 +141,8 @@ export default function useArchitects() {
   };
 
   const handleSelectSuggestion = (user: User) => {
-    setSearchTerm(user.userName); // o lo que quieras mostrar
+    setSearchTerm(user.userName);
     setShowSuggestions(false);
-    // Opcional: podrías navegar al perfil o aplicarlo como filtro exacto
   };
 
   const handleSortChange = (value: string) => {
@@ -154,7 +152,6 @@ export default function useArchitects() {
     setPage(1);
   };
 
-  // Limpiar todos los filtros
   const clearFilters = () => {
     setSearchTerm("");
     setFirstName("");
@@ -180,12 +177,10 @@ export default function useArchitects() {
     sortValue: `${sortField}-${sortOrder}`,
     setSortValue: handleSortChange,
     SORT_OPTIONS,
-    // Sugerencias
     suggestions,
     showSuggestions,
     setShowSuggestions,
     onSelectSuggestion: handleSelectSuggestion,
-    // Utilidades
     clearFilters,
   };
 }

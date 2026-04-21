@@ -72,7 +72,7 @@ export default function SkillSection({
               <button
                 type="button"
                 onClick={() => removeSkill(skill.id)}
-                className="text-red-500 hover:text-red-700"
+                className="text-error hover:text-error/80"
               >
                 <FaTrash />
               </button>

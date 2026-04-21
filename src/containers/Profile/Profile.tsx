@@ -1,9 +1,9 @@
 import { useState } from "react";
-import AppLayout from "../Home/components/AppLayout";
+import AppLayout from "../../layouts/AppLayout";
 import ProfileHeader from "./components/ProfileHeader/ProfileHeader";
 import ProjectTab from "./components/ProjectTab/ProjectTab";
 import AbouTab from "./components/AboutTab/AboutTab";
-import useProfile from "./hooks/useProfile";
+import useProfile from "../../modules/user/hooks/useProfile";
 import ExperienceTab from "./components/ExperienceTab/ExperienceTab";
 
 export default function Profile() {
@@ -47,8 +47,8 @@ export default function Profile() {
                   className={`flex items-center gap-2 px-4 md:px-6 py-3 md:py-4 whitespace-nowrap rounded-t-lg transition-colors duration-200 focus:outline-none 
                     focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                       activeTab === tab.id
-                        ? "border-b-2 border-primary text-gray-800 bg-gray-200 font-semibold"
-                        : "border-b-2 border-transparent text-gray-600 hover:text-foreground hover:border-border"
+                        ? "border-b-2 border-primary text-foreground bg-muted font-semibold"
+                        : "border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border"
                     }`}
                 >
                   <span className="text-sm md:text-base">{tab.label}</span>

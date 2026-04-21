@@ -1,4 +1,4 @@
-import AppLayout from "../Home/components/AppLayout";
+import AppLayout from "../../layouts/AppLayout";
 import ProfilePhotoUpload from "./components/ProfilePhotoUpload/ProfilePhotoUpload";
 import useUpdateUser from "./hooks/useUpdateUser";
 import Button from "../../modules/app/modules/ui/components/Button/Button";

@@ -29,7 +29,7 @@ export default function LanguageSection({
             <button
               type="button"
               onClick={() => removeLanguage(index)}
-              className="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-md transition-colors"
+              className="p-2 text-error hover:text-error/80 hover:bg-error/10 rounded-md transition-colors"
               title="Eliminar idioma"
             >
               <svg

@@ -11,7 +11,7 @@
 }
 
 @font-face {
-    font-family: "Plus Jakarta Sans Semibold";
+    font-family: "Plus Jakarta Sans SemiBold";
     src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-SemiBold.ttf");
 }
 
@@ -80,7 +80,7 @@ textarea {
     --font-semibold: "Plus Jakarta Sans SemiBold" !important;
     --font-bold: "Plus Jakarta Sans Bold";
 
-    --shadow-input: 0px 0px 5.5px rgb(76 217 100 / 0.3);
+    --shadow-input: 0px 0px 5.5px rgb(0 0 0 / 0.08);
 
     --radius-card: var(--radius-lg);
     --radius-input: var(--radius-md);
@@ -99,19 +99,19 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Crimson Text', serif;
+    font-family: var(--font-title-semibold);
 }
 
 
 .caption {
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: var(--font-medium);
     font-size: 0.875rem;
     line-height: 1.4;
     letter-spacing: 0.025em;
 }
 
 .data-text {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-medium);
     font-feature-settings: 'tnum' on, 'lnum' on;
 }
 

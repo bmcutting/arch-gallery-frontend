@@ -16,7 +16,7 @@ export default function SocialSection({ formData, handleChange }: Props) {
           value={formData.instagramUrl ?? ""}
           onChange={(e) => handleChange("instagramUrl", e.target.value)}
           className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md 
-                 border border-gray-300 focus:ring-2 focus:ring-primary"
+                 border border-border focus:ring-2 focus:ring-primary"
         />
       </div>
 
@@ -27,7 +27,7 @@ export default function SocialSection({ formData, handleChange }: Props) {
           value={formData.twitterUrl ?? ""}
           onChange={(e) => handleChange("twitterUrl", e.target.value)}
           className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md 
-                 border border-gray-300 focus:ring-2 focus:ring-primary"
+                 border border-border focus:ring-2 focus:ring-primary"
         />
       </div>
 
@@ -38,7 +38,7 @@ export default function SocialSection({ formData, handleChange }: Props) {
           value={formData.linkedinUrl ?? ""}
           onChange={(e) => handleChange("linkedinUrl", e.target.value)}
           className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md 
-                 border border-gray-300 focus:ring-2 focus:ring-primary"
+                 border border-border focus:ring-2 focus:ring-primary"
         />
       </div>
     </div>

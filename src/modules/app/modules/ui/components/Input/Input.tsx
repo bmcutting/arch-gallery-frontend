@@ -47,7 +47,7 @@ export default function Input({
         <div className={`${full ? "w-full" : ""}`}>
           {/* Input + botón Clear en fila */}
           <div
-            className={`relative flex items-center ${isInvalid ? "border-red-500 border-2 rounded-lg" : "border-gray-300"}`}
+            className={`relative flex items-center ${isInvalid ? "border-error border-2 rounded-lg" : "border-border"}`}
           >
             <input
               className={className}
@@ -70,7 +70,7 @@ export default function Input({
           </div>
 
           {/* Mensaje de error debajo */}
-          {isInvalid && <p className="mt-1 text-sm text-red-500">{errorMsg}</p>}
+          {isInvalid && <p className="mt-1 text-sm text-error">{errorMsg}</p>}
         </div>
       )}
     </>

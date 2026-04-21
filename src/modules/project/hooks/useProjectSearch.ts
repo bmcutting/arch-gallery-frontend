@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ProjectSortFields } from "../../../modules/project/domain/enums/project-sort-fileds";
-import type { Project } from "../../../modules/project/domain/entities/project";
-import type { ProjectPaginationParams } from "../../../modules/project/dto/write/project-pagination-params";
-import type { PaginationResult } from "../../../modules/app/modules/shared/domain/core/pagination-result";
-import { getAllProjects, type ProjectFeedItem } from "../../../modules/project/services/get-all-projects";
+import { ProjectSortFields } from "../domain/enums/project-sort-fileds";
+import type { Project } from "../domain/entities/project";
+import type { ProjectPaginationParams } from "../dto/write/project-pagination-params";
+import type { PaginationResult } from "../../app/modules/shared/domain/core/pagination-result";
+import { getAllProjects, type ProjectFeedItem } from "../services/get-all-projects";
 
-export default function useSearch() {
+export default function useProjectSearch() {
   function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
     func: F,
     wait: number,
@@ -114,7 +114,6 @@ export default function useSearch() {
     }
 
     try {
-      // Usamos el mismo endpoint pero con pageSize pequeño y solo el campo search
       const result = await getAllProjects({
         params: {
           page: 1,
@@ -143,9 +142,8 @@ export default function useSearch() {
   };
 
   const handleSelectSuggestion = (project: Project) => {
-    setSearchTerm(project.title); // o lo que quieras mostrar
+    setSearchTerm(project.title);
     setShowSuggestions(false);
-    // Opcional: podrías navegar al perfil o aplicarlo como filtro exacto
   };
 
   const handleSortChange = (value: string) => {
@@ -158,7 +156,6 @@ export default function useSearch() {
     setPage(1);
   };
 
-  // Limpiar todos los filtros
   const clearFilters = () => {
     setSearchTerm("");
     setTitle("");
@@ -184,12 +181,10 @@ export default function useSearch() {
     sortValue: `${sortField}-${sortOrder}`,
     setSortValue: handleSortChange,
     SORT_OPTIONS,
-    // Sugerencias
     suggestions,
     showSuggestions,
     setShowSuggestions,
     onSelectSuggestion: handleSelectSuggestion,
-    // Utilidades
     clearFilters,
   };
 }

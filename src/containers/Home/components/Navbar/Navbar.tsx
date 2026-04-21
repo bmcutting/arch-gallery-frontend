@@ -54,16 +54,16 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="flex gap-6 lg:hidden">
-          <Link to={APP_ROUTES.HOME} className="hover:text-blue-600">
+          <Link to={APP_ROUTES.HOME} className="hover:text-accent">
             <FiHome size={22} />
           </Link>
-          <Link to={APP_ROUTES.SEARCH} className="hover:text-blue-600">
+          <Link to={APP_ROUTES.SEARCH} className="hover:text-accent">
             <FiSearch size={22} />
           </Link>
-          <Link to={APP_ROUTES.ARCHITECTS} className="hover:text-blue-600">
+          <Link to={APP_ROUTES.ARCHITECTS} className="hover:text-accent">
             <FiUsers size={22} />
           </Link>
-          <Link to={APP_ROUTES.PROFILE} className="hover:text-blue-600">
+          <Link to={APP_ROUTES.PROFILE} className="hover:text-accent">
             <FiUser size={22} />
           </Link>
         </div>

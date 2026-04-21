@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
-import type { Project } from "../../../modules/project/domain/entities/project";
-import { getProjectByLoggedUser } from "../../../modules/project/services/get-project";
-import { deleteProject } from "../../../modules/project/services/delete-project";
+import type { Project } from "../domain/entities/project";
+import { getProjectByLoggedUser } from "../services/get-project";
+import { deleteProject } from "../services/delete-project";
 
 interface ProjectFeedItem {
   project: Project;
   likedByUser: boolean;
 }
 
-export default function useTabProject() {
+export default function useUserProjects() {
   const [projects, setProjects] = useState<ProjectFeedItem[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<ProjectFeedItem[]>(
     [],

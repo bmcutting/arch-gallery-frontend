@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { addComment } from "../../comment/services/add-comment";
 import type { Project } from "../../project/domain/entities/project";
-import { fetchComments } from "../../like/services/fetch-comment";
+import { fetchComments } from "../services/fetch-comments";
 
 interface Props {
   project: Project;

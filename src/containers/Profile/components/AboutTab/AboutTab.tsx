@@ -12,7 +12,7 @@ export default function AbouTab({ user }: Props) {
           Biografía personal
         </h2>
         <div className="prose prose-stone max-w-none animate-fadeIn">
-          <p className="text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed tracking-wide">
+          <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed tracking-wide">
             {user?.longBio || "Aún no hay biografía disponible."}
           </p>
         </div>

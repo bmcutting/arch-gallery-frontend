@@ -1,5 +1,5 @@
 import Select from "../../../../modules/app/modules/ui/components/Select/Select";
-import useTabProject from "../../hooks/useTabProject";
+import useUserProjects from "../../../../modules/project/hooks/useUserProjects";
 import CreateProjectModal from "../../../../modules/project/components/CreateProjectModal";
 import ProjectFeed from "../../../../modules/project/components/ProjectFeed";
 import ProjectContextMenu from "../ProjectContextMenu/ProjectContextMenu";
@@ -31,7 +31,7 @@ export default function ProjectTab({ userId }: Props) {
     cancelDelete,
     projectToEdit,
     requestEdit,
-  } = useTabProject();
+  } = useUserProjects();
 
   const { openMenuId, toggleMenu } = useContextMenu();
 
@@ -102,7 +102,7 @@ export default function ProjectTab({ userId }: Props) {
           confirmLabel="Eliminar"
           cancelLabel="Cancelar"
         >
-          <span className="mb-8 text-2xl font-bold text-red-600">
+          <span className="mb-8 text-2xl font-bold text-error">
             Esta acción no se puede deshacer.
           </span>
         </Modal>
