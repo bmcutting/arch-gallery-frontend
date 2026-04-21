@@ -18,7 +18,7 @@ export default function useSearch() {
   }
   const [searchTerm, setSearchTerm] = useState("");
   const [title, setTitle] = useState("");
-  const [year, setYear] = useState();
+  const [year, setYear] = useState("");
   const [page, setPage] = useState(1);
   const [pageSize] = useState(12);
   const [sortField, setSortField] = useState<ProjectSortFields>(
@@ -60,8 +60,15 @@ export default function useSearch() {
       params.title = title.trim();
     }
 
+    if (year.trim()) {
+      const parsedYear = Number(year.trim());
+      if (!Number.isNaN(parsedYear)) {
+        params.year = parsedYear;
+      }
+    }
+
     return params;
-  }, [page, pageSize, sortField, sortOrder, searchTerm, title]);
+  }, [page, pageSize, sortField, sortOrder, searchTerm, title, year]);
 
   const fetchProjects = useCallback(async () => {
     if (abortControllerRef.current) {
@@ -155,6 +162,7 @@ export default function useSearch() {
   const clearFilters = () => {
     setSearchTerm("");
     setTitle("");
+    setYear("");
     setPage(1);
   };
 
