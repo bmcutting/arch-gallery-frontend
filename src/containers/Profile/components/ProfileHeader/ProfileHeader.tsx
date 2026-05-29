@@ -13,9 +13,10 @@ import { APP_ROUTES } from "../../../../modules/app/domain/constants/app-routes"
 
 interface Props {
   user: User;
+  isOwnProfile?: boolean;
 }
 
-export default function ProfileHeader({ user }: Props) {
+export default function ProfileHeader({ user, isOwnProfile = true }: Props) {
   const navigate = useNavigate();
   return (
     <div className="mt-14 bg-card border-b border-border">
@@ -141,13 +142,15 @@ export default function ProfileHeader({ user }: Props) {
               >
                 Enviar Correo
               </button>
-              <button
-                type="button"
-                onClick={() => navigate(APP_ROUTES.PROFILEMANAGEMENT)}
-                className="px-5 py-2 text-base font-semibold text-white bg-primary rounded-lg shadow hover:bg-primary/90 transition-colors"
-              >
-                Editar Perfil
-              </button>
+              {isOwnProfile && (
+                <button
+                  type="button"
+                  onClick={() => navigate(APP_ROUTES.PROFILEMANAGEMENT)}
+                  className="px-5 py-2 text-base font-semibold text-white bg-primary rounded-lg shadow hover:bg-primary/90 transition-colors"
+                >
+                  Editar Perfil
+                </button>
+              )}
             </div>
           </div>
         </div>

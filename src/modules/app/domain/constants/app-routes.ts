@@ -5,5 +5,9 @@ export const APP_ROUTES = {
   PROFILE: "/profile",
   PROFILEMANAGEMENT: "/profile/profilemanagement",
   ARCHITECTS: "/architects",
+  ARCHITECT_DETAIL: "/architects/:userId",
   SEARCH: "/search"
 };
+
+export const buildArchitectDetailPath = (userId: string) =>
+  `/architects/${userId}`;

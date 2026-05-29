@@ -1,14 +1,17 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import AppLayout from "../../layouts/AppLayout";
 import ProfileHeader from "./components/ProfileHeader/ProfileHeader";
 import ProjectTab from "./components/ProjectTab/ProjectTab";
 import AbouTab from "./components/AboutTab/AboutTab";
-import useProfile from "../../modules/user/hooks/useProfile";
+import useProfileUser from "../../modules/user/hooks/useProfileUser";
 import ExperienceTab from "./components/ExperienceTab/ExperienceTab";
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState("projects");
-  const user = useProfile();
+  const { userId } = useParams<{ userId?: string }>();
+  const isOwnProfile = !userId;
+  const { user, loading, error } = useProfileUser(userId);
 
   const tabs = [
     {
@@ -20,7 +23,17 @@ export default function Profile() {
     { id: "experience", label: "Experiencia", icon: "Briefcase" },
   ];
 
-  if (!user) {
+  if (error) {
+    return (
+      <AppLayout>
+        <div className="min-h-screen flex items-center justify-center">
+          <p>No se encontró este perfil.</p>
+        </div>
+      </AppLayout>
+    );
+  }
+
+  if (loading || !user) {
     return (
       <AppLayout>
         <div className="min-h-screen flex items-center justify-center">
@@ -33,7 +46,7 @@ export default function Profile() {
   return (
     <AppLayout>
       <div className="min-h-screen">
-        <ProfileHeader user={user} />
+        <ProfileHeader user={user} isOwnProfile={isOwnProfile} />
         <div className="max-w-360 mx-auto px-4 md:px-6 lg:px-8 py-2 md:py-4 lg:py-6">
           <div className="border-b border-border mb-6 md:mb-8 lg:mb-12">
             <nav className="flex gap-2 md:gap-4 overflow-x-auto" role="tablist">
@@ -61,7 +74,9 @@ export default function Profile() {
               aria-labelledby={`${activeTab}-tab`}
               className="mt-6 animate-fadeIn"
             >
-              {activeTab === "projects" && <ProjectTab userId={user?.id} />}
+              {activeTab === "projects" && (
+                <ProjectTab userId={user?.id} readOnly={!isOwnProfile} />
+              )}
               {activeTab === "about" && <AbouTab user={user} />}
               {activeTab === "experience" && <ExperienceTab user={user} />}
             </div>

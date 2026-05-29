@@ -50,6 +50,14 @@ export default function App() {
           }
         />
         <Route
+          path={APP_ROUTES.ARCHITECT_DETAIL}
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path={APP_ROUTES.PROFILEMANAGEMENT}
           element={
             <ProtectedRoute>

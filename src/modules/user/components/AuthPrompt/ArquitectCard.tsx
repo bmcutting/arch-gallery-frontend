@@ -1,12 +1,18 @@
 import { FaMapPin, FaUserCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import type { User } from "../../domain/entities/user";
 import Button from "../../../app/modules/ui/components/Button/Button";
+import { buildArchitectDetailPath } from "../../../app/domain/constants/app-routes";
 
 interface Props {
   architect?: User;
 }
 
 export default function ArchitectCard({ architect }: Props) {
+  const navigate = useNavigate();
+  const goToProfile = () => {
+    if (architect?.id) navigate(buildArchitectDetailPath(architect.id));
+  };
   const hasProfileImage = !!architect?.profileImageUrl;
   const hasSpecialization = !!architect?.specialization;
   const hasBio = !!architect?.shortBio;
@@ -19,7 +25,10 @@ export default function ArchitectCard({ architect }: Props) {
   const bioText = hasBio ? architect!.shortBio : "Sin descripción";
 
   return (
-    <article className="bg-card rounded-xl overflow-hidden shadow-warm hover:shadow-warm-md transition-smooth cursor-pointer group flex flex-col h-full">
+    <article
+      onClick={goToProfile}
+      className="bg-card rounded-xl overflow-hidden shadow-warm hover:shadow-warm-md transition-smooth cursor-pointer group flex flex-col h-full"
+    >
       <div className="relative h-32 w-full overflow-hidden">
         <img
           src={coverPlaceholder}
@@ -64,7 +73,9 @@ export default function ArchitectCard({ architect }: Props) {
           </div>
         )}
 
-        <Button size="lg">Ver perfil</Button>
+        <Button size="lg" onClick={goToProfile}>
+          Ver perfil
+        </Button>
       </div>
     </article>
   );

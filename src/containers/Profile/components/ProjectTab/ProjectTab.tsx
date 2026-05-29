@@ -9,9 +9,10 @@ import EditProjectModal from "../../../../modules/project/components/EditProject
 
 interface Props {
   userId: string;
+  readOnly?: boolean;
 }
 
-export default function ProjectTab({ userId }: Props) {
+export default function ProjectTab({ userId, readOnly = false }: Props) {
   const {
     projects,
     showCreateModal,
@@ -31,7 +32,7 @@ export default function ProjectTab({ userId }: Props) {
     cancelDelete,
     projectToEdit,
     requestEdit,
-  } = useUserProjects();
+  } = useUserProjects(readOnly ? userId : undefined);
 
   const { openMenuId, toggleMenu } = useContextMenu();
 
@@ -55,6 +56,12 @@ export default function ProjectTab({ userId }: Props) {
           />
         </div>
       </div>
+      {readOnly && projects.length === 0 && (
+        <p className="text-center text-muted-foreground py-10">
+          Este usuario aún no tiene proyectos publicados.
+        </p>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
         {projects?.map((item) => (
           <div key={item.project.id} className="relative">
@@ -62,25 +69,29 @@ export default function ProjectTab({ userId }: Props) {
               project={item.project}
               likedByUser={item.likedByUser}
             />
-            <ProjectContextMenu
-              isOpen={openMenuId === item.project.id}
-              onToggle={() => toggleMenu(item.project.id)}
-              onEdit={() => requestEdit(item.project)}
-              onDelete={() => requestDelete(item.project)}
-            />
+            {!readOnly && (
+              <ProjectContextMenu
+                isOpen={openMenuId === item.project.id}
+                onToggle={() => toggleMenu(item.project.id)}
+                onEdit={() => requestEdit(item.project)}
+                onDelete={() => requestDelete(item.project)}
+              />
+            )}
           </div>
         ))}
-        <div
-          onClick={() => setShowCreateModal(true)}
-          className="flex flex-col items-center justify-center border-2 border-dashed border-accent rounded-lg cursor-pointer hover:bg-accent/10 transition-all"
-        >
-          <span className="text-lg md:text-xl font-semibold text-primary">
-            + Añadir Proyecto
-          </span>
-        </div>
+        {!readOnly && (
+          <div
+            onClick={() => setShowCreateModal(true)}
+            className="flex flex-col items-center justify-center border-2 border-dashed border-accent rounded-lg cursor-pointer hover:bg-accent/10 transition-all"
+          >
+            <span className="text-lg md:text-xl font-semibold text-primary">
+              + Añadir Proyecto
+            </span>
+          </div>
+        )}
       </div>
 
-      {showCreateModal && (
+      {!readOnly && showCreateModal && (
         <CreateProjectModal
           onClose={() => setShowCreateModal(false)}
           userId={userId}

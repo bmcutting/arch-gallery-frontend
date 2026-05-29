@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Project } from "../domain/entities/project";
 import { getProjectByLoggedUser } from "../services/get-project";
+import { getProjectsByUserId } from "../services/get-projects-by-user";
 import { deleteProject } from "../services/delete-project";
 
 interface ProjectFeedItem {
@@ -8,7 +9,12 @@ interface ProjectFeedItem {
   likedByUser: boolean;
 }
 
-export default function useUserProjects() {
+/**
+ * Lista de proyectos para la pestaña de perfil.
+ * - Sin `userId`: proyectos del usuario logueado (con acciones de editar/borrar).
+ * - Con `userId`: proyectos de ese usuario (solo lectura).
+ */
+export default function useUserProjects(userId?: string) {
   const [projects, setProjects] = useState<ProjectFeedItem[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<ProjectFeedItem[]>(
     [],
@@ -105,7 +111,11 @@ export default function useUserProjects() {
   }
 
   useEffect(() => {
-    getProjectByLoggedUser()
+    const request = userId
+      ? getProjectsByUserId(userId)
+      : getProjectByLoggedUser();
+
+    request
       .then((data) => {
         const sorted = sortList(data, "recent");
         setProjects(sorted);
@@ -113,7 +123,7 @@ export default function useUserProjects() {
         setSelectedSort("recent");
       })
       .catch(() => {});
-  }, []);
+  }, [userId]);
 
   return {
     projects: filteredProjects,
