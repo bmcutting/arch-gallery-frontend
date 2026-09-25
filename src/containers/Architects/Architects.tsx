@@ -12,11 +12,8 @@ import useArchitects from "../../modules/user/hooks/useArchitects";
 export default function Architects() {
   const {
     searchTerm,
-    setSearchTerm,
     firstName,
-    setFirstName,
     lastName,
-    setLastName,
     architects,
     loading,
     error,
@@ -51,7 +48,7 @@ export default function Architects() {
   }, [setShowSuggestions]);
 
   const activeFiltersCount = [firstName, lastName].filter((v) =>
-    v.trim(),
+    v.value.trim(),
   ).length;
 
   return (
@@ -72,9 +69,8 @@ export default function Architects() {
               <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5 pointer-events-none z-10" />
               <Input
                 type="text"
-                value={searchTerm}
-                onChange={setSearchTerm}
-                onClear={() => setSearchTerm("")}
+                inputValue={searchTerm}
+                onClear={() => searchTerm.onChange("")}
                 onFocus={() => setShowSuggestions(true)}
                 placeholder="Buscar por nombre, email o username..."
                 full
@@ -119,9 +115,8 @@ export default function Architects() {
           </div>
 
           <div
-            className={`overflow-hidden transition-smooth ${
-              filtersOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-            }`}
+            className={`overflow-hidden transition-smooth ${filtersOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+              }`}
           >
             <div className="bg-card border border-border rounded-xl shadow-warm p-4 md:p-5 flex flex-col gap-4">
               <div className="flex flex-wrap gap-3">
@@ -131,8 +126,7 @@ export default function Architects() {
                   </label>
                   <Input
                     type="text"
-                    value={firstName}
-                    onChange={setFirstName}
+                    inputValue={firstName}
                     placeholder="Filtrar por nombre"
                     className="w-full px-3 py-2 bg-card border border-border rounded-input text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent"
                   />
@@ -144,8 +138,7 @@ export default function Architects() {
                   </label>
                   <Input
                     type="text"
-                    value={lastName}
-                    onChange={setLastName}
+                    inputValue={lastName}
                     placeholder="Filtrar por apellido"
                     className="w-full px-3 py-2 bg-card border border-border rounded-input text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent"
                   />

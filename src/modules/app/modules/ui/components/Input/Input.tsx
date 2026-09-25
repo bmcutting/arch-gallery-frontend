@@ -1,9 +1,13 @@
 import FormLoader from "../../shared/components/FormLoader/FormLoader";
 import Clear from "../../shared/components/Clear/Clear";
 
-interface Props {
+export interface InputValue {
   value: string | undefined;
   onChange(v: string): void;
+}
+
+interface Props {
+  inputValue: InputValue;
   placeholder?: string;
   name?: string;
   type?: "text" | "password";
@@ -22,8 +26,7 @@ interface Props {
 
 export default function Input({
   placeholder,
-  onChange,
-  value,
+  inputValue,
   type,
   name,
   full = true,
@@ -38,7 +41,7 @@ export default function Input({
   onKeyDown,
   className,
 }: Props) {
-  const isInvalid = touched && !value;
+  const isInvalid = touched && !inputValue.value;
   return (
     <>
       {loading ? (
@@ -56,13 +59,13 @@ export default function Input({
               placeholder={placeholder}
               disabled={disabled}
               required={required}
-              value={value ?? ""}
-              onChange={(e) => onChange(e.target.value)}
+              value={inputValue.value ?? ""}
+              onChange={(e) => inputValue.onChange(e.target.value)}
               onBlur={onBlur}
               onFocus={onFocus}
               onKeyDown={onKeyDown}
             />
-            {onClear && value && (
+            {onClear && inputValue.value && (
               <div className="absolute right-2.5 z-10">
                 <Clear onClick={onClear} />
               </div>

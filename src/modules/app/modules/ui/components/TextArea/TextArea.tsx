@@ -1,9 +1,9 @@
 import Clear from "../../shared/components/Clear/Clear";
 import FormLoader from "../../shared/components/FormLoader/FormLoader";
+import type { InputValue } from "../Input/Input";
 
 interface Props {
-  value: string | undefined;
-  onChange(v: string): void;
+  inputValue: InputValue;
   placeholder?: string;
   name?: string;
   full?: boolean;
@@ -21,8 +21,7 @@ interface Props {
 
 export default function Textarea({
   placeholder,
-  onChange,
-  value,
+  inputValue,
   name,
   full = true,
   loading = false,
@@ -36,8 +35,8 @@ export default function Textarea({
   className,
   maxChars,
 }: Props) {
-  const isInvalid = touched && !value;
-  const length = value?.length ?? 0;
+  const isInvalid = touched && !inputValue.value;
+  const length = inputValue.value?.length ?? 0;
 
   return (
     <>
@@ -54,13 +53,13 @@ export default function Textarea({
               placeholder={placeholder}
               disabled={disabled}
               required={required}
-              value={value ?? ""}
-              onChange={(e) => onChange(e.target.value)}
+              value={inputValue.value ?? ""}
+              onChange={(e) => inputValue.onChange(e.target.value)}
               onBlur={onBlur}
               onFocus={onFocus}
               rows={4}
             />
-            {onClear && value && (
+            {onClear && inputValue.value && (
               <div className="absolute right-2.5 top-2 z-10">
                 <Clear onClick={onClear} />
               </div>
@@ -71,11 +70,10 @@ export default function Textarea({
 
           {maxChars && (
             <p
-              className={`text-xs mt-2 ${
-                length >= maxChars
-                  ? "text-error font-extrabold"
-                  : "text-muted-foreground"
-              }`}
+              className={`text-xs mt-2 ${length >= maxChars
+                ? "text-error font-extrabold"
+                : "text-muted-foreground"
+                }`}
             >
               {length}/{maxChars} caracteres
             </p>

@@ -60,8 +60,7 @@ export default function ExperienceFormModal({
             <Input
               name="title"
               placeholder="Ej: Arquitecto Senior, Máster en Arquitectura"
-              value={form.title}
-              onChange={(val) => setForm({ ...form, title: val })}
+              inputValue={{ value: form.title, onChange: (val) => setForm({ ...form, title: val }) }}
               required
               full
               touched={touched.title}
@@ -74,10 +73,10 @@ export default function ExperienceFormModal({
             <Input
               name="institutionOrCompany"
               placeholder="Nombre de la empresa o institución"
-              value={form.institutionOrCompany}
-              onChange={(val) =>
-                setForm({ ...form, institutionOrCompany: val })
-              }
+              inputValue={{
+                value: form.institutionOrCompany, onChange: (val) =>
+                  setForm({ ...form, institutionOrCompany: val })
+              }}
               required
               full
               touched={touched.institutionOrCompany}
@@ -94,10 +93,10 @@ export default function ExperienceFormModal({
             >
               <Input
                 name="startYear"
-                value={form.startYear.toString()}
-                onChange={(val) =>
-                  setForm({ ...form, startYear: parseInt(val) })
-                }
+                inputValue={{
+                  value: form.startYear.toString(), onChange: (val) =>
+                    setForm({ ...form, startYear: parseInt(val) })
+                }}
                 touched={touched.startYear}
                 onBlur={handleTouched}
                 errorMsg="Debe añadir el año de inicip"
@@ -108,13 +107,13 @@ export default function ExperienceFormModal({
               <FormInput label="Año de fin">
                 <div>
                   <Input
-                    value={form.endYear?.toString() || ""}
-                    onChange={(val) =>
-                      setForm({
-                        ...form,
-                        endYear: val ? parseInt(val) : undefined,
-                      })
-                    }
+                    inputValue={{
+                      value: form.endYear?.toString() || "", onChange: (val) =>
+                        setForm({
+                          ...form,
+                          endYear: val ? parseInt(val) : undefined,
+                        })
+                    }}
                     disabled={form.isCurrent}
                     placeholder="Año"
                   />
@@ -139,8 +138,7 @@ export default function ExperienceFormModal({
           <FormInput label="Descripción (opcional)">
             <Textarea
               placeholder="Describe tus responsabilidades o logros"
-              value={form.description}
-              onChange={(val) => setForm({ ...form, description: val })}
+              inputValue={{ value: form.description, onChange: (val) => setForm({ ...form, description: val }) }}
               className="border border-border rounded-md p-2"
             />
           </FormInput>

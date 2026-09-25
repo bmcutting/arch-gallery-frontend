@@ -17,8 +17,6 @@ export default function Login() {
     password,
     touched,
     error,
-    setEmail,
-    setPassword,
   } = useLogin();
 
   return (
@@ -28,14 +26,12 @@ export default function Login() {
         <FormInput label="Correo" size="base" required>
           <Input
             loading={false}
-            onChange={setEmail}
+            inputValue={email}
             placeholder="user@gmail.com"
             name="email"
-            onClear={() => setEmail("")}
             touched={touched.email}
             onBlur={handleTouched}
             errorMsg="Debe añadir un correo electrónico"
-            value={email}
             className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>
@@ -43,12 +39,10 @@ export default function Login() {
         <FormInput label="Contraseña" size="base" required>
           <Input
             loading={false}
-            onChange={setPassword}
+            inputValue={password}
             name="password"
-            value={password}
             type="password"
             placeholder="********"
-            onClear={() => setPassword("")}
             touched={touched.password}
             onBlur={handleTouched}
             errorMsg="Debe añadir la contraseña"
@@ -67,7 +61,7 @@ export default function Login() {
           loading={loading}
           full
         >
-          Iniciar Sesión
+          {loading ? "Iniciando sesión..." : "Iniciar sesión"}
         </Button>
 
         <AuthPrompt

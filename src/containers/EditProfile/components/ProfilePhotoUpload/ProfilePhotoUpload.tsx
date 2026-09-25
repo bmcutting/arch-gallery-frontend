@@ -46,8 +46,7 @@ export default function ProfilePhotoUpload({ profileImageUrl }: Props) {
             </div>
             <div className="hidden">
               <Input
-                value="PhotoUploadInput"
-                onChange={() => console.log("HOLA")}
+                inputValue={{ value: "PhotoUploadInput", onChange: () => console.log("HOLA") }}
                 className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
               />
             </div>

@@ -17,9 +17,6 @@ export default function CreateProjectModal({ onClose, userId }: Props) {
     description,
     year,
     categories,
-    setTitle,
-    setDescription,
-    setYear,
     addCategory,
     removeCategory,
     updateCategory,
@@ -36,9 +33,8 @@ export default function CreateProjectModal({ onClose, userId }: Props) {
         <form onSubmit={handleSubmit} className="space-y-5">
           <FormInput label="Título" required>
             <Input
-              value={title}
-              onChange={setTitle}
-              onClear={() => setTitle("")}
+              inputValue={title}
+              onClear={() => title.onChange("")}
               className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
             />
           </FormInput>
@@ -46,8 +42,7 @@ export default function CreateProjectModal({ onClose, userId }: Props) {
           <FormInput label="Descripción">
             <Textarea
               placeholder="Descripción"
-              value={description}
-              onChange={setDescription}
+              inputValue={description}
               maxChars={500}
               className="h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg
                           rounded-md border border-border focus:ring-2 focus:ring-primary
@@ -56,7 +51,7 @@ export default function CreateProjectModal({ onClose, userId }: Props) {
           </FormInput>
 
           <FormInput label="Año" required>
-            <Input value={String(year)} onChange={(v) => setYear(Number(v))} />
+            <Input inputValue={year} />
           </FormInput>
 
           <FormInput label="Categorías (máx. 5)">
@@ -64,8 +59,7 @@ export default function CreateProjectModal({ onClose, userId }: Props) {
               {categories.map((cat, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <Input
-                    value={cat}
-                    onChange={(value) => updateCategory(index, value)}
+                    inputValue={{ value: cat, onChange: (value) => updateCategory(index, value) }}
                     placeholder="Ej: Urbanismo, Vivienda, Obra nueva..."
                     className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
                   />

@@ -160,12 +160,18 @@ export default function useArchitects() {
   };
 
   return {
-    searchTerm,
-    setSearchTerm: handleSearchChange,
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
+    searchTerm: {
+      value: searchTerm,
+      onChange: handleSearchChange,
+    },
+    firstName: {
+      value: firstName,
+      onChange: setFirstName,
+    },
+    lastName: {
+      value: lastName,
+      onChange: setLastName,
+    },
     architects,
     loading,
     error,

@@ -23,12 +23,6 @@ export default function SignUp() {
     lastName,
     touched,
     error,
-    setEmail,
-    setPassword,
-    setConfirmPassword,
-    setFirstName,
-    setLastName,
-    setUserName,
     setStep
   } = useSignUp();
 
@@ -40,53 +34,51 @@ export default function SignUp() {
           <FormInput label="Correo" size="base" required>
             <Input
               loading={false}
-              onChange={setEmail}
+              inputValue={email}
               placeholder="user@gmail.com"
               name="email"
-              value={email}
-              onClear={() => setEmail("")}
+              onClear={() => email.onChange("")}
               touched={touched.email}
               onBlur={handleTouched}
               errorMsg="Debe añadir un correo electrónico"
               className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
             />
           </FormInput>
-          <FormInput label="Nombre" size="base" required>
-            <Input
-              loading={false}
-              onChange={setFirstName}
-              placeholder="Carlos"
-              name="firstName"
-              value={firstName}
-              onClear={() => setFirstName("")}
-              touched={touched.firstName}
-              onBlur={handleTouched}
-              errorMsg="Debe añadir el nombre"
-              className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
-            />
-          </FormInput>
-          <FormInput label="Apellido" size="base" required>
-            <Input
-              loading={false}
-              onChange={setLastName}
-              placeholder="Peguer"
-              name="lastName"
-              value={lastName}
-              onClear={() => setLastName("")}
-              touched={touched.lastName}
-              onBlur={handleTouched}
-              errorMsg="Debe añadir el apellido"
-              className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
-            />
-          </FormInput>
+          <div className="flex gap-5">
+            <FormInput label="Nombre" size="base" required>
+              <Input
+                loading={false}
+                inputValue={firstName}
+                placeholder="Carlos"
+                name="firstName"
+                onClear={() => firstName.onChange("")}
+                touched={touched.firstName}
+                onBlur={handleTouched}
+                errorMsg="Debe añadir el nombre"
+                className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
+              />
+            </FormInput>
+            <FormInput label="Apellido" size="base" required>
+              <Input
+                loading={false}
+                inputValue={lastName}
+                placeholder="Peguer"
+                name="lastName"
+                onClear={() => lastName.onChange("")}
+                touched={touched.lastName}
+                onBlur={handleTouched}
+                errorMsg="Debe añadir el apellido"
+                className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
+              />
+            </FormInput>
+          </div>
           <FormInput label="Nombre de usuario" size="base" required>
             <Input
               loading={false}
-              onChange={setUserName}
+              inputValue={userName}
               placeholder="carlospeguer"
               name="userName"
-              value={userName}
-              onClear={() => setUserName("")}
+              onClear={() => userName.onChange("")}
               touched={touched.userName}
               onBlur={handleTouched}
               errorMsg="Debe añadir el nombre de usuario"
@@ -114,12 +106,11 @@ export default function SignUp() {
           <FormInput label="Contraseña" size="base" required>
             <Input
               loading={false}
-              onChange={setPassword}
+              inputValue={password}
               name="password"
-              value={password}
               type="password"
               placeholder="********"
-              onClear={() => setPassword("")}
+              onClear={() => password.onChange("")}
               touched={touched.password}
               onBlur={handleTouched}
               errorMsg="Debe añadir la contraseña"
@@ -128,12 +119,11 @@ export default function SignUp() {
           </FormInput>
           <FormInput label="Confirmar contraseña" size="base" required>
             <Input
-              onChange={setConfirmPassword}
               name="confirmPassword"
-              value={confirmPassword}
+              inputValue={confirmPassword}
               type="password"
               placeholder="********"
-              onClear={() => setConfirmPassword("")}
+              onClear={() => confirmPassword.onChange("")}
               touched={touched.confirmPassword}
               onBlur={handleTouched}
               errorMsg="Debe confirmar la contraseña"

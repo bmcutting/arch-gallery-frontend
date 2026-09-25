@@ -1,13 +1,12 @@
 import { useCallback } from "react";
 import { ChevronDown, SearchIcon, SlidersHorizontal } from "lucide-react";
-import Input from "../../../modules/app/modules/ui/components/Input/Input";
+import Input, { type InputValue } from "../../../modules/app/modules/ui/components/Input/Input";
 import useClickOutside from "../../../modules/app/hooks/useClickOutside";
 import type { Project } from "../../../modules/project/domain/entities/project";
 import SuggestionsDropdown from "./SuggestionsDropdown";
 
 interface Props {
-  searchTerm: string;
-  setSearchTerm: (v: string) => void;
+  searchTerm: InputValue;
   suggestions: Project[];
   showSuggestions: boolean;
   setShowSuggestions: (v: boolean) => void;
@@ -19,7 +18,6 @@ interface Props {
 
 export default function SearchBar({
   searchTerm,
-  setSearchTerm,
   suggestions,
   showSuggestions,
   setShowSuggestions,
@@ -40,9 +38,8 @@ export default function SearchBar({
         <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5 pointer-events-none z-10" />
         <Input
           type="text"
-          value={searchTerm}
-          onChange={setSearchTerm}
-          onClear={() => setSearchTerm("")}
+          inputValue={searchTerm}
+          onClear={() => searchTerm.onChange("")}
           onFocus={() => setShowSuggestions(true)}
           placeholder="Buscar proyectos..."
           full

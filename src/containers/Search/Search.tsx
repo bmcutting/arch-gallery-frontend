@@ -9,11 +9,8 @@ import SearchResults from "./components/SearchResults";
 export default function Search() {
   const {
     searchTerm,
-    setSearchTerm,
     title,
-    setTitle,
     year,
-    setYear,
     projects,
     loading,
     error,
@@ -42,7 +39,6 @@ export default function Search() {
         <div className="flex flex-col gap-3 mb-6">
           <SearchBar
             searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
             suggestions={suggestions}
             showSuggestions={showSuggestions}
             setShowSuggestions={setShowSuggestions}

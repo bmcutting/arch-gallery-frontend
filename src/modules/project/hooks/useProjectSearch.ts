@@ -164,12 +164,9 @@ export default function useProjectSearch() {
   };
 
   return {
-    searchTerm,
-    setSearchTerm: handleSearchChange,
-    title,
-    setTitle,
-    year,
-    setYear,
+    searchTerm: { value: searchTerm, onChange: handleSearchChange },
+    title: { value: title, onChange: setTitle },
+    year: { value: year, onChange: setYear },
     projects,
     loading,
     error,

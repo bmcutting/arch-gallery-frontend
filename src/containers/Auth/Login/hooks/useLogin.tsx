@@ -71,11 +71,9 @@ export default function useLogin() {
     handleSubmit,
     handleTouched,
     loading,
-    email,
-    password,
+    email: { value: email, onChange: setEmail },
+    password: {value: password, onChange: setPassword},
     touched,
     error,
-    setPassword,
-    setEmail,
   };
 }
