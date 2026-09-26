@@ -35,7 +35,7 @@ export default function Input({
   touched,
   errorMsg,
   required,
-  onClear,
+  onClear = () => { inputValue.onChange("") },
   onBlur,
   onFocus,
   onKeyDown,

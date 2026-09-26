@@ -70,7 +70,6 @@ export default function Architects() {
               <Input
                 type="text"
                 inputValue={searchTerm}
-                onClear={() => searchTerm.onChange("")}
                 onFocus={() => setShowSuggestions(true)}
                 placeholder="Buscar por nombre, email o username..."
                 full
