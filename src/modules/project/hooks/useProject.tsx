@@ -72,7 +72,7 @@ export default function useProject({ onClose, userId, project }: Props) {
     handleEdit,
     title: { value: title, onChange: setTitle },
     description: { value: description, onChange: setDescription },
-    year: { value: String(year), onChange: (v: number) => setYear(Number(v)) },
+    year: { value: String(year), onChange: (v: string) => setYear(Number(v)) },
     imagesUrl: { value: imagesUrl, onChange: setImagesUrl },
     categories,
     setCategories,

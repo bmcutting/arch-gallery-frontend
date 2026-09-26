@@ -27,8 +27,7 @@ export default function PersonalInfoSection({
       <FormInput label="Nombre" size="lg">
         <Input
           placeholder="Nombre"
-          value={formData.firstName ?? ""}
-          onChange={(value: string) => handleChange("firstName", value)}
+          inputValue={{ value: formData.firstName ?? "", onChange: (value: string) => handleChange("firstName", value) }}
           name="firstName"
           touched={touched.firstName}
           onBlur={handleTouched}
@@ -45,8 +44,7 @@ export default function PersonalInfoSection({
       <FormInput label="Apellido" size="lg">
         <Input
           placeholder="Apellido"
-          value={formData.lastName ?? ""}
-          onChange={(value: string) => handleChange("lastName", value)}
+          inputValue={{ value: formData.lastName ?? "", onChange: (value: string) => handleChange("lastName", value) }}
           name="lastName"
           touched={touched.lastName}
           onBlur={handleTouched}
@@ -63,8 +61,7 @@ export default function PersonalInfoSection({
       <FormInput label="Nombre de usuario" size="lg">
         <Input
           placeholder="Nombre de usuario"
-          value={formData.userName ?? ""}
-          onChange={(value: string) => handleChange("userName", value)}
+          inputValue={{ value: formData.userName ?? "", onChange: (value: string) => handleChange("userName", value) }}
           name="userName"
           touched={touched.userName}
           onBlur={handleTouched}
@@ -81,8 +78,7 @@ export default function PersonalInfoSection({
       <FormInput label="Correo electrónico" size="lg">
         <Input
           placeholder="Correo Electrónico"
-          value={formData.email ?? ""}
-          onChange={(value: string) => handleChange("email", value)}
+          inputValue={{ value: formData.email ?? "", onChange: (value: string) => handleChange("email", value) }}
           name="email"
           touched={touched.email}
           onBlur={handleTouched}
@@ -99,40 +95,35 @@ export default function PersonalInfoSection({
       <FormInput label="Teléfono" size="lg">
         <Input
           placeholder="Teléfono"
-          value={formData.phoneNumber ?? ""}
-          onChange={(value: string) => handleChange("phoneNumber", value)}
+          inputValue={{ value: formData.phoneNumber ?? "", onChange: (value: string) => handleChange("phoneNumber", value) }}
           className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
         />
       </FormInput>
       <FormInput label="Años de experiencia" size="lg">
         <Input
           placeholder="Años de Experiencia"
-          value={(formData.experienceYears ?? 0).toString()}
-          onChange={(value: string) => handleChange("experienceYears", value)}
+          inputValue={{ value: (formData.experienceYears ?? 0).toString(), onChange: (value: string) => handleChange("experienceYears", value) }}
           className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
         />
       </FormInput>
       <FormInput label="Sitio web" size="lg">
         <Input
           placeholder="Website"
-          value={formData.website ?? ""}
-          onChange={(value: string) => handleChange("website", value)}
+          inputValue={{ value: formData.website ?? "", onChange: (value: string) => handleChange("website", value) }}
           className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
         />
       </FormInput>
       <FormInput label="Ubicación" size="lg">
         <Input
           placeholder="Ubicación"
-          value={formData.location ?? ""}
-          onChange={(value: string) => handleChange("location", value)}
+          inputValue={{ value: formData.location ?? "", onChange: (value: string) => handleChange("location", value) }}
           className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
         />
       </FormInput>
       <FormInput label="Especialización" size="lg">
         <Input
           placeholder="Especialización"
-          value={formData.specialization ?? ""}
-          onChange={(value: string) => handleChange("specialization", value)}
+          inputValue={{ value: formData.specialization ?? "", onChange: (value: string) => handleChange("specialization", value) }}
           className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
         />
       </FormInput>

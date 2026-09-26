@@ -29,7 +29,7 @@ export default function Search() {
   } = useProjectSearch();
 
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const activeFiltersCount = [title, year].filter((v) => v.trim()).length;
+  const activeFiltersCount = [title, year].filter((v) => v.value.trim()).length;
 
   return (
     <AppLayout>
@@ -51,9 +51,7 @@ export default function Search() {
           <SearchFilters
             open={filtersOpen}
             title={title}
-            setTitle={setTitle}
             year={year}
-            setYear={setYear}
             sortValue={sortValue}
             setSortValue={setSortValue}
             sortOptions={SORT_OPTIONS}

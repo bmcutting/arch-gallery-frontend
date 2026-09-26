@@ -41,10 +41,9 @@ export default function SkillFormModal({
             <Input
               name="name"
               placeholder="Ej: AutoCAD, Revit, Photoshop"
-              value={form.name}
+              inputValue={{ value: form.name, onChange: (val) => setForm({ ...form, name: val }) }}
               touched={touched.name}
               onBlur={handleTouched}
-              onChange={(val) => setForm({ ...form, name: val })}
               required
               errorMsg="Debe añadir el nombre de la habilidad"
               className="w-full px-3 py-2 border border-border rounded-md"

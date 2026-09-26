@@ -1,4 +1,4 @@
-import Input, { type InputValue } from "../../../modules/app/modules/ui/components/Input/Input";
+import Input from "../../../modules/app/modules/ui/components/Input/Input";
 import Segmented from "../../../modules/app/modules/ui/components/Segmented/Segmented";
 import Button from "../../../modules/app/modules/ui/components/Button/Button";
 

@@ -60,8 +60,7 @@ export default function EditProjectModal({ project, onClose }: Props) {
               {categories.map((cat, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <Input
-                    value={cat}
-                    onChange={(value) => updateCategory(index, value)}
+                    inputValue={{ value: cat, onChange: (value) => updateCategory(index, value) }}
                     placeholder="Ej: Urbanismo, Vivienda, Obra nueva..."
                     className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
                   />

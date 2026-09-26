@@ -23,11 +23,10 @@ export default function CommentSection({
     <div
       className={`absolute inset-0 bg-white/95 backdrop-blur-sm
               transition-all duration-500 ease-in-out
-              ${
-                showComments
-                  ? "translate-y-0 opacity-100 pointer-events-auto"
-                  : "translate-y-full opacity-0 pointer-events-none"
-              }`}
+              ${showComments
+          ? "translate-y-0 opacity-100 pointer-events-auto"
+          : "translate-y-full opacity-0 pointer-events-none"
+        }`}
     >
       <div className="p-4 h-full flex flex-col">
         <div className="flex justify-between items-center mb-3">
@@ -60,9 +59,8 @@ export default function CommentSection({
 
         <div className="relative mt-3">
           <Textarea
-            value={comment}
+            inputValue={{ value: comment, onChange: setComment }}
             placeholder="Comenta..."
-            onChange={setComment}
             onFocus={() => setShowTextarea(true)}
             onBlur={() => setShowTextarea(false)}
             className={`px-3 py-2 pr-10 text-sm md:text-base lg:text-lg 
