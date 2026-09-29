@@ -31,7 +31,7 @@ export default function ProfileHeader({ user, isOwnProfile = true }: Props) {
           </div>
 
           <div className="flex-1 min-w-0 text-center lg:text-left">
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-title-bold text-black mb-2">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-black mb-2">
               {user?.firstName} {user?.lastName}
             </h1>
             {user.specialization && (

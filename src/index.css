@@ -1,28 +1,52 @@
 @import "tailwindcss";
+@import "@fontsource-variable/space-grotesk";
 
 @font-face {
-    font-family: "Plus Jakarta Sans Regular";
-    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-Regular.ttf");
+    font-family: "Plus Jakarta Sans";
+    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: "Plus Jakarta Sans Medium";
-    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-Medium.ttf");
+    font-family: "Plus Jakarta Sans";
+    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: "Plus Jakarta Sans SemiBold";
-    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-SemiBold.ttf");
+    font-family: "Plus Jakarta Sans";
+    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: "Plus Jakarta Sans Bold";
-    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-Bold.ttf");
+    font-family: "Plus Jakarta Sans";
+    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: "Plus Jakarta Sans ExtraBold";
-    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-ExtraBold.ttf");
+    font-family: "Plus Jakarta Sans";
+    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-ExtraBold.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
 }
 
 /* Ocultar scrollbar en navegadores basados en WebKit (Chrome, Safari, Edge) */
@@ -70,15 +94,8 @@ textarea {
     --color-muted-foreground: #6B7280;
     --color-error: #DC2626;
 
-    --font-body: "Plus Jakarta Sans Regular";
-    --font-title-regular: "Plus Jakarta Sans Regular";
-    --font-title-medium: "Plus Jakarta Sans Medium";
-    --font-title-bold: "Plus Jakarta Sans Bold";
-    --font-title-semibold: "Plus Jakarta Sans SemiBold";
-    --font-medium: "Plus Jakarta Sans Medium";
-    --font-regular: "Plus Jakarta Sans Regular";
-    --font-semibold: "Plus Jakarta Sans SemiBold" !important;
-    --font-bold: "Plus Jakarta Sans Bold";
+    --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-heading: "Space Grotesk Variable", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 
     --shadow-input: 0px 0px 5.5px rgb(0 0 0 / 0.08);
 
@@ -91,33 +108,6 @@ textarea {
     --breakpoint-xs: 450px;
 }
 
-
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: var(--font-title-semibold);
-}
-
-
-.caption {
-    font-family: var(--font-medium);
-    font-size: 0.875rem;
-    line-height: 1.4;
-    letter-spacing: 0.025em;
-}
-
-.data-text {
-    font-family: var(--font-medium);
-    font-feature-settings: 'tnum' on, 'lnum' on;
-}
-
-
-
-
 .no-scroll {
     overflow: hidden;
 }
@@ -126,25 +116,39 @@ h6 {
     z-index: 999;
 }
 
-body {
-    font-family: var(--font-body);
+@layer base {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        letter-spacing: -0.015em;
+    }
+
+    strong {
+        font-weight: 600;
+    }
+
+    button {
+        cursor: pointer;
+    }
 }
 
-input,
-textarea,
-td,
-span,
-div {
-    font-family: var(--font-body);
-}
+@layer components {
+    .caption {
+        font-weight: 500;
+        font-size: 0.875rem;
+        line-height: 1.4;
+        letter-spacing: 0.025em;
+    }
 
-strong {
-    font-family: var(--font-semibold);
-    font-weight: normal;
-}
-
-button {
-    cursor: pointer;
+    .data-text {
+        font-weight: 500;
+        font-variant-numeric: tabular-nums lining-nums;
+    }
 }
 
 @layer utilities {
