@@ -14,7 +14,7 @@ export default function useProfile() {
       .catch(() => {
         window.location.href = APP_ROUTES.LOGIN;
       });
-  }, [user?.id]);
+  }, []);
 
   return user;
 }

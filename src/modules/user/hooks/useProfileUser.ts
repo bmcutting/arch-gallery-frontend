@@ -10,45 +10,45 @@ interface Result {
   error: boolean;
 }
 
-/**
- * Carga los datos de un perfil.
- * - Sin `userId`: carga el usuario logueado (getMe) y, si falla, redirige al login.
- * - Con `userId`: carga ese usuario (getUserById) y, si falla, expone `error`
- *   sin redirigir (es el perfil de otra persona, no la sesión propia).
- */
+interface FetchState {
+  key: string;
+  user?: User;
+  error: boolean;
+}
+
+const OWN_PROFILE_KEY = "me";
+
 export default function useProfileUser(userId?: string): Result {
-  const [user, setUser] = useState<User>();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const key = userId ?? OWN_PROFILE_KEY;
+  const [state, setState] = useState<FetchState>();
 
   useEffect(() => {
     let active = true;
-    setLoading(true);
-    setError(false);
-    setUser(undefined);
-
     const request = userId ? getUserById(userId) : getMe();
 
     request
-      .then((data) => {
-        if (active) setUser(data);
+      .then((user) => {
+        if (active) setState({ key, user, error: false });
       })
       .catch(() => {
         if (!active) return;
         if (userId) {
-          setError(true);
+          setState({ key, error: true });
         } else {
           window.location.href = APP_ROUTES.LOGIN;
         }
-      })
-      .finally(() => {
-        if (active) setLoading(false);
       });
 
     return () => {
       active = false;
     };
-  }, [userId]);
+  }, [key, userId]);
 
-  return { user, loading, error };
+  const isCurrent = state?.key === key;
+
+  return {
+    user: isCurrent ? state.user : undefined,
+    loading: !isCurrent,
+    error: isCurrent && state.error,
+  };
 }
