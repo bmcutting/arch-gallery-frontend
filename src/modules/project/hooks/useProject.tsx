@@ -20,14 +20,16 @@ export default function useProject({ onClose, userId, project }: Props) {
   const [imagesUrl, setImagesUrl] = useState<string[]>(
     project?.imagesUrl ? project.imagesUrl : [],
   );
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<string[]>(
+    project?.categories?.map(c => c.name) ?? []
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    createProject({ title, year, description, userId, categories });
-
-    if (onClose) onClose();
+    createProject({ title, year, description, userId, categories })
+      .then(() => onClose?.())
+      .catch((err) => console.error("Error creating project", err));
   };
 
   const handleEdit = (e: React.FormEvent) => {
@@ -39,14 +41,14 @@ export default function useProject({ onClose, userId, project }: Props) {
     }
 
     updateProject({
-      projectId: project?.id,
+      projectId: project.id,
       title,
       year,
       description,
       categories,
-    });
-
-    if (onClose) onClose();
+    })
+      .then(() => onClose?.())
+      .catch((err) => console.error("Error updating project", err));
   };
 
   const addCategory = () => {
