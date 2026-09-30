@@ -50,11 +50,11 @@ export default function Input({
         <div className={`${full ? "w-full" : ""}`}>
           {/* Input + botón Clear en fila */}
           <div
-            className={`relative flex items-center rounded-md border-2 transition-colors outline-none focus-within:border-accent
+            className={`relative flex items-center rounded-lg border-3 transition-colors outline-none focus-within:border-accent
               ${isInvalid ? "border-error" : "border-border"}`}
           >
             <input
-              className={`${className} border-0 outline-none focus:outline-none focus:ring-0 focus:shadow-none`}
+              className={`${className} outline-none focus:outline-none focus:ring-0 focus:shadow-none`}
               type={type ?? "text"}
               name={name}
               placeholder={placeholder}
@@ -74,7 +74,12 @@ export default function Input({
           </div>
 
           {/* Mensaje de error debajo */}
-          {isInvalid && <div className="relative mt-1"> <p className="absolute top-full text-sm text-error">{errorMsg}</p></div>}
+          {isInvalid &&
+            <div className="relative mt-1 ml-1">
+              <p className="absolute top-full text-sm text-error">
+                {errorMsg}
+              </p>
+            </div>}
         </div>
       )}
     </>

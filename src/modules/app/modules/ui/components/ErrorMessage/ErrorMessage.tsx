@@ -7,8 +7,8 @@ interface Props {
 export default function ErrorMessage({ message }: Props) {
   if (!message) return null;
   return (
-    <div className=" flex items-center justify-center gap-2 text-xs sm:text-sm md:text-base
-     text-error font-medium wrap-break-word animate-fadeIn">
+    <div className="flex items-center justify-center gap-2 text-xs sm:text-sm md:text-base
+     text-error font-medium wrap-break-word animate-fadeIn mt-8">
       <FaExclamationCircle className="w-4 h-4 text-error" />
       <span>{message}</span>
     </div>
