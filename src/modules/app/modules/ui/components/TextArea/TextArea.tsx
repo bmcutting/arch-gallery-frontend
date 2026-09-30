@@ -32,7 +32,7 @@ export default function Textarea({
   onClear,
   onBlur,
   onFocus,
-  className,
+  className = "h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg resize-none leading-relaxed",
   maxChars,
 }: Props) {
   const isInvalid = touched && !inputValue.value;
@@ -45,10 +45,11 @@ export default function Textarea({
       ) : (
         <div className={`${full ? "w-full" : ""}`}>
           <div
-            className={`relative ${isInvalid ? "border-error border-2 rounded-lg" : "border-border"}`}
+            className={`relative rounded-md border-2 transition-colors outline-none focus-within:border-accent
+              ${isInvalid ? "border-error" : "border-border"}`}
           >
             <textarea
-              className={`w-full resize-none ${className}`}
+              className={`w-full border-0 outline-none focus:outline-none focus:ring-0 focus:shadow-none ${className}`}
               name={name}
               placeholder={placeholder}
               disabled={disabled}

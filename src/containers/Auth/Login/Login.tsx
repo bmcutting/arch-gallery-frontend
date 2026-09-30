@@ -32,7 +32,6 @@ export default function Login() {
             touched={touched.email}
             onBlur={handleTouched}
             errorMsg="Debe añadir un correo electrónico"
-            className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>
 
@@ -46,7 +45,6 @@ export default function Login() {
             touched={touched.password}
             onBlur={handleTouched}
             errorMsg="Debe añadir la contraseña"
-            className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary"
           />
         </FormInput>
 

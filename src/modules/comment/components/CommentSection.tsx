@@ -63,8 +63,7 @@ export default function CommentSection({
             placeholder="Comenta..."
             onFocus={() => setShowTextarea(true)}
             onBlur={() => setShowTextarea(false)}
-            className={`px-3 py-2 pr-10 text-sm md:text-base lg:text-lg 
-                  rounded-md border border-border focus:ring-2 focus:ring-primary
+            className={`px-3 py-2 pr-10 text-sm md:text-base lg:text-lg
                   resize-none leading-relaxed overflow-y-auto transition-all duration-400
                   ${showTextarea ? "h-40 md:h-56 lg:h-64" : "h-10 md:h-10 lg:h-12"}`}
           />

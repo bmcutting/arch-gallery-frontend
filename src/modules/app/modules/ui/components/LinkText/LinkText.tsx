@@ -20,7 +20,7 @@ export default function LinkText({
       clsx(
         "text-sm text-center select-none transition-colors duration-300",
         highlight
-          ? "text-primary font-semibold hover:underline hover:text-secondary"
+          ? "text-accent font-semibold hover:underline hover:text-secondary"
           : "text-muted-foreground",
         className
       ),

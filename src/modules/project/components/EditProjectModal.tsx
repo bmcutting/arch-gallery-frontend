@@ -36,7 +36,6 @@ export default function EditProjectModal({ project, onClose }: Props) {
             <Input
               inputValue={title}
               onClear={() => title.onChange("")}
-              className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
             />
           </FormInput>
 
@@ -45,9 +44,6 @@ export default function EditProjectModal({ project, onClose }: Props) {
               placeholder="Descripción"
               inputValue={description}
               maxChars={500}
-              className="h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg
-                                    rounded-md border border-border focus:ring-2 focus:ring-primary
-                                    resize-none leading-relaxed"
             />
           </FormInput>
 
@@ -62,7 +58,6 @@ export default function EditProjectModal({ project, onClose }: Props) {
                   <Input
                     inputValue={{ value: cat, onChange: (value) => updateCategory(index, value) }}
                     placeholder="Ej: Urbanismo, Vivienda, Obra nueva..."
-                    className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
                   />
                   <button
                     type="button"

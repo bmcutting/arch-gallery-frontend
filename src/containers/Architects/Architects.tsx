@@ -73,7 +73,7 @@ export default function Architects() {
                 onFocus={() => setShowSuggestions(true)}
                 placeholder="Buscar por nombre, email o username..."
                 full
-                className="w-full pl-11 pr-4 py-3.5 text-base md:text-lg bg-card border border-border rounded-input text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent shadow-warm transition-smooth"
+                className="w-full pl-11 pr-4 py-3.5 text-base md:text-lg bg-card rounded-input text-foreground placeholder:text-muted-foreground shadow-warm transition-smooth"
               />
               {showSuggestions && suggestions.length > 0 && (
                 <ul className="absolute z-20 w-full bg-card border border-border rounded-input mt-1 shadow-warm-lg max-h-60 overflow-auto">
@@ -127,7 +127,7 @@ export default function Architects() {
                     type="text"
                     inputValue={firstName}
                     placeholder="Filtrar por nombre"
-                    className="w-full px-3 py-2 bg-card border border-border rounded-input text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent"
+                    className="w-full px-3 py-2 bg-card rounded-input text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
 
@@ -139,7 +139,7 @@ export default function Architects() {
                     type="text"
                     inputValue={lastName}
                     placeholder="Filtrar por apellido"
-                    className="w-full px-3 py-2 bg-card border border-border rounded-input text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent"
+                    className="w-full px-3 py-2 bg-card rounded-input text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
               </div>

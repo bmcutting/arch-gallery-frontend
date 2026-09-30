@@ -23,7 +23,6 @@ export default function LanguageSection({
             <Input
               inputValue={{ value: lang, onChange: (value) => updateLanguage(index, value) }}
               placeholder="Ej: Español, Inglés, Francés..."
-              className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary"
             />
             <button
               type="button"

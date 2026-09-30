@@ -46,7 +46,6 @@ export default function SkillFormModal({
               onBlur={handleTouched}
               required
               errorMsg="Debe añadir el nombre de la habilidad"
-              className="w-full px-3 py-2 border border-border rounded-md"
               full
             />
           </FormInput>

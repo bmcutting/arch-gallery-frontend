@@ -66,7 +66,6 @@ export default function ExperienceFormModal({
               touched={touched.title}
               onBlur={handleTouched}
               errorMsg="Debe añadir un título"
-              className="w-full px-3 py-2 border border-border rounded-md"
             />
           </FormInput>
           <FormInput label="Institución/Empresa" required>
@@ -82,7 +81,6 @@ export default function ExperienceFormModal({
               touched={touched.institutionOrCompany}
               onBlur={handleTouched}
               errorMsg="Debe añadir una institución o empresa"
-              className="w-full px-3 py-2 border border-border rounded-md"
             />
           </FormInput>
           <div className="grid grid-cols-2 gap-4">
@@ -139,7 +137,7 @@ export default function ExperienceFormModal({
             <Textarea
               placeholder="Describe tus responsabilidades o logros"
               inputValue={{ value: form.description, onChange: (val) => setForm({ ...form, description: val }) }}
-              className="border border-border rounded-md p-2"
+              className="p-2"
             />
           </FormInput>
           <div className="flex justify-end gap-3 pt-2">

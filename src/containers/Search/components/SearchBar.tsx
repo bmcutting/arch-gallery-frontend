@@ -43,7 +43,7 @@ export default function SearchBar({
           onFocus={() => setShowSuggestions(true)}
           placeholder="Buscar proyectos..."
           full
-          className="w-full pl-11 pr-4 py-3.5 text-base md:text-lg bg-card border border-border rounded-input text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent shadow-warm transition-smooth"
+          className="w-full pl-11 pr-4 py-3.5 text-base md:text-lg bg-card rounded-input text-foreground placeholder:text-muted-foreground shadow-warm transition-smooth"
         />
         {showSuggestions && (
           <SuggestionsDropdown

@@ -48,7 +48,7 @@ export default function SearchFilters({
               type="text"
               inputValue={title}
               placeholder="Filtrar por título"
-              className="w-full px-3 py-2 bg-card border border-border rounded-input text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent"
+              className="w-full px-3 py-2 bg-card rounded-input text-foreground placeholder:text-muted-foreground"
             />
           </div>
 
@@ -60,7 +60,7 @@ export default function SearchFilters({
               type="text"
               inputValue={year}
               placeholder="Filtrar por año"
-              className="w-full px-3 py-2 bg-card border border-border rounded-input text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent"
+              className="w-full px-3 py-2 bg-card rounded-input text-foreground placeholder:text-muted-foreground"
             />
           </div>
         </div>

@@ -38,7 +38,6 @@ export default function PersonalInfoSection({
               firstName: "",
             }))
           }
-          className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
         />
       </FormInput>
       <FormInput label="Apellido" size="lg">
@@ -55,7 +54,6 @@ export default function PersonalInfoSection({
               lastName: "",
             }))
           }
-          className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
         />
       </FormInput>
       <FormInput label="Nombre de usuario" size="lg">
@@ -72,7 +70,6 @@ export default function PersonalInfoSection({
               userName: "",
             }))
           }
-          className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
         />
       </FormInput>
       <FormInput label="Correo electrónico" size="lg">
@@ -89,42 +86,36 @@ export default function PersonalInfoSection({
               email: "",
             }))
           }
-          className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
         />
       </FormInput>
       <FormInput label="Teléfono" size="lg">
         <Input
           placeholder="Teléfono"
           inputValue={{ value: formData.phoneNumber ?? "", onChange: (value: string) => handleChange("phoneNumber", value) }}
-          className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
         />
       </FormInput>
       <FormInput label="Años de experiencia" size="lg">
         <Input
           placeholder="Años de Experiencia"
           inputValue={{ value: (formData.experienceYears ?? 0).toString(), onChange: (value: string) => handleChange("experienceYears", value) }}
-          className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
         />
       </FormInput>
       <FormInput label="Sitio web" size="lg">
         <Input
           placeholder="Website"
           inputValue={{ value: formData.website ?? "", onChange: (value: string) => handleChange("website", value) }}
-          className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
         />
       </FormInput>
       <FormInput label="Ubicación" size="lg">
         <Input
           placeholder="Ubicación"
           inputValue={{ value: formData.location ?? "", onChange: (value: string) => handleChange("location", value) }}
-          className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
         />
       </FormInput>
       <FormInput label="Especialización" size="lg">
         <Input
           placeholder="Especialización"
           inputValue={{ value: formData.specialization ?? "", onChange: (value: string) => handleChange("specialization", value) }}
-          className="w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md focus:ring-2 focus:ring-primary border border-primary focus:border-0"
         />
       </FormInput>
     </section>

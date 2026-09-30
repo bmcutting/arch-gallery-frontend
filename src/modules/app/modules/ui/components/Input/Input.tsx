@@ -39,7 +39,7 @@ export default function Input({
   onBlur,
   onFocus,
   onKeyDown,
-  className,
+  className = "w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md",
 }: Props) {
   const isInvalid = touched && !inputValue.value;
   return (
@@ -50,10 +50,11 @@ export default function Input({
         <div className={`${full ? "w-full" : ""}`}>
           {/* Input + botón Clear en fila */}
           <div
-            className={`relative flex items-center ${isInvalid ? "border-error border-2 rounded-lg" : "border-border"}`}
+            className={`relative flex items-center rounded-md border-2 transition-colors outline-none focus-within:border-accent
+              ${isInvalid ? "border-error" : "border-border"}`}
           >
             <input
-              className={className}
+              className={`${className} border-0 outline-none focus:outline-none focus:ring-0 focus:shadow-none`}
               type={type ?? "text"}
               name={name}
               placeholder={placeholder}
@@ -73,7 +74,7 @@ export default function Input({
           </div>
 
           {/* Mensaje de error debajo */}
-          {isInvalid && <p className="mt-1 text-sm text-error">{errorMsg}</p>}
+          {isInvalid && <div className="relative mt-1"> <p className="absolute top-full text-sm text-error">{errorMsg}</p></div>}
         </div>
       )}
     </>
