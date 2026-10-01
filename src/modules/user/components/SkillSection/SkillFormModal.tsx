@@ -1,10 +1,10 @@
 import { FaTimes } from "react-icons/fa";
-import Button from "../../../app/modules/ui/components/Button/Button";
-import Input from "../../../app/modules/ui/components/Input/Input";
-import type { Level } from "../../domain/enums/level";
-import FormInput from "../../../app/modules/ui/components/Form/FormInput";
-import useSkillForm from "../../hooks/useSkillForm";
-import type { Skill } from "../../domain/entities/skill";
+import Button from "@modules/app/modules/ui/components/Button/Button";
+import Input from "@modules/app/modules/ui/components/Input/Input";
+import type { Level } from "@modules/user/domain/enums/level";
+import FormInput from "@modules/app/modules/ui/components/Form/FormInput";
+import useSkillForm from "@modules/user/hooks/useSkillForm";
+import type { Skill } from "@modules/user/domain/entities/skill";
 
 interface Props {
   isOpen: boolean;
@@ -27,7 +27,7 @@ export default function SkillFormModal({
 
   return (
     <div className="flex items-center justify-center p-4">
-      <div className="bg-card rounded-lg shadow-xl w-full max-w-md">
+      <div className="bg-card rounded-lg shadow-xl w-full max-w-md max-h-[calc(100dvh-2rem)] overflow-y-auto">
         <div className="flex justify-between items-center p-4 border-b border-border">
           <h2 className="text-xl font-semibold">
             {skill ? "Editar habilidad" : "Añadir habilidad"}

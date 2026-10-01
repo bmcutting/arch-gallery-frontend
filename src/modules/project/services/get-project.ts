@@ -1,5 +1,5 @@
-import { instance } from "../../app/modules/http/domain/instance";
-import type { Project } from "../domain/entities/project";
+import { instance } from "@modules/app/modules/http/domain/instance";
+import type { Project } from "@modules/project/domain/entities/project";
 import type { ProjectFeedItemResponse } from "./get-all-projects";
 import { ProjectMapper } from "./project-mapper";
 

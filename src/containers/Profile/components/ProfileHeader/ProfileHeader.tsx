@@ -7,9 +7,9 @@ import {
   FaPhone,
 } from "react-icons/fa";
 import { IoGlobeOutline } from "react-icons/io5";
-import type { User } from "../../../../modules/user/domain/entities/user";
+import type { User } from "@modules/user/domain/entities/user";
 import { useNavigate } from "react-router-dom";
-import { APP_ROUTES } from "../../../../modules/app/domain/constants/app-routes";
+import { APP_ROUTES } from "@modules/app/domain/constants/app-routes";
 
 interface Props {
   user: User;

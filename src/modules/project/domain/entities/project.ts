@@ -1,7 +1,7 @@
-import type { Category } from "../../../category/domain/entities/category";
-import type { Comment } from "../../../comment/domain/entities/comment";
-import type { Like } from "../../../like/domain/entities/like";
-import type { User } from "../../../user/domain/entities/user";
+import type { Category } from "@modules/category/domain/entities/category";
+import type { Comment } from "@modules/comment/domain/entities/comment";
+import type { Like } from "@modules/like/domain/entities/like";
+import type { User } from "@modules/user/domain/entities/user";
 
 export interface Project {
   id: string;

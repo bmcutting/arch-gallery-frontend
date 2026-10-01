@@ -1,5 +1,5 @@
 import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
-import type { User } from "../../domain/entities/user";
+import type { User } from "@modules/user/domain/entities/user";
 
 interface Props {
   formData: User;

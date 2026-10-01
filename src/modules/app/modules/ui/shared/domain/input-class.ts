@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import type { Size } from "../../domain/size";
+import type { Size } from "@modules/app/modules/ui/domain/size";
 
 interface Props {
   size: Size;

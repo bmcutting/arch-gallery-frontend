@@ -1,4 +1,4 @@
-import type { IconProps } from "../domain/props";
+import type { IconProps } from "@modules/icon/domain/props";
 
 export default function Close({ size }: IconProps) {
   return (

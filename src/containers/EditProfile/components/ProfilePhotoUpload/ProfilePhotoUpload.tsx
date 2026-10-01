@@ -1,5 +1,5 @@
 import { FaInfo, FaUpload } from "react-icons/fa";
-import Input from "../../../../modules/app/modules/ui/components/Input/Input";
+import Input from "@modules/app/modules/ui/components/Input/Input";
 
 interface Props {
   profileImageUrl?: string;

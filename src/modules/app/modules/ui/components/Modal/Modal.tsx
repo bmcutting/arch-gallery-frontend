@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../Button/Button";
+import Button from "@modules/app/modules/ui/components/Button/Button";
 
 interface ModalProps {
   message: string;
@@ -19,8 +19,8 @@ export default function Modal({
   children,
 }: ModalProps) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-      <div className="bg-white rounded-xl shadow-2xl p-8 max-w-lg w-full text-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+      <div className="bg-white rounded-xl shadow-2xl p-8 max-w-lg w-full max-h-[calc(100dvh-2rem)] overflow-y-auto text-center">
         <p className="text-2xl font-bold text-foreground mb-6">{message}</p>
         {children && <div className="mb-8">{children}</div>}
 

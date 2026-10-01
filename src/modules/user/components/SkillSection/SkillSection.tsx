@@ -1,6 +1,6 @@
 import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
-import type { Skill } from "../../domain/entities/skill";
-import Button from "../../../app/modules/ui/components/Button/Button";
+import type { Skill } from "@modules/user/domain/entities/skill";
+import Button from "@modules/app/modules/ui/components/Button/Button";
 import { useState } from "react";
 import SkillFormModal from "./SkillFormModal";
 

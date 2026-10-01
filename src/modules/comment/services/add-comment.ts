@@ -1,5 +1,5 @@
-import { instance } from "../../app/modules/http/domain/instance";
-import type { AddCommentDto } from "../dto/write/add-comment";
+import { instance } from "@modules/app/modules/http/domain/instance";
+import type { AddCommentDto } from "@modules/comment/dto/write/add-comment";
 
 export function addComment(props: AddCommentDto): Promise<number> {
   return instance

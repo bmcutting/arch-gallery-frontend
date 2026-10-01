@@ -1,4 +1,4 @@
-import LinkText from "../../../app/modules/ui/components/LinkText/LinkText";
+import LinkText from "@modules/app/modules/ui/components/LinkText/LinkText";
 
 interface Props {
   message: string;

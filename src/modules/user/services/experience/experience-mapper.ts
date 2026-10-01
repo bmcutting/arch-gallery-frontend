@@ -1,5 +1,5 @@
-import type { Experience } from "../../domain/entities/experience";
-import type { ExperienceResponse } from "../../dto/read/experience";
+import type { Experience } from "@modules/user/domain/entities/experience";
+import type { ExperienceResponse } from "@modules/user/dto/read/experience";
 
 export class ExperienceMapper {
   static toDomain(r: ExperienceResponse): Experience {

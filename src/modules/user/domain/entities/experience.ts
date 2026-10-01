@@ -1,4 +1,4 @@
-import type { ExperienceType } from "../enums/experience";
+import type { ExperienceType } from "@modules/user/domain/enums/experience";
 
 export interface Experience {
   id: string;

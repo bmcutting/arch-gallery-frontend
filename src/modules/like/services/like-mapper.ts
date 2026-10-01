@@ -1,5 +1,5 @@
-import type { Like } from "../domain/entities/like";
-import type { LikeResponse } from "../dto/read/like";
+import type { Like } from "@modules/like/domain/entities/like";
+import type { LikeResponse } from "@modules/like/dto/read/like";
 
 export class LikeMapper {
   static toDomain(r: LikeResponse): Like {

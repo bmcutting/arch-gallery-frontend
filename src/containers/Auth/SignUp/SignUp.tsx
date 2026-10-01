@@ -1,11 +1,11 @@
-import { APP_ROUTES } from "../../../modules/app/domain/constants/app-routes";
-import Button from "../../../modules/app/modules/ui/components/Button/Button";
-import ErrorMessage from "../../../modules/app/modules/ui/components/ErrorMessage/ErrorMessage";
-import FormInput from "../../../modules/app/modules/ui/components/Form/FormInput";
-import Input from "../../../modules/app/modules/ui/components/Input/Input";
-import AuthPrompt from "../../../modules/user/components/AuthPrompt/AuthPrompt";
-import AuthContainer from "../components/AuthContainer";
-import Header from "../components/Header";
+import { APP_ROUTES } from "@modules/app/domain/constants/app-routes";
+import Button from "@modules/app/modules/ui/components/Button/Button";
+import ErrorMessage from "@modules/app/modules/ui/components/ErrorMessage/ErrorMessage";
+import FormInput from "@modules/app/modules/ui/components/Form/FormInput";
+import Input from "@modules/app/modules/ui/components/Input/Input";
+import AuthPrompt from "@modules/user/components/AuthPrompt/AuthPrompt";
+import AuthContainer from "@containers/Auth/components/AuthContainer";
+import Header from "@containers/Auth/components/Header";
 import useSignUp from "./hooks/useSignUp";
 
 export default function SignUp() {

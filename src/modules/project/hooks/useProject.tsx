@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { createProject } from "../services/create-project";
-import type { Project } from "../domain/entities/project";
-import { updateProject } from "../services/update-project";
+import { createProject } from "@modules/project/services/create-project";
+import type { Project } from "@modules/project/domain/entities/project";
+import { updateProject } from "@modules/project/services/update-project";
 
 interface Props {
   onClose?: () => void;

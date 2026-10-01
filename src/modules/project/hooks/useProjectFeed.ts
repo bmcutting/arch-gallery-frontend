@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { getProjectFeed } from "../services/get-feed";
-import type { Project } from "../domain/entities/project";
+import { getProjectFeed } from "@modules/project/services/get-feed";
+import type { Project } from "@modules/project/domain/entities/project";
 
 interface ProjectFeedItem {
   project: Project;

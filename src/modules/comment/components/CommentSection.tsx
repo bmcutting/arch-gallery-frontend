@@ -1,7 +1,7 @@
 import { BiSend } from "react-icons/bi";
-import Textarea from "../../app/modules/ui/components/TextArea/TextArea";
-import type { Project } from "../../project/domain/entities/project";
-import useComment from "../hooks/useComment";
+import Textarea from "@modules/app/modules/ui/components/TextArea/TextArea";
+import type { Project } from "@modules/project/domain/entities/project";
+import useComment from "@modules/comment/hooks/useComment";
 import CommentCard from "./CommentCard";
 
 interface Props extends ReturnType<typeof useComment> {

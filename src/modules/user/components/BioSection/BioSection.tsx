@@ -1,6 +1,6 @@
-import FormInput from "../../../app/modules/ui/components/Form/FormInput";
-import Textarea from "../../../app/modules/ui/components/TextArea/TextArea";
-import type { User } from "../../domain/entities/user";
+import FormInput from "@modules/app/modules/ui/components/Form/FormInput";
+import Textarea from "@modules/app/modules/ui/components/TextArea/TextArea";
+import type { User } from "@modules/user/domain/entities/user";
 
 interface Props {
   formData: User;

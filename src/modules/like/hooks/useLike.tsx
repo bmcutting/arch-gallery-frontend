@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { addLike } from "../services/add-like";
-import { removeLike } from "../services/remove-like";
-import type { Project } from "../../project/domain/entities/project";
+import { addLike } from "@modules/like/services/add-like";
+import { removeLike } from "@modules/like/services/remove-like";
+import type { Project } from "@modules/project/domain/entities/project";
 
 interface Props {
   project: Project;

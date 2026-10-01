@@ -1,5 +1,5 @@
-import type { Experience } from "../../domain/entities/experience";
-import type { Skill } from "../../domain/entities/skill";
+import type { Experience } from "@modules/user/domain/entities/experience";
+import type { Skill } from "@modules/user/domain/entities/skill";
 
 export interface UpdateUserDto {
   userId: string;

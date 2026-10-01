@@ -1,4 +1,4 @@
-import type { Project } from "../../../modules/project/domain/entities/project";
+import type { Project } from "@modules/project/domain/entities/project";
 
 interface Props {
   suggestions: Project[];

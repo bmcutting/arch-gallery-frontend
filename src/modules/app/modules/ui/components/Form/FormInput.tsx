@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import type { Size } from "../../domain/size";
-import Label from "../Label/Label";
+import type { Size } from "@modules/app/modules/ui/domain/size";
+import Label from "@modules/app/modules/ui/components/Label/Label";
 import SwitchText from "./components/SwitchText/SwitchText";
 
 interface Props {

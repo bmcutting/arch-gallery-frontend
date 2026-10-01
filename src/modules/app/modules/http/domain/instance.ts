@@ -1,11 +1,11 @@
 import axios, { HttpStatusCode } from "axios";
-import { API_ROUTE } from "../../../domain/constants/env";
+import { API_ROUTE } from "@modules/app/domain/constants/env";
 import {
   LOCAL_STORAGE_KEY,
   LocalStorage,
-} from "../../../entities/local-storage";
+} from "@modules/app/entities/local-storage";
 import type { HttpResponseError } from "./error";
-import { APP_ROUTES } from "../../../domain/constants/app-routes";
+import { APP_ROUTES } from "@modules/app/domain/constants/app-routes";
 
 const instance = axios.create({
   baseURL: API_ROUTE,

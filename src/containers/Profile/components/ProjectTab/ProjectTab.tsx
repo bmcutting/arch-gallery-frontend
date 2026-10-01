@@ -1,11 +1,11 @@
-import Select from "../../../../modules/app/modules/ui/components/Select/Select";
-import useUserProjects from "../../../../modules/project/hooks/useUserProjects";
-import CreateProjectModal from "../../../../modules/project/components/CreateProjectModal";
-import ProjectFeed from "../../../../modules/project/components/ProjectFeed";
-import ProjectContextMenu from "../ProjectContextMenu/ProjectContextMenu";
-import useContextMenu from "../../hooks/useContextMenu";
-import Modal from "../../../../modules/app/modules/ui/components/Modal/Modal";
-import EditProjectModal from "../../../../modules/project/components/EditProjectModal";
+import Select from "@modules/app/modules/ui/components/Select/Select";
+import useUserProjects from "@modules/project/hooks/useUserProjects";
+import CreateProjectModal from "@modules/project/components/CreateProjectModal";
+import ProjectFeed from "@modules/project/components/ProjectFeed";
+import ProjectContextMenu from "@containers/Profile/components/ProjectContextMenu/ProjectContextMenu";
+import useContextMenu from "@containers/Profile/hooks/useContextMenu";
+import Modal from "@modules/app/modules/ui/components/Modal/Modal";
+import EditProjectModal from "@modules/project/components/EditProjectModal";
 
 interface Props {
   userId: string;

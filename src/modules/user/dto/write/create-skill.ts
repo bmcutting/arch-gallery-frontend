@@ -1,4 +1,4 @@
-import type { Level } from "../../domain/enums/level";
+import type { Level } from "@modules/user/domain/enums/level";
 
 export interface CreateSkillDto {
   userId: string;

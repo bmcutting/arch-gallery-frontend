@@ -1,6 +1,6 @@
-import AppLayout from "../../layouts/AppLayout";
-import useProjectFeed from "../../modules/project/hooks/useProjectFeed";
-import ProjectFeed from "../../modules/project/components/ProjectFeed";
+import AppLayout from "@layouts/AppLayout";
+import useProjectFeed from "@modules/project/hooks/useProjectFeed";
+import ProjectFeed from "@modules/project/components/ProjectFeed";
 
 export default function Home() {
   const { projects, loading, loaderRef } = useProjectFeed();

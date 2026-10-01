@@ -1,11 +1,11 @@
 import { FaTimes } from "react-icons/fa";
-import type { Experience } from "../../domain/entities/experience";
-import useExperienceForm from "../../hooks/useExperienceForm";
-import Input from "../../../app/modules/ui/components/Input/Input";
-import FormInput from "../../../app/modules/ui/components/Form/FormInput";
-import Textarea from "../../../app/modules/ui/components/TextArea/TextArea";
-import Button from "../../../app/modules/ui/components/Button/Button";
-import type { ExperienceType } from "../../domain/enums/experience";
+import type { Experience } from "@modules/user/domain/entities/experience";
+import useExperienceForm from "@modules/user/hooks/useExperienceForm";
+import Input from "@modules/app/modules/ui/components/Input/Input";
+import FormInput from "@modules/app/modules/ui/components/Form/FormInput";
+import Textarea from "@modules/app/modules/ui/components/TextArea/TextArea";
+import Button from "@modules/app/modules/ui/components/Button/Button";
+import type { ExperienceType } from "@modules/user/domain/enums/experience";
 
 interface Props {
   isOpen: boolean;
@@ -32,7 +32,7 @@ export default function ExperienceFormModal({
 
   return (
     <div className="flex items-center justify-center">
-      <div className="bg-card rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-border">
+      <div className="bg-card rounded-lg shadow-xl w-full max-w-2xl max-h-[calc(100dvh-2rem)] overflow-y-auto border border-border">
         <div className="flex justify-between items-center p-4 border-b border-border">
           <h2 className="text-xl font-semibold">
             {experience ? "Editar experiencia" : "Añadir experiencia"}

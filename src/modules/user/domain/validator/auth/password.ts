@@ -1,6 +1,6 @@
-import type { AppException } from "../../../../app/domain/exception/app";
-import type { IValidator } from "../../../../app/validator/validator";
-import { EmptyPasswordException } from "../../exceptions/auth-password";
+import type { AppException } from "@modules/app/domain/exception/app";
+import type { IValidator } from "@modules/app/validator/validator";
+import { EmptyPasswordException } from "@modules/user/domain/exceptions/auth-password";
 
 export class AuthPasswordValidator implements IValidator {
   constructor(private readonly value: string) {}

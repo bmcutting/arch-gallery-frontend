@@ -1,5 +1,5 @@
-import type { PaginationDTO } from "../../../app/modules/shared/dto/write/pagination";
-import type { ProjectSortFields } from "../../domain/enums/project-sort-fileds";
+import type { PaginationDTO } from "@modules/app/modules/shared/dto/write/pagination";
+import type { ProjectSortFields } from "@modules/project/domain/enums/project-sort-fileds";
 
 export type ProjectPaginationParams = PaginationDTO & {
   search?: string;

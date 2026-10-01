@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { createUser } from "../../../../modules/user/services/user/create-user";
-import { SignUpValidator } from "../../../../modules/user/domain/validator/signup/signup-validator";
+import { createUser } from "@modules/user/services/user/create-user";
+import { SignUpValidator } from "@modules/user/domain/validator/signup/signup-validator";
 import {
   LOCAL_STORAGE_KEY,
   LocalStorage,
-} from "../../../../modules/app/entities/local-storage";
-import type { HttpResponseError } from "../../../../modules/app/modules/http/domain/error";
+} from "@modules/app/entities/local-storage";
+import type { HttpResponseError } from "@modules/app/modules/http/domain/error";
 import { HttpStatusCode } from "axios";
-import { loginUser } from "../../../../modules/user/services/user/login-user";
+import { loginUser } from "@modules/user/services/user/login-user";
 
 export default function useSignUp() {
   const router = useNavigate();

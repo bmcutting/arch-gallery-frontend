@@ -1,7 +1,7 @@
-import type { CategoryResponse } from "../../../category/dto/read/category";
-import type { CommentResponse } from "../../../comment/dto/read/commentResponse";
-import type { LikeResponse } from "../../../like/dto/read/like";
-import type { UserResponse } from "../../../user/dto/read/user";
+import type { CategoryResponse } from "@modules/category/dto/read/category";
+import type { CommentResponse } from "@modules/comment/dto/read/commentResponse";
+import type { LikeResponse } from "@modules/like/dto/read/like";
+import type { UserResponse } from "@modules/user/dto/read/user";
 
 export interface ProjectResponse {
   id: string;

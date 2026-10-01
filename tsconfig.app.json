@@ -16,6 +16,15 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    /* Path aliases (mantener sincronizados con vite.config.ts) */
+    "paths": {
+      "@modules/*": ["./src/modules/*"],
+      "@containers/*": ["./src/containers/*"],
+      "@providers/*": ["./src/providers/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@assets/*": ["./src/assets/*"]
+    },
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

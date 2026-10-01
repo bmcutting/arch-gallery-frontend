@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type { Skill } from "../domain/entities/skill";
-import { Level } from "../domain/enums/level";
+import type { Skill } from "@modules/user/domain/entities/skill";
+import { Level } from "@modules/user/domain/enums/level";
 
 interface Props {
   isOpen: boolean;

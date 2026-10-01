@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { FaImage, FaHeart, FaComment, FaUser } from "react-icons/fa";
-import Button from "../../app/modules/ui/components/Button/Button";
-import useLike from "../../like/hooks/useLike";
+import Button from "@modules/app/modules/ui/components/Button/Button";
+import useLike from "@modules/like/hooks/useLike";
 import ProjectDetailModal from "./ProjectDetailModal";
-import useProjectDetail from "../hooks/useProjectDetail";
-import CommentSection from "../../comment/components/CommentSection";
-import useComment from "../../comment/hooks/useComment";
-import type { Project } from "../domain/entities/project";
+import useProjectDetail from "@modules/project/hooks/useProjectDetail";
+import CommentSection from "@modules/comment/components/CommentSection";
+import useComment from "@modules/comment/hooks/useComment";
+import type { Project } from "@modules/project/domain/entities/project";
 
 interface ProjectFeedProps {
   project: Project;

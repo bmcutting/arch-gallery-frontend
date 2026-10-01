@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import AppLayout from "../../layouts/AppLayout";
+import AppLayout from "@layouts/AppLayout";
 import ProfileHeader from "./components/ProfileHeader/ProfileHeader";
 import ProjectTab from "./components/ProjectTab/ProjectTab";
 import AbouTab from "./components/AboutTab/AboutTab";
-import useProfileUser from "../../modules/user/hooks/useProfileUser";
+import useProfileUser from "@modules/user/hooks/useProfileUser";
 import ExperienceTab from "./components/ExperienceTab/ExperienceTab";
 
 export default function Profile() {

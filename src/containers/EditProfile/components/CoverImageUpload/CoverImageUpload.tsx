@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { FaImage } from "react-icons/fa";
-import Button from "../../../../modules/app/modules/ui/components/Button/Button";
+import Button from "@modules/app/modules/ui/components/Button/Button";
 
 interface Props {
   coverImageUrl?: string;

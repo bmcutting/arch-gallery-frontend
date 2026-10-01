@@ -1,6 +1,6 @@
 import { useState } from "react";
-import AppLayout from "../../layouts/AppLayout";
-import useProjectSearch from "../../modules/project/hooks/useProjectSearch";
+import AppLayout from "@layouts/AppLayout";
+import useProjectSearch from "@modules/project/hooks/useProjectSearch";
 import SearchHero from "./components/SearchHero";
 import SearchBar from "./components/SearchBar";
 import SearchFilters from "./components/SearchFilters";

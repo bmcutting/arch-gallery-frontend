@@ -1,6 +1,6 @@
-import { instance } from "../../app/modules/http/domain/instance";
-import type { Project } from "../domain/entities/project";
-import type { ProjectResponse } from "../dto/read/project";
+import { instance } from "@modules/app/modules/http/domain/instance";
+import type { Project } from "@modules/project/domain/entities/project";
+import type { ProjectResponse } from "@modules/project/dto/read/project";
 import { ProjectMapper } from "./project-mapper";
 
 interface Props {

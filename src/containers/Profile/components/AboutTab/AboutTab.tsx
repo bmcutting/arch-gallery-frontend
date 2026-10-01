@@ -1,4 +1,4 @@
-import type { User } from "../../../../modules/user/domain/entities/user";
+import type { User } from "@modules/user/domain/entities/user";
 
 interface Props {
   user?: User | null;

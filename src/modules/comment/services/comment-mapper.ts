@@ -1,5 +1,5 @@
-import type { Comment } from "../domain/entities/comment";
-import type { CommentResponse } from "../dto/read/commentResponse";
+import type { Comment } from "@modules/comment/domain/entities/comment";
+import type { CommentResponse } from "@modules/comment/dto/read/commentResponse";
 
 export class CommentMapper {
   static toDomain(r: CommentResponse): Comment {

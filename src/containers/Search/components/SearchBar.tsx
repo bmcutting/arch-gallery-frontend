@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { ChevronDown, SearchIcon, SlidersHorizontal } from "lucide-react";
-import Input, { type InputValue } from "../../../modules/app/modules/ui/components/Input/Input";
-import useClickOutside from "../../../modules/app/hooks/useClickOutside";
-import type { Project } from "../../../modules/project/domain/entities/project";
+import Input, { type InputValue } from "@modules/app/modules/ui/components/Input/Input";
+import useClickOutside from "@modules/app/hooks/useClickOutside";
+import type { Project } from "@modules/project/domain/entities/project";
 import SuggestionsDropdown from "./SuggestionsDropdown";
 
 interface Props {

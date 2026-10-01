@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import type { Project } from "../domain/entities/project";
-import { getProjectByLoggedUser } from "../services/get-project";
-import { getProjectsByUserId } from "../services/get-projects-by-user";
-import { deleteProject } from "../services/delete-project";
+import type { Project } from "@modules/project/domain/entities/project";
+import { getProjectByLoggedUser } from "@modules/project/services/get-project";
+import { getProjectsByUserId } from "@modules/project/services/get-projects-by-user";
+import { deleteProject } from "@modules/project/services/delete-project";
 
 interface ProjectFeedItem {
   project: Project;

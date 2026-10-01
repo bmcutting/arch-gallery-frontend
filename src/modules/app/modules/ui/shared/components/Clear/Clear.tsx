@@ -1,4 +1,4 @@
-import Close from "../../../../../../icon/components/Close";
+import Close from "@modules/icon/components/Close";
 
 interface Props {
   onClick?: () => void;

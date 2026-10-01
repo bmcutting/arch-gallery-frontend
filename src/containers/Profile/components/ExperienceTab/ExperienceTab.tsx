@@ -1,6 +1,6 @@
 import { FaWrench } from "react-icons/fa";
-import type { User } from "../../../../modules/user/domain/entities/user";
-import useExperience from "../../hooks/useExperience";
+import type { User } from "@modules/user/domain/entities/user";
+import useExperience from "@containers/Profile/hooks/useExperience";
 
 interface Props {
   user?: User | null;

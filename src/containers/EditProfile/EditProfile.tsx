@@ -1,15 +1,15 @@
-import AppLayout from "../../layouts/AppLayout";
+import AppLayout from "@layouts/AppLayout";
 import ProfilePhotoUpload from "./components/ProfilePhotoUpload/ProfilePhotoUpload";
 import useUpdateUser from "./hooks/useUpdateUser";
-import Button from "../../modules/app/modules/ui/components/Button/Button";
-import PersonalInfoSection from "../../modules/user/components/PersonalInfoSection/PersonalInfoSection";
-import CollapsibleSection from "../../modules/app/modules/shared/components/CollapsibleSection/CollapsibleSection";
-import BioSection from "../../modules/user/components/BioSection/BioSection";
-import SocialSection from "../../modules/user/components/SocialSection/SocialSection";
-import LanguageSection from "../../modules/user/components/LanguagesSection/LanguagesSection";
+import Button from "@modules/app/modules/ui/components/Button/Button";
+import PersonalInfoSection from "@modules/user/components/PersonalInfoSection/PersonalInfoSection";
+import CollapsibleSection from "@modules/app/modules/shared/components/CollapsibleSection/CollapsibleSection";
+import BioSection from "@modules/user/components/BioSection/BioSection";
+import SocialSection from "@modules/user/components/SocialSection/SocialSection";
+import LanguageSection from "@modules/user/components/LanguagesSection/LanguagesSection";
 import CoverImageUpload from "./components/CoverImageUpload/CoverImageUpload";
-import ExperienceSection from "../../modules/user/components/ExperienceSection/ExperienceSection";
-import SkillSection from "../../modules/user/components/SkillSection/SkillSection";
+import ExperienceSection from "@modules/user/components/ExperienceSection/ExperienceSection";
+import SkillSection from "@modules/user/components/SkillSection/SkillSection";
 
 export default function ProfileManagement() {
   const {

@@ -1,7 +1,7 @@
 import { FaBriefcase, FaGraduationCap } from "react-icons/fa";
-import type { Experience } from "../../../modules/user/domain/entities/experience";
-import type { User } from "../../../modules/user/domain/entities/user";
-import { ExperienceType } from "../../../modules/user/domain/enums/experience";
+import type { Experience } from "@modules/user/domain/entities/experience";
+import type { User } from "@modules/user/domain/entities/user";
+import { ExperienceType } from "@modules/user/domain/enums/experience";
 
 interface Props {
   user?: User | null;

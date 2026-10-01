@@ -1,6 +1,6 @@
-import { Validator } from "../../../../app/validator/validator";
-import { AuthEmailValidator } from "../auth/email";
-import { AuthPasswordValidator } from "../auth/password";
+import { Validator } from "@modules/app/validator/validator";
+import { AuthEmailValidator } from "@modules/user/domain/validator/auth/email";
+import { AuthPasswordValidator } from "@modules/user/domain/validator/auth/password";
 import { SignUpFirstNameValidator } from "./firstname";
 import { SignUpLastNameValidator } from "./lastname";
 import { SignUpUserNameValidator } from "./username";

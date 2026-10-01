@@ -1,4 +1,4 @@
-import { Validator } from "../../../../app/validator/validator";
+import { Validator } from "@modules/app/validator/validator";
 import { AuthEmailValidator } from "./email";
 import { AuthPasswordValidator } from "./password";
 

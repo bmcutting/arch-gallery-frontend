@@ -1,4 +1,4 @@
-import type { AppException } from "../domain/exception/app";
+import type { AppException } from "@modules/app/domain/exception/app";
 
 export interface IValidator {
   validate(): AppException[];

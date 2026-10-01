@@ -1,8 +1,8 @@
 import { FaMapPin, FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import type { User } from "../../domain/entities/user";
-import Button from "../../../app/modules/ui/components/Button/Button";
-import { buildArchitectDetailPath } from "../../../app/domain/constants/app-routes";
+import type { User } from "@modules/user/domain/entities/user";
+import Button from "@modules/app/modules/ui/components/Button/Button";
+import { buildArchitectDetailPath } from "@modules/app/domain/constants/app-routes";
 
 interface Props {
   architect?: User;

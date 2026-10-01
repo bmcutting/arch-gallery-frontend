@@ -1,6 +1,6 @@
-import type { AppException } from "../../../../app/domain/exception/app";
-import type { IValidator } from "../../../../app/validator/validator";
-import { EmptyLastNameException } from "../../exceptions/signup-lastname";
+import type { AppException } from "@modules/app/domain/exception/app";
+import type { IValidator } from "@modules/app/validator/validator";
+import { EmptyLastNameException } from "@modules/user/domain/exceptions/signup-lastname";
 
 export class SignUpLastNameValidator implements IValidator {
   constructor(private readonly value: string) {}

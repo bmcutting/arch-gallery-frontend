@@ -1,6 +1,6 @@
-import Clear from "../../shared/components/Clear/Clear";
-import FormLoader from "../../shared/components/FormLoader/FormLoader";
-import type { InputValue } from "../Input/Input";
+import Clear from "@modules/app/modules/ui/shared/components/Clear/Clear";
+import FormLoader from "@modules/app/modules/ui/shared/components/FormLoader/FormLoader";
+import type { InputValue } from "@modules/app/modules/ui/components/Input/Input";
 
 interface Props {
   inputValue: InputValue;

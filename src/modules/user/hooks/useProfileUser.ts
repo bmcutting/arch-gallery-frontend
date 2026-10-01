@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getMe } from "../services/user/get-me";
-import { getUserById } from "../services/user/get-user-by-id";
-import type { User } from "../domain/entities/user";
-import { APP_ROUTES } from "../../app/domain/constants/app-routes";
+import { getMe } from "@modules/user/services/user/get-me";
+import { getUserById } from "@modules/user/services/user/get-user-by-id";
+import type { User } from "@modules/user/domain/entities/user";
+import { APP_ROUTES } from "@modules/app/domain/constants/app-routes";
 
 interface Result {
   user?: User;

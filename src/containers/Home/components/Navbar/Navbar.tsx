@@ -1,10 +1,10 @@
 import { FiHome, FiSearch, FiUser, FiUsers } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { APP_ROUTES } from "../../../../modules/app/domain/constants/app-routes";
+import { APP_ROUTES } from "@modules/app/domain/constants/app-routes";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 h-14 w-full lg:px-10 px-4 py-2 bg-white bg-opacity-90 shadow backdrop-blur-lg backdrop-blur-saturate-150 z-[9999]">
+    <nav className="fixed top-0 left-0 right-0 h-14 w-full lg:px-10 px-4 py-2 bg-white bg-opacity-90 shadow backdrop-blur-lg backdrop-blur-saturate-150 z-20">
       <div className="flex flex-wrap items-center justify-between w-full text-slate-800">
         <a
           className="flex items-center gap-2 mr-4 cursor-pointer py-1.5 text-md text-slate-800 font-semibold"

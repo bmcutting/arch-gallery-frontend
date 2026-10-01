@@ -1,4 +1,4 @@
-import type { UserSummary } from "../../../user/domain/entities/user-summary";
+import type { UserSummary } from "@modules/user/domain/entities/user-summary";
 
 export interface Comment {
   id: string;

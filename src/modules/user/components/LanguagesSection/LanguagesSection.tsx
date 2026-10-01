@@ -1,6 +1,6 @@
-import Button from "../../../app/modules/ui/components/Button/Button";
-import Input from "../../../app/modules/ui/components/Input/Input";
-import type { User } from "../../domain/entities/user";
+import Button from "@modules/app/modules/ui/components/Button/Button";
+import Input from "@modules/app/modules/ui/components/Input/Input";
+import type { User } from "@modules/user/domain/entities/user";
 
 interface Props {
   formData: User;

@@ -1,6 +1,6 @@
 import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
-import Button from "../../../app/modules/ui/components/Button/Button";
-import type { Experience } from "../../domain/entities/experience";
+import Button from "@modules/app/modules/ui/components/Button/Button";
+import type { Experience } from "@modules/user/domain/entities/experience";
 import { useState } from "react";
 import ExperienceFormModal from "./ExperienceFormModal";
 

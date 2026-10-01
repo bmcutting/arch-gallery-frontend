@@ -1,4 +1,4 @@
-import { AppException } from "../../../app/domain/exception/app";
+import { AppException } from "@modules/app/domain/exception/app";
 
 export class EmptyFirstNameException extends AppException {
   constructor() {

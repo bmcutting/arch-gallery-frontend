@@ -1,5 +1,5 @@
 import { FaUser } from "react-icons/fa";
-import type { Comment } from "../domain/entities/comment";
+import type { Comment } from "@modules/comment/domain/entities/comment";
 
 interface Props {
   comment: Comment;

@@ -1,5 +1,5 @@
-import type { PaginationResult } from "../domain/core/pagination-result";
-import type { PaginationResponse } from "../dto/read/pagination";
+import type { PaginationResult } from "@modules/app/modules/shared/domain/core/pagination-result";
+import type { PaginationResponse } from "@modules/app/modules/shared/dto/read/pagination";
 
 export class PaginationResultMapper {
   static execute<R, T>(

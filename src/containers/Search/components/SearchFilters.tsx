@@ -1,6 +1,6 @@
-import Input from "../../../modules/app/modules/ui/components/Input/Input";
-import Segmented from "../../../modules/app/modules/ui/components/Segmented/Segmented";
-import Button from "../../../modules/app/modules/ui/components/Button/Button";
+import Input from "@modules/app/modules/ui/components/Input/Input";
+import Segmented from "@modules/app/modules/ui/components/Segmented/Segmented";
+import Button from "@modules/app/modules/ui/components/Button/Button";
 
 interface SortOption {
   value: string;

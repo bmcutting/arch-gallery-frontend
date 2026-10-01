@@ -1,5 +1,5 @@
-import type { PaginationDTO } from "../../../app/modules/shared/dto/write/pagination";
-import type { UserSortFields } from "../../domain/enums/user-sort-fields";
+import type { PaginationDTO } from "@modules/app/modules/shared/dto/write/pagination";
+import type { UserSortFields } from "@modules/user/domain/enums/user-sort-fields";
 
 export type UserPaginationParams = PaginationDTO & {
   search?: string;

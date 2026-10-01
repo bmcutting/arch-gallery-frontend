@@ -1,4 +1,4 @@
-import type { UserSummaryResponse } from "../../../user/dto/read/user-summary";
+import type { UserSummaryResponse } from "@modules/user/dto/read/user-summary";
 
 export interface CommentResponse {
   id: string;

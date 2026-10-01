@@ -1,7 +1,7 @@
-import type { User } from "../../domain/entities/user";
-import type { UserResponse } from "../../dto/read/user";
-import { ExperienceMapper } from "../experience/experience-mapper";
-import { SkillMapper } from "../skill/skill-mapper";
+import type { User } from "@modules/user/domain/entities/user";
+import type { UserResponse } from "@modules/user/dto/read/user";
+import { ExperienceMapper } from "@modules/user/services/experience/experience-mapper";
+import { SkillMapper } from "@modules/user/services/skill/skill-mapper";
 
 export class UserMapper {
   static execute(r: UserResponse): User {

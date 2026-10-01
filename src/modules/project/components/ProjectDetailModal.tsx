@@ -1,7 +1,7 @@
 import { FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import type { Project } from "../domain/entities/project";
-import { getProjectById } from "../services/get-project-by-id";
+import type { Project } from "@modules/project/domain/entities/project";
+import { getProjectById } from "@modules/project/services/get-project-by-id";
 
 interface ProjectDetailModalProps {
   projectId: string;
@@ -38,8 +38,8 @@ export default function ProjectDetailModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-lg max-w-4xl w-full p-6 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg shadow-lg max-w-4xl w-full max-h-[calc(100dvh-2rem)] p-6 overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">{project?.title}</h2>
           <button

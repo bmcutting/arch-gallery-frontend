@@ -1,8 +1,8 @@
-import { CategoryMapper } from "../../category/services/category-mapper";
-import { CommentMapper } from "../../comment/services/comment-mapper";
-import { LikeMapper } from "../../like/services/like-mapper";
-import type { Project } from "../domain/entities/project";
-import type { ProjectResponse } from "../dto/read/project";
+import { CategoryMapper } from "@modules/category/services/category-mapper";
+import { CommentMapper } from "@modules/comment/services/comment-mapper";
+import { LikeMapper } from "@modules/like/services/like-mapper";
+import type { Project } from "@modules/project/domain/entities/project";
+import type { ProjectResponse } from "@modules/project/dto/read/project";
 
 export class ProjectMapper {
   static toDomain(r: ProjectResponse): Project {

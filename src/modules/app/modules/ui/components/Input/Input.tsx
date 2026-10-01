@@ -1,5 +1,5 @@
-import FormLoader from "../../shared/components/FormLoader/FormLoader";
-import Clear from "../../shared/components/Clear/Clear";
+import FormLoader from "@modules/app/modules/ui/shared/components/FormLoader/FormLoader";
+import Clear from "@modules/app/modules/ui/shared/components/Clear/Clear";
 
 export interface InputValue {
   value: string | undefined;

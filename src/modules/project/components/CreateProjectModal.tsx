@@ -1,9 +1,9 @@
 import { FaFolderPlus } from "react-icons/fa";
-import FormInput from "../../app/modules/ui/components/Form/FormInput";
-import Input from "../../app/modules/ui/components/Input/Input";
-import Textarea from "../../app/modules/ui/components/TextArea/TextArea";
-import Button from "../../app/modules/ui/components/Button/Button";
-import useProject from "../hooks/useProject";
+import FormInput from "@modules/app/modules/ui/components/Form/FormInput";
+import Input from "@modules/app/modules/ui/components/Input/Input";
+import Textarea from "@modules/app/modules/ui/components/TextArea/TextArea";
+import Button from "@modules/app/modules/ui/components/Button/Button";
+import useProject from "@modules/project/hooks/useProject";
 
 interface Props {
   onClose: () => void;
@@ -23,8 +23,8 @@ export default function CreateProjectModal({ onClose, userId }: Props) {
   } = useProject({ onClose, userId });
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50 transition-opacity mt-14 overflow-y-auto">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg p-6 animate-fadeIn">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50 transition-opacity p-4">
+      <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[calc(100dvh-2rem)] overflow-y-auto p-6 animate-fadeIn">
         <div className="flex items-center gap-2 mb-6">
           <FaFolderPlus className="text-accent text-2xl" />
           <h2 className="text-2xl font-bold text-secondary">Nuevo Proyecto</h2>

@@ -2,8 +2,8 @@ import { Navigate } from "react-router-dom";
 import {
   LOCAL_STORAGE_KEY,
   LocalStorage,
-} from "../entities/local-storage";
-import { APP_ROUTES } from "../domain/constants/app-routes";
+} from "@modules/app/entities/local-storage";
+import { APP_ROUTES } from "@modules/app/domain/constants/app-routes";
 
 interface Props {
   children: React.ReactNode;

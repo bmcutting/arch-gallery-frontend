@@ -1,8 +1,8 @@
 import { FaExclamationTriangle, FaFolderOpen } from "react-icons/fa";
-import Button from "../../../modules/app/modules/ui/components/Button/Button";
-import ProjectFeed from "../../../modules/project/components/ProjectFeed";
-import ProjectFeedSkeleton from "../../../modules/project/components/ProjectFeedSkeleton";
-import type { ProjectFeedItem } from "../../../modules/project/services/get-all-projects";
+import Button from "@modules/app/modules/ui/components/Button/Button";
+import ProjectFeed from "@modules/project/components/ProjectFeed";
+import ProjectFeedSkeleton from "@modules/project/components/ProjectFeedSkeleton";
+import type { ProjectFeedItem } from "@modules/project/services/get-all-projects";
 
 interface Props {
   loading: boolean;

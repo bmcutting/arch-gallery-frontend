@@ -1,5 +1,5 @@
-import Label from "../../../Label/Label";
-import Switch from "../../../Switch/Switch";
+import Label from "@modules/app/modules/ui/components/Label/Label";
+import Switch from "@modules/app/modules/ui/components/Switch/Switch";
 
 interface Props {
   text: string;

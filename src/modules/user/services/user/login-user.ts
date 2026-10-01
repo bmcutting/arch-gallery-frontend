@@ -1,6 +1,6 @@
-import { instance } from "../../../app/modules/http/domain/instance";
-import type { UserLoginResponse } from "../../dto/read/login";
-import type { LoginUserDTO } from "../../dto/write/login-user";
+import { instance } from "@modules/app/modules/http/domain/instance";
+import type { UserLoginResponse } from "@modules/user/dto/read/login";
+import type { LoginUserDTO } from "@modules/user/dto/write/login-user";
 
 export function loginUser(props: LoginUserDTO): Promise<UserLoginResponse> {
     return instance

@@ -1,21 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { ProjectSortFields } from "../domain/enums/project-sort-fileds";
-import type { Project } from "../domain/entities/project";
-import type { ProjectPaginationParams } from "../dto/write/project-pagination-params";
-import type { PaginationResult } from "../../app/modules/shared/domain/core/pagination-result";
-import { getAllProjects, type ProjectFeedItem } from "../services/get-all-projects";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { debounce } from "@modules/app/domain/helpers/debounce";
+import { ProjectSortFields } from "@modules/project/domain/enums/project-sort-fileds";
+import type { Project } from "@modules/project/domain/entities/project";
+import type { ProjectPaginationParams } from "@modules/project/dto/write/project-pagination-params";
+import type { PaginationResult } from "@modules/app/modules/shared/domain/core/pagination-result";
+import { getAllProjects, type ProjectFeedItem } from "@modules/project/services/get-all-projects";
 
 export default function useProjectSearch() {
-  function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
-    func: F,
-    wait: number,
-  ): (...args: Parameters<F>) => void {
-    let timeout: ReturnType<typeof setTimeout> | null = null;
-    return (...args: Parameters<F>) => {
-      if (timeout) clearTimeout(timeout);
-      timeout = setTimeout(() => func(...args), wait);
-    };
-  }
   const [searchTerm, setSearchTerm] = useState("");
   const [title, setTitle] = useState("");
   const [year, setYear] = useState("");
@@ -104,6 +95,7 @@ export default function useProjectSearch() {
   }, [buildParams]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchProjects();
   }, [fetchProjects]);
 
@@ -128,10 +120,11 @@ export default function useProjectSearch() {
     }
   }, []);
 
-  const debouncedFetchSuggestions = useCallback(
-    debounce((query: string) => {
-      fetchSuggestions(query).catch(console.error);
-    }, 300),
+  const debouncedFetchSuggestions = useMemo(
+    () =>
+      debounce((query: string) => {
+        fetchSuggestions(query).catch(console.error);
+      }, 300),
     [fetchSuggestions],
   );
 

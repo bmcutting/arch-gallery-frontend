@@ -1,5 +1,5 @@
-import { instance } from "../../app/modules/http/domain/instance";
-import type { RemoveLikeDto } from "../dto/write/remove-like";
+import { instance } from "@modules/app/modules/http/domain/instance";
+import type { RemoveLikeDto } from "@modules/like/dto/write/remove-like";
 
 export function removeLike(props: RemoveLikeDto): Promise<number> {
   return instance

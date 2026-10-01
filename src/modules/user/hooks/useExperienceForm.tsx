@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type { Experience } from "../domain/entities/experience";
-import { ExperienceType } from "../domain/enums/experience";
+import type { Experience } from "@modules/user/domain/entities/experience";
+import { ExperienceType } from "@modules/user/domain/enums/experience";
 
 interface Props {
   isOpen: boolean;

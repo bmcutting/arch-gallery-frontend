@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { forwardRef } from "react";
-import type { IconProps } from "../../../../../icon/domain/props";
-import type { Size } from "../../domain/size";
+import type { IconProps } from "@modules/icon/domain/props";
+import type { Size } from "@modules/app/modules/ui/domain/size";
 import clsx from "clsx";
 
 interface Props {
