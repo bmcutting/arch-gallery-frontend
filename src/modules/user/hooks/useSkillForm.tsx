@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useModal from "@modules/app/modules/modal/hooks/useModal";
 import type { Skill } from "@modules/user/domain/entities/skill";
 import { Level } from "@modules/user/domain/enums/level";
 
 interface Props {
-  isOpen: boolean;
-  skill?: Skill | null;
+  skill: Skill | null;
+  onSave: (skillData: Omit<Skill, "id">) => void;
 }
 
-export default function useSkillForm({ isOpen, skill }: Props) {
+export default function useSkillForm({ skill, onSave }: Props) {
+  const { handleClose } = useModal();
+
   const LEVEL_OPTIONS = [
     { value: Level.BEGINNER, label: "Principiante" },
     { value: Level.INTERMEDIATE, label: "Intermedio" },
@@ -16,31 +19,27 @@ export default function useSkillForm({ isOpen, skill }: Props) {
   ];
 
   const [form, setForm] = useState<Omit<Skill, "id">>({
-    name: "",
-    level: undefined,
+    name: skill?.name ?? "",
+    level: skill?.level,
   });
 
-  const [touched, setTouched] = useState({
-    name: false,
-  });
+  const [touched, setTouched] = useState({ name: false });
 
   const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
     setTouched({ ...touched, [e.target.name]: true });
   };
 
-  useEffect(() => {
-    if (skill) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setForm({
-        name: skill.name,
-        level: skill.level,
-      });
-      setTouched({ name: false });
-    } else {
-      setForm({ name: "", level: undefined });
-      setTouched({ name: false });
-    }
-  }, [skill, isOpen]);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-  return { form, setForm, LEVEL_OPTIONS, touched, handleTouched };
+    if (!form.name.trim()) {
+      setTouched({ name: true });
+      return;
+    }
+
+    onSave(form);
+    handleClose();
+  };
+
+  return { form, setForm, LEVEL_OPTIONS, touched, handleTouched, handleSubmit };
 }

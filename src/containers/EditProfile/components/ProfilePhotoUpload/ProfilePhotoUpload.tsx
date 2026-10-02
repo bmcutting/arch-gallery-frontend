@@ -66,8 +66,8 @@ export default function ProfilePhotoUpload({ profileImageUrl }: Props) {
           </div>
         )}
 
-        <div className="bg-muted/50 rounded-lg p-4">
-          <div className="flex gap-3">
+        <div className="flex items-center justify-center bg-muted/50 rounded-lg p-4">
+          <div className="flex gap-3 justify-center items-center">
             <FaInfo name="Info" size={20} className="shrink-0 mt-0.5" />
             <div className="text-xs md:text-sm text-muted-foreground space-y-1">
               <p>• Usa una foto profesional con buena iluminación</p>

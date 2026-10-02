@@ -1,11 +1,14 @@
 import Select from "@modules/app/modules/ui/components/Select/Select";
 import useUserProjects from "@modules/project/hooks/useUserProjects";
-import CreateProjectModal from "@modules/project/components/CreateProjectModal";
 import ProjectFeed from "@modules/project/components/ProjectFeed";
 import ProjectContextMenu from "@containers/Profile/components/ProjectContextMenu/ProjectContextMenu";
 import useContextMenu from "@containers/Profile/hooks/useContextMenu";
-import Modal from "@modules/app/modules/ui/components/Modal/Modal";
-import EditProjectModal from "@modules/project/components/EditProjectModal";
+import useModal from "@modules/app/modules/modal/hooks/useModal";
+import {
+  CreateProjectModalProps,
+  DeleteProjectModalProps,
+  EditProjectModalProps,
+} from "@modules/project/domain/modal/project-modal";
 
 interface Props {
   userId: string;
@@ -15,24 +18,16 @@ interface Props {
 export default function ProjectTab({ userId, readOnly = false }: Props) {
   const {
     projects,
-    showCreateModal,
-    setShowCreateModal,
-    showEditModal,
-    setShowEditModal,
     selectedFilter,
     selectedSort,
     filterOptions,
     sortOptions,
     handleSort,
     handleFilter,
-    showDeleteModal,
-    projectToDelete,
-    requestDelete,
-    confirmDelete,
-    cancelDelete,
-    projectToEdit,
-    requestEdit,
+    refetch,
   } = useUserProjects(readOnly ? userId : undefined);
+
+  const { handleOpenModal } = useModal();
 
   const { openMenuId, toggleMenu } = useContextMenu();
 
@@ -73,15 +68,27 @@ export default function ProjectTab({ userId, readOnly = false }: Props) {
               <ProjectContextMenu
                 isOpen={openMenuId === item.project.id}
                 onToggle={() => toggleMenu(item.project.id)}
-                onEdit={() => requestEdit(item.project)}
-                onDelete={() => requestDelete(item.project)}
+                onEdit={() =>
+                  handleOpenModal(new EditProjectModalProps(item.project, refetch))
+                }
+                onDelete={() =>
+                  handleOpenModal(
+                    new DeleteProjectModalProps(
+                      item.project.id,
+                      item.project.title,
+                      refetch,
+                    ),
+                  )
+                }
               />
             )}
           </div>
         ))}
         {!readOnly && (
           <div
-            onClick={() => setShowCreateModal(true)}
+            onClick={() =>
+              handleOpenModal(new CreateProjectModalProps(userId, refetch))
+            }
             className="flex flex-col items-center justify-center border-2 border-dashed border-accent rounded-lg cursor-pointer hover:bg-accent/10 transition-all"
           >
             <span className="text-lg md:text-xl font-semibold text-primary">
@@ -90,34 +97,6 @@ export default function ProjectTab({ userId, readOnly = false }: Props) {
           </div>
         )}
       </div>
-
-      {!readOnly && showCreateModal && (
-        <CreateProjectModal
-          onClose={() => setShowCreateModal(false)}
-          userId={userId}
-        />
-      )}
-
-      {showEditModal && projectToEdit && (
-        <EditProjectModal
-          onClose={() => setShowEditModal(false)}
-          project={projectToEdit}
-        />
-      )}
-
-      {showDeleteModal && projectToDelete && (
-        <Modal
-          message={`¿Seguro que quieres eliminar el proyecto "${projectToDelete.title}"?`}
-          onConfirm={confirmDelete}
-          onCancel={cancelDelete}
-          confirmLabel="Eliminar"
-          cancelLabel="Cancelar"
-        >
-          <span className="mb-8 text-2xl font-bold text-error">
-            Esta acción no se puede deshacer.
-          </span>
-        </Modal>
-      )}
     </div>
   );
 }

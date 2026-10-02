@@ -1,15 +1,22 @@
 import { useState } from "react";
+import useModal from "@modules/app/modules/modal/hooks/useModal";
 import { createProject } from "@modules/project/services/create-project";
 import type { Project } from "@modules/project/domain/entities/project";
 import { updateProject } from "@modules/project/services/update-project";
 
 interface Props {
-  onClose?: () => void;
   project?: Project;
-  userId: string;
+  userId?: string;
+  refetch: () => void;
 }
 
-export default function useProject({ onClose, userId, project }: Props) {
+export default function useProject({ userId = "", project, refetch }: Props) {
+  const { handleClose } = useModal();
+  const onSuccess = () => {
+    refetch();
+    handleClose();
+  };
+
   const [title, setTitle] = useState(project?.title ? project.title : "");
   const [description, setDescription] = useState(
     project?.description ? project.description : "",
@@ -28,7 +35,7 @@ export default function useProject({ onClose, userId, project }: Props) {
     e.preventDefault();
 
     createProject({ title, year, description, userId, categories })
-      .then(() => onClose?.())
+      .then(onSuccess)
       .catch((err) => console.error("Error creating project", err));
   };
 
@@ -47,7 +54,7 @@ export default function useProject({ onClose, userId, project }: Props) {
       description,
       categories,
     })
-      .then(() => onClose?.())
+      .then(onSuccess)
       .catch((err) => console.error("Error updating project", err));
   };
 

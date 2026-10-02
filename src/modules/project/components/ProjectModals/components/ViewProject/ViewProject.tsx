@@ -1,17 +1,16 @@
 import { FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import type { Project } from "@modules/project/domain/entities/project";
+import Modal from "@modules/app/modules/modal/components/Modal/Modal";
+import useModal from "@modules/app/modules/modal/hooks/useModal";
 import { getProjectById } from "@modules/project/services/get-project-by-id";
 
-interface ProjectDetailModalProps {
+interface Props {
   projectId: string;
-  onClose: () => void;
 }
 
-export default function ProjectDetailModal({
-  projectId,
-  onClose,
-}: ProjectDetailModalProps) {
+export default function ViewProject({ projectId }: Props) {
+  const { handleClose } = useModal();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [project, setProject] = useState<Project>();
 
@@ -38,12 +37,12 @@ export default function ProjectDetailModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-lg max-w-4xl w-full max-h-[calc(100dvh-2rem)] p-6 overflow-y-auto">
+    <Modal width={896}>
+      <div className="p-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">{project?.title}</h2>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="text-muted-foreground hover:text-foreground"
           >
             <FaTimes />
@@ -100,6 +99,6 @@ export default function ProjectDetailModal({
           ))}
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }

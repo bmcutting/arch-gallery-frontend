@@ -1,6 +1,33 @@
 @import "tailwindcss";
 @import "@fontsource-variable/space-grotesk";
 
+@theme {
+    --color-primary: #B4BCC6;
+    --color-secondary: #96A1AE;
+    --color-accent: #C99700;
+    --color-card: #FFFFFF;
+    --color-layout: #D5DAE0;
+    --color-muted: #F1F4F8;
+    --color-border: #E1E6EC;
+    --color-background: #0F0F0F;
+    --color-foreground: #181D25;
+    --color-muted-foreground: #667085;
+    --color-error: #DC2626;
+
+    --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-heading: "Space Grotesk Variable", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+    --shadow-input: 0px 0px 5.5px rgb(0 0 0 / 0.08);
+
+    --radius-card: var(--radius-lg);
+    --radius-input: var(--radius-md);
+
+    --spacing-border-layout: 1.5px;
+    --spacing-border-button: 1.5px;
+
+    --breakpoint-xs: 450px;
+}
+
 @font-face {
     font-family: "Plus Jakarta Sans";
     src: url("./assets/fonts/plus-jakarta-sans/PlusJakartaSans-Light.ttf") format("truetype");
@@ -81,33 +108,6 @@ textarea {
     animation: fadeInUp 0.4s ease-out;
 }
 
-@theme {
-    --color-primary: #B9BEC4;
-    --color-secondary: #A3A9AF;
-    --color-accent: #C99700;
-    --color-card: #FFFFFF;
-    --color-layout: var(--color-gray-300);
-    --color-muted: #F5F5F4;
-    --color-border: #EEE5EE;
-    --color-background: #0F0F0F;
-    --color-foreground: #1F1F1F;
-    --color-muted-foreground: #6B7280;
-    --color-error: #DC2626;
-
-    --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-    --font-heading: "Space Grotesk Variable", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-
-    --shadow-input: 0px 0px 5.5px rgb(0 0 0 / 0.08);
-
-    --radius-card: var(--radius-lg);
-    --radius-input: var(--radius-md);
-
-    --spacing-border-layout: 1.5px;
-    --spacing-border-button: 1.5px;
-
-    --breakpoint-xs: 450px;
-}
-
 .no-scroll {
     overflow: hidden;
 }
@@ -117,6 +117,7 @@ textarea {
 }
 
 @layer base {
+
     h1,
     h2,
     h3,

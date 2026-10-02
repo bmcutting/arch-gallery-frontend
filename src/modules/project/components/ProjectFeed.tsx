@@ -2,8 +2,8 @@ import { useState } from "react";
 import { FaImage, FaHeart, FaComment, FaUser } from "react-icons/fa";
 import Button from "@modules/app/modules/ui/components/Button/Button";
 import useLike from "@modules/like/hooks/useLike";
-import ProjectDetailModal from "./ProjectDetailModal";
-import useProjectDetail from "@modules/project/hooks/useProjectDetail";
+import useModal from "@modules/app/modules/modal/hooks/useModal";
+import { ViewProjectModalProps } from "@modules/project/domain/modal/project-modal";
 import CommentSection from "@modules/comment/components/CommentSection";
 import useComment from "@modules/comment/hooks/useComment";
 import type { Project } from "@modules/project/domain/entities/project";
@@ -19,7 +19,7 @@ export default function ProjectFeed({
 }: ProjectFeedProps) {
   const { handleLike, likesCount, liked } = useLike({ project, likedByUser });
   const commentState = useComment({ project });
-  const { showDetail, setShowDetail } = useProjectDetail();
+  const { handleOpenModal } = useModal();
 
   const [imgFailed, setImgFailed] = useState(false);
   const primaryImage = project.imagesUrl?.[0];
@@ -119,20 +119,13 @@ export default function ProjectFeed({
         </div>
 
         <div className="mt-3">
-          <Button size="base" full onClick={() => setShowDetail(true)}>
+          <Button size="base" full onClick={() => handleOpenModal(new ViewProjectModalProps(project.id))}>
             Ver más
           </Button>
         </div>
       </div>
 
       <CommentSection project={project} {...commentState} />
-
-      {showDetail && (
-        <ProjectDetailModal
-          projectId={project.id}
-          onClose={() => setShowDetail(false)}
-        />
-      )}
     </article>
   );
 }

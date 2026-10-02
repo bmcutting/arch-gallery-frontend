@@ -1,8 +1,8 @@
 import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
 import Button from "@modules/app/modules/ui/components/Button/Button";
 import type { Experience } from "@modules/user/domain/entities/experience";
-import { useState } from "react";
-import ExperienceFormModal from "./ExperienceFormModal";
+import useModal from "@modules/app/modules/modal/hooks/useModal";
+import { ExperienceFormModalProps } from "@modules/user/domain/modal/user-modal";
 
 interface Props {
   experiences: Experience[];
@@ -17,31 +17,17 @@ export default function ExperienceSection({
   removeExperience,
   updateExperience,
 }: Props) {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [editingExperience, setEditingExperience] = useState<Experience | null>(
-    null,
-  );
+  const { handleOpenModal } = useModal();
 
-  const handleSave = (exp: Omit<Experience, "id">) => {
-    console.log(exp);
-    if (editingExperience) {
-      updateExperience(editingExperience.id, exp);
-    } else {
-      addExperience(exp);
-    }
-    setEditingExperience(null);
-    setModalOpen(false);
-  };
+  const openEdit = (exp: Experience) =>
+    handleOpenModal(
+      new ExperienceFormModalProps(exp, (data) =>
+        updateExperience(exp.id, data),
+      ),
+    );
 
-  const openEdit = (exp: Experience) => {
-    setEditingExperience(exp);
-    setModalOpen(true);
-  };
-
-  const openAdd = () => {
-    setEditingExperience(null);
-    setModalOpen(true);
-  };
+  const openAdd = () =>
+    handleOpenModal(new ExperienceFormModalProps(null, addExperience));
 
   const formatRange = (exp: Experience) => {
     const start = exp.startYear;
@@ -98,16 +84,6 @@ export default function ExperienceSection({
       <Button size="sm" onClick={openAdd}>
         <FaPlus className="mr-1" /> Añadir experiencia
       </Button>
-
-      <ExperienceFormModal
-        isOpen={modalOpen}
-        onClose={() => {
-          setModalOpen(false);
-          setEditingExperience(null);
-        }}
-        experience={editingExperience}
-        onSave={handleSave}
-      />
     </div>
   );
 }

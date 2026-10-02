@@ -1,8 +1,8 @@
 import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
 import type { Skill } from "@modules/user/domain/entities/skill";
 import Button from "@modules/app/modules/ui/components/Button/Button";
-import { useState } from "react";
-import SkillFormModal from "./SkillFormModal";
+import useModal from "@modules/app/modules/modal/hooks/useModal";
+import { SkillFormModalProps } from "@modules/user/domain/modal/user-modal";
 
 interface Props {
   skills: Skill[];
@@ -17,28 +17,15 @@ export default function SkillSection({
   updateSkill,
   removeSkill,
 }: Props) {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [editingSkill, setEditingSkill] = useState<Skill | null>(null);
+  const { handleOpenModal } = useModal();
 
-  const handleSave = (skillData: Omit<Skill, "id">) => {
-    if (editingSkill) {
-      updateSkill(editingSkill.id, skillData);
-    } else {
-      addSkill(skillData);
-    }
-    setEditingSkill(null);
-    setModalOpen(false);
-  };
+  const openEdit = (skill: Skill) =>
+    handleOpenModal(
+      new SkillFormModalProps(skill, (data) => updateSkill(skill.id, data)),
+    );
 
-  const openEdit = (skill: Skill) => {
-    setEditingSkill(skill);
-    setModalOpen(true);
-  };
-
-  const openAdd = () => {
-    setEditingSkill(null);
-    setModalOpen(true);
-  };
+  const openAdd = () =>
+    handleOpenModal(new SkillFormModalProps(null, addSkill));
 
   return (
     <div className="space-y-4">
@@ -83,16 +70,6 @@ export default function SkillSection({
       <Button type="button" onClick={openAdd} size="sm">
         <FaPlus className="mr-1" /> Añadir habilidad
       </Button>
-
-      <SkillFormModal
-        isOpen={modalOpen}
-        onClose={() => {
-          setModalOpen(false);
-          setEditingSkill(null);
-        }}
-        skill={editingSkill}
-        onSave={handleSave}
-      />
     </div>
   );
 }
