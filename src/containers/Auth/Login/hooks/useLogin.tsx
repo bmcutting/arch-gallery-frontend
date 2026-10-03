@@ -57,10 +57,8 @@ export default function useLogin() {
             setLoading(false);
           });
       },
-      error(errors) {
-        if (errors.length > 0) {
-          setError(errors[0].message);
-        }
+      error() {
+       return
       },
     });
   }

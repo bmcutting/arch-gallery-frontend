@@ -56,11 +56,11 @@ export default function Profile() {
                   aria-selected={activeTab === tab?.id}
                   aria-controls={`${tab?.id}-panel`}
                   onClick={() => setActiveTab(tab?.id)}
-                  className={`flex items-center gap-2 px-4 md:px-6 py-3 md:py-4 whitespace-nowrap rounded-t-lg transition-colors duration-200 focus:outline-none 
-                    focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
-                      activeTab === tab.id
-                        ? "border-b-2 border-primary text-foreground bg-muted font-semibold"
-                        : "border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+                  className={`flex items-center gap-2 px-2 md:px-4 py-2 md:py-3 whitespace-nowrap
+                    rounded-lg focus:outline-none border-2 border-muted
+                    ${activeTab === tab.id
+                      ? " text-foreground bg-muted font-semibold hover:border-b-2 hover:border-border"
+                      : " text-muted-foreground hover:text-foreground hover:border-b-2 hover:border-border"
                     }`}
                 >
                   <span className="text-sm md:text-base">{tab.label}</span>

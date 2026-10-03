@@ -51,7 +51,7 @@ export default function Login() {
         <ErrorMessage message={error} />
 
         <Button
-          className="mt-4"
+          className="mt-5"
           color="primary"
           size="lg"
           uppercase

@@ -85,7 +85,7 @@ export default function SignUp() {
           <ErrorMessage message={error} />
 
           <Button
-            className="mt-8"
+            className="mt-5"
             color="primary"
             size="lg"
             uppercase
@@ -127,7 +127,7 @@ export default function SignUp() {
 
           <ErrorMessage message={error} />
 
-          <div className="mt-8 flex gap-4 justify-center">
+          <div className="mt-5 flex gap-4 justify-center">
             <Button
               color="primary"
               size="lg"
