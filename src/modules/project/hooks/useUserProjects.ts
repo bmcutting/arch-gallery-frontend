@@ -35,6 +35,7 @@ export default function useUserProjects(userId?: string) {
   );
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [selectedSort, setSelectedSort] = useState("recent");
+  const [loading, setLoading] = useState(true);
 
   const filterOptions = useMemo(() => {
     const categories = new Set<string>();
@@ -86,7 +87,8 @@ export default function useUserProjects(userId?: string) {
         setFilteredProjects(sorted);
         setSelectedSort("recent");
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, [userId]);
 
   useEffect(() => {
@@ -95,6 +97,7 @@ export default function useUserProjects(userId?: string) {
 
   return {
     projects: filteredProjects,
+    loading,
     selectedFilter,
     setSelectedFilter,
     selectedSort,

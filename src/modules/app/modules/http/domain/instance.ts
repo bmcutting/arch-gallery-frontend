@@ -56,25 +56,51 @@ const handleError = (error: unknown): HttpResponseError => {
   };
 };
 
+// El backend revoca el refresh token en cuanto se usa: si varias peticiones
+// reciben 401 a la vez, todas tienen que esperar al mismo refresh. Con un
+// refresh por peticion solo ganaria una y el resto cerraria la sesion.
+let refreshPromise: Promise<string> | null = null;
+
+const refreshAccessToken = (refreshToken: string): Promise<string> => {
+  if (!refreshPromise) {
+    refreshPromise = axios
+      .post(`${API_ROUTE}/auth/refresh`, { refresh_token: refreshToken })
+      .then(({ data }) => {
+        LocalStorage.set(LOCAL_STORAGE_KEY.ACCESS_TOKEN, data.access_token);
+        LocalStorage.set(LOCAL_STORAGE_KEY.REFRESH_TOKEN, data.refresh_token);
+        return data.access_token as string;
+      })
+      .finally(() => {
+        refreshPromise = null;
+      });
+  }
+
+  return refreshPromise;
+};
+
 instance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const e = handleError(error);
+    const originalRequest = error.config;
 
-    if (e.status === HttpStatusCode.Unauthorized) {
-      const originalRequest = error.config;
+    // Un 401 de auth/login o auth/register son credenciales incorrectas: no se
+    // arregla refrescando. Y una peticion ya reintentada no se reintenta otra vez.
+    const isAuthRoute = /^\/?auth\//.test(originalRequest?.url ?? "");
+
+    if (
+      e.status === HttpStatusCode.Unauthorized &&
+      !isAuthRoute &&
+      !originalRequest?._retry
+    ) {
       const refreshToken = LocalStorage.get(LOCAL_STORAGE_KEY.REFRESH_TOKEN);
 
       if (refreshToken) {
         try {
-          const { data } = await axios.post(`${API_ROUTE}/auth/refresh`, {
-            refresh_token: refreshToken,
-          });
+          const accessToken = await refreshAccessToken(refreshToken);
 
-          LocalStorage.set(LOCAL_STORAGE_KEY.ACCESS_TOKEN, data.access_token);
-          LocalStorage.set(LOCAL_STORAGE_KEY.REFRESH_TOKEN, data.refresh_token);
-
-          originalRequest.headers.authorization = `Bearer ${data.access_token}`;
+          originalRequest._retry = true;
+          originalRequest.headers.authorization = `Bearer ${accessToken}`;
           return instance(originalRequest);
         } catch (refreshError) {
           LocalStorage.remove(LOCAL_STORAGE_KEY.ACCESS_TOKEN);

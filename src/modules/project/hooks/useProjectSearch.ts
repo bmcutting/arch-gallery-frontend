@@ -39,7 +39,7 @@ export default function useProjectSearch() {
   const buildParams = useCallback((): ProjectPaginationParams => {
     const params: ProjectPaginationParams = {
       page,
-      pageSize,
+      limit: pageSize,
       sort: [{ field: sortField, order: sortOrder }],
     };
 
@@ -66,7 +66,7 @@ export default function useProjectSearch() {
       abortControllerRef.current.abort();
     }
     const controller = new AbortController();
-    abortControllerRef.current?.abort();
+    abortControllerRef.current = controller;
 
     setLoading(true);
     setError(null);
@@ -82,6 +82,8 @@ export default function useProjectSearch() {
       setTotalItems(result.totalItems);
       setTotalPages(result.totalPages);
     } catch (err: unknown) {
+      // Una peticion cancelada ya fue reemplazada por otra: no es un error.
+      if (controller.signal.aborted) return;
       if (err instanceof Error && err.name !== "AbortError") {
         setError(err.message);
       } else if (typeof err === "string") {
@@ -90,7 +92,7 @@ export default function useProjectSearch() {
         setError("Error desconocido al cargar los arquitectos");
       }
     } finally {
-      setLoading(false);
+      if (!controller.signal.aborted) setLoading(false);
     }
   }, [buildParams]);
 
@@ -109,7 +111,7 @@ export default function useProjectSearch() {
       const result = await getAllProjects({
         params: {
           page: 1,
-          pageSize: 5,
+          limit: 5,
           search: query.trim(),
         },
       });

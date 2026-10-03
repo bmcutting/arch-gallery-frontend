@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { FaExclamationTriangle, FaFolderOpen } from "react-icons/fa";
 import Button from "@modules/app/modules/ui/components/Button/Button";
 import ProjectFeed from "@modules/project/components/ProjectFeed";
@@ -25,7 +26,9 @@ export default function SearchResults({
   setPage,
   onClearFilters,
 }: Props) {
-  if (loading) {
+  // Skeleton solo en la primera carga; despues se mantienen los resultados
+  // anteriores atenuados para que no parpadee al cambiar filtros.
+  if (loading && projects.length === 0) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {Array.from({ length: pageSize }).map((_, i) => (
@@ -67,7 +70,13 @@ export default function SearchResults({
   }
 
   return (
-    <>
+    <div
+      aria-busy={loading}
+      className={clsx(
+        "transition-opacity duration-200",
+        loading && "opacity-50 pointer-events-none",
+      )}
+    >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {projects.map((item) => (
           <ProjectFeed
@@ -99,6 +108,6 @@ export default function SearchResults({
           </Button>
         </div>
       )}
-    </>
+    </div>
   );
 }

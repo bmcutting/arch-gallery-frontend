@@ -1,6 +1,7 @@
 import Select from "@modules/app/modules/ui/components/Select/Select";
 import useUserProjects from "@modules/project/hooks/useUserProjects";
 import ProjectFeed from "@modules/project/components/ProjectFeed";
+import ProjectFeedSkeleton from "@modules/project/components/ProjectFeedSkeleton";
 import ProjectContextMenu from "@containers/Profile/components/ProjectContextMenu/ProjectContextMenu";
 import useContextMenu from "@containers/Profile/hooks/useContextMenu";
 import useModal from "@modules/app/modules/modal/hooks/useModal";
@@ -18,6 +19,7 @@ interface Props {
 export default function ProjectTab({ userId, readOnly = false }: Props) {
   const {
     projects,
+    loading,
     selectedFilter,
     selectedSort,
     filterOptions,
@@ -51,13 +53,17 @@ export default function ProjectTab({ userId, readOnly = false }: Props) {
           />
         </div>
       </div>
-      {readOnly && projects.length === 0 && (
+      {readOnly && !loading && projects.length === 0 && (
         <p className="text-center text-muted-foreground py-10">
           Este usuario aún no tiene proyectos publicados.
         </p>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+        {loading &&
+          Array.from({ length: 3 }).map((_, i) => (
+            <ProjectFeedSkeleton key={i} />
+          ))}
         {projects?.map((item) => (
           <div key={item.project.id} className="relative">
             <ProjectFeed

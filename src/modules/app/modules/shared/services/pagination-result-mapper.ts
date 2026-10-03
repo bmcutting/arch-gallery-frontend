@@ -9,7 +9,7 @@ export class PaginationResultMapper {
     return {
       hasNextPage: r.hasNextPage,
       items: r.items.map((r) => mapper(r)),
-      pageSize: r.pageSize,
+      pageSize: r.limit,
       totalPages: r.totalPages,
       totalItems: r.totalItems,
     };

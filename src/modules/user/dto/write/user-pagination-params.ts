@@ -8,8 +8,6 @@ export type UserPaginationParams = PaginationDTO & {
   lastName?: string;
   createdAtMin?: Date;
   createdAtMax?: Date;
-  includeDeleted?: boolean;
-  onlyDeleted?: boolean;
   deletedAtMin?: Date;
   deletedAtMax?: Date;
   email?: string;

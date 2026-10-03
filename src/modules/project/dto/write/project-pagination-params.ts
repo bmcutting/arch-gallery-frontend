@@ -7,8 +7,6 @@ export type ProjectPaginationParams = PaginationDTO & {
   year?: number;
   createdAtMin?: Date;
   createdAtMax?: Date;
-  includeDeleted?: boolean;
-  onlyDeleted?: boolean;
   deletedAtMin?: Date;
   deletedAtMax?: Date;
   isActive?: boolean;

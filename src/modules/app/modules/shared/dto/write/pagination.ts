@@ -1,5 +1,5 @@
 export type PaginationDTO = {
   page?: number;
-  pageSize?: number;
+  limit?: number;
   search?: string;
 };

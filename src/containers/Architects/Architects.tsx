@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import clsx from "clsx";
 import { ChevronDown, SearchIcon, SlidersHorizontal } from "lucide-react";
 import { FaExclamationTriangle, FaUserAlt } from "react-icons/fa";
 import AppLayout from "@layouts/AppLayout";
@@ -168,7 +169,7 @@ export default function Architects() {
           </div>
         </div>
 
-        {loading && (
+        {loading && architects.length === 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {Array.from({ length: pageSize }).map((_, i) => (
               <ArchitectCardSkeleton key={i} />
@@ -203,8 +204,14 @@ export default function Architects() {
           </div>
         )}
 
-        {!loading && !error && architects.length > 0 && (
-          <>
+        {!error && architects.length > 0 && (
+          <div
+            aria-busy={loading}
+            className={clsx(
+              "transition-opacity duration-200",
+              loading && "opacity-50 pointer-events-none",
+            )}
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
               {architects.map((architect) => (
                 <ArchitectCard key={architect.id} architect={architect} />
@@ -232,7 +239,7 @@ export default function Architects() {
                 </Button>
               </div>
             )}
-          </>
+          </div>
         )}
       </div>
     </AppLayout>

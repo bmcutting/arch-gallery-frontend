@@ -35,6 +35,7 @@ export default function useLogin() {
 
         loginUser({ email: email, password: password })
           .then((data) => {
+            console.log(data)
             LocalStorage.set(LOCAL_STORAGE_KEY.ACCESS_TOKEN, data.access_token);
             LocalStorage.set(
               LOCAL_STORAGE_KEY.REFRESH_TOKEN,
@@ -45,6 +46,7 @@ export default function useLogin() {
           })
 
           .catch((e: HttpResponseError) => {
+            console.log(e)
             if (e.status === HttpStatusCode.NotFound) {
               setError("No existe este usuario");
             } else {

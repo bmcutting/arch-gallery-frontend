@@ -6,6 +6,7 @@ import ProjectTab from "./components/ProjectTab/ProjectTab";
 import AbouTab from "./components/AboutTab/AboutTab";
 import useProfileUser from "@modules/user/hooks/useProfileUser";
 import ExperienceTab from "./components/ExperienceTab/ExperienceTab";
+import ProfileSkeleton from "./components/ProfileSkeleton/ProfileSkeleton";
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState("projects");
@@ -36,9 +37,7 @@ export default function Profile() {
   if (loading || !user) {
     return (
       <AppLayout>
-        <div className="min-h-screen flex items-center justify-center">
-          <p>Cargando perfil...</p>
-        </div>
+        <ProfileSkeleton />
       </AppLayout>
     );
   }
