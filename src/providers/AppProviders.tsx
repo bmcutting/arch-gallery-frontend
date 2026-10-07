@@ -2,6 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import ModalProvider from "@modules/app/modules/modal/components/ModalProvider/ModalProvider";
 import AppModals from "@modules/app/components/AppModals";
+import UserProvider from "@modules/user/context/UserProvider";
 
 interface Props {
   children: React.ReactNode;
@@ -10,11 +11,13 @@ interface Props {
 export default function AppProviders({ children }: Props) {
   return (
     <BrowserRouter>
-      <ModalProvider>
-        <ToastContainer />
-        {children}
-        <AppModals />
-      </ModalProvider>
+      <UserProvider>
+        <ModalProvider>
+          <ToastContainer />
+          {children}
+          <AppModals />
+        </ModalProvider>
+      </UserProvider>
     </BrowserRouter>
   );
 }

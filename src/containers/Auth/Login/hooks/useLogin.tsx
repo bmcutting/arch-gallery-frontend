@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { AuthValidator } from "@modules/user/domain/validator/auth/auth-validator";
-import { useNavigate } from "react-router-dom";
 import {
   LOCAL_STORAGE_KEY,
   LocalStorage,
@@ -8,10 +7,10 @@ import {
 import { loginUser } from "@modules/user/services/user/login-user";
 import type { HttpResponseError } from "@modules/app/modules/http/domain/error";
 import { HttpStatusCode } from "axios";
-import { APP_ROUTES } from "@modules/app/domain/constants/app-routes";
+import { useUserContext } from "@modules/user/context/useUserContext";
 
 export default function useLogin() {
-  const navigate = useNavigate();
+  const { refreshUser } = useUserContext();
 
   const [loading, setLoading] = useState(false);
   const [touched, setTouched] = useState({ email: false, password: false });
@@ -35,18 +34,18 @@ export default function useLogin() {
 
         loginUser({ email: email, password: password })
           .then((data) => {
-            console.log(data)
             LocalStorage.set(LOCAL_STORAGE_KEY.ACCESS_TOKEN, data.access_token);
             LocalStorage.set(
               LOCAL_STORAGE_KEY.REFRESH_TOKEN,
               data.refresh_token,
             );
 
-            navigate(APP_ROUTES.HOME);
+            return refreshUser();
           })
-
+          .then((me) => {
+            if (!me) setError("No se pudo cargar tu perfil");
+          })
           .catch((e: HttpResponseError) => {
-            console.log(e)
             if (e.status === HttpStatusCode.NotFound) {
               setError("No existe este usuario");
             } else {

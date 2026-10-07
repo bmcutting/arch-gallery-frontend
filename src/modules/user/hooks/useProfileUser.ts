@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { getMe } from "@modules/user/services/user/get-me";
 import { getUserById } from "@modules/user/services/user/get-user-by-id";
 import type { User } from "@modules/user/domain/entities/user";
-import { APP_ROUTES } from "@modules/app/domain/constants/app-routes";
 
 interface Result {
   user?: User;
@@ -11,40 +9,31 @@ interface Result {
 }
 
 interface FetchState {
-  key: string;
+  userId: string;
   user?: User;
   error: boolean;
 }
 
-const OWN_PROFILE_KEY = "me";
-
-export default function useProfileUser(userId?: string): Result {
-  const key = userId ?? OWN_PROFILE_KEY;
+export default function useProfileUser(userId: string): Result {
   const [state, setState] = useState<FetchState>();
 
   useEffect(() => {
     let active = true;
-    const request = userId ? getUserById(userId) : getMe();
 
-    request
+    getUserById(userId)
       .then((user) => {
-        if (active) setState({ key, user, error: false });
+        if (active) setState({ userId, user, error: false });
       })
       .catch(() => {
-        if (!active) return;
-        if (userId) {
-          setState({ key, error: true });
-        } else {
-          window.location.href = APP_ROUTES.LOGIN;
-        }
+        if (active) setState({ userId, error: true });
       });
 
     return () => {
       active = false;
     };
-  }, [key, userId]);
+  }, [userId]);
 
-  const isCurrent = state?.key === key;
+  const isCurrent = state?.userId === userId;
 
   return {
     user: isCurrent ? state.user : undefined,

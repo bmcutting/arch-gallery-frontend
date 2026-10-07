@@ -1,14 +1,22 @@
-import { FaWrench } from "react-icons/fa";
+import { FaPlus, FaWrench } from "react-icons/fa";
 import type { User } from "@modules/user/domain/entities/user";
-import useExperience from "@containers/Profile/hooks/useExperience";
+import useExperience from "@modules/user/hooks/useExperience";
+import Button from "@modules/app/modules/ui/components/Button/Button";
+import { ExperienceFormModalProps } from "@modules/user/domain/modal/user-modal";
+import useModal from "@modules/app/modules/modal/hooks/useModal";
 
 interface Props {
   user?: User | null;
+  readOnly?: boolean;
 }
 
-export default function ExperienceTab({ user }: Props) {
-  const { experiences, skills, getExperienceIcon, formatYearRange } =
+export default function ExperienceTab({ user, readOnly = false }: Props) {
+  const { experiences, addExperience, skills, getExperienceIcon, formatYearRange } =
     useExperience({ user });
+  const { handleOpenModal } = useModal();
+
+  const openAdd = () =>
+    handleOpenModal(new ExperienceFormModalProps(null, addExperience));
 
   return (
     <div className="space-y-12 md:space-y-16">
@@ -18,7 +26,9 @@ export default function ExperienceTab({ user }: Props) {
         </h2>
         {experiences.length === 0 ? (
           <p className="text-black italic">
-            Aún no has añadido experiencia profesional o formación.
+            {readOnly
+              ? "Aún no ha añadido experiencia profesional o formación."
+              : "Aún no has añadido experiencia profesional o formación."}
           </p>
         ) : (
           <div className="space-y-6">
@@ -50,14 +60,23 @@ export default function ExperienceTab({ user }: Props) {
             ))}
           </div>
         )}
+        {!readOnly && (
+          <Button size="sm" className="mt-4" onClick={openAdd}>
+            <FaPlus className="mr-1" /> Añadir experiencia
+          </Button>
+        )}
       </section>
 
       <section>
-        <h2></h2>
+        <h2 className="text-xl  md:text-2xl lg:text-3xl font-semibold text-black mb-6 md:mb-8">
+          Habilidades
+        </h2>
+
         {skills.length === 0 ? (
           <p className="text-black italic">
             No se han agregado habilidades aún.
           </p>
+
         ) : (
           <div className="flex flex-wrap gap-3">
             {skills.map((skill) => (

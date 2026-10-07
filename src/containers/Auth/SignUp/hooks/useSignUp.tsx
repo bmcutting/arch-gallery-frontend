@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { createUser } from "@modules/user/services/user/create-user";
 import { SignUpValidator } from "@modules/user/domain/validator/signup/signup-validator";
@@ -9,9 +8,10 @@ import {
 import type { HttpResponseError } from "@modules/app/modules/http/domain/error";
 import { HttpStatusCode } from "axios";
 import { loginUser } from "@modules/user/services/user/login-user";
+import { useUserContext } from "@modules/user/context/useUserContext";
 
 export default function useSignUp() {
-  const router = useNavigate();
+  const { refreshUser } = useUserContext();
 
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
@@ -89,8 +89,15 @@ export default function useSignUp() {
               LOCAL_STORAGE_KEY.ACCESS_TOKEN,
               loginData.access_token,
             );
+            LocalStorage.set(
+              LOCAL_STORAGE_KEY.REFRESH_TOKEN,
+              loginData.refresh_token,
+            );
 
-            router("/home", { replace: true });
+            return refreshUser();
+          })
+          .then((me) => {
+            if (!me) setError("No se pudo cargar tu perfil");
           })
           .catch((e: HttpResponseError) => {
             if (e.status === HttpStatusCode.Conflict) {

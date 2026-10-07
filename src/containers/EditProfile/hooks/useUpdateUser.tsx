@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import type { User } from "@modules/user/domain/entities/user";
-import useProfile from "@modules/user/hooks/useProfile";
 import { updateUser } from "@modules/user/services/user/update-user";
 import { UserMapperDto } from "@modules/user/services/user/user-mapper-dto";
-import type { Experience } from "@modules/user/domain/entities/experience";
 import type { Skill } from "@modules/user/domain/entities/skill";
+import type { Experience } from "@modules/user/domain/entities/experience";
+import { useUserContext } from "@modules/user/context/useUserContext";
 
 export default function useUpdateUser() {
-  const user = useProfile();
+  const { user, setUser } = useUserContext();
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
   const [formData, setFormData] = useState<User>({
@@ -81,6 +81,7 @@ export default function useUpdateUser() {
     updateUser(UserMapperDto.execute(cleaned))
       .then((data) => {
         if (data.success === true) {
+          setUser(cleaned);
           setStatus("success");
           setTimeout(() => setStatus("idle"), 5000);
         } else {
@@ -118,7 +119,6 @@ export default function useUpdateUser() {
   };
 
   const addExperience = (expData: Omit<Experience, "id">) => {
-    console.log(expData);
     const newExp: Experience = {
       id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(),
       ...expData,
@@ -162,12 +162,10 @@ export default function useUpdateUser() {
     }));
   };
   const removeSkill = (id: string) => {
-    console.log(id);
     setFormData((prev) => ({
       ...prev,
       skills: prev.skills?.filter((skill) => skill.id !== id) || [],
     }));
-    console.log(formData);
   };
 
   const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {

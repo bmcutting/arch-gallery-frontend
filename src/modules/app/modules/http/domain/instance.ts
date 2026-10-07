@@ -5,7 +5,7 @@ import {
   LocalStorage,
 } from "@modules/app/entities/local-storage";
 import type { HttpResponseError } from "./error";
-import { APP_ROUTES } from "@modules/app/domain/constants/app-routes";
+import { expireSession } from "./session";
 
 const instance = axios.create({
   baseURL: API_ROUTE,
@@ -103,14 +103,11 @@ instance.interceptors.response.use(
           originalRequest.headers.authorization = `Bearer ${accessToken}`;
           return instance(originalRequest);
         } catch (refreshError) {
-          LocalStorage.remove(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-          LocalStorage.remove(LOCAL_STORAGE_KEY.REFRESH_TOKEN);
-          window.location.href = APP_ROUTES.LOGIN;
+          expireSession();
           return Promise.reject(refreshError);
         }
       } else {
-        LocalStorage.remove(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-        window.location.href = APP_ROUTES.LOGIN;
+        expireSession();
       }
     }
     return Promise.reject(e);

@@ -1,8 +1,4 @@
 import { Navigate } from "react-router-dom";
-import {
-  LOCAL_STORAGE_KEY,
-  LocalStorage,
-} from "@modules/app/entities/local-storage";
 import { APP_ROUTES } from "@modules/app/domain/constants/app-routes";
 import { useUserContext } from "@modules/user/context/useUserContext";
 import SplashScreen from "@modules/app/components/SplashScreen/SplashScreen";
@@ -11,20 +7,15 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function ProtectedRoute({ children }: Props) {
+export default function PublicRoute({ children }: Props) {
   const { user, loading } = useUserContext();
-  const token = LocalStorage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-
-  if (!token) {
-    return <Navigate to={APP_ROUTES.LOGIN} replace />;
-  }
 
   if (loading) {
     return <SplashScreen />;
   }
 
-  if (!user) {
-    return <Navigate to={APP_ROUTES.LOGIN} replace />;
+  if (user) {
+    return <Navigate to={APP_ROUTES.HOME} replace />;
   }
 
   return <>{children}</>;

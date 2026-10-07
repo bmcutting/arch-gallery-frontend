@@ -1,13 +1,17 @@
 import { FaBriefcase, FaGraduationCap } from "react-icons/fa";
+import { toast } from "react-toastify";
 import type { Experience } from "@modules/user/domain/entities/experience";
 import type { User } from "@modules/user/domain/entities/user";
 import { ExperienceType } from "@modules/user/domain/enums/experience";
+import { useUserContext } from "@modules/user/context/useUserContext";
+import { createExperience } from "@modules/user/services/experience/create-experience";
 
 interface Props {
   user?: User | null;
 }
 
 export default function useExperience({ user }: Props) {
+  const { refreshUser } = useUserContext();
   const experiences = user?.experiences || [];
   const skills = user?.skills || [];
 
@@ -28,5 +32,10 @@ export default function useExperience({ user }: Props) {
     return `${start} – ${end}`;
   };
 
-  return { experiences, skills, getExperienceIcon, formatYearRange };
+  const addExperience = (expData: Omit<Experience, "id">) =>
+    createExperience(expData)
+      .then(() => refreshUser())
+      .catch(() => toast.error("No se pudo añadir la experiencia"));
+
+  return { experiences, addExperience, skills, getExperienceIcon, formatYearRange };
 }
