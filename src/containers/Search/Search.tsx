@@ -18,9 +18,6 @@ export default function Search() {
     page,
     setPage,
     pageSize,
-    sortValue,
-    setSortValue,
-    SORT_OPTIONS,
     suggestions,
     showSuggestions,
     setShowSuggestions,
@@ -52,9 +49,6 @@ export default function Search() {
             open={filtersOpen}
             title={title}
             year={year}
-            sortValue={sortValue}
-            setSortValue={setSortValue}
-            sortOptions={SORT_OPTIONS}
             activeFiltersCount={activeFiltersCount}
             onClearFilters={clearFilters}
           />

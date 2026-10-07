@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import useSelect from "./hooks/useSelect";
 import { FaChevronDown } from "react-icons/fa6";
-import { FaCheck } from "react-icons/fa";
 
 interface Props {
   className?: string;
@@ -9,7 +8,6 @@ interface Props {
   options: Options[];
   value: string;
   error?: string;
-  multiple?: boolean;
   required?: boolean;
   disabled?: boolean;
   description?: string;
@@ -26,7 +24,6 @@ export default function Select({
   className,
   label,
   options,
-  multiple = false,
   required = false,
   disabled = false,
   value,
@@ -41,7 +38,7 @@ export default function Select({
     handleToggle,
     isSelected,
     handleOptionSelect,
-  } = useSelect({ value, options, multiple, disabled, onChange });
+  } = useSelect({ value, options, disabled, onChange });
   return (
     <div className={clsx("relative", className)}>
       {label && (
@@ -84,7 +81,6 @@ export default function Select({
           className="sr-only"
           onChange={() => {}}
           tabIndex={-1}
-          multiple={multiple}
           required={required}
         >
           <option value="">Select...</option>
@@ -113,9 +109,6 @@ export default function Select({
                   onClick={() => !disabled && handleOptionSelect(option)}
                 >
                   <span className="flex-1">{option?.label}</span>
-                  {multiple && isSelected(option?.value) && (
-                    <FaCheck className="h-4 w-4" />
-                  )}
                 </div>
               ))
             )}

@@ -8,7 +8,7 @@ export default function AbouTab({ user }: Props) {
   return (
     <div className="space-y-8 md:space-y-10 lg:space-y-12">
       <section>
-        <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-primary mb-4 md:mb-6">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-black mb-4 md:mb-6">
           Biografía personal
         </h2>
         <div className="prose prose-stone max-w-none animate-fadeIn">

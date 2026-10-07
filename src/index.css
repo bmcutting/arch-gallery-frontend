@@ -2,17 +2,18 @@
 @import "@fontsource-variable/space-grotesk";
 
 @theme {
-    --color-primary: #B4BCC6;
-    --color-secondary: #96A1AE;
-    --color-accent: #C99700;
+    --color-primary: #A9C7D8;
+    --color-secondary: #93B8CC;
+    --color-accent: #4A81FF;
     --color-card: #FFFFFF;
-    --color-layout: #D5DAE0;
-    --color-muted: #F1F4F8;
-    --color-border: #E1E6EC;
+    --color-layout: #DEEAF0;
+    --color-muted: #F3F8FA;
+    --color-border: #E0EBF0;
     --color-background: #0F0F0F;
-    --color-foreground: #181D25;
-    --color-muted-foreground: #667085;
-    --color-error: #DC2626;
+    --color-foreground: #13232C;
+    --color-muted-foreground: #5A6E78;
+    --color-error: #C53030;
+    --color-like: #DC2626;
 
     --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
     --font-heading: "Space Grotesk Variable", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;

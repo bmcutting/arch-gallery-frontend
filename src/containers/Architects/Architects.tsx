@@ -4,7 +4,6 @@ import { ChevronDown, SearchIcon, SlidersHorizontal } from "lucide-react";
 import { FaExclamationTriangle, FaUserAlt } from "react-icons/fa";
 import AppLayout from "@layouts/AppLayout";
 import Input from "@modules/app/modules/ui/components/Input/Input";
-import Segmented from "@modules/app/modules/ui/components/Segmented/Segmented";
 import ArchitectCard from "@modules/user/components/AuthPrompt/ArquitectCard";
 import ArchitectCardSkeleton from "@modules/user/components/AuthPrompt/ArchitectCardSkeleton";
 import Button from "@modules/app/modules/ui/components/Button/Button";
@@ -22,9 +21,6 @@ export default function Architects() {
     page,
     setPage,
     pageSize,
-    sortValue,
-    setSortValue,
-    SORT_OPTIONS,
     suggestions,
     showSuggestions,
     setShowSuggestions,
@@ -141,19 +137,6 @@ export default function Architects() {
                     inputValue={lastName}
                     placeholder="Filtrar por apellido"
                     className="w-full px-3 py-2 bg-card rounded-input text-foreground placeholder:text-muted-foreground"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">
-                  Orden
-                </label>
-                <div className="overflow-x-auto">
-                  <Segmented
-                    options={SORT_OPTIONS}
-                    value={sortValue}
-                    onChange={setSortValue}
                   />
                 </div>
               </div>

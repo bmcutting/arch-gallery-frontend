@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { debounce } from "@modules/app/domain/helpers/debounce";
-import { ProjectSortFields } from "@modules/project/domain/enums/project-sort-fileds";
 import type { Project } from "@modules/project/domain/entities/project";
 import type { ProjectPaginationParams } from "@modules/project/dto/write/project-pagination-params";
 import type { PaginationResult } from "@modules/app/modules/shared/domain/core/pagination-result";
@@ -12,10 +11,6 @@ export default function useProjectSearch() {
   const [year, setYear] = useState("");
   const [page, setPage] = useState(1);
   const [pageSize] = useState(12);
-  const [sortField, setSortField] = useState<ProjectSortFields>(
-    ProjectSortFields.TITLE,
-  );
-  const [sortOrder, setSortOrder] = useState<"ASC" | "DESC">("ASC");
 
   const [projects, setProjects] = useState<ProjectFeedItem[]>([]);
   const [totalItems, setTotalItems] = useState(0);
@@ -28,19 +23,10 @@ export default function useProjectSearch() {
 
   const abortControllerRef = useRef<AbortController | null>(null);
 
-  const SORT_OPTIONS = [
-    { value: `${ProjectSortFields.TITLE}-ASC`, label: "Título A-Z" },
-    { value: `${ProjectSortFields.TITLE}-DESC`, label: "Título Z-A" },
-    { value: `${ProjectSortFields.YEAR}-ASC`, label: "Year New-Old" },
-    { value: `${ProjectSortFields.YEAR}-DESC`, label: "Year Old-New" },
-    { value: "createdAt-DESC", label: "Más recientes" },
-  ];
-
   const buildParams = useCallback((): ProjectPaginationParams => {
     const params: ProjectPaginationParams = {
       page,
       limit: pageSize,
-      sort: [{ field: sortField, order: sortOrder }],
     };
 
     if (searchTerm.trim()) {
@@ -59,7 +45,7 @@ export default function useProjectSearch() {
     }
 
     return params;
-  }, [page, pageSize, sortField, sortOrder, searchTerm, title, year]);
+  }, [page, pageSize, searchTerm, title, year]);
 
   const fetchProjects = useCallback(async () => {
     if (abortControllerRef.current) {
@@ -141,16 +127,6 @@ export default function useProjectSearch() {
     setShowSuggestions(false);
   };
 
-  const handleSortChange = (value: string) => {
-    const [field, order] = value.split("-") as [
-      ProjectSortFields,
-      "ASC" | "DESC",
-    ];
-    setSortField(field);
-    setSortOrder(order);
-    setPage(1);
-  };
-
   const clearFilters = () => {
     setSearchTerm("");
     setTitle("");
@@ -170,9 +146,6 @@ export default function useProjectSearch() {
     page,
     setPage,
     pageSize,
-    sortValue: `${sortField}-${sortOrder}`,
-    setSortValue: handleSortChange,
-    SORT_OPTIONS,
     suggestions,
     showSuggestions,
     setShowSuggestions,

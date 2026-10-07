@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { debounce } from "@modules/app/domain/helpers/debounce";
-import { UserSortFields } from "@modules/user/domain/enums/user-sort-fields";
 import type { User } from "@modules/user/domain/entities/user";
 import type { UserPaginationParams } from "@modules/user/dto/write/user-pagination-params";
 import type { PaginationResult } from "@modules/app/modules/shared/domain/core/pagination-result";
@@ -13,10 +12,6 @@ export default function useArchitects() {
 
   const [page, setPage] = useState(1);
   const [pageSize] = useState(12);
-  const [sortField, setSortField] = useState<UserSortFields>(
-    UserSortFields.FIRST_NAME,
-  );
-  const [sortOrder, setSortOrder] = useState<"ASC" | "DESC">("ASC");
 
   const [architects, setArchitects] = useState<User[]>([]);
   const [totalItems, setTotalItems] = useState(0);
@@ -29,20 +24,10 @@ export default function useArchitects() {
 
   const abortControllerRef = useRef<AbortController | null>(null);
 
-  const SORT_OPTIONS = [
-    { value: `${UserSortFields.FIRST_NAME}-ASC`, label: "Nombre A-Z" },
-    { value: `${UserSortFields.FIRST_NAME}-DESC`, label: "Nombre Z-A" },
-    { value: `${UserSortFields.LAST_NAME}-ASC`, label: "Apellido A-Z" },
-    { value: `${UserSortFields.LAST_NAME}-DESC`, label: "Apellido Z-A" },
-    { value: `${UserSortFields.EMAIL}-ASC`, label: "Email A-Z" },
-    { value: "createdAt-DESC", label: "Más recientes" },
-  ];
-
   const buildParams = useCallback((): UserPaginationParams => {
     const params: UserPaginationParams = {
       page,
       limit: pageSize,
-      sort: [{ field: sortField, order: sortOrder }],
     };
 
     if (searchTerm.trim()) {
@@ -58,7 +43,7 @@ export default function useArchitects() {
     }
 
     return params;
-  }, [page, pageSize, sortField, sortOrder, searchTerm, firstName, lastName]);
+  }, [page, pageSize, searchTerm, firstName, lastName]);
 
   const fetchArchitects = useCallback(async () => {
     if (abortControllerRef.current) {
@@ -140,13 +125,6 @@ export default function useArchitects() {
     setShowSuggestions(false);
   };
 
-  const handleSortChange = (value: string) => {
-    const [field, order] = value.split("-") as [UserSortFields, "ASC" | "DESC"];
-    setSortField(field);
-    setSortOrder(order);
-    setPage(1);
-  };
-
   const clearFilters = () => {
     setSearchTerm("");
     setFirstName("");
@@ -175,9 +153,6 @@ export default function useArchitects() {
     page,
     setPage,
     pageSize,
-    sortValue: `${sortField}-${sortOrder}`,
-    setSortValue: handleSortChange,
-    SORT_OPTIONS,
     suggestions,
     showSuggestions,
     setShowSuggestions,

@@ -1,11 +1,5 @@
 import Input from "@modules/app/modules/ui/components/Input/Input";
-import Segmented from "@modules/app/modules/ui/components/Segmented/Segmented";
 import Button from "@modules/app/modules/ui/components/Button/Button";
-
-interface SortOption {
-  value: string;
-  label: string;
-}
 
 interface FilterValue {
   value: string | undefined;
@@ -16,9 +10,6 @@ interface Props {
   open: boolean;
   title: FilterValue;
   year: FilterValue
-  sortValue: string;
-  setSortValue: (v: string) => void;
-  sortOptions: SortOption[];
   activeFiltersCount: number;
   onClearFilters: () => void;
 }
@@ -27,9 +18,6 @@ export default function SearchFilters({
   open,
   title,
   year,
-  sortValue,
-  setSortValue,
-  sortOptions,
   activeFiltersCount,
   onClearFilters,
 }: Props) {
@@ -61,19 +49,6 @@ export default function SearchFilters({
               inputValue={year}
               placeholder="Filtrar por año"
               className="w-full px-3 py-2 bg-card rounded-input text-foreground placeholder:text-muted-foreground"
-            />
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">
-            Orden
-          </label>
-          <div className="overflow-x-auto">
-            <Segmented
-              options={sortOptions}
-              value={sortValue}
-              onChange={setSortValue}
             />
           </div>
         </div>
