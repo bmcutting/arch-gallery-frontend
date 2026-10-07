@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { FaImage, FaHeart, FaComment, FaUser } from "react-icons/fa";
 import Button from "@modules/app/modules/ui/components/Button/Button";
+import Image from "@modules/app/modules/ui/components/Image/Image";
 import useLike from "@modules/like/hooks/useLike";
 import useModal from "@modules/app/modules/modal/hooks/useModal";
 import { ViewProjectModalProps } from "@modules/project/domain/modal/project-modal";
@@ -21,9 +21,7 @@ export default function ProjectFeed({
   const commentState = useComment({ project });
   const { handleOpenModal } = useModal();
 
-  const [imgFailed, setImgFailed] = useState(false);
   const primaryImage = project.imagesUrl?.[0];
-  const showImage = !!primaryImage && !imgFailed;
 
   return (
     <article
@@ -31,24 +29,22 @@ export default function ProjectFeed({
       className="group relative bg-card rounded-xl border border-border shadow-warm hover:shadow-warm-md hover:border-primary transition-smooth overflow-hidden"
     >
       <div className="relative bg-muted">
-        {showImage ? (
-          <div className="aspect-4/3 w-full overflow-hidden">
-            <img
-              src={primaryImage}
-              alt={`Vista del proyecto "${project.title}"`}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy"
-              onError={() => setImgFailed(true)}
-            />
-          </div>
-        ) : (
-          <div className="aspect-4/3 w-full flex flex-col items-center justify-center bg-muted text-muted-foreground">
-            <FaImage className="text-5xl mb-2 opacity-40" />
-            <span className="text-xs font-medium tracking-wider uppercase">
-              Sin previsualización
-            </span>
-          </div>
-        )}
+        <div className="aspect-4/3 w-full overflow-hidden">
+          <Image
+            src={primaryImage}
+            alt={`Vista del proyecto "${project.title}"`}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+            fallback={
+              <div className="w-full h-full flex flex-col items-center justify-center bg-muted text-muted-foreground">
+                <FaImage className="text-5xl mb-2 opacity-40" />
+                <span className="text-xs font-medium tracking-wider uppercase">
+                  Sin previsualización
+                </span>
+              </div>
+            }
+          />
+        </div>
       </div>
 
       <div className="p-5">
@@ -63,15 +59,11 @@ export default function ProjectFeed({
 
         <div className="flex items-center gap-2 text-muted-foreground mb-4">
           <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center overflow-hidden shrink-0">
-            {project.user?.profileImageUrl ? (
-              <img
-                src={project.user.profileImageUrl}
-                alt=""
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <FaUser className="text-muted-foreground text-sm" />
-            )}
+            <Image
+              src={project.user?.profileImageUrl}
+              className="w-full h-full object-cover"
+              fallback={<FaUser className="text-muted-foreground text-sm" />}
+            />
           </div>
           <span className="text-sm font-medium">
             {project.user?.userName ?? "Unknown"}
@@ -97,8 +89,8 @@ export default function ProjectFeed({
                   <FaHeart
                     className={`transition-all ${
                       liked
-                        ? "text-error scale-125"
-                        : "text-muted-foreground hover:text-error hover:scale-200"
+                        ? "text-like scale-125"
+                        : "text-muted-foreground hover:text-like hover:scale-200"
                     }`}
                   />
                   {likesCount}

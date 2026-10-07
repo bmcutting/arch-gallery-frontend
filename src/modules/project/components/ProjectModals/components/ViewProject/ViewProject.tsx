@@ -1,3 +1,4 @@
+import Image from "@modules/app/modules/ui/components/Image/Image";
 import { FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import type { Project } from "@modules/project/domain/entities/project";
@@ -20,7 +21,7 @@ export default function ViewProject({ projectId }: Props) {
         setProject(data);
       })
       .catch(() => {
-        console.log("asdad");
+        console.error("Error al cargar el proyecto");
       });
   }, [projectId]);
 
@@ -60,7 +61,7 @@ export default function ViewProject({ projectId }: Props) {
             >
               <FaChevronLeft />
             </button>
-            <img
+            <Image
               src={project.imagesUrl[currentIndex]}
               alt={`Foto ${currentIndex + 1}`}
               className="w-full max-h-[400px] object-cover rounded-md"

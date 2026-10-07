@@ -1,4 +1,5 @@
 import { FaUser } from "react-icons/fa";
+import Image from "@modules/app/modules/ui/components/Image/Image";
 import type { Comment } from "@modules/comment/domain/entities/comment";
 
 interface Props {
@@ -9,15 +10,12 @@ export default function CommentCard({ comment }: Props) {
   return (
     <div className="flex flex-row gap-3 p-2 rounded-md bg-muted text-foreground shadow-sm">
       <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center overflow-hidden shrink-0">
-        {comment.user?.profileImageUrl ? (
-          <img
-            src={comment.user.profileImageUrl}
-            alt={comment.user.userName}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <FaUser className="text-muted-foreground text-base" />
-        )}
+        <Image
+          src={comment.user?.profileImageUrl}
+          alt={comment.user?.userName}
+          className="w-full h-full object-cover"
+          fallback={<FaUser className="text-muted-foreground text-base" />}
+        />
       </div>
 
       <div className="flex flex-col">

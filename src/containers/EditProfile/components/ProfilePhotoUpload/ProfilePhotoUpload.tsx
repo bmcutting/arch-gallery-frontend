@@ -1,5 +1,6 @@
 import { FaInfo, FaUpload } from "react-icons/fa";
 import Input from "@modules/app/modules/ui/components/Input/Input";
+import Image from "@modules/app/modules/ui/components/Image/Image";
 
 interface Props {
   profileImageUrl?: string;
@@ -11,21 +12,11 @@ export default function ProfilePhotoUpload({ profileImageUrl }: Props) {
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
         <div className="shrink-0">
           <div className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden bg-muted border-2 border-border">
-            {profileImageUrl ? (
-              <img
-                src={profileImageUrl}
-                alt="Vista previa de foto de perfil del arquitecto"
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div>
-                <img
-                  src="/user.png"
-                  alt="Vista previa de foto de perfil del arquitecto"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            )}
+            <Image
+              src={profileImageUrl || "/user.png"}
+              alt="Vista previa de foto de perfil del arquitecto"
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
 

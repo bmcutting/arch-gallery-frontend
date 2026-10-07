@@ -2,6 +2,7 @@ import { FaMapPin, FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import type { User } from "@modules/user/domain/entities/user";
 import Button from "@modules/app/modules/ui/components/Button/Button";
+import Image from "@modules/app/modules/ui/components/Image/Image";
 import { buildArchitectDetailPath } from "@modules/app/domain/constants/app-routes";
 
 interface Props {
@@ -13,7 +14,6 @@ export default function ArchitectCard({ architect }: Props) {
   const goToProfile = () => {
     if (architect?.id) navigate(buildArchitectDetailPath(architect.id));
   };
-  const hasProfileImage = !!architect?.profileImageUrl;
   const hasSpecialization = !!architect?.specialization;
   const hasBio = !!architect?.shortBio;
   const hasLocation = !!architect?.location;
@@ -30,7 +30,7 @@ export default function ArchitectCard({ architect }: Props) {
       className="bg-card rounded-xl overflow-hidden shadow-warm hover:shadow-warm-md transition-smooth cursor-pointer group flex flex-col h-full"
     >
       <div className="relative h-32 w-full overflow-hidden">
-        <img
+        <Image
           src={coverPlaceholder}
           alt="Portada"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -40,15 +40,14 @@ export default function ArchitectCard({ architect }: Props) {
       <div className="px-5 pb-5 flex-1 flex flex-col">
         <div className="relative -mt-8 mb-3 flex items-end justify-between">
           <div className="w-16 h-16 rounded-full overflow-hidden bg-muted ring-3 ring-card shadow-warm flex items-center justify-center">
-            {hasProfileImage ? (
-              <img
-                src={architect!.profileImageUrl}
-                alt={architect?.firstName || displayName}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <FaUserCircle size={40} className="text-muted-foreground/60" />
-            )}
+            <Image
+              src={architect?.profileImageUrl}
+              alt={architect?.firstName || displayName}
+              className="w-full h-full object-cover"
+              fallback={
+                <FaUserCircle size={40} className="text-muted-foreground/60" />
+              }
+            />
           </div>
         </div>
 

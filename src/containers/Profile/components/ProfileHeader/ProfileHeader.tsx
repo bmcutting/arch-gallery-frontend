@@ -5,9 +5,11 @@ import {
   FaMapMarkerAlt,
   FaTwitter,
   FaPhone,
+  FaUser,
 } from "react-icons/fa";
 import { IoGlobeOutline } from "react-icons/io5";
 import type { User } from "@modules/user/domain/entities/user";
+import Image from "@modules/app/modules/ui/components/Image/Image";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "@modules/app/domain/constants/app-routes";
 
@@ -23,10 +25,15 @@ export default function ProfileHeader({ user, isOwnProfile = true }: Props) {
       <div className="max-w-360 mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-8 lg:py-12">
         <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-12">
           <div className="relative w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 mx-auto lg:mx-0">
-            <img
-              src={user?.profileImageUrl ? user.profileImageUrl : "user.png"}
+            <Image
+              src={user?.profileImageUrl}
               alt={`${user?.firstName ?? ""} ${user?.lastName ?? ""}`}
               className="w-full h-full rounded-full object-cover border-4 border-primary/90"
+              fallback={
+                <div className="w-full h-full rounded-full border-4 border-primary/90 bg-muted flex items-center justify-center">
+                  <FaUser className="w-1/3 h-1/3 text-muted-foreground" />
+                </div>
+              }
             />
           </div>
 

@@ -1,3 +1,4 @@
+import Image from "@modules/app/modules/ui/components/Image/Image";
 import { useRef, useState } from "react";
 import { FaImage } from "react-icons/fa";
 import Button from "@modules/app/modules/ui/components/Button/Button";
@@ -61,20 +62,19 @@ export default function CoverImageUpload({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
       >
-        {coverImageUrl ? (
-          <img
-            src={coverImageUrl}
-            alt="Portada del perfil"
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center bg-muted text-muted-foreground">
-            <FaImage className="w-8 h-8 mb-2" />
-            <p className="text-sm text-center px-4">
-              Arrastra una imagen o haz clic para seleccionar
-            </p>
-          </div>
-        )}
+        <Image
+          src={coverImageUrl}
+          alt="Portada del perfil"
+          className="w-full h-full object-cover"
+          fallback={
+            <div className="w-full h-full flex flex-col items-center justify-center bg-muted text-muted-foreground">
+              <FaImage className="w-8 h-8 mb-2" />
+              <p className="text-sm text-center px-4">
+                Arrastra una imagen o haz clic para seleccionar
+              </p>
+            </div>
+          }
+        />
         {(localLoading || loading) && (
           <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
             <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
