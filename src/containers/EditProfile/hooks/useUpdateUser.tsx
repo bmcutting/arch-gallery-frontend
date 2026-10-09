@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import type { User } from "@modules/user/domain/entities/user";
 import { updateUser } from "@modules/user/services/user/update-user";
 import { UserMapperDto } from "@modules/user/services/user/user-mapper-dto";
 import type { Skill } from "@modules/user/domain/entities/skill";
 import type { Experience } from "@modules/user/domain/entities/experience";
 import { useUserContext } from "@modules/user/context/useUserContext";
+import type { ProfileFormValues } from "@modules/user/domain/forms/profile-form";
+import { ProfileFormMapper } from "@modules/user/services/user/profile-form-mapper";
 
 export default function useUpdateUser() {
   const { user, setUser } = useUserContext();
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
-  const [formData, setFormData] = useState<User>({
+  const [formData, setFormData] = useState<ProfileFormValues>({
     id: user?.id ?? "",
     email: user?.email ?? "",
     firstName: user?.firstName ?? "",
@@ -28,8 +29,8 @@ export default function useUpdateUser() {
     twitterUrl: user?.twitterUrl ?? "",
     linkedinUrl: user?.linkedinUrl ?? "",
     languages: user?.languages ?? [],
-    skills: user?.skills ?? [],
-    experiences: user?.experiences ?? [],
+    skills: ProfileFormMapper.skills(user?.skills),
+    experiences: ProfileFormMapper.experiences(user?.experiences),
   });
 
   const [touched, setTouched] = useState({
@@ -39,21 +40,20 @@ export default function useUpdateUser() {
     lastName: false,
   });
 
-  const cleanFormData = (data: User): User => ({
+  const cleanFormData = (data: ProfileFormValues): ProfileFormValues => ({
     ...data,
     languages: (data.languages ?? []).filter((lang) => lang.trim() !== ""),
-    skills: (data.skills ?? []).filter((skill) => skill.name.trim() !== ""),
-    experiences: data.experiences ?? [],
+    skills: data.skills.filter((skill) => skill.name.trim() !== ""),
   });
 
   useEffect(() => {
     if (user) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setFormData({ ...user, languages: user.languages ?? [] });
+      setFormData(ProfileFormMapper.fromUser(user));
     }
   }, [user]);
 
-  const handleChange = (field: keyof User, value: string) => {
+  const handleChange = (field: keyof ProfileFormValues, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -78,16 +78,11 @@ export default function useUpdateUser() {
 
     const cleaned = cleanFormData(formData);
 
-    updateUser(UserMapperDto.execute(cleaned))
-      .then((data) => {
-        if (data.success === true) {
-          setUser(cleaned);
-          setStatus("success");
-          setTimeout(() => setStatus("idle"), 5000);
-        } else {
-          setStatus("error");
-          setTimeout(() => setStatus("idle"), 5000);
-        }
+    updateUser(cleaned.id, UserMapperDto.execute(cleaned))
+      .then((updated) => {
+        setUser(updated);
+        setStatus("success");
+        setTimeout(() => setStatus("idle"), 5000);
       })
       .catch(() => {
         setStatus("error");
@@ -119,52 +114,50 @@ export default function useUpdateUser() {
   };
 
   const addExperience = (expData: Omit<Experience, "id">) => {
-    const newExp: Experience = {
-      id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(),
-      ...expData,
-    };
     setFormData((prev) => ({
       ...prev,
-      experiences: [...(prev.experiences || []), newExp],
+      experiences: [
+        ...prev.experiences,
+        { key: crypto.randomUUID(), ...expData },
+      ],
     }));
   };
-  const updateExperience = (id: string, expData: Omit<Experience, "id">) => {
+  const updateExperience = (key: string, expData: Omit<Experience, "id">) => {
     setFormData((prev) => ({
       ...prev,
-      experiences: prev.experiences?.map((exp) =>
-        exp.id === id ? { ...expData, id } : exp,
+      experiences: prev.experiences.map((exp) =>
+        exp.key === key ? { ...expData, id: exp.id, key } : exp,
       ),
     }));
   };
-  const removeExperience = (id: string) => {
+  const removeExperience = (key: string) => {
     setFormData((prev) => ({
       ...prev,
-      experiences: prev.experiences?.filter((exp) => exp.id !== id) || [],
+      experiences: prev.experiences.filter((exp) => exp.key !== key),
     }));
   };
 
   const addSkill = (skillData: Omit<Skill, "id">) => {
-    const newSkill: Skill = {
-      id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(),
-      ...skillData,
-    };
     setFormData((prev) => ({
       ...prev,
-      skills: [...(prev.skills || []), newSkill],
+      skills: [...prev.skills, { key: crypto.randomUUID(), ...skillData }],
     }));
   };
-  const updateSkill = (id: string, skillData: Omit<Skill, "id">) => {
+  const updateSkill = (key: string, skillData: Omit<Skill, "id">) => {
     setFormData((prev) => ({
       ...prev,
-      skills: prev.skills?.map((skill) =>
-        skill.id === id ? { ...skillData, id } : skill,
-      ),
+      skills: prev.skills.map((skill) => {
+        if (skill.key !== key) return skill;
+        return skillData.name === skill.name
+          ? { ...skill, level: skillData.level }
+          : { key, name: skillData.name, level: skillData.level };
+      }),
     }));
   };
-  const removeSkill = (id: string) => {
+  const removeSkill = (key: string) => {
     setFormData((prev) => ({
       ...prev,
-      skills: prev.skills?.filter((skill) => skill.id !== id) || [],
+      skills: prev.skills.filter((skill) => skill.key !== key),
     }));
   };
 

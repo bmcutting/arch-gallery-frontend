@@ -6,7 +6,7 @@ import type { Level } from "@modules/user/domain/enums/level";
 import type { Skill } from "@modules/user/domain/entities/skill";
 
 interface Props {
-  skill: Skill | null;
+  skill: Omit<Skill, "id"> | null;
   onSave: (skillData: Omit<Skill, "id">) => void;
 }
 

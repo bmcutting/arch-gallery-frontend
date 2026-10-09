@@ -1,14 +1,15 @@
 import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
 import Button from "@modules/app/modules/ui/components/Button/Button";
 import type { Experience } from "@modules/user/domain/entities/experience";
+import type { ExperienceFormItem } from "@modules/user/domain/forms/profile-form";
 import useModal from "@modules/app/modules/modal/hooks/useModal";
 import { ExperienceFormModalProps } from "@modules/user/domain/modal/user-modal";
 
 interface Props {
-  experiences: Experience[];
+  experiences: ExperienceFormItem[];
   addExperience: (expData: Omit<Experience, "id">) => void;
-  removeExperience: (id: string) => void;
-  updateExperience: (id: string, expData: Omit<Experience, "id">) => void;
+  removeExperience: (key: string) => void;
+  updateExperience: (key: string, expData: Omit<Experience, "id">) => void;
 }
 
 export default function ExperienceSection({
@@ -19,17 +20,17 @@ export default function ExperienceSection({
 }: Props) {
   const { handleOpenModal } = useModal();
 
-  const openEdit = (exp: Experience) =>
+  const openEdit = (exp: ExperienceFormItem) =>
     handleOpenModal(
       new ExperienceFormModalProps(exp, (data) =>
-        updateExperience(exp.id, data),
+        updateExperience(exp.key, data),
       ),
     );
 
   const openAdd = () =>
     handleOpenModal(new ExperienceFormModalProps(null, addExperience));
 
-  const formatRange = (exp: Experience) => {
+  const formatRange = (exp: ExperienceFormItem) => {
     const start = exp.startYear;
     const end = exp.isCurrent ? "Actualidad" : exp.endYear || "";
     return end ? `${start} – ${end}` : `${start}`;
@@ -45,7 +46,7 @@ export default function ExperienceSection({
         )}
         {experiences.map((exp) => (
           <div
-            key={exp.id}
+            key={exp.key}
             className="border border-border rounded-lg p-4 hover:shadow-sm transition-shadow mt-2"
           >
             <div className="flex justify-between items-start">
@@ -70,7 +71,7 @@ export default function ExperienceSection({
                 </button>
                 <button
                   type="button"
-                  onClick={() => removeExperience(exp.id)}
+                  onClick={() => removeExperience(exp.key)}
                   title="Eliminar"
                   className="p-2 text-primary/80 hover:text-primary rounded-md"
                 >

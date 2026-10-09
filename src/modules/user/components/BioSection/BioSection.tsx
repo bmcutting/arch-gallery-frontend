@@ -1,10 +1,10 @@
 import FormInput from "@modules/app/modules/ui/components/Form/FormInput";
 import Textarea from "@modules/app/modules/ui/components/TextArea/TextArea";
-import type { User } from "@modules/user/domain/entities/user";
+import type { ProfileFormValues } from "@modules/user/domain/forms/profile-form";
 
 interface Props {
-  formData: User;
-  handleChange: (field: keyof User, value: string) => void;
+  formData: ProfileFormValues;
+  handleChange: (field: keyof ProfileFormValues, value: string) => void;
 }
 
 export default function BioSection({ formData, handleChange }: Props) {

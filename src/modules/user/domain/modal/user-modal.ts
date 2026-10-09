@@ -4,7 +4,7 @@ import type { Experience } from "@modules/user/domain/entities/experience";
 
 export class SkillFormModalProps extends ModalProps {
   constructor(
-    readonly skill: Skill | null,
+    readonly skill: Omit<Skill, "id"> | null,
     readonly onSave: (skillData: Omit<Skill, "id">) => void,
   ) {
     super();
@@ -13,7 +13,7 @@ export class SkillFormModalProps extends ModalProps {
 
 export class ExperienceFormModalProps extends ModalProps {
   constructor(
-    readonly experience: Experience | null,
+    readonly experience: Omit<Experience, "id"> | null,
     readonly onSave: (expData: Omit<Experience, "id">) => void,
   ) {
     super();

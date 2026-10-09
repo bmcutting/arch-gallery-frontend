@@ -1,7 +1,6 @@
 import type { ExperienceType } from "@modules/user/domain/enums/experience";
 
 export interface UpdateExperienceDto {
-  userId: string;
   type?: ExperienceType;
   title?: string;
   institutionOrCompany?: string;

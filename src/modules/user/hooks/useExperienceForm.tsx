@@ -4,7 +4,7 @@ import type { Experience } from "@modules/user/domain/entities/experience";
 import { ExperienceType } from "@modules/user/domain/enums/experience";
 
 interface Props {
-  experience: Experience | null;
+  experience: Omit<Experience, "id"> | null;
   onSave: (expData: Omit<Experience, "id">) => void;
 }
 

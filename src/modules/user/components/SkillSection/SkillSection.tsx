@@ -1,14 +1,15 @@
 import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
 import type { Skill } from "@modules/user/domain/entities/skill";
+import type { SkillFormItem } from "@modules/user/domain/forms/profile-form";
 import Button from "@modules/app/modules/ui/components/Button/Button";
 import useModal from "@modules/app/modules/modal/hooks/useModal";
 import { SkillFormModalProps } from "@modules/user/domain/modal/user-modal";
 
 interface Props {
-  skills: Skill[];
+  skills: SkillFormItem[];
   addSkill: (skill: Omit<Skill, "id">) => void;
-  updateSkill: (id: string, skill: Omit<Skill, "id">) => void;
-  removeSkill: (id: string) => void;
+  updateSkill: (key: string, skill: Omit<Skill, "id">) => void;
+  removeSkill: (key: string) => void;
 }
 
 export default function SkillSection({
@@ -19,9 +20,9 @@ export default function SkillSection({
 }: Props) {
   const { handleOpenModal } = useModal();
 
-  const openEdit = (skill: Skill) =>
+  const openEdit = (skill: SkillFormItem) =>
     handleOpenModal(
-      new SkillFormModalProps(skill, (data) => updateSkill(skill.id, data)),
+      new SkillFormModalProps(skill, (data) => updateSkill(skill.key, data)),
     );
 
   const openAdd = () =>
@@ -37,7 +38,7 @@ export default function SkillSection({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {skills.map((skill) => (
           <div
-            key={skill.id}
+            key={skill.key}
             className="flex justify-between items-center border border-border rounded-lg p-3"
           >
             <div>
@@ -58,7 +59,7 @@ export default function SkillSection({
               </button>
               <button
                 type="button"
-                onClick={() => removeSkill(skill.id)}
+                onClick={() => removeSkill(skill.key)}
                 className="text-error hover:text-error/80"
               >
                 <FaTrash />

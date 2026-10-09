@@ -1,8 +1,7 @@
-import type { Experience } from "@modules/user/domain/entities/experience";
-import type { Skill } from "@modules/user/domain/entities/skill";
+import type { CreateExperienceDto } from "./create-experience";
+import type { UserSkillItemDto } from "./user-skill-item";
 
 export interface UpdateUserDto {
-  userId: string;
   email?: string;
   userName?: string;
   firstName?: string;
@@ -20,6 +19,7 @@ export interface UpdateUserDto {
   twitterUrl?: string;
   linkedinUrl?: string;
   languages?: string[];
-  skills?: Skill[];
-  experiences?: Experience[];
+  // Conjuntos completos: lo que no se mande se elimina.
+  skills?: UserSkillItemDto[];
+  experiences?: (CreateExperienceDto & { id?: string })[];
 }
