@@ -3,6 +3,7 @@ import useModal from "@modules/app/modules/modal/hooks/useModal";
 import { createProject } from "@modules/project/services/create-project";
 import type { Project } from "@modules/project/domain/entities/project";
 import { updateProject } from "@modules/project/services/update-project";
+import type { DateInputValue } from "@modules/app/modules/ui/components/DateInput/DateInput";
 
 interface Props {
   project?: Project;
@@ -21,7 +22,7 @@ export default function useProject({ userId = "", project, refetch }: Props) {
   const [description, setDescription] = useState(
     project?.description ? project.description : "",
   );
-  const [year, setYear] = useState<number>(
+  const [year, setYear] = useState<number | undefined>(
     project?.year ? project.year : new Date().getFullYear(),
   );
   const [imagesUrl, setImagesUrl] = useState<string[]>(
@@ -32,6 +33,7 @@ export default function useProject({ userId = "", project, refetch }: Props) {
   );
 
   const handleSubmit = () => {
+    if (year === undefined) return;
     createProject({ title, year, description, userId, categories })
       .then(onSuccess)
       .catch((err) => console.error("Error creating project", err));
@@ -42,6 +44,7 @@ export default function useProject({ userId = "", project, refetch }: Props) {
       console.error("No project id provided for update");
       return;
     }
+    if (year === undefined) return;
 
     updateProject({
       projectId: project.id,
@@ -77,7 +80,10 @@ export default function useProject({ userId = "", project, refetch }: Props) {
     handleEdit,
     title: { value: title, onChange: setTitle },
     description: { value: description, onChange: setDescription },
-    year: { value: String(year), onChange: (v: string) => setYear(Number(v)) },
+    year: {
+      value: { year },
+      onChange: (date) => setYear(date.year),
+    } satisfies DateInputValue,
     imagesUrl: { value: imagesUrl, onChange: setImagesUrl },
     categories,
     setCategories,

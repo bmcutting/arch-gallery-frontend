@@ -3,6 +3,7 @@ import type { Project } from "@modules/project/domain/entities/project";
 import FormModal from "@modules/app/modules/modal/components/FormModal/FormModal";
 import FormInput from "@modules/app/modules/ui/components/Form/FormInput";
 import Input from "@modules/app/modules/ui/components/Input/Input";
+import DateInput from "@modules/app/modules/ui/components/DateInput/DateInput";
 import Textarea from "@modules/app/modules/ui/components/TextArea/TextArea";
 import Button from "@modules/app/modules/ui/components/Button/Button";
 import useProject from "@modules/project/hooks/useProject";
@@ -44,7 +45,7 @@ export default function EditProject({ project, refetch }: Props) {
       </FormInput>
 
       <FormInput label="Año" required>
-        <Input inputValue={year} />
+        <DateInput precision="year" inputValue={year} />
       </FormInput>
 
       <FormInput label="Categorías (máx. 5)">

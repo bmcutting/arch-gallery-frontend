@@ -1,6 +1,7 @@
 import FormModal from "@modules/app/modules/modal/components/FormModal/FormModal";
 import Input from "@modules/app/modules/ui/components/Input/Input";
 import FormInput from "@modules/app/modules/ui/components/Form/FormInput";
+import DateInput from "@modules/app/modules/ui/components/DateInput/DateInput";
 import Textarea from "@modules/app/modules/ui/components/TextArea/TextArea";
 import useExperienceForm from "@modules/user/hooks/useExperienceForm";
 import type { Experience } from "@modules/user/domain/entities/experience";
@@ -69,28 +70,25 @@ export default function ExperienceForm({ experience, onSave }: Props) {
           className="block text-sm font-medium mb-1"
           required
         >
-          <Input
+          <DateInput
+            precision="year"
             name="startYear"
             inputValue={{
-              value: form.startYear.toString(),
-              onChange: (val) => setForm({ ...form, startYear: parseInt(val) }),
+              value: { year: form.startYear },
+              onChange: ({ year }) => setForm({ ...form, startYear: year }),
             }}
             errorMsg="Debe añadir el año de inicio"
           />
         </FormInput>
         <FormInput label="Año de fin">
           <div>
-            <Input
+            <DateInput
+              precision="year"
               inputValue={{
-                value: form.endYear?.toString() || "",
-                onChange: (val) =>
-                  setForm({
-                    ...form,
-                    endYear: val ? parseInt(val) : undefined,
-                  }),
+                value: { year: form.endYear },
+                onChange: ({ year }) => setForm({ ...form, endYear: year }),
               }}
               disabled={form.isCurrent}
-              placeholder="Año"
             />
             <label className="flex items-center gap-1 text-sm whitespace-nowrap">
               <input
