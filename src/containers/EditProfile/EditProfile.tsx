@@ -15,15 +15,13 @@ export default function ProfileManagement() {
   const {
     formData,
     status,
+    languagesForm,
     experiencesForm,
     skillsForm,
     touched,
     handleTouched,
     handleSave,
     handleChange,
-    addLanguage,
-    removeLanguage,
-    updateLanguage,
     setFormData,
   } = useUpdateUser();
 
@@ -78,12 +76,7 @@ export default function ProfileManagement() {
               </div>
               <div className="px-6 py-3 md:px-8 md:py-4">
                 <CollapsibleSection title="Idiomas">
-                  <LanguageSection
-                    formData={formData}
-                    updateLanguage={updateLanguage}
-                    removeLanguage={removeLanguage}
-                    addLanguage={addLanguage}
-                  />
+                  <LanguageSection form={languagesForm} />
                 </CollapsibleSection>
               </div>
               <div className="px-6 py-3 md:px-8 md:py-4">

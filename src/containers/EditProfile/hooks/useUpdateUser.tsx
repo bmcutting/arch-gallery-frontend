@@ -3,6 +3,7 @@ import { updateUser } from "@modules/user/services/user/update-user";
 import { UserMapperDto } from "@modules/user/services/user/user-mapper-dto";
 import { useUserContext } from "@modules/user/context/useUserContext";
 import type { ProfileForm } from "@modules/user/domain/form/profile-form";
+import useLanguagesForm from "@modules/user/hooks/useLanguagesForm";
 import useExperiencesForm from "@modules/user/hooks/useExperiencesForm";
 import useSkillsForm from "@modules/user/hooks/useSkillsForm";
 
@@ -27,10 +28,11 @@ export default function useUpdateUser() {
     instagramUrl: user?.instagramUrl ?? "",
     twitterUrl: user?.twitterUrl ?? "",
     linkedinUrl: user?.linkedinUrl ?? "",
-    languages: user?.languages ?? [],
   });
+  const languagesForm = useLanguagesForm(user?.languages);
   const experiencesForm = useExperiencesForm(user?.experiences);
   const skillsForm = useSkillsForm(user?.skills);
+  const { onSet: setLanguages } = languagesForm;
   const { onSet: setExperiences } = experiencesForm;
   const { onSet: setSkills } = skillsForm;
 
@@ -41,19 +43,15 @@ export default function useUpdateUser() {
     lastName: false,
   });
 
-  const cleanFormData = (data: ProfileForm): ProfileForm => ({
-    ...data,
-    languages: (data.languages ?? []).filter((lang) => lang.trim() !== ""),
-  });
-
   useEffect(() => {
     if (user) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setFormData({ ...user, languages: user.languages ?? [] });
+      setFormData(user);
+      setLanguages(user.languages ?? []);
       setExperiences(user.experiences ?? []);
       setSkills(user.skills ?? []);
     }
-  }, [user, setExperiences, setSkills]);
+  }, [user, setLanguages, setExperiences, setSkills]);
 
   const handleChange = (field: keyof ProfileForm, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -78,10 +76,9 @@ export default function useUpdateUser() {
       return;
     }
 
-    const cleaned = cleanFormData(formData);
-
-    updateUser(cleaned.id, {
-      ...UserMapperDto.execute(cleaned),
+    updateUser(formData.id, {
+      ...UserMapperDto.execute(formData),
+      languages: languagesForm.dto(),
       skills: skillsForm.dto(),
       experiences: experiencesForm.dto(),
     })
@@ -96,29 +93,6 @@ export default function useUpdateUser() {
       });
   };
 
-  const addLanguage = () => {
-    setFormData((prev) => ({
-      ...prev,
-      languages: [...(prev.languages || []), ""],
-    }));
-  };
-
-  const removeLanguage = (index: number) => {
-    setFormData((prev) => ({
-      ...prev,
-      languages: prev.languages?.filter((_, i) => i !== index) || [],
-    }));
-  };
-
-  const updateLanguage = (index: number, value: string) => {
-    const newLanguages = [...(formData.languages || [])];
-    newLanguages[index] = value;
-    setFormData((prev) => ({
-      ...prev,
-      languages: newLanguages,
-    }));
-  };
-
   const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
     setTouched({ ...touched, [e.target.name]: true });
   };
@@ -130,9 +104,7 @@ export default function useUpdateUser() {
     handleSave,
     handleChange,
     handleTouched,
-    addLanguage,
-    removeLanguage,
-    updateLanguage,
+    languagesForm: languagesForm.form,
     experiencesForm: experiencesForm.form,
     skillsForm: skillsForm.form,
     setFormData,

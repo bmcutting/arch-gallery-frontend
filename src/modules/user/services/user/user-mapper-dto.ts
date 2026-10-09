@@ -21,7 +21,6 @@ export class UserMapperDto {
       instagramUrl: user.instagramUrl,
       twitterUrl: user.twitterUrl,
       linkedinUrl: user.linkedinUrl,
-      languages: user.languages ?? [],
     };
   }
 }

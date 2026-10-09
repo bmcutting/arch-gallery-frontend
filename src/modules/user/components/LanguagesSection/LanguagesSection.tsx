@@ -1,32 +1,24 @@
 import Button from "@modules/app/modules/ui/components/Button/Button";
 import Input from "@modules/app/modules/ui/components/Input/Input";
-import type { ProfileForm } from "@modules/user/domain/form/profile-form";
+import type { LanguagesFormProps } from "@modules/user/domain/form/languages-form-props";
 
 interface Props {
-  formData: ProfileForm;
-  updateLanguage: (index: number, value: string) => void;
-  removeLanguage: (index: number) => void;
-  addLanguage: () => void;
+  form: LanguagesFormProps;
 }
 
-export default function LanguageSection({
-  formData,
-  updateLanguage,
-  removeLanguage,
-  addLanguage,
-}: Props) {
+export default function LanguageSection({ form }: Props) {
   return (
     <div className="space-y-3">
       <div className="md:grid md:grid-cols-2">
-        {formData.languages?.map((lang, index) => (
-          <div key={index} className="flex items-center gap-3 mt-2">
+        {form.values.map((lang) => (
+          <div key={lang.key} className="flex items-center gap-3 mt-2">
             <Input
-              inputValue={{ value: lang, onChange: (value) => updateLanguage(index, value) }}
+              inputValue={{ value: lang.value, onChange: (value) => form.onUpdate(lang.key, value) }}
               placeholder="Ej: Español, Inglés, Francés..."
             />
             <button
               type="button"
-              onClick={() => removeLanguage(index)}
+              onClick={() => form.onDelete(lang.key)}
               className="p-2 text-error hover:text-error/80 hover:bg-error/10 rounded-md transition-colors"
               title="Eliminar idioma"
             >
@@ -49,7 +41,7 @@ export default function LanguageSection({
       </div>
       <Button
         type="button"
-        onClick={addLanguage}
+        onClick={form.onAdd}
         size="base"
         full
         color="primary"
