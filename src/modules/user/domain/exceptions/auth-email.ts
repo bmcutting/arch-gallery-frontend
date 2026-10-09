@@ -5,3 +5,9 @@ export class EmptyEmailException extends AppException {
     super("El email del usuario no puede estar vacío", "email");
   }
 }
+
+export class InvalidEmailException extends AppException {
+  constructor() {
+    super("El email no tiene un formato válido", "email");
+  }
+}
