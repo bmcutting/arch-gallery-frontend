@@ -2,6 +2,8 @@ import { useState } from "react";
 import useModal from "@modules/app/modules/modal/hooks/useModal";
 import type { Skill } from "@modules/user/domain/entities/skill";
 import { Level } from "@modules/user/domain/enums/level";
+import { SkillValidator } from "@modules/user/domain/validator/skill/skill-validator";
+import type { FormSubmit } from "@modules/app/modules/ui/components/Form/domain/form-submit";
 
 interface Props {
   skill: Omit<Skill, "id"> | null;
@@ -23,23 +25,15 @@ export default function useSkillForm({ skill, onSave }: Props) {
     level: skill?.level,
   });
 
-  const [touched, setTouched] = useState({ name: false });
-
-  const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
-    setTouched({ ...touched, [e.target.name]: true });
+  const handleSubmit = ({ setErrors }: FormSubmit) => {
+    new SkillValidator({ name: form.name }).execute({
+      success: () => {
+        onSave(form);
+        handleClose();
+      },
+      error: setErrors,
+    });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!form.name.trim()) {
-      setTouched({ name: true });
-      return;
-    }
-
-    onSave(form);
-    handleClose();
-  };
-
-  return { form, setForm, LEVEL_OPTIONS, touched, handleTouched, handleSubmit };
+  return { form, setForm, LEVEL_OPTIONS, handleSubmit };
 }

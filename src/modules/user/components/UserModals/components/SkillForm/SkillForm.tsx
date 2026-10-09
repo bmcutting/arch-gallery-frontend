@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function SkillForm({ skill, onSave }: Props) {
-  const { form, setForm, LEVEL_OPTIONS, touched, handleTouched, handleSubmit } =
+  const { form, setForm, LEVEL_OPTIONS, handleSubmit } =
     useSkillForm({ skill, onSave });
 
   return (
@@ -29,9 +29,6 @@ export default function SkillForm({ skill, onSave }: Props) {
             value: form.name,
             onChange: (val) => setForm({ ...form, name: val }),
           }}
-          touched={touched.name}
-          onBlur={handleTouched}
-          required
           errorMsg="Debe añadir el nombre de la habilidad"
           full
         />

@@ -2,6 +2,8 @@ import { useState } from "react";
 import useModal from "@modules/app/modules/modal/hooks/useModal";
 import type { Experience } from "@modules/user/domain/entities/experience";
 import { ExperienceType } from "@modules/user/domain/enums/experience";
+import { ExperienceValidator } from "@modules/user/domain/validator/experience/experience-validator";
+import type { FormSubmit } from "@modules/app/modules/ui/components/Form/domain/form-submit";
 
 interface Props {
   experience: Omit<Experience, "id"> | null;
@@ -21,34 +23,15 @@ export default function useExperienceForm({ experience, onSave }: Props) {
     isCurrent: experience?.isCurrent ?? false,
   });
 
-  const [touched, setTouched] = useState({
-    type: false,
-    title: false,
-    institutionOrCompany: false,
-    startYear: false,
-  });
-
-  const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
-    setTouched({ ...touched, [e.target.name]: true });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    setTouched({
-      type: !form.type,
-      title: !form.title,
-      institutionOrCompany: !form.institutionOrCompany,
-      startYear: !form.startYear,
+  const handleSubmit = ({ setErrors }: FormSubmit) => {
+    new ExperienceValidator(form).execute({
+      success: () => {
+        onSave(form);
+        handleClose();
+      },
+      error: setErrors,
     });
-
-    if (!form.title.trim() || !form.institutionOrCompany.trim()) {
-      return;
-    }
-
-    onSave(form);
-    handleClose();
   };
 
-  return { form, setForm, handleSubmit, handleTouched, touched };
+  return { form, setForm, handleSubmit };
 }

@@ -1,6 +1,7 @@
 import Clear from "@modules/app/modules/ui/shared/components/Clear/Clear";
 import FormLoader from "@modules/app/modules/ui/shared/components/FormLoader/FormLoader";
 import type { InputValue } from "@modules/app/modules/ui/components/Input/Input";
+import useFieldError from "@modules/app/modules/ui/components/Form/hooks/useFieldError";
 
 interface Props {
   inputValue: InputValue;
@@ -9,8 +10,6 @@ interface Props {
   full?: boolean;
   loading?: boolean;
   disabled?: boolean;
-  touched?: boolean;
-  required?: boolean;
   errorMsg?: string;
   onClear?: () => void;
   onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
@@ -26,16 +25,15 @@ export default function Textarea({
   full = true,
   loading = false,
   disabled,
-  touched,
-  errorMsg,
-  required,
+  errorMsg = "Este campo es obligatorio",
   onClear,
   onBlur,
   onFocus,
   className = "h-40 md:h-56 lg:h-64 px-3 py-2 text-sm md:text-base lg:text-lg resize-none leading-relaxed",
   maxChars,
 }: Props) {
-  const isInvalid = touched && !inputValue.value;
+  const field = useFieldError({ name, value: inputValue.value, errorMsg });
+  const isInvalid = field.invalid;
   const length = inputValue.value?.length ?? 0;
 
   return (
@@ -53,10 +51,15 @@ export default function Textarea({
               name={name}
               placeholder={placeholder}
               disabled={disabled}
-              required={required}
               value={inputValue.value ?? ""}
-              onChange={(e) => inputValue.onChange(e.target.value)}
-              onBlur={onBlur}
+              onChange={(e) => {
+                inputValue.onChange(e.target.value);
+                field.onChange();
+              }}
+              onBlur={(e) => {
+                field.onBlur();
+                onBlur?.(e);
+              }}
               onFocus={onFocus}
               rows={4}
             />
@@ -67,7 +70,7 @@ export default function Textarea({
             )}
           </div>
 
-          {isInvalid && <p className="mt-1 text-sm text-error">{errorMsg}</p>}
+          {isInvalid && <p className="mt-1 text-sm text-error">{field.message}</p>}
 
           {maxChars && (
             <p

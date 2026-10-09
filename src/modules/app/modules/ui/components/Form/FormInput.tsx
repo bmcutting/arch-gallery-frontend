@@ -2,6 +2,7 @@ import clsx from "clsx";
 import type { Size } from "@modules/app/modules/ui/domain/size";
 import Label from "@modules/app/modules/ui/components/Label/Label";
 import SwitchText from "./components/SwitchText/SwitchText";
+import { FieldContext } from "./context/field-context";
 
 interface Props {
   label: string;
@@ -62,7 +63,9 @@ export default function FormInput({
 
         {extra}
       </div>
-      {children}
+      <FieldContext.Provider value={{ required: Boolean(required) }}>
+        {children}
+      </FieldContext.Provider>
     </section>
   );
 }

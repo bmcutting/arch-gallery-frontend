@@ -5,32 +5,21 @@ import type { ProfileForm } from "@modules/user/domain/form/profile-form";
 interface Props {
   formData: ProfileForm;
   handleChange: (field: keyof ProfileForm, value: string) => void;
-  touched: {
-    email: boolean;
-    firstName: boolean;
-    userName: boolean;
-    lastName: boolean;
-  };
-  handleTouched: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
   setFormData: React.Dispatch<React.SetStateAction<ProfileForm>>;
 }
 
 export default function PersonalInfoSection({
   formData,
   handleChange,
-  touched,
-  handleTouched,
   setFormData,
 }: Props) {
   return (
     <section className="grid gap-x-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-      <FormInput label="Nombre" size="lg">
+      <FormInput label="Nombre" size="lg" required>
         <Input
           placeholder="Nombre"
           inputValue={{ value: formData.firstName ?? "", onChange: (value: string) => handleChange("firstName", value) }}
           name="firstName"
-          touched={touched.firstName}
-          onBlur={handleTouched}
           errorMsg="Debe añadir el nombre"
           onClear={() =>
             setFormData((prev) => ({
@@ -40,13 +29,11 @@ export default function PersonalInfoSection({
           }
         />
       </FormInput>
-      <FormInput label="Apellido" size="lg">
+      <FormInput label="Apellido" size="lg" required>
         <Input
           placeholder="Apellido"
           inputValue={{ value: formData.lastName ?? "", onChange: (value: string) => handleChange("lastName", value) }}
           name="lastName"
-          touched={touched.lastName}
-          onBlur={handleTouched}
           errorMsg="Debe añadir el apellido"
           onClear={() =>
             setFormData((prev) => ({
@@ -56,13 +43,11 @@ export default function PersonalInfoSection({
           }
         />
       </FormInput>
-      <FormInput label="Nombre de usuario" size="lg">
+      <FormInput label="Nombre de usuario" size="lg" required>
         <Input
           placeholder="Nombre de usuario"
           inputValue={{ value: formData.userName ?? "", onChange: (value: string) => handleChange("userName", value) }}
           name="userName"
-          touched={touched.userName}
-          onBlur={handleTouched}
           errorMsg="Debe añadir el nombre de usuario"
           onClear={() =>
             setFormData((prev) => ({
@@ -72,13 +57,11 @@ export default function PersonalInfoSection({
           }
         />
       </FormInput>
-      <FormInput label="Correo electrónico" size="lg">
+      <FormInput label="Correo electrónico" size="lg" required>
         <Input
           placeholder="Correo Electrónico"
           inputValue={{ value: formData.email ?? "", onChange: (value: string) => handleChange("email", value) }}
           name="email"
-          touched={touched.email}
-          onBlur={handleTouched}
           errorMsg="Debe añadir el correo electrónico"
           onClear={() =>
             setFormData((prev) => ({

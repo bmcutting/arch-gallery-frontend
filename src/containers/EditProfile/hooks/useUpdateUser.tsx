@@ -6,6 +6,8 @@ import type { ProfileForm } from "@modules/user/domain/form/profile-form";
 import useLanguagesForm from "@modules/user/hooks/useLanguagesForm";
 import useExperiencesForm from "@modules/user/hooks/useExperiencesForm";
 import useSkillsForm from "@modules/user/hooks/useSkillsForm";
+import { ProfileValidator } from "@modules/user/domain/validator/profile/profile-validator";
+import type { FormSubmit } from "@modules/app/modules/ui/components/Form/domain/form-submit";
 
 export default function useUpdateUser() {
   const { user, setUser } = useUserContext();
@@ -36,13 +38,6 @@ export default function useUpdateUser() {
   const { onSet: setExperiences } = experiencesForm;
   const { onSet: setSkills } = skillsForm;
 
-  const [touched, setTouched] = useState({
-    email: false,
-    firstName: false,
-    userName: false,
-    lastName: false,
-  });
-
   useEffect(() => {
     if (user) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -57,25 +52,7 @@ export default function useUpdateUser() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSave = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const newTouched = { ...touched };
-    if (!formData.email) newTouched.email = true;
-    if (!formData.firstName) newTouched.firstName = true;
-    if (!formData.lastName) newTouched.lastName = true;
-    if (!formData.userName) newTouched.userName = true;
-    setTouched(newTouched);
-
-    if (
-      !formData.email ||
-      !formData.firstName ||
-      !formData.lastName ||
-      !formData.userName
-    ) {
-      return;
-    }
-
+  const save = () =>
     updateUser(formData.id, {
       ...UserMapperDto.execute(formData),
       languages: languagesForm.dto(),
@@ -91,19 +68,21 @@ export default function useUpdateUser() {
         setStatus("error");
         setTimeout(() => setStatus("idle"), 5000);
       });
-  };
 
-  const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
-    setTouched({ ...touched, [e.target.name]: true });
+  const handleSave = ({ setErrors }: FormSubmit) => {
+    new ProfileValidator({
+      email: formData.email,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      userName: formData.userName,
+    }).execute({ success: save, error: setErrors });
   };
 
   return {
     formData,
     status,
-    touched,
     handleSave,
     handleChange,
-    handleTouched,
     languagesForm: languagesForm.form,
     experiencesForm: experiencesForm.form,
     skillsForm: skillsForm.form,

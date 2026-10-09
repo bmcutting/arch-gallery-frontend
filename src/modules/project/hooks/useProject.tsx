@@ -31,17 +31,13 @@ export default function useProject({ userId = "", project, refetch }: Props) {
     project?.categories?.map(c => c.name) ?? []
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     createProject({ title, year, description, userId, categories })
       .then(onSuccess)
       .catch((err) => console.error("Error creating project", err));
   };
 
-  const handleEdit = (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleEdit = () => {
     if (!project?.id) {
       console.error("No project id provided for update");
       return;

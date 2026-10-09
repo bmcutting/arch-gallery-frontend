@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { createUser } from "@modules/user/services/user/create-user";
 import { SignUpValidator } from "@modules/user/domain/validator/signup/signup-validator";
+import { SignUpPasswordValidator } from "@modules/user/domain/validator/signup/signup-password-validator";
+import type { FormSubmit } from "@modules/app/modules/ui/components/Form/domain/form-submit";
 import {
   LOCAL_STORAGE_KEY,
   LocalStorage,
@@ -24,51 +26,15 @@ export default function useSignUp() {
   const [userName, setUserName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const [touched, setTouched] = useState({
-    email: false,
-    password: false,
-    confirmPassword: false,
-    firstName: false,
-    userName: false,
-    lastName: false,
-  });
-
-  function handleStepOneSubmit(e: React.FormEvent) {
-    e.preventDefault();
-
-    const newTouched = { ...touched };
-    if (!email) newTouched.email = true;
-    if (!firstName) newTouched.firstName = true;
-    if (!lastName) newTouched.lastName = true;
-    if (!userName) newTouched.userName = true;
-    setTouched(newTouched);
-
-    if (!email || !firstName || !lastName || !userName) {
-      return;
-    }
-    setStep(2);
+  function handleStepOneSubmit({ setErrors }: FormSubmit) {
+    new SignUpValidator({ email, firstName, lastName, userName }).execute({
+      success: () => setStep(2),
+      error: setErrors,
+    });
   }
 
-  function handleFinalSubmit(e: React.FormEvent) {
-    e.preventDefault();
-
-    const newTouched = { ...touched };
-    if (!password) newTouched.password = true;
-    if (!confirmPassword) newTouched.confirmPassword = true;
-    setTouched(newTouched);
-
-    if (password !== confirmPassword) {
-      setError("Las contraseñas no coinciden");
-      return;
-    }
-
-    const validator = new SignUpValidator({
-      email: email,
-      password: password,
-      firstName: firstName,
-      lastName: lastName,
-      userName: userName,
-    });
+  function handleFinalSubmit({ setErrors }: FormSubmit) {
+    const validator = new SignUpPasswordValidator({ password, confirmPassword });
 
     validator.execute({
       success() {
@@ -112,21 +78,14 @@ export default function useSignUp() {
             setLoading(false);
           });
       },
-      error() {
-        return
-      },
+      error: setErrors,
     });
   }
-
-  const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
-    setTouched({ ...touched, [e.target.name]: true });
-  };
 
   return {
     step,
     handleStepOneSubmit,
     handleFinalSubmit,
-    handleTouched,
     loading,
     email: { value: email, onChange: setEmail },
     password: { value: password, onChange: setPassword },
@@ -134,7 +93,6 @@ export default function useSignUp() {
     firstName: { value: firstName, onChange: setFirstName },
     userName: { value: userName, onChange: setUserName },
     lastName: { value: lastName, onChange: setLastName },
-    touched,
     error,
     setStep,
   };

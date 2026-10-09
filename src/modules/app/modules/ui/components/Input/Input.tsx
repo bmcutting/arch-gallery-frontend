@@ -1,5 +1,6 @@
 import FormLoader from "@modules/app/modules/ui/shared/components/FormLoader/FormLoader";
 import Clear from "@modules/app/modules/ui/shared/components/Clear/Clear";
+import useFieldError from "@modules/app/modules/ui/components/Form/hooks/useFieldError";
 
 export interface InputValue {
   value: string | undefined;
@@ -14,8 +15,6 @@ interface Props {
   full?: boolean;
   loading?: boolean;
   disabled?: boolean;
-  touched?: boolean;
-  required?: boolean;
   errorMsg?: string;
   onClear?: () => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
@@ -32,16 +31,15 @@ export default function Input({
   full = true,
   loading = false,
   disabled,
-  touched,
-  errorMsg,
-  required,
+  errorMsg = "Este campo es obligatorio",
   onClear = () => { inputValue.onChange("") },
   onBlur,
   onFocus,
   onKeyDown,
   className = "w-full px-3 py-2 text-sm md:text-base lg:text-lg rounded-md",
 }: Props) {
-  const isInvalid = touched && !inputValue.value;
+  const field = useFieldError({ name, value: inputValue.value, errorMsg });
+  const isInvalid = field.invalid;
   return (
     <>
       {loading ? (
@@ -59,10 +57,15 @@ export default function Input({
               name={name}
               placeholder={placeholder}
               disabled={disabled}
-              required={required}
               value={inputValue.value ?? ""}
-              onChange={(e) => inputValue.onChange(e.target.value)}
-              onBlur={onBlur}
+              onChange={(e) => {
+                inputValue.onChange(e.target.value);
+                field.onChange();
+              }}
+              onBlur={(e) => {
+                field.onBlur();
+                onBlur?.(e);
+              }}
               onFocus={onFocus}
               onKeyDown={onKeyDown}
             />
@@ -77,7 +80,7 @@ export default function Input({
           {isInvalid &&
             <div className="relative mt-1 ml-1">
               <p className="absolute top-full text-sm text-error">
-                {errorMsg}
+                {field.message}
               </p>
             </div>}
         </div>

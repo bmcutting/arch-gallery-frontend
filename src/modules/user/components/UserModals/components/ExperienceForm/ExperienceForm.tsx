@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function ExperienceForm({ experience, onSave }: Props) {
-  const { form, setForm, handleSubmit, handleTouched, touched } =
+  const { form, setForm, handleSubmit } =
     useExperienceForm({ experience, onSave });
 
   return (
@@ -47,10 +47,7 @@ export default function ExperienceForm({ experience, onSave }: Props) {
             value: form.title,
             onChange: (val) => setForm({ ...form, title: val }),
           }}
-          required
           full
-          touched={touched.title}
-          onBlur={handleTouched}
           errorMsg="Debe añadir un título"
         />
       </FormInput>
@@ -62,10 +59,7 @@ export default function ExperienceForm({ experience, onSave }: Props) {
             value: form.institutionOrCompany,
             onChange: (val) => setForm({ ...form, institutionOrCompany: val }),
           }}
-          required
           full
-          touched={touched.institutionOrCompany}
-          onBlur={handleTouched}
           errorMsg="Debe añadir una institución o empresa"
         />
       </FormInput>
@@ -81,10 +75,7 @@ export default function ExperienceForm({ experience, onSave }: Props) {
               value: form.startYear.toString(),
               onChange: (val) => setForm({ ...form, startYear: parseInt(val) }),
             }}
-            touched={touched.startYear}
-            onBlur={handleTouched}
             errorMsg="Debe añadir el año de inicio"
-            required
           />
         </FormInput>
         <FormInput label="Año de fin">

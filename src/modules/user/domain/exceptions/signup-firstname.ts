@@ -2,6 +2,6 @@ import { AppException } from "@modules/app/domain/exception/app";
 
 export class EmptyFirstNameException extends AppException {
   constructor() {
-    super("El nombre del usuario no puede estar vacío");
+    super("El nombre del usuario no puede estar vacío", "firstName");
   }
 }

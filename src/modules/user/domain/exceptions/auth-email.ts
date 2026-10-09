@@ -2,6 +2,6 @@ import { AppException } from "@modules/app/domain/exception/app";
 
 export class EmptyEmailException extends AppException {
   constructor() {
-    super("El email del usuario no puede estar vacío");
+    super("El email del usuario no puede estar vacío", "email");
   }
 }

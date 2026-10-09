@@ -1,6 +1,7 @@
 import { APP_ROUTES } from "@modules/app/domain/constants/app-routes";
 import Button from "@modules/app/modules/ui/components/Button/Button";
 import ErrorMessage from "@modules/app/modules/ui/components/ErrorMessage/ErrorMessage";
+import Form from "@modules/app/modules/ui/components/Form/Form";
 import FormInput from "@modules/app/modules/ui/components/Form/FormInput";
 import Input from "@modules/app/modules/ui/components/Input/Input";
 import AuthPrompt from "@modules/user/components/AuthPrompt/AuthPrompt";
@@ -13,7 +14,6 @@ export default function SignUp() {
     step,
     handleStepOneSubmit,
     handleFinalSubmit,
-    handleTouched,
     loading,
     email,
     password,
@@ -21,7 +21,6 @@ export default function SignUp() {
     firstName,
     userName,
     lastName,
-    touched,
     error,
     setStep
   } = useSignUp();
@@ -30,7 +29,7 @@ export default function SignUp() {
     <AuthContainer>
       <Header />
       {step === 1 && (
-        <form className="w-full" onSubmit={handleStepOneSubmit}>
+        <Form className="w-full" onSubmit={handleStepOneSubmit}>
           <FormInput label="Correo" size="base" required>
             <Input
               loading={false}
@@ -38,8 +37,6 @@ export default function SignUp() {
               placeholder="user@gmail.com"
               name="email"
               onClear={() => email.onChange("")}
-              touched={touched.email}
-              onBlur={handleTouched}
               errorMsg="Debe añadir un correo electrónico"
             />
           </FormInput>
@@ -51,8 +48,6 @@ export default function SignUp() {
                 placeholder="Carlos"
                 name="firstName"
                 onClear={() => firstName.onChange("")}
-                touched={touched.firstName}
-                onBlur={handleTouched}
                 errorMsg="Debe añadir el nombre"
               />
             </FormInput>
@@ -63,8 +58,6 @@ export default function SignUp() {
                 placeholder="Peguer"
                 name="lastName"
                 onClear={() => lastName.onChange("")}
-                touched={touched.lastName}
-                onBlur={handleTouched}
                 errorMsg="Debe añadir el apellido"
               />
             </FormInput>
@@ -76,8 +69,6 @@ export default function SignUp() {
               placeholder="carlospeguer"
               name="userName"
               onClear={() => userName.onChange("")}
-              touched={touched.userName}
-              onBlur={handleTouched}
               errorMsg="Debe añadir el nombre de usuario"
             />
           </FormInput>
@@ -94,11 +85,11 @@ export default function SignUp() {
           >
             Continuar
           </Button>
-        </form>
+        </Form>
       )}
 
       {step === 2 && (
-        <form className="w-full" onSubmit={handleFinalSubmit}>
+        <Form className="w-full" onSubmit={handleFinalSubmit}>
           <FormInput label="Contraseña" size="base" required>
             <Input
               loading={false}
@@ -107,8 +98,6 @@ export default function SignUp() {
               type="password"
               placeholder="********"
               onClear={() => password.onChange("")}
-              touched={touched.password}
-              onBlur={handleTouched}
               errorMsg="Debe añadir la contraseña"
             />
           </FormInput>
@@ -119,8 +108,6 @@ export default function SignUp() {
               type="password"
               placeholder="********"
               onClear={() => confirmPassword.onChange("")}
-              touched={touched.confirmPassword}
-              onBlur={handleTouched}
               errorMsg="Debe confirmar la contraseña"
             />
           </FormInput>
@@ -148,7 +135,7 @@ export default function SignUp() {
               Registrarse
             </Button>
           </div>
-        </form>
+        </Form>
       )}
 
       <AuthPrompt

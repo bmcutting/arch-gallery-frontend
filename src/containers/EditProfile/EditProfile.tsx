@@ -2,6 +2,7 @@ import AppLayout from "@layouts/AppLayout";
 import ProfilePhotoUpload from "./components/ProfilePhotoUpload/ProfilePhotoUpload";
 import useUpdateUser from "./hooks/useUpdateUser";
 import Button from "@modules/app/modules/ui/components/Button/Button";
+import Form from "@modules/app/modules/ui/components/Form/Form";
 import PersonalInfoSection from "@modules/user/components/PersonalInfoSection/PersonalInfoSection";
 import CollapsibleSection from "@modules/app/modules/shared/components/CollapsibleSection/CollapsibleSection";
 import BioSection from "@modules/user/components/BioSection/BioSection";
@@ -18,8 +19,6 @@ export default function ProfileManagement() {
     languagesForm,
     experiencesForm,
     skillsForm,
-    touched,
-    handleTouched,
     handleSave,
     handleChange,
     setFormData,
@@ -41,7 +40,7 @@ export default function ProfileManagement() {
               </div>
             </div>
           </div>
-          <form onSubmit={handleSave}>
+          <Form onSubmit={handleSave}>
             <div className="rounded-lg shadow-warm-lg overflow-hidden">
               <div className="p-6 md:p-8 border-b border-border">
                 <ProfilePhotoUpload />
@@ -53,8 +52,6 @@ export default function ProfileManagement() {
                   <PersonalInfoSection
                     formData={formData}
                     handleChange={handleChange}
-                    touched={touched}
-                    handleTouched={handleTouched}
                     setFormData={setFormData}
                   />
                 </CollapsibleSection>
@@ -101,7 +98,7 @@ export default function ProfileManagement() {
                 </Button>
               </div>
             </div>
-          </form>
+          </Form>
         </div>
       </div>
     </AppLayout>

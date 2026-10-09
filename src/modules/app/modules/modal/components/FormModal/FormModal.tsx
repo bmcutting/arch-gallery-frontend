@@ -2,11 +2,13 @@ import { FaTimes } from "react-icons/fa";
 import Button from "@modules/app/modules/ui/components/Button/Button";
 import Modal from "@modules/app/modules/modal/components/Modal/Modal";
 import useModal from "@modules/app/modules/modal/hooks/useModal";
+import Form from "@modules/app/modules/ui/components/Form/Form";
+import type { FormSubmit } from "@modules/app/modules/ui/components/Form/domain/form-submit";
 
 interface Props {
   title: string;
   icon?: React.ReactNode;
-  onSubmit: (e: React.FormEvent) => void;
+  onSubmit: (submit: FormSubmit) => void;
   submitText?: string;
   cancelText?: string;
   loading?: boolean;
@@ -30,7 +32,7 @@ export default function FormModal({
 
   return (
     <Modal width={width} closeOnBackdrop={false} scrollBody={false}>
-      <form onSubmit={onSubmit} className="flex min-h-0 flex-1 flex-col">
+      <Form onSubmit={onSubmit} className="flex min-h-0 flex-1 flex-col">
         <div className="flex shrink-0 items-center justify-between gap-2 px-6 pt-6 pb-4">
           <div className="flex items-center gap-2">
             {icon}
@@ -63,7 +65,7 @@ export default function FormModal({
             {submitText}
           </Button>
         </div>
-      </form>
+      </Form>
     </Modal>
   );
 }

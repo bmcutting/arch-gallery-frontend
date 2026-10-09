@@ -8,24 +8,17 @@ import { loginUser } from "@modules/user/services/user/login-user";
 import type { HttpResponseError } from "@modules/app/modules/http/domain/error";
 import { HttpStatusCode } from "axios";
 import { useUserContext } from "@modules/user/context/useUserContext";
+import type { FormSubmit } from "@modules/app/modules/ui/components/Form/domain/form-submit";
 
 export default function useLogin() {
   const { refreshUser } = useUserContext();
 
   const [loading, setLoading] = useState(false);
-  const [touched, setTouched] = useState({ email: false, password: false });
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-
-    const newTouched = { ...touched };
-    if (!email) newTouched.email = true;
-    if (!password) newTouched.password = true;
-    setTouched(newTouched);
-
+  function handleSubmit({ setErrors }: FormSubmit) {
     const validator = new AuthValidator({ email: email, password: password });
 
     validator.execute({
@@ -56,23 +49,15 @@ export default function useLogin() {
             setLoading(false);
           });
       },
-      error() {
-       return
-      },
+      error: setErrors,
     });
   }
 
-  const handleTouched = (e: React.FocusEvent<HTMLInputElement>) => {
-    setTouched({ ...touched, [e.target.name]: true });
-  };
-
   return {
     handleSubmit,
-    handleTouched,
     loading,
     email: { value: email, onChange: setEmail },
     password: {value: password, onChange: setPassword},
-    touched,
     error,
   };
 }
