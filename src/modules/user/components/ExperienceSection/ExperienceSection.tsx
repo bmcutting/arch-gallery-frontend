@@ -1,36 +1,27 @@
 import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
 import Button from "@modules/app/modules/ui/components/Button/Button";
-import type { Experience } from "@modules/user/domain/entities/experience";
-import type { ExperienceFormItem } from "@modules/user/domain/forms/profile-form";
+import type { ExperienceForm } from "@modules/user/domain/form/experience-form";
+import type { ExperiencesFormProps } from "@modules/user/domain/form/experiences-form-props";
 import useModal from "@modules/app/modules/modal/hooks/useModal";
 import { ExperienceFormModalProps } from "@modules/user/domain/modal/user-modal";
 
 interface Props {
-  experiences: ExperienceFormItem[];
-  addExperience: (expData: Omit<Experience, "id">) => void;
-  removeExperience: (key: string) => void;
-  updateExperience: (key: string, expData: Omit<Experience, "id">) => void;
+  form: ExperiencesFormProps;
 }
 
-export default function ExperienceSection({
-  experiences,
-  addExperience,
-  removeExperience,
-  updateExperience,
-}: Props) {
+export default function ExperienceSection({ form }: Props) {
   const { handleOpenModal } = useModal();
+  const experiences = form.values;
 
-  const openEdit = (exp: ExperienceFormItem) =>
+  const openEdit = (exp: ExperienceForm) =>
     handleOpenModal(
-      new ExperienceFormModalProps(exp, (data) =>
-        updateExperience(exp.key, data),
-      ),
+      new ExperienceFormModalProps(exp, (data) => form.onUpdate(exp.key, data)),
     );
 
   const openAdd = () =>
-    handleOpenModal(new ExperienceFormModalProps(null, addExperience));
+    handleOpenModal(new ExperienceFormModalProps(null, form.onAdd));
 
-  const formatRange = (exp: ExperienceFormItem) => {
+  const formatRange = (exp: ExperienceForm) => {
     const start = exp.startYear;
     const end = exp.isCurrent ? "Actualidad" : exp.endYear || "";
     return end ? `${start} – ${end}` : `${start}`;
@@ -71,7 +62,7 @@ export default function ExperienceSection({
                 </button>
                 <button
                   type="button"
-                  onClick={() => removeExperience(exp.key)}
+                  onClick={() => form.onDelete(exp.key)}
                   title="Eliminar"
                   className="p-2 text-primary/80 hover:text-primary rounded-md"
                 >

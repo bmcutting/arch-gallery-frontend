@@ -1,32 +1,24 @@
 import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
-import type { Skill } from "@modules/user/domain/entities/skill";
-import type { SkillFormItem } from "@modules/user/domain/forms/profile-form";
+import type { SkillForm } from "@modules/user/domain/form/skill-form";
+import type { SkillsFormProps } from "@modules/user/domain/form/skills-form-props";
 import Button from "@modules/app/modules/ui/components/Button/Button";
 import useModal from "@modules/app/modules/modal/hooks/useModal";
 import { SkillFormModalProps } from "@modules/user/domain/modal/user-modal";
 
 interface Props {
-  skills: SkillFormItem[];
-  addSkill: (skill: Omit<Skill, "id">) => void;
-  updateSkill: (key: string, skill: Omit<Skill, "id">) => void;
-  removeSkill: (key: string) => void;
+  form: SkillsFormProps;
 }
 
-export default function SkillSection({
-  skills,
-  addSkill,
-  updateSkill,
-  removeSkill,
-}: Props) {
+export default function SkillSection({ form }: Props) {
   const { handleOpenModal } = useModal();
+  const skills = form.values;
 
-  const openEdit = (skill: SkillFormItem) =>
+  const openEdit = (skill: SkillForm) =>
     handleOpenModal(
-      new SkillFormModalProps(skill, (data) => updateSkill(skill.key, data)),
+      new SkillFormModalProps(skill, (data) => form.onUpdate(skill.key, data)),
     );
 
-  const openAdd = () =>
-    handleOpenModal(new SkillFormModalProps(null, addSkill));
+  const openAdd = () => handleOpenModal(new SkillFormModalProps(null, form.onAdd));
 
   return (
     <div className="space-y-4">
@@ -59,7 +51,7 @@ export default function SkillSection({
               </button>
               <button
                 type="button"
-                onClick={() => removeSkill(skill.key)}
+                onClick={() => form.onDelete(skill.key)}
                 className="text-error hover:text-error/80"
               >
                 <FaTrash />

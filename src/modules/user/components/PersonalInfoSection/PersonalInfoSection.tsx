@@ -1,10 +1,10 @@
 import FormInput from "@modules/app/modules/ui/components/Form/FormInput";
 import Input from "@modules/app/modules/ui/components/Input/Input";
-import type { ProfileFormValues } from "@modules/user/domain/forms/profile-form";
+import type { ProfileForm } from "@modules/user/domain/form/profile-form";
 
 interface Props {
-  formData: ProfileFormValues;
-  handleChange: (field: keyof ProfileFormValues, value: string) => void;
+  formData: ProfileForm;
+  handleChange: (field: keyof ProfileForm, value: string) => void;
   touched: {
     email: boolean;
     firstName: boolean;
@@ -12,7 +12,7 @@ interface Props {
     lastName: boolean;
   };
   handleTouched: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
-  setFormData: React.Dispatch<React.SetStateAction<ProfileFormValues>>;
+  setFormData: React.Dispatch<React.SetStateAction<ProfileForm>>;
 }
 
 export default function PersonalInfoSection({

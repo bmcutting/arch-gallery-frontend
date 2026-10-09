@@ -1,9 +1,9 @@
 import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
-import type { ProfileFormValues } from "@modules/user/domain/forms/profile-form";
+import type { ProfileForm } from "@modules/user/domain/form/profile-form";
 
 interface Props {
-  formData: ProfileFormValues;
-  handleChange: (field: keyof ProfileFormValues, value: string) => void;
+  formData: ProfileForm;
+  handleChange: (field: keyof ProfileForm, value: string) => void;
 }
 
 export default function SocialSection({ formData, handleChange }: Props) {

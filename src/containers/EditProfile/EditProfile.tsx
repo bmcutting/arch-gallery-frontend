@@ -15,6 +15,8 @@ export default function ProfileManagement() {
   const {
     formData,
     status,
+    experiencesForm,
+    skillsForm,
     touched,
     handleTouched,
     handleSave,
@@ -22,12 +24,6 @@ export default function ProfileManagement() {
     addLanguage,
     removeLanguage,
     updateLanguage,
-    addExperience,
-    removeExperience,
-    updateExperience,
-    addSkill,
-    removeSkill,
-    updateSkill,
     setFormData,
   } = useUpdateUser();
 
@@ -92,22 +88,12 @@ export default function ProfileManagement() {
               </div>
               <div className="px-6 py-3 md:px-8 md:py-4">
                 <CollapsibleSection title="Experiencia laboral y estudiantil">
-                  <ExperienceSection
-                    experiences={formData.experiences ?? []}
-                    addExperience={addExperience}
-                    removeExperience={removeExperience}
-                    updateExperience={updateExperience}
-                  />
+                  <ExperienceSection form={experiencesForm} />
                 </CollapsibleSection>
               </div>
               <div className="px-6 py-3 md:px-8 md:py-4">
                 <CollapsibleSection title="Habilidades">
-                  <SkillSection
-                    skills={formData.skills ?? []}
-                    addSkill={addSkill}
-                    removeSkill={removeSkill}
-                    updateSkill={updateSkill}
-                  />
+                  <SkillSection form={skillsForm} />
                 </CollapsibleSection>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 px-6 py-3 md:px-8 md:py-4">

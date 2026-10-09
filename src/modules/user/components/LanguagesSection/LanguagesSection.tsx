@@ -1,9 +1,9 @@
 import Button from "@modules/app/modules/ui/components/Button/Button";
 import Input from "@modules/app/modules/ui/components/Input/Input";
-import type { ProfileFormValues } from "@modules/user/domain/forms/profile-form";
+import type { ProfileForm } from "@modules/user/domain/form/profile-form";
 
 interface Props {
-  formData: ProfileFormValues;
+  formData: ProfileForm;
   updateLanguage: (index: number, value: string) => void;
   removeLanguage: (index: number) => void;
   addLanguage: () => void;
